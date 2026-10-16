@@ -4,242 +4,92 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>ETHICA 銀座 | 地球46億年を、一皿ずつ旅する</title>
-<meta name="description" content="銀座一丁目、扉の向こうは洞窟。地球46億年の物語を一皿ずつ辿る、中南米イノベーティブのレストラン ETHICA。ミシュランガイド東京 3年連続掲載。">
-<meta property="og:title" content="ETHICA 銀座 | 地球46億年を、一皿ずつ旅する">
-<meta property="og:description" content="銀座一丁目、扉の向こうは洞窟。地球46億年の物語を一皿ずつ辿るレストラン。">
-<meta property="og:image" content="assets/img/table_top.webp">
-<meta name="theme-color" content="#07090a">
+<title>ETHICA 銀座｜地球46億年を一皿ずつ旅する中南米イノベーティブ</title>
+<meta name="description" content="銀座一丁目駅3番出口から徒歩30秒。ミシュランガイド東京 3年連続掲載。洞窟のような空間で、地球46億年を一皿ずつ行き来する中南米イノベーティブ。コースは全5章 ¥14,800から（税込・サービス料別）。会食・接待にはキッチンの中の個室も。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ethicaginza.github.io/ethica-journey/">
+<meta property="og:title" content="ETHICA 銀座｜地球46億年を一皿ずつ旅する中南米イノベーティブ">
+<meta property="og:description" content="銀座一丁目駅3番出口から徒歩30秒。ミシュランガイド東京 3年連続掲載。洞窟のような空間で、地球46億年を一皿ずつ行き来する中南米イノベーティブ。コースは全5章 ¥14,800から（税込・サービス料別）。会食・接待にはキッチンの中の個室も。">
+<meta property="og:image" content="https://ethicaginza.github.io/ethica-journey/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#060807">
 <link rel="icon" href="assets/img/logo.png">
+<link rel="preload" as="image" media="(max-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_table_m1080.webp 1080w, assets/img/hero_table_m1440.webp 1440w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" media="(min-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_table_1440.webp 1440w, assets/img/hero_table_2560.webp 2560w" imagesizes="100vw" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap">
-<style>
-/* 洞窟の黒・骨の白・セノーテの青・ロゴの金。縦書きの見出しと、時間の目盛りを主役にする */
-:root{
-  --cave:#07090A; --stone:#101413; --stone2:#161C1B; --line:#273130;
-  --bone:#ECE6DA; --muted:#A29F95; --cenote:#3CB8C4; --cenote-deep:#0E5F69; --gold:#C9A46A;
-  --f-jp:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
-  --f-body:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
-  --f-lat:"Cormorant Garamond","Times New Roman",serif;
-  --gut:max(20px,env(safe-area-inset-left,0px));
-  color-scheme:dark;
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--cave);color:var(--bone);font-family:var(--f-body);font-size:15.5px;line-height:1.9;letter-spacing:.02em}
-img,video{max-width:100%;display:block}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--cenote);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gut);padding-right:max(20px,env(safe-area-inset-right,0px))}
-.lat{font-family:var(--f-lat)}
-.eyebrow{font-family:var(--f-lat);font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
-h1,h2,h3{font-family:var(--f-jp);font-weight:500;margin:0;text-wrap:balance;letter-spacing:.06em}
-h2{font-size:clamp(26px,3.6vw,40px);line-height:1.5}
-h3{font-size:19px;line-height:1.6}
-p{margin:0}
-.sec{padding-block:clamp(72px,11vw,140px)}
-.lede{font-family:var(--f-jp);font-size:clamp(17px,1.9vw,20px);line-height:2.1;max-width:34em}
-
-/* ボタン */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;font-family:var(--f-body);font-weight:700;font-size:15px;letter-spacing:.08em;text-decoration:none;transition:background .25s,color .25s,border-color .25s}
-.btn-primary{background:var(--cenote);color:#04201F}
-.btn-primary:hover{background:#5ccfd9}
-.btn-ghost{border:1px solid rgba(236,230,218,.45);color:var(--bone)}
-.btn-ghost:hover{border-color:var(--bone)}
-.btn small{font-weight:500;font-size:12px;opacity:.8}
-
-/* ヘッダー */
-.top{position:fixed;inset:0 0 auto 0;z-index:40;padding-top:env(safe-area-inset-top,0px);transition:background .3s}
-.top.solid{background:rgba(7,9,10,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.brand img{width:34px;height:auto}
-.brand span{font-family:var(--f-lat);font-size:22px;letter-spacing:.3em;color:var(--gold)}
-.top nav{display:flex;align-items:center;gap:26px;font-size:13px;letter-spacing:.12em}
-.top nav a{text-decoration:none;color:var(--muted)}
-.top nav a:hover{color:var(--bone)}
-.top nav a.btn-primary,.top nav a.btn-primary:hover{color:#04201F}
-.top .btn{min-height:40px;padding:0 18px;font-size:13px}
-@media (max-width:860px){.top nav a.nl{display:none}}
-
-/* ヒーロー */
-.hero{position:relative;min-height:100svh;display:grid;align-items:end;overflow:hidden}
-.hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,9,10,.35) 0%,rgba(7,9,10,.15) 35%,rgba(7,9,10,.85) 82%,var(--cave) 100%)}
-.hero .inner{position:relative;z-index:2;padding-block:120px 64px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end}
-.hero h1{font-size:clamp(34px,5.6vw,68px);line-height:1.45;letter-spacing:.1em}
-.hero .years{font-family:var(--f-lat);font-style:italic;font-size:clamp(16px,1.6vw,20px);color:var(--cenote);letter-spacing:.06em;margin-bottom:18px}
-.hero .sub{margin-top:22px;color:#d6d1c6;max-width:30em}
-.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
-.hero .award{writing-mode:vertical-rl;font-family:var(--f-jp);font-size:14px;letter-spacing:.32em;color:var(--gold);border-left:1px solid rgba(201,164,106,.5);padding-left:14px;max-height:340px}
-.tcy{text-combine-upright:all;-webkit-text-combine:horizontal}
-@media (max-width:720px){.hero .inner{grid-template-columns:1fr}.hero .award{writing-mode:horizontal-tb;border-left:none;border-top:1px solid rgba(201,164,106,.5);padding:14px 0 0;max-height:none;letter-spacing:.14em;font-size:13px}}
-@media (min-width:1000px){.hero h1.v{writing-mode:vertical-rl;position:absolute;right:var(--gut);top:120px;font-size:46px;line-height:1.9}}
-
-/* 物語 */
-.story{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,6vw,90px);align-items:start}
-.story .text{display:flex;flex-direction:column;gap:30px}
-.story .text h3{color:var(--gold);font-size:15px;letter-spacing:.24em;font-family:var(--f-body);font-weight:500}
-.story .text p{font-family:var(--f-jp);font-size:17px;line-height:2.15}
-.story figure{margin:0;position:sticky;top:96px}
-.story figure video{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:2px}
-.story figcaption{font-size:12px;color:var(--muted);margin-top:10px;letter-spacing:.08em}
-@media (max-width:860px){.story{grid-template-columns:1fr}.story figure{position:static}}
-
-/* 時代のパネル */
-.era{position:relative;min-height:88svh;display:grid;align-items:center;overflow:hidden;border-top:1px solid var(--line)}
-.era video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.75}
-.era::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,9,10,.92) 0%,rgba(7,9,10,.55) 45%,rgba(7,9,10,.1) 100%)}
-.era .inner{position:relative;z-index:2;padding-block:80px}
-.era .num{font-family:var(--f-lat);font-size:clamp(54px,9vw,120px);line-height:1;color:var(--bone);letter-spacing:.02em}
-.era .num small{font-size:.32em;letter-spacing:.2em;margin-left:.4em;color:var(--muted)}
-.era h3{margin-top:18px;font-size:clamp(22px,2.6vw,30px)}
-.era p{margin-top:16px;max-width:26em;color:#d9d4c9}
-
-/* 時間の目盛り */
-.ruler-sec{background:linear-gradient(180deg,var(--cave),var(--stone) 30%,var(--stone))}
-.ruler-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:56px}
-@media (max-width:860px){.ruler-head{grid-template-columns:1fr}}
-.ruler{position:relative;margin-left:clamp(70px,14vw,180px);border-left:1px solid var(--line);display:flex;flex-direction:column}
-.tick{position:relative;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:baseline;padding:18px 0 18px 26px;border-bottom:1px solid rgba(39,49,48,.6)}
-.tick::before{content:"";position:absolute;left:-5px;top:30px;width:9px;height:9px;border-radius:50%;background:var(--cenote);box-shadow:0 0 0 4px rgba(60,184,196,.15)}
-.tick .age{position:absolute;right:calc(100% + 18px);top:16px;font-family:var(--f-lat);font-size:clamp(18px,2vw,24px);white-space:nowrap;color:var(--bone);text-align:right}
-.tick .age i{font-size:.62em;color:var(--muted);font-style:normal;margin-left:2px}
-.tick .ord{font-family:var(--f-lat);font-style:italic;color:var(--gold);font-size:15px;white-space:nowrap}
-.tick h4{margin:0;font-family:var(--f-jp);font-weight:500;font-size:17px;letter-spacing:.06em}
-.tick .ing{font-size:13px;color:var(--muted);margin-top:2px}
-.gap{padding:22px 0 22px 26px;font-family:var(--f-lat);font-style:italic;color:var(--muted);letter-spacing:.2em;font-size:14px}
-.gap::before{content:"≈";position:absolute;left:-9px;color:var(--muted);background:var(--stone);line-height:1}
-.gap{position:relative}
-.tick.now::before{background:var(--gold);box-shadow:0 0 0 4px rgba(201,164,106,.18)}
-.ruler-note{font-size:12.5px;color:var(--muted);margin-top:22px;margin-left:clamp(70px,14vw,180px);padding-left:26px}
-
-/* 再生 */
-.rebirth{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
-.rebirth img{width:100%;aspect-ratio:3/2;object-fit:cover}
-.items{display:grid;grid-template-columns:1fr;gap:0;margin-top:34px;border-top:1px solid var(--line)}
-.items div{display:grid;grid-template-columns:8.5em 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
-.items dt,.items .from{font-family:var(--f-jp);color:var(--gold);font-size:14.5px}
-.items .to{font-size:14.5px}
-@media (max-width:860px){.rebirth{grid-template-columns:1fr}.items div{grid-template-columns:1fr;gap:2px}}
-
-/* コース */
-.courses-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:44px}
-.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
-.card{background:var(--stone);border:1px solid var(--line);border-radius:4px;padding:30px 26px 26px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.card .use{font-size:12.5px;letter-spacing:.14em;color:var(--cenote)}
-.card h3{font-size:22px}
-.card .chap{font-family:var(--f-lat);font-style:italic;color:var(--muted);font-size:16px}
-.card .price{font-family:var(--f-lat);font-size:34px;line-height:1;margin-top:auto;padding-top:10px}
-.card .price small{font-family:var(--f-body);font-size:12px;color:var(--muted);margin-left:8px;letter-spacing:.04em}
-.card p.d{font-size:14px;color:#cfcabd;line-height:1.85}
-.card .btn{width:100%;margin-top:6px}
-.card.mid{background:linear-gradient(180deg,#14302f,#0f1716);border-color:var(--cenote);transform:translateY(-14px);box-shadow:0 20px 60px rgba(0,0,0,.45)}
-.card.mid .badge{align-self:flex-start;background:var(--gold);color:#1b1408;font-size:12px;font-weight:700;letter-spacing:.12em;padding:4px 12px;border-radius:999px}
-.sub-head{margin:72px 0 22px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
-.sub-head h3{font-size:22px}
-.sub-head span{color:var(--muted);font-size:13.5px}
-.seats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.seat{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);background:var(--stone);border:1px solid var(--line);border-radius:4px;overflow:hidden;min-width:0}
-.seat img{width:100%;height:100%;object-fit:cover;min-height:260px}
-.seat .card{border:none;border-radius:0;background:transparent}
-.purpose{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.fine{font-size:12.5px;color:var(--muted);margin-top:26px;line-height:1.9}
-@media (max-width:980px){.tiers{grid-template-columns:1fr}.card.mid{transform:none}.seats,.purpose{grid-template-columns:1fr}}
-@media (max-width:560px){.seat{grid-template-columns:1fr}.seat img{min-height:200px;max-height:240px}}
-
-/* ギャラリー */
-.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(150px,18vw,240px);gap:8px;margin-top:40px}
-.gallery img{width:100%;height:100%;object-fit:cover}
-.gallery .t2{grid-row:span 2}
-.gallery .w2{grid-column:span 2}
-@media (max-width:720px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:150px}}
-
-/* 空間 */
-.space{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(28px,5vw,64px);align-items:start}
-.space .photos{display:grid;gap:10px}
-.space .photos img{width:100%;aspect-ratio:16/9;object-fit:cover}
-.space .map{background:#000;border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:12px}
-.space .map img{width:100%;max-height:520px;object-fit:contain}
-.space ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:8px;font-size:14.5px}
-@media (max-width:860px){.space{grid-template-columns:1fr}}
-
-/* キッチン */
-.kitchen{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
-.kitchen video{width:100%;aspect-ratio:4/5;object-fit:cover}
-.kitchen .who{margin-top:28px;display:flex;flex-direction:column;gap:4px;border-left:2px solid var(--gold);padding-left:16px}
-.kitchen .who span{font-size:12.5px;color:var(--muted);letter-spacing:.12em}
-@media (max-width:860px){.kitchen{grid-template-columns:1fr}}
-
-/* FAQ・アクセス */
-.info{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px)}
-details{border-bottom:1px solid var(--line);padding:16px 0}
-summary{cursor:pointer;font-family:var(--f-jp);font-size:16px;list-style:none;display:flex;justify-content:space-between;gap:16px}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"＋";color:var(--cenote)}
-details[open] summary::after{content:"－"}
-details p{margin-top:10px;font-size:14.5px;color:#cfcabd}
-.access dl{display:grid;grid-template-columns:6.5em 1fr;gap:12px 18px;margin:24px 0 0;font-size:14.5px}
-.access dt{color:var(--gold)}
-.access dd{margin:0}
-@media (max-width:860px){.info{grid-template-columns:1fr}}
-
-/* 最後の呼びかけ */
-.final{position:relative;overflow:hidden;text-align:center}
-.final img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35}
-.final .inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:22px}
-.final .others{font-size:13px;color:var(--muted)}
-.final .others a{color:var(--bone)}
-
-footer{border-top:1px solid var(--line);padding-block:36px calc(96px + env(safe-area-inset-bottom,0px));font-size:12.5px;color:var(--muted)}
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
-
-/* スマホの固定予約バー */
-.dock{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;gap:10px;padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));background:rgba(7,9,10,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .35s}
-.dock.show{transform:none}
-.dock .btn{flex:1;min-height:48px}
-.dock .tel{flex:0 0 auto;width:56px;padding:0}
-@media (max-width:860px){.dock{display:flex}}
-
-/* 表示の演出（最初から見える状態を基本に） */
-.rise{transition:opacity .9s ease,transform .9s ease}
-.js .rise.pre{opacity:0;transform:translateY(24px)}
-@media (prefers-reduced-motion:reduce){.rise{transition:none}.js .rise.pre{opacity:1;transform:none}html{scroll-behavior:auto}}
-@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-</style>
+<link rel="stylesheet" href="assets/site.css?v=4">
+<link rel="stylesheet" href="assets/timeline.css?v=4">
 </head>
 <body>
-
+<a class="sr skip" href="#main">本文へ移動</a>
 <header class="top" id="top">
   <div class="wrap">
-    <a class="brand" href="#" aria-label="ETHICA トップへ"><img src="assets/img/logo.png" alt=""><span>ETHICA</span></a>
-    <nav aria-label="メニュー">
-      <a class="nl" href="#story">物語</a>
-      <a class="nl" href="#chapters">時代の章</a>
-      <a class="nl" href="#courses">コース</a>
-      <a class="nl" href="#access">アクセス</a>
-      <a class="btn btn-primary" href="https://res-reserve.com/ja/restaurants/ethicatokyo" target="_blank" rel="noopener">空席を見る</a>
+    <a class="brand" href="#" aria-label="ETHICA ページの先頭へ"><img src="assets/img/logo.png" alt="" width="34" height="35"><span>ETHICA</span></a>
+    <nav aria-label="ページ内のメニュー">
+      <a class="nl" href="#story">物語</a><a class="nl" href="#chapters">時代の章</a><a class="nl" href="#courses">コース</a><a class="nl" href="#purpose">記念日</a><a class="nl" href="#seats">会食</a><a class="nl" href="#access">アクセス</a>
+      <a class="btn btn-gold hdr" href="https://res-reserve.com/ja/restaurants/ethicatokyo?utm_source=lp&amp;utm_medium=site&amp;utm_content=header" target="_blank" rel="noopener" data-cta="header">空席を見る<span class="arrow" aria-hidden="true">→</span></a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav"><span class="mb-l" aria-hidden="true"></span><span class="mb-t">メニュー</span></button>
     </nav>
+  </div>
+  <div class="mnav" id="mnav" hidden>
+    <div class="wrap"><a href="#story">物語</a><a href="#chapters">時代の章</a><a href="#courses">コース</a><a href="#purpose">記念日</a><a href="#seats">会食</a><a href="#access">アクセス</a><a class="btn btn-gold btn-wide" href="https://res-reserve.com/ja/restaurants/ethicatokyo?utm_source=lp&amp;utm_medium=site&amp;utm_content=menu" target="_blank" rel="noopener" data-cta="menu">空席を見る<span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </header>
 
-<main>
-<section class="hero" aria-label="ETHICA">
-  <img class="poster" src="assets/video/resin.webp" alt="">
-  <video autoplay muted loop playsinline preload="auto" poster="assets/video/resin.webp" aria-hidden="true"><source src="assets/video/resin.mp4" type="video/mp4"></video>
+<main id="main">
+<section class="hero" data-water aria-label="ETHICA">
+  <div class="stage">
+    <picture>
+      <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/hero_table_m1080.webp 1080w, assets/img/hero_table_m1440.webp 1440w" sizes="100vw">
+      <img class="still" src="assets/img/hero_table_1440.webp" srcset="assets/img/hero_table_1440.webp 1440w, assets/img/hero_table_2560.webp 2560w" sizes="100vw" alt="青いレジンのテーブルに並ぶ、ETHICAの料理を真上から見たところ" fetchpriority="high">
+    </picture>
+    <canvas aria-hidden="true"></canvas>
+  </div>
   <div class="wrap inner">
-    <div>
-      <p class="years">— 4,600,000,000 years ago, to tonight.</p>
-      <h1>地球46億年を、<br>一皿ずつ旅する。</h1>
-      <p class="sub">銀座一丁目。扉を開けると、そこは洞窟の中。<br>中南米の感性で、地球の記憶を一皿ずつ辿る、時空のコースです。</p>
-      <div class="ctas">
-        <a class="btn btn-primary" href="https://res-reserve.com/ja/restaurants/ethicatokyo" target="_blank" rel="noopener">空席を見る</a>
-        <a class="btn btn-ghost" href="#courses">コースを見る</a>
-      </div>
+    <p class="eyebrow mich">ミシュランガイド東京 3年連続掲載</p>
+    <h1>扉を<wbr>開けると、<br><span class="nw">46億年前</span>だった。</h1>
+    <p class="sub">銀座一丁目の、<wbr>洞窟のような<wbr>一軒。<wbr>地球の<wbr>歴史を<wbr>一皿ずつ<wbr>行き来する、<wbr>中南米イノベーティブ。</p>
+    <div class="ctas" id="hero-ctas">
+      <a class="btn btn-gold" href="https://res-reserve.com/ja/restaurants/ethicatokyo?utm_source=lp&amp;utm_medium=site&amp;utm_content=hero" target="_blank" rel="noopener" data-cta="hero">空席を見る<span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn-line" href="#courses">コースと料金を見る</a>
     </div>
-    <p class="award">ミシュランガイド東京　<span class="tcy">3</span>年連続掲載</p>
+    <p class="hint" aria-hidden="true"><span class="h-mouse">写真の上でマウスを動かすと、水面が揺れます</span><span class="h-touch">写真に触れると、水面が揺れます</span></p>
+    <div class="proof"><ul><li><span>コース <span class="nw">¥14,800〜</span><wbr>（税込・サービス料別）</span></li>
+<li><span>ディナー <span class="nw">火〜日</span>・ランチ <span class="nw">土・日</span></span></li>
+<li><span>銀座一丁目駅 <span class="nw">3番出口</span> 徒歩<span class="nw">30秒</span></span></li>
+<li><span>キッチンの<wbr>中の<wbr>席<wbr>（カウンター・個室）<wbr>各1日<span class="nw">1組</span></span></li></ul></div>
+  </div>
+</section>
+
+<section class="router" aria-labelledby="router-title">
+  <div class="wrap">
+    <h2 class="r-title" id="router-title">目的から選ぶ</h2>
+    <div class="r-grid">
+    <a class="r-card hot" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/30c859ae-9c18-4094-9eb0-4351d81fef42?utm_source=lp&amp;utm_medium=site&amp;utm_content=router_collection" target="_blank" rel="noopener" data-cta="router_collection">
+      <span class="r-badge">1番人気</span><span class="r-use">はじめての方に</span>
+      <span class="r-name">ETHICA コレクション</span>
+      <span class="r-meta"><span class="price"><span class="yen">¥</span>19,800</span><span class="r-chap"><span class="nw">全8章</span></span></span>
+      <span class="r-go">空席を見る<span aria-hidden="true">→</span></span>
+    </a><a class="r-card" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/61ffd0c5-f570-48b6-a2ec-d0982cc5bd1d?utm_source=lp&amp;utm_medium=site&amp;utm_content=router_anniversary" target="_blank" rel="noopener" data-cta="router_anniversary">
+      <span class="r-use">誕生日・記念日に</span>
+      <span class="r-name">誕生日・記念日コース</span>
+      <span class="r-meta"><span class="price"><span class="yen">¥</span>25,200</span><span class="r-chap"><span class="nw">全9章</span>・プレート付き</span></span>
+      <span class="r-go">空席を見る<span aria-hidden="true">→</span></span>
+    </a><a class="r-card" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/e95d45f4-750a-41cc-9f75-7aa835759e85?utm_source=lp&amp;utm_medium=site&amp;utm_content=router_gastro" target="_blank" rel="noopener" data-cta="router_gastro">
+      <span class="r-use">会食・接待に</span>
+      <span class="r-name">キッチンの<wbr>中の<wbr>個室</span>
+      <span class="r-meta"><span class="price"><span class="yen">¥</span>29,800</span><span class="r-chap"><span class="nw">全9章</span>・<span class="nw">2〜4名</span></span></span><span class="r-hint">予約ページで<wbr>「<span class="nw">ガストロノミー体験</span>」を</span>
+      <span class="r-go">空席を見る<span aria-hidden="true">→</span></span>
+    </a><a class="r-card" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/31a4ceeb-9b01-4fd9-98e8-35a9e7bc86eb?utm_source=lp&amp;utm_medium=site&amp;utm_content=router_short" target="_blank" rel="noopener" data-cta="router_short">
+      <span class="r-use">この後ご予定がある夜に</span>
+      <span class="r-name">ショートコース</span>
+      <span class="r-meta"><span class="price"><span class="yen">¥</span>14,800</span><span class="r-chap"><span class="nw">全5章</span></span></span>
+      <span class="r-go">空席を見る<span aria-hidden="true">→</span></span>
+    </a>
+    </div>
+    <p class="r-note">料金は<wbr>税込・<span class="nw">1名</span>、<wbr>別途サービス料<span class="nw">10%</span>。<wbr>個室は、<wbr>予約ページの<wbr>「<span class="nw">グランド・コレクション</span>」の<wbr>中から<wbr>「<span class="nw">ガストロノミー体験</span>」を<wbr>お選びください。</p>
   </div>
 </section>
 
@@ -247,184 +97,215 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   <div class="wrap story">
     <div class="text rise">
       <p class="eyebrow">Our Story</p>
-      <h2>なぜ、地球46億年なのか。</h2>
-      <div><h3>二人の出発点</h3>
-      <p>外資系の金融を離れたオーナーと、二ツ星レストランの厨房を離れた料理人。<br>ひとりは、エシカル（倫理的）という考え方を、もっと身近なものにしたかった。<br>もうひとりは、まだ誰も見たことのない一皿で、新しい価値をつくりたかった。<br>ETHICAは、その二人が組んで始めた店です。</p></div>
-      <div><h3>説明ではなく、旅を</h3>
-      <p>「エシカル」は正しい言葉ですが、少し遠く聞こえます。<br>だから私たちは、説明するのではなく、旅をしてもらうことにしました。<br>過去を振り返り、いまの立ち位置を知り、その先の未来を考える。<br>そのためのいちばん大きな物差しが、地球の46億年でした。</p></div>
-      <div><h3>旅の終わりに</h3>
-      <p>旅を終えて扉の外へ戻ったとき、見慣れた銀座が少し違って見えたなら。<br>それが、私たちのいちばんの願いです。</p></div>
+      <h2>二人は、<wbr>説明より旅を選んだ。</h2>
+      <div><h3>金融と、厨房と。</h3><p>外資系の<wbr>金融を<wbr>離れた<wbr>オーナーと、<wbr>厨房に<wbr>生きる<wbr>料理人。<wbr>ひとりは、<wbr>エシカル<wbr>（倫理的）と<wbr>いう<wbr>考え方を<wbr>身近に<wbr>したかった。<wbr>もう<wbr>ひとりは、<wbr>まだ<wbr>誰も<wbr>見た<wbr>ことの<wbr>ない<wbr>一皿を<wbr>つくりたかった。</p></div>
+<div><h3>講義ではなく、旅を</h3><p>「エシカル」は<wbr>正しい<wbr>言葉だけれど、<wbr>聞くだけでは<wbr>少し<wbr>遠い。<wbr>だから<wbr>講義は<wbr>しない。<wbr>皿の<wbr>上で、<wbr>地球の<wbr><span class="nw">46億年</span>を<wbr>旅して<wbr>もらう。<wbr>過去を<wbr>知ると、<wbr>いま自分が<wbr>どこに<wbr>立っているかが<wbr>見えてくるから。</p></div>
+<div><h3>扉の外で</h3><p>最後の<wbr>一杯を<wbr>飲み終えて<wbr>扉を<wbr>出ると、<wbr>見慣れた<wbr>銀座の<wbr>灯り。<wbr>その<wbr>景色が、<wbr>来た<wbr>ときより<wbr>少し<wbr>違って<wbr>見えたなら。<wbr>旅の<wbr>先に<wbr>ある<wbr>未来は、<wbr>あなたが<wbr>持ち帰る<wbr>もの。</p></div>
     </div>
     <figure class="rise">
-      <video autoplay muted loop playsinline preload="metadata" poster="assets/video/cambrian.webp" aria-hidden="true"><source src="assets/video/cambrian.mp4" type="video/mp4"></video>
-      <figcaption>過去を振り返り、いまの立ち位置を知る。</figcaption>
+      <video muted loop playsinline preload="none" data-src="assets/video/vent.mp4" poster="assets/video/vent.webp" aria-hidden="true"></video>
+      <figcaption>映像は、<wbr><span class="nw">38億年前</span>の<wbr>深い海。<wbr>熱水が<wbr>噴き出す場所。<wbr><span class="nw">1皿目</span>は、<wbr>ここから。</figcaption>
     </figure>
   </div>
 </section>
 
-<section class="era" id="chapters" aria-label="46億年前 地球の誕生">
-  <video autoplay muted loop playsinline preload="metadata" poster="assets/video/lava.webp" aria-hidden="true"><source src="assets/video/lava.mp4" type="video/mp4"></video>
-  <div class="wrap inner rise">
-    <p class="num">46<small>億年前</small></p>
-    <h3>地球の誕生</h3>
-    <p>まだ海も、生き物もいなかった、燃える星。旅は、ここから始まります。</p>
-  </div>
-</section>
-<section class="era" aria-label="38億年前 海の誕生">
-  <video autoplay muted loop playsinline preload="metadata" poster="assets/video/vent.webp" aria-hidden="true"><source src="assets/video/vent.mp4" type="video/mp4"></video>
-  <div class="wrap inner rise">
-    <p class="num">38<small>億年前</small></p>
-    <h3>海の誕生・熱水噴出孔</h3>
-    <p>深い海の底、熱い水が噴き出す場所で、最初の生命が生まれたと言われています。</p>
-  </div>
-</section>
-
-<section class="sec ruler-sec" aria-labelledby="ruler-title">
+<section class="sec voyage-sec" id="chapters" aria-labelledby="tl-title">
   <div class="wrap">
-    <div class="ruler-head rise">
-      <div><p class="eyebrow">Chapters</p><h2 id="ruler-title">時代を行き来する、全8章。</h2></div>
-      <p class="lede">コースは古い順には進みません。46億年前から500年前まで、時代を行き来しながら、一皿ずつ地球の記憶を辿ります。目盛りの右は、その章が何皿目に出てくるかです。</p>
+    <div class="tl-head rise">
+      <div><p class="eyebrow">Chapters</p><h2 id="tl-title">出てくる順に、<wbr>時代は跳ぶ。</h2></div>
+      <p class="lede">ETHICA コレクションの<wbr>料理は、<wbr>時代の<wbr>順には<wbr>出てきません。<wbr><span class="nw">38億年前</span>の<wbr>海から<wbr>始まり、<wbr><span class="nw">3皿目</span>で<wbr>いきなり<span class="nw">46億年前</span>、<wbr>地球の<wbr>誕生へ。<wbr>タイムマシンのように<wbr>行き来する、<wbr><span class="nw">全8章</span>（<span class="nw">8皿</span>）の<wbr>旅です。</p>
     </div>
-    <div class="ruler rise" role="list">
-      <div class="tick" role="listitem"><span class="age">46<i>億年前</i></span><span class="ord">第3章</span><div><h4>地球の誕生</h4><p class="ing">ムール貝</p></div></div>
-      <div class="tick" role="listitem"><span class="age">38<i>億年前</i></span><span class="ord">第1章</span><div><h4>海の誕生・熱水噴出孔</h4><p class="ing">戻り鰹</p></div></div>
-      <div class="tick" role="listitem"><span class="age">5<i>億年前</i></span><span class="ord">第4章</span><div><h4>植物の上陸・土と菌糸の網</h4><p class="ing">虹鱒</p></div></div>
-      <div class="tick" role="listitem"><span class="age">4<i>億年前</i></span><span class="ord">第8章</span><div><h4>昆虫と花の共進化</h4><p class="ing">ルクマ</p></div></div>
-      <div class="tick" role="listitem"><span class="age">3<i>億年前</i></span><span class="ord">第2章</span><div><h4>脊椎動物の上陸</h4><p class="ing">鹿</p></div></div>
-      <div class="tick" role="listitem"><span class="age">2<i>億年前</i></span><span class="ord">第5章</span><div><h4>恐竜の時代と大絶滅</h4><p class="ing">太刀魚</p></div></div>
-      <div class="tick" role="listitem"><span class="age">6600<i>万年前</i></span><span class="ord">第6章</span><div><h4>哺乳類の繁栄</h4><p class="ing">豚肩ロース</p></div></div>
-      <div class="gap" aria-hidden="true">— 65,999,500 years —</div>
-      <div class="tick" role="listitem"><span class="age">500<i>年前</i></span><span class="ord">第7章</span><div><h4>文明と交易</h4><p class="ing">栗</p></div></div>
-      <div class="tick now" role="listitem"><span class="age">今夜</span><span class="ord">Tonight</span><div><h4>あなたが立っている場所</h4><p class="ing">旅の終わりに、コーヒーまたはハーブティーを。</p></div></div>
+    <div class="tl-grid">
+      <div class="tl-side">
+        <div class="calkey rise">
+          <p><b>地球カレンダー</b><span class="nw">46億年</span>を<wbr><span class="nw">1年</span>に<wbr>縮めた暦。<wbr><span class="nw">1月1日</span>に<wbr>地球が<wbr>生まれ、<wbr>人類の<wbr>文明の<wbr>記録は、<wbr>大晦日の<wbr>最後の<wbr>数十秒に<wbr>収まります。<wbr><span class="nw">8皿</span>の<wbr>うち<span class="nw">6皿</span>は、<wbr><span class="nw">11月22日</span>から<wbr>大晦日までの<wbr>時代です。</p>
+          <figure class="route" aria-label="8皿を、地球カレンダー上で出てくる順につないだ図">
+  <div class="rt">
+    <div class="band year" aria-hidden="true"><span class="lab r">大晦日</span><span style="--x:24.66%">4月</span><span style="--x:49.59%">7月</span><span style="--x:74.79%">10月</span><span class="zz" style="--x:87.12%"></span></div>
+    <div class="band zoom" aria-hidden="true"><span style="--x:14.89%"></span><span style="--x:29.79%"></span><span style="--x:44.68%"></span><span style="--x:59.57%"></span><span style="--x:74.47%"></span><span style="--x:89.36%"></span></div>
+    <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><path class="callout" d="M871.2 240.0 L0 640.0 L1000 640.0 L1000 240.0 Z"/><path class="seg" style="--i:0" d="M173.9 240.0 C173.9 440.0 493.5 440.0 493.5 640.0"/><path class="seg back" style="--i:1" d="M493.5 640.0 C493.5 440.0 0.0 440.0 0.0 240.0"/><path class="seg" style="--i:2" d="M0.0 240.0 C0.0 440.0 155.9 440.0 155.9 640.0"/><path class="seg" style="--i:3" d="M155.9 640.0 C155.9 490.0 662.3 490.0 662.3 640.0"/><path class="seg" style="--i:4" d="M662.3 640.0 C662.3 490.0 888.6 490.0 888.6 640.0"/><path class="seg" style="--i:5" d="M888.6 640.0 C888.6 490.0 1000.0 490.0 1000.0 640.0"/><path class="seg back" style="--i:6" d="M1000.0 640.0 C1000.0 970.0 324.7 970.0 324.7 640.0"/></svg>
+    <span class="rp year" data-n="1" style="--x:17.39%;--d:0"><b class="num">1</b><i>3/5</i></span><span class="rp zoom" data-n="2" style="--x:49.35%;--d:1"><b class="num">2</b><i>12/8</i></span><span class="rp year" data-n="3" style="--x:0.00%;--d:2"><b class="num">3</b><i>1/1</i></span><span class="rp zoom" data-n="4" style="--x:15.59%;--d:3"><b class="num">4</b><i>11/22</i></span><span class="rp zoom" data-n="5" style="--x:66.23%;--d:4"><b class="num">5</b><i>12/16</i></span><span class="rp zoom" data-n="6" style="--x:88.86%;--d:5"><b class="num">6</b><i>12/26</i></span><span class="rp zoom" data-n="7" style="--x:100.00%;--d:6"><b class="num">7</b><i>12/31</i></span><span class="rp zoom" data-n="8" style="--x:32.47%;--d:7"><b class="num">8</b><i>11/30</i></span>
+  </div>
+  <figcaption><span class="lg"><i class="s"></i>未来へ進む</span><span class="lg"><i class="b"></i>過去へさかのぼる</span><span class="lg">番号＝出てくる順</span><span class="lg">下の帯＝11月15日〜大晦日を拡大</span></figcaption>
+</figure>
+        </div>
+      </div>
+      <ol class="voyage" id="voyage">
+<li class="leg" data-n="1">
+  
+  <div class="no" aria-hidden="true"><span class="n num">1</span><small>皿目</small></div>
+  <div class="body">
+    <p class="ago"><span class="sr">1皿目、</span><span class="num">38</span><span class="u">億年前</span></p>
+    <h3>海の<wbr>誕生・<span class="nw">熱水噴出孔</span></h3>
+    <p class="cal-l"><span>地球カレンダー</span><b class="nw">3月5日</b></p>
+    <p class="line">最初の<wbr>命が<wbr>生まれた<wbr>といわれる、<wbr>深海の<wbr>熱水から。<wbr>戻り鰹の<wbr>一皿。</p>
+  </div>
+</li>
+<li class="leg" data-n="2">
+  <p class="hop fwd"><i aria-hidden="true">↓</i><span><span class="nw">35億年</span>すすむ</span></p>
+  <div class="no" aria-hidden="true"><span class="n num">2</span><small>皿目</small></div>
+  <div class="body">
+    <p class="ago"><span class="sr">2皿目、</span><span class="num">3</span><span class="u">億年前</span></p>
+    <h3>脊椎動物の<wbr>上陸</h3>
+    <p class="cal-l"><span>地球カレンダー</span><b class="nw">12月8日</b></p>
+    <p class="line">背骨を<wbr>持つ命が、<wbr>海から<wbr>陸へ。<wbr>主役は<wbr>鹿。</p>
+  </div>
+</li>
+<li class="leg" data-n="3">
+  <p class="hop back"><i aria-hidden="true">↺</i><span><span class="nw">43億年</span><span class="nw">さかのぼる</span></span></p>
+  <div class="no" aria-hidden="true"><span class="n num">3</span><small>皿目</small></div>
+  <div class="body">
+    <p class="ago"><span class="sr">3皿目、</span><span class="num">46</span><span class="u">億年前</span></p>
+    <h3>地球の<wbr>誕生</h3>
+    <p class="cal-l"><span>地球カレンダー</span><b class="nw">1月1日 0時</b></p>
+    <p class="line">燃える<wbr>星が<wbr>生まれた<wbr>日へ、<wbr>ムール貝で<wbr>戻る。</p>
+  </div>
+</li>
+<li class="leg" data-n="4">
+  <p class="hop fwd"><i aria-hidden="true">↓</i><span><span class="nw">41億年</span>すすむ</span></p>
+  <div class="no" aria-hidden="true"><span class="n num">4</span><small>皿目</small></div>
+  <div class="body">
+    <p class="ago"><span class="sr">4皿目、</span><span class="num">5</span><span class="u">億年前</span></p>
+    <h3>植物の<wbr>上陸・土と<wbr>菌糸の<wbr>網</h3>
+    <p class="cal-l"><span>地球カレンダー</span><b class="nw">11月22日</b></p>
+    <p class="line">土の<wbr>下に、<wbr>菌糸の<wbr>網が<wbr>広がる。<wbr>虹鱒で<wbr>描く。</p>
+  </div>
+</li>
+<li class="leg" data-n="5">
+  <p class="hop fwd"><i aria-hidden="true">↓</i><span><span class="nw">3億年</span>すすむ</span></p>
+  <div class="no" aria-hidden="true"><span class="n num">5</span><small>皿目</small></div>
+  <div class="body">
+    <p class="ago"><span class="sr">5皿目、</span><span class="num">2</span><span class="u">億年前</span></p>
+    <h3>恐竜の<wbr>時代と<wbr>大絶滅</h3>
+    <p class="cal-l"><span>地球カレンダー</span><b class="nw">12月16日</b></p>
+    <p class="line">恐竜の<wbr>時代と、<wbr>その<wbr>終わりを<wbr>太刀魚で。</p>
+  </div>
+</li>
+<li class="leg" data-n="6">
+  <p class="hop fwd"><i aria-hidden="true">↓</i><span>1億<span class="nw">3400万年</span>すすむ</span></p>
+  <div class="no" aria-hidden="true"><span class="n num">6</span><small>皿目</small></div>
+  <div class="body">
+    <p class="ago"><span class="sr">6皿目、</span><span class="num">6600</span><span class="u">万年前</span></p>
+    <h3>哺乳類の<wbr>繁栄</h3>
+    <p class="cal-l"><span>地球カレンダー</span><b class="nw">12月26日 18時ごろ</b></p>
+    <p class="line">主役の<wbr>座は、<wbr>哺乳類へ。<wbr>豚肩ロースが<wbr>継ぐ。</p>
+  </div>
+</li>
+<li class="leg" data-n="7">
+  <p class="hop fwd"><i aria-hidden="true">↓</i><span>約<span class="nw">6600万年</span>すすむ</span></p>
+  <div class="no" aria-hidden="true"><span class="n num">7</span><small>皿目</small></div>
+  <div class="body">
+    <p class="ago"><span class="sr">7皿目、</span><span class="num">500</span><span class="u">年前</span></p>
+    <h3>文明と<wbr>交易</h3>
+    <p class="cal-l"><span>地球カレンダー</span><b class="nw">12月31日 23:59:56</b></p>
+    <p class="line">年越しの<wbr>約3.<span class="nw">4秒</span>前。<wbr>海を<wbr>越える<wbr>交易を、栗で。</p>
+  </div>
+</li>
+<li class="leg" data-n="8">
+  <p class="hop back"><i aria-hidden="true">↺</i><span>約<span class="nw">4億年</span><span class="nw">さかのぼる</span></span></p>
+  <div class="no" aria-hidden="true"><span class="n num">8</span><small>皿目</small></div>
+  <div class="body">
+    <p class="ago"><span class="sr">8皿目、</span><span class="num">4</span><span class="u">億年前</span></p>
+    <h3>昆虫と<wbr>花の<wbr>共進化</h3>
+    <p class="cal-l"><span>地球カレンダー</span><b class="nw">11月30日</b></p>
+    <p class="line">昆虫と<wbr>花が、<wbr>互いを<wbr>形づくってきた<wbr>時代。<wbr>結びは、<wbr>ルクマの<wbr>デザート。</p>
+  </div>
+</li>
+<li class="leg tonight" data-n="9">
+  <p class="hop fwd"><i aria-hidden="true">↓</i><span>約<span class="nw">4億年</span>すすむ</span></p>
+  <div class="no" aria-hidden="true"><span class="n"><span class="ring"></span></span><small>最後に</small></div>
+  <div class="body">
+    <p class="ago"><span class="u big">今夜</span></p>
+    <h3>旅の終わり</h3>
+    <p class="cal-l"><span>地球カレンダー</span><b class="nw">12月31日 24:00</b></p>
+    <p class="line">コーヒーまたは<wbr>ハーブティーを。<wbr>年が<wbr>明ける<wbr>瞬間に、<wbr>あなたの席が<wbr>ある。</p>
+  </div>
+</li>
+      </ol>
     </div>
-    <p class="ruler-note">ETHICA コレクション（全8章）の章立てです。食材は季節と仕入れで替わります。</p>
+    <div class="eve rise" role="group" aria-label="大晦日、最後の10秒">
+      <p class="eve-t">大晦日、最後の10秒。<span>1秒は、およそ146年。</span></p>
+      <div class="eve-bar" aria-hidden="true"><span class="hand"></span><span class="mk m7" style="--p:66%"></span><span class="mk now" style="--p:100%"></span>
+        <span class="tk first" style="--p:0%">23:59:50</span><span class="tk" style="--p:50%">:55</span><span class="tk last" style="--p:100%">24:00</span></div>
+      <ul class="eve-l"><li><span class="t">23:59:56</span><span><span class="nw">7皿目</span>　文明と<wbr>交易<wbr>（栗）。<wbr><span class="nw">500年前</span>は、<wbr>年越しの<wbr>約3.<span class="nw">4秒</span>前。</span></li><li><span class="t">24:00</span><span>今夜。<wbr>旅の<wbr>終わりに、<wbr>コーヒーまたは<wbr>ハーブティーを。</span></li></ul>
+    </div>
+    <p class="tl-note">ETHICA コレクション・<span class="nw">2026年</span>秋の<wbr>章立てです。<wbr>食材は<wbr>季節と<wbr>仕入れで<wbr>替わります。</p>
+    <div class="tl-cta"><a class="btn btn-gold" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/30c859ae-9c18-4094-9eb0-4351d81fef42?utm_source=lp&amp;utm_medium=site&amp;utm_content=timeline" target="_blank" rel="noopener" data-cta="timeline">この旅の空席を見る<span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
-<section class="sec" aria-labelledby="rebirth-title">
-  <div class="wrap rebirth">
-    <img class="rise" src="assets/img/table_top.webp" alt="青いレジンのテーブルに並ぶ料理を上から見たところ" loading="lazy" width="1920" height="1280">
-    <div class="rise">
-      <p class="eyebrow">Rebirth</p>
-      <h2 id="rebirth-title">形を変えて、また命になる。</h2>
-      <p class="lede" style="margin-top:22px">46億年、地球がずっと続けてきたことです。この店も、その物語の一部です。</p>
-      <dl class="items">
-        <div><dt>朽ちたポプラ</dt><dd class="to">燕三条の職人が、レジンで甦らせたテーブルに。青い樹脂には、中南米の泉「セノーテ」を映しました。</dd></div>
-        <div><dt>卵の殻</dt><dd class="to">足もとのエッグタイルに。</dd></div>
-        <div><dt>カメノテの殻、ボタンエビの頭、ムール貝の殻、鹿の骨</dt><dd class="to">カトラリーレストに。</dd></div>
-        <div><dt>パイナップルの芯、果物の皮、スパイス</dt><dd class="to">ノンアルコールペアリングの一杯に。</dd></div>
-      </dl>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="courses" aria-labelledby="courses-title" style="background:var(--stone)">
+<section class="sec courses-sec" id="courses" aria-labelledby="courses-title">
   <div class="wrap">
     <div class="courses-head rise">
-      <div><p class="eyebrow">Courses</p><h2 id="courses-title">旅の長さを選ぶ。</h2></div>
-      <p style="color:var(--muted);max-width:30em;font-size:14px">迷ったら、いちばん選ばれている「ETHICA コレクション」を。表示は税込・1名の料金です。サービス料10%を別に頂戴します。</p>
+      <div><p class="eyebrow">Courses</p><h2 id="courses-title">旅の長さを、<wbr>選ぶ。</h2><p class="mich c-mich">ミシュランガイド東京 3年連続掲載</p></div>
+      <p class="lede">迷ったら、<wbr>真ん中の<wbr>「ETHICA コレクション」へ。<wbr>コレクションと<wbr><span class="nw">グランド・コレクション</span>は、<wbr><span class="nw">土・日</span>の<wbr>ランチにも<wbr>ご用意しています。</p>
     </div>
     <div class="tiers">
-      <article class="card rise">
-        <p class="use">この後ご予定がある方に</p>
-        <h3>ショートコース</h3>
-        <p class="chap">5 chapters ・ 全5章</p>
-        <p class="d">旅のエッセンスを5章に凝縮しました。会食の前後や、お酒を中心に楽しみたい夜に。</p>
-        <p class="price">¥14,800<small>税込・サ別</small></p>
-        <a class="btn btn-ghost" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/31a4ceeb-9b01-4fd9-98e8-35a9e7bc86eb" target="_blank" rel="noopener">このコースで空席を見る</a>
-      </article>
-      <article class="card mid rise">
-        <span class="badge">1番人気</span>
-        <p class="use">初めての方に</p>
-        <h3>ETHICA コレクション</h3>
-        <p class="chap">8 chapters ・ 全8章</p>
-        <p class="d">地球46億年を、8つの章で旅する。ETHICAの物語をいちばんまっすぐに味わえるコースです。</p>
-        <p class="price">¥19,800<small>税込・サ別</small></p>
-        <a class="btn btn-primary" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/30c859ae-9c18-4094-9eb0-4351d81fef42" target="_blank" rel="noopener">このコースで空席を見る</a>
-      </article>
-      <article class="card rise">
-        <p class="use">特別な日に</p>
-        <h3>ETHICA グランド・コレクション</h3>
-        <p class="chap">9 chapters ・ 全9章</p>
-        <p class="d">希少な食材へアップグレードした、全9章の旅。</p>
-        <p class="price">¥24,800<small>税込・サ別</small></p>
-        <a class="btn btn-ghost" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/e95d45f4-750a-41cc-9f75-7aa835759e85" target="_blank" rel="noopener">このコースで空席を見る</a>
-      </article>
+      <article class="card side rise" id="c-short">
+  <p class="use">この後ご予定がある夜に</p>
+  <h3>ショートコース</h3>
+  <p class="chap">全5章<span class="sep">・</span>テーブル席・<span class="nw">1〜8名</span></p>
+  <p class="d">お酒を<wbr>中心に<wbr>楽しみたい夜の<wbr>ために、<wbr>あえて<wbr>腹八分目に<wbr>抑えた<span class="nw">全5章</span>。</p>
+  <p class="pr"><span class="price"><span class="yen">¥</span>14,800</span><small>税込・サービス料別</small></p>
+  <a class="btn btn-line btn-wide" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/31a4ceeb-9b01-4fd9-98e8-35a9e7bc86eb?utm_source=lp&amp;utm_medium=site&amp;utm_content=card_short" target="_blank" rel="noopener" data-cta="card_short">空席を見る<span class="arrow" aria-hidden="true">→</span></a>
+</article>
+      <article class="card mid rise" id="c-collection">
+  <span class="badge">1番人気</span><p class="use">はじめての方に</p>
+  <h3>ETHICA コレクション</h3>
+  <p class="chap">全8章<span class="sep">・</span>テーブル席・<span class="nw">1〜8名</span></p>
+  <p class="d">地球<span class="nw">46億年</span>を、<wbr>8つの<wbr>皿で<wbr>行き来する<wbr>基本の<wbr>コース。<wbr>ETHICAの<wbr>物語を、<wbr>そのまま<wbr>辿ります。</p>
+  <p class="pr"><span class="price"><span class="yen">¥</span>19,800</span><small>税込・サービス料別</small></p>
+  <a class="btn btn-gold btn-wide" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/30c859ae-9c18-4094-9eb0-4351d81fef42?utm_source=lp&amp;utm_medium=site&amp;utm_content=card_collection" target="_blank" rel="noopener" data-cta="card_collection">この旅の空席を見る<span class="arrow" aria-hidden="true">→</span></a><p class="basis">※<wbr>「1番人気」は、<wbr>食べログの<wbr>「人気No.1」<wbr>表示<wbr>（直近30日の<wbr>予約組数が<wbr>最多の<wbr>コース・<span class="nw">2026年</span>10月時点）に<wbr>基づきます。</p>
+</article>
+      <article class="card side rise" id="c-grand">
+  <p class="use">特別な夜に</p>
+  <h3>ETHICA <span class="nw">グランド・コレクション</span></h3>
+  <p class="chap">全9章<span class="sep">・</span>テーブル席・<span class="nw">1〜8名</span></p>
+  <p class="d">コレクションの<wbr>旅を、<wbr>希少な<wbr>食材へ<wbr>アップグレードした<span class="nw">全9章</span>。<wbr>少し<wbr>長く、<wbr>深く<wbr>旅したい夜に。</p>
+  <p class="pr"><span class="price"><span class="yen">¥</span>24,800</span><small>税込・サービス料別</small></p>
+  <a class="btn btn-line btn-wide" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/e95d45f4-750a-41cc-9f75-7aa835759e85?utm_source=lp&amp;utm_medium=site&amp;utm_content=card_grand" target="_blank" rel="noopener" data-cta="card_grand">空席を見る<span class="arrow" aria-hidden="true">→</span></a>
+</article>
     </div>
-
-    <div class="sub-head rise"><h3>キッチンの中の、1日1組の席</h3><span>どちらもグランド・コレクションをもとにした全9章です。</span></div>
+    <div class="sub-head rise" id="seats"><h3>キッチンの<wbr>中の、<wbr>1日<span class="nw">1組</span>の<wbr>席</h3><span>どちらも<span class="nw">全9章</span>。<wbr>キッチンの<wbr>中で、<wbr>1日<span class="nw">1組</span>だけ。</span></div>
     <div class="seats">
-      <article class="seat rise">
-        <img src="assets/img/plating.webp" alt="皿に盛り付ける料理人の手元" loading="lazy" width="1600" height="1067">
-        <div class="card">
-          <p class="use">デート・記念日に ・ 1〜2名</p>
-          <h3>シェフズ・カウンター</h3>
-          <p class="d">キッチンの中の個室カウンター。目の前で仕上がる一皿を、その日限りの食材とともに。</p>
-          <p class="price">¥27,800<small>税込・サ別</small></p>
-          <a class="btn btn-ghost" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/e95d45f4-750a-41cc-9f75-7aa835759e85" target="_blank" rel="noopener">空席を見る</a>
-        </div>
-      </article>
-      <article class="seat rise">
-        <img src="assets/img/hand_place.webp" alt="岩の上の皿を整える手元" loading="lazy" width="1600" height="1067">
-        <div class="card">
-          <p class="use">会食・接待に ・ 2〜4名</p>
-          <h3>ガストロノミー体験</h3>
-          <p class="d">キッチンの中の個室。盛り付け場からわずか30cm、厨房の鼓動を感じる特等席です。</p>
-          <p class="price">¥29,800<small>税込・サ別</small></p>
-          <a class="btn btn-ghost" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/e95d45f4-750a-41cc-9f75-7aa835759e85" target="_blank" rel="noopener">空席を見る</a>
-        </div>
-      </article>
+      <article class="seat rise" id="c-chefs">
+  <img src="assets/img/plating.webp" alt="皿に盛り付ける料理人の手元" loading="lazy" width="1600" height="1067">
+  <div class="card"><p class="use">デート・記念日に・1〜2名</p><h3><span class="nw">シェフズ・カウンター</span></h3>
+  <p class="chap">全9章<span class="sep">・</span>キッチンの<wbr>中の<wbr>個室カウンター・<span class="nw">1〜2名</span>・1日<span class="nw">1組</span></p>
+  <p class="d">キッチンの<wbr>中の<wbr>個室カウンター。<wbr>より<wbr>希少な<wbr>部位や<wbr>その<wbr>日限りの<wbr>食材を、<wbr>シェフが<wbr>目の前で<wbr>仕上げます。</p>
+  <p class="pr"><span class="price"><span class="yen">¥</span>27,800</span><small>税込・サービス料別</small></p>
+  <a class="btn btn-line btn-wide" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/e95d45f4-750a-41cc-9f75-7aa835759e85?utm_source=lp&amp;utm_medium=site&amp;utm_content=card_chefs" target="_blank" rel="noopener" data-cta="card_chefs">空席を見る<span class="arrow" aria-hidden="true">→</span></a><p class="basis">予約ページでは<wbr>「<span class="nw">グランド・コレクション</span>」の<wbr>中の<wbr>プラン<span class="nw">として</span>お選びください<wbr>（ディナー・ランチとも）。</p></div>
+</article>
+      <article class="seat rise" id="c-gastro">
+  <img src="assets/img/hand_place.webp" alt="岩の上の皿を整える手元" loading="lazy" width="1600" height="1067">
+  <div class="card"><p class="use">会食・接待に・2〜4名</p><h3><span class="nw">ガストロノミー体験</span></h3>
+  <p class="chap">全9章<span class="sep">・</span>キッチンの<wbr>中の<wbr>個室・<span class="nw">2〜4名</span>・1日<span class="nw">1組</span></p>
+  <p class="d">キッチンの<wbr>中の<wbr>個室。<wbr>盛り付け場から、<wbr>わずか<wbr>30cm。<wbr>キッチンの<wbr>鼓動を<wbr>感じながら、<wbr><span class="nw">全9章</span>を。</p>
+  <p class="pr"><span class="price"><span class="yen">¥</span>29,800</span><small>税込・サービス料別</small></p>
+  <a class="btn btn-line btn-wide" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/e95d45f4-750a-41cc-9f75-7aa835759e85?utm_source=lp&amp;utm_medium=site&amp;utm_content=card_gastro" target="_blank" rel="noopener" data-cta="card_gastro">個室の空席を見る<span class="arrow" aria-hidden="true">→</span></a><p class="basis">予約ページでは<wbr>「<span class="nw">グランド・コレクション</span>」の<wbr>中の<wbr>プラン<span class="nw">として</span>お選びください<wbr>（ディナー・ランチとも）。</p></div>
+</article>
     </div>
-
-    <div class="sub-head rise"><h3>目的で選ぶ</h3></div>
+    <div class="sub-head rise" id="purpose"><h3>お祝いに、<wbr>食の<wbr>制限に</h3></div>
     <div class="purpose">
-      <article class="card rise">
-        <p class="use">大切な方のお祝いに</p>
-        <h3>誕生日・記念日コース</h3>
-        <p class="chap">9 chapters ・ 全9章 ・ メッセージプレート付き</p>
-        <p class="d">グランド・コレクションに、お祝いのメッセージプレートを添えて。</p>
-        <p class="price">¥25,200<small>税込・サ別</small></p>
-        <a class="btn btn-ghost" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/61ffd0c5-f570-48b6-a2ec-d0982cc5bd1d" target="_blank" rel="noopener">このコースで空席を見る</a>
-      </article>
-      <article class="card rise">
-        <p class="use">ヴィーガン対応可</p>
-        <h3>ベジタリアン ETHICA コレクション</h3>
-        <p class="chap">8 chapters ・ 全8章</p>
-        <p class="d">野菜と果実、きのこで描く、もうひとつの46億年。ヴィーガンやムスリムフレンドリーにも対応します。</p>
-        <p class="price">¥19,800<small>税込・サ別</small></p>
-        <a class="btn btn-ghost" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/f3ff6a91-364f-477f-81e1-e98d0bc20697" target="_blank" rel="noopener">このコースで空席を見る</a>
-      </article>
+      <article class="card side rise" id="c-anniversary">
+  <p class="use">誕生日・記念日に・2名〜</p>
+  <h3>誕生日・記念日コース</h3>
+  <p class="chap">全9章<span class="sep">・</span>テーブル席・<span class="nw">2名</span>〜・<span class="nw">メッセージプレート</span>付き</p>
+  <p class="d"><span class="nw">グランド・コレクション</span>の<wbr><span class="nw">全9章</span>に、<wbr>お祝いの<wbr><span class="nw">メッセージプレート</span>を<wbr>添えて。</p>
+  <p class="pr"><span class="price"><span class="yen">¥</span>25,200</span><small>税込・サービス料別</small></p>
+  <a class="btn btn-line btn-wide" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/61ffd0c5-f570-48b6-a2ec-d0982cc5bd1d?utm_source=lp&amp;utm_medium=site&amp;utm_content=card_anniv" target="_blank" rel="noopener" data-cta="card_anniv">記念日の空席を見る<span class="arrow" aria-hidden="true">→</span></a>
+</article>
+      <article class="card side rise" id="c-veg">
+  <p class="use">ベジタリアンの方に・1〜8名</p>
+  <h3>ベジタリアン ETHICA コレクション</h3>
+  <p class="chap">全8章<span class="sep">・</span>テーブル席・<span class="nw">1〜8名</span></p>
+  <p class="d">ベジタリアンの<wbr>ための、<wbr>もう<wbr>ひとつの<span class="nw">全8章</span>。<wbr>ヴィーガン・ムスリムフレンドリーの<wbr>ご要望も<wbr>ご相談ください。</p>
+  <p class="pr"><span class="price"><span class="yen">¥</span>19,800</span><small>税込・サービス料別</small></p>
+  <a class="btn btn-line btn-wide" href="https://res-reserve.com/ja/restaurants/ethicatokyo/courses/f3ff6a91-364f-477f-81e1-e98d0bc20697?utm_source=lp&amp;utm_medium=site&amp;utm_content=card_veg" target="_blank" rel="noopener" data-cta="card_veg">空席を見る<span class="arrow" aria-hidden="true">→</span></a>
+</article>
     </div>
-    <p class="fine">ペアリング（ワイン・ノンアルコール）もご用意しています。ご希望の方は、ご予約時の「ご要望」欄にお書き添えください。</p>
-  </div>
-</section>
-
-<section class="sec" aria-labelledby="gallery-title">
-  <div class="wrap">
-    <div class="rise"><p class="eyebrow">Plates</p><h2 id="gallery-title">季節で替わる、時代の一皿。</h2></div>
-    <div class="gallery">
-      <img class="t2" src="assets/img/d_coral.webp" alt="青い器に盛られた白と青緑の一皿" loading="lazy">
-      <img src="assets/img/d_ink.webp" alt="白い石の上の黒い麺の一皿" loading="lazy">
-      <img src="assets/img/d_berry.webp" alt="赤い果実と花びらの一皿" loading="lazy">
-      <img class="t2" src="assets/img/d_pink.webp" alt="岩の器に咲く桃色の一皿" loading="lazy">
-      <img class="w2" src="assets/img/dish_flower.webp" alt="紫の花びらが散る器" loading="lazy">
-      <img src="assets/img/d_maze.webp" alt="黒地に白い模様の一皿" loading="lazy">
-      <img src="assets/img/d_glass.webp" alt="ガラスの器に注がれた赤い一杯" loading="lazy">
-      <img src="assets/img/d_ebi.webp" alt="黒い器から伸びる細い線の一皿" loading="lazy">
-      <img src="assets/img/d_square.webp" alt="青いレジンの上の四角い皿" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<section class="sec" aria-labelledby="kitchen-title" style="background:var(--stone)">
-  <div class="wrap kitchen">
-    <video class="rise" autoplay muted loop playsinline preload="metadata" poster="assets/video/sauce.webp" aria-hidden="true"><source src="assets/video/sauce.mp4" type="video/mp4"></video>
-    <div class="rise">
-      <p class="eyebrow">Kitchen</p>
-      <h2 id="kitchen-title">一皿に、<br>ひとつの時代を。</h2>
-      <p class="lede" style="margin-top:22px">ペルー料理の基礎の上に、フランス料理の技法を重ねて、時代の風景を一皿に描きます。ソースが大地の地層になり、器が海の底になる。食べることが、その時代に立つことになるように。</p>
-      <div class="who"><span>Executive Chef</span><p>松苗 まさお ／ 二ツ星 MAZ 出身</p></div>
-    </div>
+    <p class="release">ご予約は<wbr>毎月<wbr>1日に、<wbr>翌月分の<wbr>受け付けを<wbr>始めます。<wbr>満席の<wbr>日の<wbr><span class="nw">キャンセル待ち</span>は、<wbr><a href="https://www.instagram.com/ethica.ginza/" target="_blank" rel="noopener">Instagram</a>で<wbr>お知らせしています。</p>
+    <p class="fine">料金は<wbr>すべて<wbr>税込・<span class="nw">1名</span>、<wbr>別途サービス料<span class="nw">10%</span>を<wbr>頂戴します。<wbr>テーブル席の<wbr>コースは<wbr><span class="nw">1〜8名</span>様で<wbr>ご予約いただけます<wbr>（誕生日・記念日コースは<wbr><span class="nw">2名様</span>から）。<wbr>ペアリングは<wbr>別料金で、<wbr><span class="nw">ノンアルコールペアリング</span>は<wbr>事前予約制です。</p>
   </div>
 </section>
 
@@ -432,85 +313,120 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   <div class="wrap space">
     <div class="photos rise">
       <p class="eyebrow">The Cave</p>
-      <h2 id="space-title" style="margin-bottom:22px">扉の向こうは、洞窟。</h2>
-      <img src="assets/img/interior.webp" alt="岩壁に沿って木のテーブルが並ぶ洞窟のような店内" loading="lazy" width="1920" height="1280">
-      <img src="assets/img/interior_blue.webp" alt="青い光のテーブル席が並ぶ店内" loading="lazy" width="1920" height="1280">
+      <h2 id="space-title">岩壁と、<wbr>落とした灯り。</h2>
+      <p class="lede">銀座一丁目の<wbr>通りから<wbr>一歩<wbr>入れば、<wbr>そこは<wbr>もう<wbr>別の<wbr>時代。<wbr>目的に<wbr>合わせて、<wbr>3つの<wbr>席から<wbr>選べます。</p>
+      <img src="assets/img/interior.webp" alt="岩壁に沿って木のテーブルが並ぶ、洞窟のような店内" loading="lazy" width="1920" height="1280">
     </div>
     <aside class="map rise" aria-label="席の配置">
-      <img src="assets/img/floormap.webp" alt="店内の見取り図。入口から奥へテーブル席が続き、奥にカウンターとキッチン内の個室がある" loading="lazy" width="900" height="1923">
-      <ul>
-        <li>テーブル席：岩壁沿いの洞窟の席</li>
-        <li>シェフズ・カウンター：キッチンの中、1日1組</li>
-        <li>個室：キッチンの中、2〜4名で1日1組</li>
-      </ul>
+      <ul><li>テーブル席<wbr>（<span class="nw">1〜8名</span>）<wbr>：洞窟のような<wbr>空間</li>
+<li><span class="nw">シェフズ・カウンター</span><wbr>（<span class="nw">1〜2名</span>・1日<wbr><span class="nw">1組</span>）<wbr>：キッチンの<wbr>中</li>
+<li>個室<wbr>（<span class="nw">2〜4名</span>・1日<wbr><span class="nw">1組</span>）<wbr>：キッチンの<wbr>中。<wbr>会食・<wbr>接待に</li></ul>
+      <details class="mapd"><summary>見取り図を見る</summary><img src="assets/img/floormap.webp" alt="店内の見取り図。入口から奥へテーブル席が続き、奥にカウンター、キッチン、キッチンの中の個室がある" loading="lazy" width="900" height="1923"></details>
     </aside>
   </div>
 </section>
 
-<section class="sec" id="access" aria-label="よくある質問とアクセス" style="background:var(--stone)">
+<section class="sec alt" aria-labelledby="rebirth-title">
+  <div class="wrap rebirth">
+    <img class="rise" src="assets/img/rebirth_table.webp" alt="朽ちたポプラの木目に、青い樹脂が流れるテーブル" loading="lazy" width="1600" height="1200">
+    <div class="rise">
+      <p class="eyebrow">Rebirth</p>
+      <h2 id="rebirth-title">朽ちた木が、<wbr>テーブルになる。</h2>
+      <p class="lede">形を<wbr>変えて、<wbr>もう<wbr>一度<wbr>役目を<wbr>持つ。<wbr><span class="nw">46億年</span>、<wbr>地球が<wbr>ずっと<wbr>続けてきたことが、<wbr>この<wbr>店の<wbr>中でも<wbr>起きています。</p>
+      <dl class="items"><div><dt>朽ちた<wbr>ポプラ</dt><dd><span class="ar" aria-hidden="true">→</span><span>燕三条の<wbr>職人が<wbr>レジンで<wbr>甦らせた、<wbr>テーブルに。<wbr>青い<wbr>樹脂には、<wbr>中南米の<wbr>泉<wbr>「セノーテ」を<wbr>映しました。</span></dd></div>
+<div><dt>卵の<wbr>殻</dt><dd><span class="ar" aria-hidden="true">→</span><span>足もとの<wbr>エッグタイルに。</span></dd></div>
+<div><dt>カメノテの<wbr>殻・ボタンエビの<wbr>頭・ムール貝の<wbr>殻・鹿の<wbr>骨</dt><dd><span class="ar" aria-hidden="true">→</span><span>手もとの<wbr>カトラリーレストに。</span></dd></div>
+<div><dt>パイナップルの<wbr>芯・果物の<wbr>皮・スパイスなど</dt><dd><span class="ar" aria-hidden="true">→</span><span><span class="nw">ノンアルコールペアリング</span>の<wbr>一杯に。</span></dd></div></dl>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="kitchen-title">
+  <div class="wrap kitchen">
+    <figure class="k-img rise"><img src="assets/img/kitchen_plate.webp" alt="墨流しのような白と黒の上に、紫の花びらと赤い細い線を散らした一皿" loading="lazy" width="1200" height="1500"></figure>
+    <div class="rise">
+      <p class="eyebrow">Kitchen</p>
+      <h2 id="kitchen-title">一皿に、<wbr>ひとつの時代を。</h2>
+      <p class="lede">ペルー料理の<wbr>基礎に、<wbr>フランス料理の<wbr>技法を<wbr>重ねる。<wbr>一皿ごとに、<wbr>地球史の<wbr>ひとつの<wbr>場面を<wbr>描く。<wbr>食べ進めるうちに、<wbr>気づけば<wbr>その<wbr>時代の<wbr>風景の<wbr>中に<wbr>いる。<wbr>一皿は、<wbr>その<wbr>ための<wbr>扉です。</p>
+      <div class="who"><span>Executive Chef</span><p class="lat">MASAO ANDRÉS MATSUNAE GUZMÁN</p><span>二ツ星 MAZ 出身</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" aria-labelledby="gallery-title">
+  <div class="wrap">
+    <div class="rise"><p class="eyebrow">Plates</p><h2 id="gallery-title">季節で替わる、<wbr>時代の一皿。</h2><p class="lede">これまでに<wbr>お出しした<wbr>一皿から。<wbr>食材は<wbr>季節と<wbr>仕入れで<wbr>替わる<wbr>ため、<wbr>同じ章でも、<wbr>季節に<wbr>よって<wbr>皿の<wbr>景色が<wbr>変わります。</p></div>
+    <div class="gallery">
+      <figure class="t2"><img src="assets/img/d_coral.webp" alt="青い器に盛られた白と青緑の一皿" loading="lazy"></figure>
+      <figure><img src="assets/img/d_ink.webp" alt="白い石の上の黒い麺の一皿" loading="lazy"></figure>
+      <figure><img src="assets/img/d_berry.webp" alt="赤い果実と花びらの一皿" loading="lazy"></figure>
+      <figure class="t2"><img src="assets/img/d_pink.webp" alt="岩の器に咲く桃色の一皿" loading="lazy"></figure>
+      <figure><img src="assets/img/d_cup.webp" alt="岩の上の器に注がれた一杯" loading="lazy"></figure>
+      <figure><img src="assets/img/d_maze.webp" alt="黒地に白い模様の一皿" loading="lazy"></figure>
+      <figure><img src="assets/img/d_glass.webp" alt="ガラスの器に注がれた赤い一杯" loading="lazy"></figure>
+      <figure><img src="assets/img/d_ebi.webp" alt="黒い器から細い線が伸びる一皿" loading="lazy"></figure>
+      <figure class="w2"><img src="assets/img/d_square.webp" alt="青いレジンの上の四角い皿" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="access" aria-label="ご予約の前に・アクセス">
   <div class="wrap info">
     <div class="rise">
       <p class="eyebrow">Q&amp;A</p>
-      <h2 style="margin-bottom:18px">ご来店の前に。</h2>
-      <details><summary>服装の決まりはありますか</summary><p>スマートカジュアルでお越しください。タンクトップ、短パン、ビーチサンダルはご遠慮いただいています。</p></details>
-      <details><summary>アレルギーや苦手な食材に対応できますか</summary><p>ご予約時に、お連れ様の分もあわせてお知らせください。妊娠中などの食事の制限もお書き添えください。</p></details>
-      <details><summary>ベジタリアン・ヴィーガンでも楽しめますか</summary><p>ベジタリアン ETHICA コレクションをご用意しています。ヴィーガンやムスリムフレンドリーにも対応します。</p></details>
-      <details><summary>コース料金のほかにかかるものは</summary><p>サービス料10%と、ミネラルウォーターチャージとしてお一人様¥980（税込）を頂戴しています。ペアリングは別料金です。</p></details>
-      <details><summary>支払い方法は</summary><p>キャッシュレス決済のみです。VISA・Master・JCB・AMEX・Diners、交通系電子マネー・iD・QUICPay がご利用いただけます。</p></details>
-      <details><summary>記念日のサプライズはお願いできますか</summary><p>メッセージプレートをご用意できます。誕生日・記念日コースをお選びいただくか、ご予約時にご相談ください。</p></details>
+      <h2 class="faq-t">ご予約の<wbr>前に。</h2>
+      <details><summary><span>会食・<wbr>接待で<wbr>使える<wbr>個室は<wbr>ありますか</span></summary><p>キッチンの<wbr>中に、<wbr><span class="nw">2〜4名</span>様・1日<span class="nw">1組</span>の<wbr>個室が<wbr>あります。<wbr>予約ページの<wbr>「ETHICA <span class="nw">グランド・コレクション</span>」の<wbr>中の<wbr>「<span class="nw">ガストロノミー体験</span>（<span class="nw">¥29,800</span>・<span class="nw">全9章</span>）」から<wbr>ご予約ください。</p></details>
+<details><summary><span><span class="nw">1名</span>でも<wbr>予約できますか</span></summary><p>はい。<wbr>テーブル席の<wbr>各コースは<wbr><span class="nw">1名様</span>から、<wbr><span class="nw">シェフズ・カウンター</span>は<wbr><span class="nw">1〜2名</span>様で<wbr>ご予約いただけます。<wbr>誕生日・記念日コースは<wbr><span class="nw">2名様</span>からです。</p></details>
+<details><summary><span>記念日の<wbr>サプライズは<wbr>お願い<wbr>できますか</span></summary><p><span class="nw">メッセージプレート</span>を<wbr>ご用意できます。<wbr>誕生日・記念日コースを<wbr>お選びいただくか、<wbr>ご予約時に<wbr>ご相談ください。</p></details>
+<details><summary><span>アレルギーや<wbr>ベジタリアンに<wbr>対応できますか</span></summary><p>アレルギーは、<wbr>ご予約時に<wbr>お連れ様の<wbr>分も<wbr>あわせてお知らせください。<wbr>ベジタリアン ETHICA コレクションも<wbr>ご用意しています。<wbr>ヴィーガン・ムスリムフレンドリーの<wbr>ご要望は、<wbr>ご予約時に<wbr>お知らせいただければ<wbr>対応できます。</p></details>
+<details><summary><span>予約は<wbr>いつから<wbr>受け付けていますか</span></summary><p>毎月<wbr>1日に、<wbr>翌月分の<wbr>ご予約の<wbr>受け付けを<wbr>始めます。<wbr>満席の<wbr>日の<wbr><span class="nw">キャンセル待ち</span>は、<wbr><a class="nw" href="https://www.instagram.com/ethica.ginza/" target="_blank" rel="noopener">Instagram（@ethica.ginza）</a>で<wbr>お知らせしています。</p></details>
+<details><summary><span>コース料金の<wbr>ほかに、<wbr>かかる<wbr>ものは<wbr>ありますか</span></summary><p>サービス料<span class="nw">10%</span>と、<wbr>ミネラルウォーター<span class="nw">として</span><span class="nw">お一人様</span><span class="nw">¥980</span><wbr>（税込）を<wbr>頂戴しています。<wbr>ペアリングは<wbr>別料金です。</p></details>
+<details><summary><span>キャンセルや<wbr>人数の<wbr>変更は<wbr>できますか</span></summary><p>人数や<wbr>日時の<wbr>変更は、<wbr>お電話<wbr>（<span class="nw">03-6228-7313</span>・受付 <span class="nw">12:00〜17:00</span>）で<wbr>承ります。<wbr>ネット予約では、<wbr><span class="nw">キャンセル料</span>が<wbr>発生した<span class="nw">場合にのみ</span>、<wbr>ご登録の<wbr>カードで<wbr>決済されます。</p></details>
+<details><summary><span>服装や<wbr><span class="nw">支払い方法</span>の<wbr>決まりは<wbr>ありますか</span></summary><p>服装は<wbr>スマートカジュアルで<wbr>お越しください<wbr>（タンクトップ・短パン・ビーチサンダルは<wbr>ご遠慮いただいています）。<wbr>お支払いは<wbr>キャッシュレスのみで、<wbr>VISA・Master・JCB・AMEX・Diners、<wbr>交通系電子マネー・iD・QUICPay が<wbr>ご利用いただけます。</p></details>
+<details><summary><span>営業時間と、<wbr>ランチの<wbr>営業を<wbr>教えてください</span></summary><p>ディナーは<wbr><span class="nw">火〜金</span> <span class="nw">17:30〜</span>、<wbr><span class="nw">土・日</span> <span class="nw">18:00〜</span><wbr>（最終入店は<wbr>いずれも<wbr><span class="nw">20:30</span>）。<wbr>ランチは<wbr><span class="nw">土・日</span> <span class="nw">11:30〜</span><wbr>（最終入店 <span class="nw">13:00</span>）です。<wbr>月曜定休。</p></details>
     </div>
     <div class="access rise">
       <p class="eyebrow">Access</p>
-      <h2>銀座一丁目駅から、徒歩30秒。</h2>
+      <h2>銀座一丁目駅<wbr><span class="nw">3番出口</span>から、<wbr>徒歩<span class="nw">30秒</span>。</h2>
       <dl>
-        <dt>住所</dt><dd>東京都中央区銀座1-3-3 東亜ビル 1F<br><a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A71-3-3%20ETHICA" target="_blank" rel="noopener">地図で見る</a></dd>
-        <dt>駅から</dt><dd>銀座一丁目駅 3番出口 徒歩30秒<br>有楽町駅 徒歩2分／銀座駅 C9出口 徒歩4分</dd>
-        <dt>ディナー</dt><dd>火〜金 17:30〜（最終入店 20:30）<br>土・日 18:00〜（最終入店 20:30）</dd>
-        <dt>ランチ</dt><dd>土・日 11:30〜（最終入店 13:00）</dd>
+        <dt>住所</dt><dd><span class="nw">東京都中央区銀座1-3-3</span> <span class="nw">東亜ビル 1F</span><br><a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A71-3-3%20ETHICA" target="_blank" rel="noopener">地図で見る</a></dd>
+        <dt>駅から</dt><dd><span class="nw">銀座一丁目駅</span> <span class="nw">3番出口 徒歩30秒</span><br><span class="nw">有楽町駅 徒歩2分</span><br><span class="nw">銀座駅</span> <span class="nw">C9出口 徒歩4分</span><br><span class="nw">京橋駅 徒歩5分</span></dd>
+        <dt>ディナー</dt><dd><span class="nw">火〜金 17:30〜</span>／<span class="nw">土・日 18:00〜</span><br><span class="nw">最終入店 20:30</span></dd>
+        <dt>ランチ</dt><dd><span class="nw">土・日 11:30〜</span><span class="nw">（最終入店 13:00）</span></dd>
         <dt>定休日</dt><dd>月曜日</dd>
-        <dt>お電話</dt><dd><a href="tel:0362287313">03-6228-7313</a>（12:00〜17:00）</dd>
+        <dt>お電話</dt><dd><a class="tel" href="tel:+81362287313">03-6228-7313</a><span class="nw">（受付 12:00〜17:00）</span></dd>
       </dl>
     </div>
   </div>
 </section>
 
-<section class="sec final" aria-labelledby="final-title">
-  <img src="assets/img/cenote_wide.webp" alt="" loading="lazy">
+<section class="sec final" data-water aria-labelledby="final-title">
+  <img class="still" src="assets/img/cenote_wide.webp" alt="" loading="lazy">
+  <canvas aria-hidden="true"></canvas>
   <div class="wrap inner rise">
-    <p class="eyebrow">Reservation</p>
-    <h2 id="final-title">46億年の旅へ、ようこそ。</h2>
-    <a class="btn btn-primary" href="https://res-reserve.com/ja/restaurants/ethicatokyo" target="_blank" rel="noopener">空席を見る・予約する</a>
-    <p class="others">食べログ・一休からもご予約いただけます：<a href="https://tabelog.com/tokyo/A1301/A130101/13275021/" target="_blank" rel="noopener">食べログ</a>　<a href="https://restaurant.ikyu.com/121282/" target="_blank" rel="noopener">一休</a></p>
+    <p class="eyebrow mich">ミシュランガイド東京 3年連続掲載</p>
+    <h2 id="final-title"><span class="nw">46億年前</span>への<wbr>扉は、<br>銀座一丁目に。</h2>
+    <p class="final-sub">今月と<wbr>来月の<wbr>空席を、<wbr>予約ページで<wbr>ご覧いただけます。<wbr>記念日や<wbr>会食の<wbr>ご相談は、<wbr>お電話<wbr>（<span class="nw">12:00〜17:00</span>）でも<wbr>承ります。</p>
+    <a class="btn btn-gold" href="https://res-reserve.com/ja/restaurants/ethicatokyo?utm_source=lp&amp;utm_medium=site&amp;utm_content=final" target="_blank" rel="noopener" data-cta="final">空席を見る<span class="arrow" aria-hidden="true">→</span></a>
   </div>
 </section>
 </main>
 
 <footer>
-  <div class="wrap"><span>ETHICA 銀座　東京都中央区銀座1-3-3 東亜ビル 1F</span><span>試作版（検索エンジンには表示されません）</span></div>
+  <div class="wrap">
+    <span>ETHICA　東京都中央区銀座1-3-3 東亜ビル 1F　<a href="tel:+81362287313">03-6228-7313</a></span>
+    <span>食べログ・一休からもご予約いただけます：<a href="https://tabelog.com/tokyo/A1301/A130101/13275021/" target="_blank" rel="noopener">食べログ</a>　<a href="https://restaurant.ikyu.com/121282/" target="_blank" rel="noopener">一休</a></span>
+    <span>試作版（検索エンジンには表示されません）</span>
+  </div>
 </footer>
 
-<div class="dock" id="dock" aria-label="予約">
-  <a class="btn btn-primary" href="https://res-reserve.com/ja/restaurants/ethicatokyo" target="_blank" rel="noopener">空席を見る</a>
-  <a class="btn btn-ghost tel" href="tel:0362287313" aria-label="電話をかける"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.9 2.2z"/></svg></a>
-</div>
+<nav class="dock" id="dock" aria-label="予約">
+  <a class="btn btn-gold" href="https://res-reserve.com/ja/restaurants/ethicatokyo?utm_source=lp&amp;utm_medium=site&amp;utm_content=dock" target="_blank" rel="noopener" data-cta="dock"><span class="d-main">空席を見る<span class="arrow" aria-hidden="true">→</span></span><small>コース ¥14,800〜 税込・サービス料別</small></a>
+  <a class="btn btn-line call" href="tel:+81362287313" aria-label="電話をかける（受付 12:00〜17:00）" data-cta="dock_tel"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.9 2.2z"/></svg><span class="off-hours">受付<br>12-17時</span></a>
+</nav>
 
-<script>
-(function(){
-  document.documentElement.classList.add('js');
-  var top=document.getElementById('top'), dock=document.getElementById('dock');
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function onScroll(){ var y=window.scrollY||0; top.classList.toggle('solid', y>40); dock.classList.toggle('show', y>window.innerHeight*0.6); }
-  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
-  var vids=[].slice.call(document.querySelectorAll('video'));
-  if(reduce){ vids.forEach(function(v){ v.removeAttribute('autoplay'); try{v.pause();}catch(e){} }); }
-  if('IntersectionObserver' in window){
-    var vo=new IntersectionObserver(function(es){ es.forEach(function(e){ var v=e.target; if(reduce) return; if(e.isIntersecting){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); } else { v.pause(); } }); }, {threshold:0.15});
-    vids.forEach(function(v){ vo.observe(v); });
-    var els=[].slice.call(document.querySelectorAll('.rise'));
-    var ro=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.remove('pre'); ro.unobserve(e.target); } }); }, {rootMargin:'0px 0px -8% 0px'});
-    els.forEach(function(el){ var r=el.getBoundingClientRect(); if(r.top>window.innerHeight){ el.classList.add('pre'); ro.observe(el); } });
-  }
-})();
-</script>
+<script src="assets/ripple.js?v=4"></script>
+<script src="assets/app.js?v=4"></script>
+<script src="assets/pond.js?v=4"></script>
 </body>
 </html>
