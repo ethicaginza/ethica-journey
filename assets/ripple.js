@@ -13,7 +13,7 @@
     'i.g+=(avg-i.r)*1.7;i.g*=0.986;i.r+=i.g;i.r=mix(i.r,avg,0.015)*0.9985;float k=smoothstep(0.0,0.0025,abs(i.r)+abs(i.g));i.r*=mix(0.93,1.0,k);i.g*=mix(0.93,1.0,k);gl_FragColor=i;}';
   // 描画：波の高さから傾きを出し、写真をわずかにずらす。小さな傾き（静止時に残る細かな揺れ）は写さない＝止まっている写真はくっきり
   function renderSrc(manual) {
-    return 'precision highp float;uniform sampler2D t;uniform sampler2D img;uniform vec2 dx;uniform vec2 res;uniform vec2 cover;uniform float zoom;uniform vec2 pan;uniform float pert;uniform float dim;uniform float asp;varying vec2 v;' +
+    return 'precision highp float;uniform sampler2D t;uniform sampler2D img;uniform vec2 dx;uniform vec2 res;uniform vec2 cover;uniform float zoom;uniform vec2 pan;uniform float pert;uniform float dim;uniform float asp;uniform sampler2D msk;uniform float um;varying vec2 v;' +
       (manual
         // 補間できないテクスチャ（iPhoneなど）では、4点を自分で混ぜて滑らかにする
         ? 'float H(vec2 uv){vec2 p=uv*res-0.5;vec2 f=fract(p);vec2 b=(floor(p)+0.5)/res;float a=texture2D(t,b).r;float c=texture2D(t,b+vec2(dx.x,0.0)).r;float e=texture2D(t,b+vec2(0.0,dx.y)).r;float g=texture2D(t,b+dx).r;return mix(mix(a,c,f.x),mix(e,g,f.x),f.y);}'
@@ -22,6 +22,10 @@
       // 傾きはマス目あたりで縦横同じに扱い、ずらす量は画面のピクセルで縦横同じにする（波紋が楕円にならない）
       'vec3 ddx=vec3(1.0,(hx-h)*res.x,0.0);vec3 ddy=vec3(0.0,(hy-h)*res.x,1.0);vec2 off=-normalize(cross(ddy,ddx)).xz;' +
       'off*=smoothstep(0.03,0.12,length(off));' +
+      // 型（1=青いレジン、0=木・皿）。写真と同じ位置合わせで読み、型の外では写真をずらさず、光も出さない
+      'vec2 muv=(v-0.5)*cover/zoom+0.5+pan;muv.y=1.0-muv.y;float mk=um>0.5?texture2D(msk,clamp(muv,0.001,0.999)).r:1.0;off*=mk;' +
+      // ずらした先が木や皿なら、ずらさない（木や皿の色をレジンの側へ引き込まない）
+      'vec2 o2=off*pert*vec2(1.0,asp)*cover;float mk2=um>0.5?texture2D(msk,clamp(muv+vec2(o2.x,-o2.y),0.001,0.999)).r:1.0;off*=mk2*mk2;' +
       'float sp=pow(max(0.0,dot(off,normalize(vec2(-0.6,1.0)))),4.0);' +
       'vec2 iuv=(v-0.5)*cover/zoom+0.5+pan;iuv+=off*pert*vec2(1.0,asp)*cover;iuv.y=1.0-iuv.y;' +
       'vec3 col=texture2D(img,clamp(iuv,0.001,0.999)).rgb*dim;' +
@@ -37,6 +41,7 @@
     this.maxDpr = opt.dpr || 1.5;
     this.raf = 0; this.running = false; this.inView = true; this.tabOn = !document.hidden;
     this.ok = this.init();
+    if (this.ok && opt.mask) { this.maskImg(opt.mask.landscape); this.maskImg(opt.mask.portrait); }
   }
   Ripple.prototype.init = function () {
     var gl = this.c.getContext('webgl', { alpha: false, antialias: false, premultipliedAlpha: false, preserveDrawingBuffer: false });
@@ -116,10 +121,51 @@
     this.free(this.a); this.free(this.b);
     this.a = this.makeTarget(sw, sh); this.b = this.makeTarget(sw, sh);
   };
+  /* 型（マスク）。写真の向き（縦長か横長か）に合う型を読み、GPU用のテクスチャと、点の判定用の小さな配列を作る */
+  Ripple.prototype.loadMask = function () {
+    var m = this.opt.mask; if (!m || !this.ok) return;
+    var url = this.ih > this.iw ? m.portrait : m.landscape; if (!url || url === this.maskUrl) return;
+    var self = this, gl = this.gl; this.maskUrl = url; this.maskOn = false; // 新しい型が届くまでは波紋を立てない
+    var im = this.maskImg(url);
+    var use = function () {
+      if (!self.ok || self.maskUrl !== url) return;
+      if (!self.msk) self.msk = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, self.msk);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, gl.LUMINANCE, gl.UNSIGNED_BYTE, im);
+      try {
+        var cw = 192, ch = Math.max(1, Math.round(cw * im.naturalHeight / im.naturalWidth)), c2 = document.createElement('canvas');
+        c2.width = cw; c2.height = ch; var x2 = c2.getContext('2d'); x2.drawImage(im, 0, 0, cw, ch);
+        var d = x2.getImageData(0, 0, cw, ch).data, a = new Uint8Array(cw * ch);
+        for (var i = 0; i < a.length; i++) a[i] = d[i * 4];
+        self.mcpu = { w: cw, h: ch, a: a };
+      } catch (e) { self.mcpu = null; }
+      self.maskOn = true;
+    };
+    if (im.__ok) use(); else if (!im.__bad) { im.addEventListener('load', use); }
+    // 読めなかったときは maskOn が false のまま＝波紋を立てない（木や皿まで揺らさない）
+  };
+  /* 型の画像は、写真と同時に読み始める（写真が届いてから読むと、その間のタップで皿まで揺れる） */
+  Ripple.prototype.maskImg = function (url) {
+    this.mimgs = this.mimgs || {};
+    if (this.mimgs[url]) return this.mimgs[url];
+    var im = new Image(); im.onload = function () { im.__ok = true; }; im.onerror = function () { im.__bad = true; };
+    im.src = url; this.mimgs[url] = im; return im;
+  };
+  /* 描画面の点（CSSピクセル）が型のどこに当たるか（0〜1）。型が無ければ 1 */
+  Ripple.prototype.maskAt = function (x, y) {
+    var M = this.mcpu, V = this.view; if (!M || !V) return 1;
+    var vx = x / this.cw, vy = 1 - y / this.ch;
+    var u = (vx - 0.5) * V.cover[0] / V.zoom + 0.5 + V.pan[0], t = 1 - ((vy - 0.5) * V.cover[1] / V.zoom + 0.5 + V.pan[1]);
+    if (u < 0 || u > 1 || t < 0 || t > 1) return 0;
+    return M.a[Math.min(M.h - 1, Math.floor(t * M.h)) * M.w + Math.min(M.w - 1, Math.floor(u * M.w))] / 255;
+  };
   Ripple.prototype.quad = function () { var gl = this.gl; gl.bindBuffer(gl.ARRAY_BUFFER, this.buf); gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
   Ripple.prototype.swap = function () { var t = this.a; this.a = this.b; this.b = t; };
   Ripple.prototype.drop = function (x, y, radiusPx, strength) {
     if (!this.ok || !this.running) return;
+    if (this.opt.mask && (!this.maskOn || this.maskAt(x, y) < 0.35)) return; // 型が届くまでと、木や皿の上では波紋を立てない
     this.lastDrop = performance.now();
     var gl = this.gl, P = this.pDrop;
     gl.viewport(0, 0, this.sw, this.sh); gl.bindFramebuffer(gl.FRAMEBUFFER, this.b.f); gl.useProgram(P.p);
@@ -146,7 +192,10 @@
     var k = 0.5 - 0.5 * Math.cos((time / this.period) * Math.PI * 2 / 2); // 0→1→0 のゆっくりした往復
     var z = this.zoomFrom + (this.zoomTo - this.zoomFrom) * k;
     gl.uniform2f(P.u.cover, cover[0], cover[1]); gl.uniform1f(P.u.zoom, z);
-    gl.uniform2f(P.u.pan, 0.01 * k * Math.sin(time / this.period * 1.3), -0.008 * k);
+    var pan = [0.01 * k * Math.sin(time / this.period * 1.3), -0.008 * k];
+    gl.uniform2f(P.u.pan, pan[0], pan[1]);
+    this.view = { cover: cover, zoom: z, pan: pan };
+    gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, this.maskOn ? this.msk : this.img); gl.uniform1i(P.u.msk, 2); gl.uniform1f(P.u.um, this.maskOn ? 1 : 0);
     gl.uniform1f(P.u.pert, this.opt.pert || 0.03); gl.uniform1f(P.u.dim, this.dim);
     this.quad();
   };
@@ -155,7 +204,8 @@
     if (!this.running || !this.inView || !this.tabOn) return; // 止めるときは次のフレームを頼まない（kick で再開）
     var dt = Math.min(100, now - this.prev); this.prev = now;
     if (this.opt.ambient && now - this.lastAmb > this.opt.ambient) {
-      this.lastAmb = now; this.drop(this.cw * (0.2 + 0.6 * Math.random()), this.ch * (0.2 + 0.6 * Math.random()), 26, 0.05);
+      this.lastAmb = now;
+      for (var tries = 0; tries < 8; tries++) { var ax = this.cw * (0.1 + 0.8 * Math.random()), ay = this.ch * (0.1 + 0.8 * Math.random()); if (!this.opt.mask || (this.maskOn && this.maskAt(ax, ay) >= 0.6)) { this.drop(ax, ay, 26, 0.05); break; } }
     }
     var idle = now - (this.lastDrop || 0) > 8000;
     this.acc += dt; var n = 0;
@@ -181,6 +231,7 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, im);
+      self.loadMask();
       self.t0 = performance.now(); self.lastAmb = 0; self.running = true;
       self.onFirst = onReady || null; // 最初の1枚を描いてから知らせる（写真が一瞬暗くならないように）
       self.kick();
@@ -190,7 +241,8 @@
   Ripple.prototype.setSrc = function (src) {
     if (!this.ok || !this.running || src === this.src) return;
     var self = this, gl = this.gl, im = new Image(); this.src = src;
-    im.onload = function () { if (!self.ok) return; self.iw = im.naturalWidth; self.ih = im.naturalHeight; gl.bindTexture(gl.TEXTURE_2D, self.img); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, im); };
+    if (this.opt.mask) this.maskOn = false;
+    im.onload = function () { if (!self.ok) return; self.iw = im.naturalWidth; self.ih = im.naturalHeight; gl.bindTexture(gl.TEXTURE_2D, self.img); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, im); self.loadMask(); };
     im.src = src;
   };
   Ripple.prototype.bind = function (target) {

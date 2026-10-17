@@ -296,3 +296,19 @@ footer a{color:var(--gold-text);text-decoration:none}
 }
 /* v7c: タブレット幅（601〜900px）でも縦長の動画を正方形の枠で見せる（横長の帯にしない） */
 @media (min-width:601px) and (max-width:900px){.s-video,.rb-video{aspect-ratio:1/1}.story figure.s-video{max-width:620px;margin-inline:auto}}
+/* v8: ボタンの文字をすっきり（太字で詰まって潰れて見えたため、太さを中くらいにして、字を少し大きく、字間を少し狭く） */
+.btn{font-weight:500;font-size:15px;letter-spacing:.12em;font-feature-settings:"palt" 0}
+.btn-gold{color:#1B150C}
+.top .btn{font-size:13px;letter-spacing:.1em}
+.btn .arrow{font-weight:500}
+.dock .btn-gold{font-weight:500}
+/* v8: 再生の節の動画（水面の上の鍾乳石と水）は、ターコイズの水面が入るように下寄りを見せる */
+.rb-video video{object-position:50% 78%}
+/* v8: 物語は「見出し（結論）→ 動画 → 本文」の順。スマホでも結論の題が最初に見える。PCは左に見出しと本文、右に動画を固定 */
+.story .s-head .eyebrow{margin-bottom:10px}
+.story.solo{row-gap:30px}
+@media (min-width:901px){
+  .story.solo{grid-template-areas:"head fig" "body fig";grid-template-rows:auto 1fr;row-gap:34px}
+  .story .s-head{grid-area:head}.story .text{grid-area:body}
+  .story figure.s-video{grid-area:fig;order:0}
+}

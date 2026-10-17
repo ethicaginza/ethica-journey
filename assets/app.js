@@ -76,10 +76,11 @@
       var start = function () {
         var lost = function () { sec.classList.remove('water'); };
         var r = new w.EthicaRipple(cv, img.currentSrc || img.src,
-          i === 0 ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.1, period: 22, dpr: 3, onLost: lost } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost });
+          i === 0 ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.1, period: 22, dpr: 3, onLost: lost, mask: { landscape: 'assets/img/hero_mask.png', portrait: 'assets/img/hero_mask_m.png' } } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost });
         if (!r.ok) return;
         if (i === 0 && /[?&]debugdrops=1/.test(location.search)) { w.__drops = []; var od = r.drop; r.drop = function (x, y, rad, st) { w.__drops.push([Math.round(x), Math.round(y), st]); return od.apply(r, arguments); }; }
         r.start(function () { sec.classList.add('water'); });
+        if (i === 0) w.__heroRipple = { r: r, el: cv };
         r.bind(sec);
         if (i === 0) {
           setTimeout(function () { sec.classList.add('touched'); }, 9000);

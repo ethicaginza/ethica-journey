@@ -17,6 +17,12 @@
   }
   size(); window.addEventListener('resize', size);
   var rings = [], running = false, lastTrail = 0, lx = -1, ly = -1, down = null, prevT = 0;
+  // トップの写真の上で、青いレジンでない所（木・皿）なら true
+  function offResin(x, y) {
+    var h = window.__heroRipple; if (!h || !h.r.maskOn) return false;
+    var b = h.el.getBoundingClientRect(); if (x < b.left || x > b.right || y < b.top || y > b.bottom) return false;
+    return h.r.maskAt(x - b.left, y - b.top) < 0.35;
+  }
   function skip(e) { var t = e.target; return t && t.closest && t.closest('[data-water]'); }
   function add(x, y, big) {
     rings.push({ x: x, y: y, r: big ? 6 : 2, max: big ? 150 : 46, life: 1, w: big ? 1.4 : 0.8, a: big ? 0.75 : 0.32, sp: big ? 3.2 : 1.1 });
@@ -25,13 +31,13 @@
   }
   window.addEventListener('pointerdown', function (e) {
     if (skip(e)) return;
-    if (e.pointerType === 'mouse') add(e.clientX, e.clientY, true);
+    if (e.pointerType === 'mouse') { if (!offResin(e.clientX, e.clientY)) add(e.clientX, e.clientY, true); }
     else down = { x: e.clientX, y: e.clientY, t: performance.now(), id: e.pointerId };
   }, { passive: true });
   window.addEventListener('pointerup', function (e) {
     if (!down || e.pointerId !== down.id) return;
     var dx = e.clientX - down.x, dy = e.clientY - down.y, quick = performance.now() - down.t < 500;
-    if (quick && dx * dx + dy * dy < 100) add(e.clientX, e.clientY, true);
+    if (quick && dx * dx + dy * dy < 100 && !offResin(e.clientX, e.clientY)) add(e.clientX, e.clientY, true);
     down = null;
   }, { passive: true });
   window.addEventListener('pointercancel', function () { down = null; }, { passive: true });
@@ -43,7 +49,9 @@
     for (var i = 0; i < e.changedTouches.length; i++) {
       var t = e.changedTouches[i], q = tl[t.identifier], dx = q ? t.clientX - q.x : 99, dy = q ? t.clientY - q.y : 99;
       if (q && (now - q.t < 55 || dx * dx + dy * dy < 400)) continue;
-      tl[t.identifier] = { x: t.clientX, y: t.clientY, t: now }; add(t.clientX, t.clientY, false);
+      tl[t.identifier] = { x: t.clientX, y: t.clientY, t: now };
+      if (offResin(t.clientX, t.clientY)) continue;
+      add(t.clientX, t.clientY, false);
     }
   }, { passive: true });
   var tend = function (e) { for (var i = 0; i < e.changedTouches.length; i++) delete tl[e.changedTouches[i].identifier]; };
@@ -52,7 +60,7 @@
     if (e.pointerType !== 'mouse' || skip(e)) return;
     var now = performance.now(), dx = e.clientX - lx, dy = e.clientY - ly;
     if (now - lastTrail < 90 || dx * dx + dy * dy < 900) return;
-    lastTrail = now; lx = e.clientX; ly = e.clientY; add(e.clientX, e.clientY, false);
+    lastTrail = now; lx = e.clientX; ly = e.clientY; if (!offResin(e.clientX, e.clientY)) add(e.clientX, e.clientY, false);
   }, { passive: true });
   function tick(now) {
     var f = Math.min(3, Math.max(0.25, (now - prevT) / 16.7)); prevT = now; // 画面の更新頻度によらず同じ速さで広げる
