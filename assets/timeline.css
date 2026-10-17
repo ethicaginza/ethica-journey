@@ -1,25 +1,4 @@
-/* 目的から選ぶ・年表（出てくる順の縦1列＋地球カレンダー）・大晦日の10秒・最後の呼びかけの水面 */
-
-/* 目的から選ぶ */
-.router{background:linear-gradient(180deg,var(--cave),var(--stone));border-bottom:1px solid var(--line);padding-block:30px 26px}
-.r-title{font-family:var(--f-body);font-size:12.5px;font-weight:500;letter-spacing:.3em;color:var(--gold);margin-bottom:14px}
-.r-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.r-card{position:relative;display:flex;flex-direction:column;gap:4px;padding:18px 18px 16px;border:1px solid var(--line);background:rgba(20,25,24,.7);text-decoration:none;min-width:0;transition:border-color .3s,background .3s,transform .3s}
-.r-card:hover{border-color:var(--gold);background:rgba(28,26,20,.8);transform:translateY(-2px)}
-.r-card.hot{border-color:rgba(201,164,106,.75);background:linear-gradient(180deg,#1b1710,#121411)}
-.r-badge{position:absolute;top:-10px;right:14px;background:var(--gold);color:#17120A;font-size:11px;font-weight:700;letter-spacing:.14em;padding:2px 10px;line-height:1.6}
-.r-use{font-size:12px;letter-spacing:.12em;color:var(--gold-text)}
-.r-name{font-family:var(--f-jp);font-size:17px;line-height:1.5}
-.r-meta{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:2px}
-.r-meta .price{font-size:24px;line-height:1.1;color:var(--bone)}
-.r-chap{font-size:12px;color:var(--muted)}
-.r-go{margin-top:auto;padding-top:8px;font-size:12.5px;font-weight:700;letter-spacing:.14em;color:var(--gold-text);display:inline-flex;gap:8px;align-items:center}
-.r-go span{font-family:var(--f-lat);font-size:16px;transition:transform .3s}
-.r-card:hover .r-go span{transform:translateX(4px)}
-.r-hint{font-size:11px;color:var(--muted);line-height:1.5;margin-top:2px}
-.r-note{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.7}
-@media (max-width:900px){.r-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:600px){.router{padding-block:24px 22px}.r-card{padding:16px 14px 14px}.r-name{font-size:15.5px}.r-meta .price{font-size:21px}.r-use{font-size:11.5px;letter-spacing:.06em}.r-go{font-size:12px;letter-spacing:.08em}}
+/* 年表（出てくる順の縦1列＋縮尺の違う2本の軸の図）・最後の呼びかけの水面 */
 
 /* 年表 */
 .voyage-sec{background:linear-gradient(180deg,var(--stone) 0%,var(--cave) 18%,var(--cave) 100%)}
@@ -28,37 +7,42 @@
 .tl-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px 56px;align-items:start}
 .tl-side{grid-column:2;grid-row:1;position:sticky;top:calc(var(--hdr) + 24px)}
 .tl-grid .voyage{grid-column:1;grid-row:1}
-@media (max-width:900px){.tl-grid{grid-template-columns:1fr}.tl-side,.tl-grid .voyage{grid-column:1;grid-row:auto;position:static}}
-.calkey{border:1px solid var(--line-gold);background:linear-gradient(180deg,rgba(201,164,106,.06),transparent);padding:22px 22px 18px}
+@media (max-width:900px){.tl-grid{grid-template-columns:1fr}.tl-side{grid-column:1;grid-row:auto;position:static}.tl-grid .voyage{grid-column:1;grid-row:auto}}
+.calkey{border:1px solid var(--line-gold);background:linear-gradient(180deg,rgba(201,164,106,.06),transparent);padding:18px 22px 16px}
 .calkey>p{font-size:13.5px;color:#D6D0C3;line-height:1.85}
 .calkey b{display:block;font-family:var(--f-jp);font-weight:500;font-size:17px;color:var(--gold-hi);letter-spacing:.1em;margin-bottom:2px}
 
 /* 航路図 */
-.route{margin:18px 0 0}
+.route{margin:0}
 .rt{position:relative;height:270px;margin:0 14px}
 .rt .band{position:absolute;left:0;right:0;height:1px;background:rgba(236,230,218,.28)}
 .rt .band.year{top:24%}.rt .band.zoom{top:64%;background:var(--gold)}
 .rt .band span{position:absolute;top:0}
 .rt .band>span[style]{left:var(--x);height:7px;width:1px;margin-top:-3px;background:rgba(236,230,218,.3);font-size:10px;color:var(--muted);line-height:1}
-.rt .band.year>span[style]:not(.zz){padding-top:12px;width:auto;background:none;transform:translateX(-50%);height:auto}
-.rt .band.year>span[style]:not(.zz)::before{content:"";position:absolute;left:50%;top:0;width:1px;height:7px;background:rgba(236,230,218,.3)}
+.rt .band.year>span[style]:not(.zz){top:10px!important;padding:0;width:auto;background:none;transform:translateX(-50%);height:auto;font-family:var(--f-lat);font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;font-size:13px;letter-spacing:.04em;color:var(--gold-text)}
+.rt .band.year>span[style]:not(.zz)::before{content:"";position:absolute;left:50%;top:-13px;width:1px;height:7px;background:rgba(236,230,218,.3)}
 .rt .zz{left:var(--x)!important;right:0;width:auto!important;height:9px!important;margin-top:-4px!important;background:rgba(201,164,106,.28)!important;border:1px solid var(--gold)}
 .rt .lab{font-size:10.5px;color:var(--muted);top:-22px!important;white-space:nowrap}
 .rt .lab.l{left:0}.rt .lab.r{right:0;color:var(--gold-text)}
+.rt .band.zoom .lab.l{top:66px!important;left:-4px;font-family:var(--f-lat);font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;font-size:12.5px;font-weight:600;color:var(--gold-text)}
+@media (max-width:600px){.rt .band.zoom .lab.l{top:62px!important}}
 .rt svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.rt .callout{fill:rgba(201,164,106,.045);stroke:rgba(201,164,106,.22);stroke-width:1;vector-effect:non-scaling-stroke}
-.rt .seg{fill:none;stroke:var(--gold);stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.rt .callout{fill:rgba(201,164,106,.03);stroke:rgba(201,164,106,.16);stroke-width:1;vector-effect:non-scaling-stroke}
+.rt .seg{fill:none;stroke:var(--gold);stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linecap:round;transition:opacity .4s}
+.route.has-cur .seg{opacity:.28}.route.has-cur .seg.on{opacity:1;stroke-width:2.4}
 .rt .seg.back{stroke:var(--gold-hi);stroke-dasharray:5 5}
 .rp{position:absolute;left:var(--x);top:24%;width:24px;height:24px;margin:-12px 0 0 -12px;z-index:2}
 .rp.zoom{top:64%}
-.rp[data-n="3"] i{left:0;transform:none}
+.rp[data-n="3"] i{left:0;transform:none}.rp.zoom[data-n="7"] i{left:auto;right:-6px;transform:none;font-family:var(--f-body);font-size:10.5px;font-weight:500}
 .rp.zoom i{top:80px}
 .rp.zoom i::before{content:"";position:absolute;left:50%;bottom:100%;height:6px;border-left:1px solid rgba(201,164,106,.35)}
-.rp b{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--cave);border:1px solid var(--gold);font-size:13.5px;color:var(--bone);line-height:1;transition:background .4s,color .4s,box-shadow .4s}
-.rp i{position:absolute;left:50%;top:28px;transform:translateX(-50%);font-style:normal;font-size:10.5px;color:var(--muted);white-space:nowrap}
-.rp.year i{top:28px}
+.rp b{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--cave);border:1px solid var(--gold);font-size:14px;color:var(--bone);line-height:1;transition:background .4s,color .4s,box-shadow .4s}
+.rp i{position:absolute;left:50%;top:28px;transform:translateX(-50%);font-style:normal;font-family:var(--f-lat);font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--gold-text);white-space:nowrap}
+.rp.year i{top:-22px}
 .rp.cur b{background:var(--gold);color:#17120A;box-shadow:0 0 0 6px rgba(201,164,106,.16)}
-.route figcaption{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px;font-size:11.5px;color:var(--muted)}
+.route figcaption{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px;font-size:12px;color:var(--muted)}
+.rt-key{font-size:12.5px;color:#D6D0C3;line-height:1.7;margin:0 0 30px}
+.rt-key b{font-family:var(--f-lat);font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;color:var(--gold-text);font-weight:600;font-size:14px}
 .route .lg{display:inline-flex;align-items:center;gap:7px}
 .route .lg i{display:inline-block;width:22px;height:0;border-top:2px solid var(--gold)}
 .route .lg i.b{border-top:2px dashed var(--gold-hi)}
@@ -66,7 +50,7 @@
 .js .route.pre .rp,.js .route.pre .seg{opacity:0}
 .route .rp{transition:opacity .45s ease calc(var(--d) * .22s)}
 .route .seg{transition:opacity .45s ease calc(var(--i) * .22s + .15s)}
-@media (max-width:600px){.rp.zoom i{top:74px}}
+@media (max-width:600px){.rp.zoom i{top:74px}.rp.zoom[data-n="7"] i{top:90px}}
 @media (max-width:600px){.rt{height:250px;margin:0 12px}.rp,.rp b{width:22px;height:22px}.rp{margin:-11px 0 0 -11px}.rp b{font-size:12.5px}}
 
 .voyage{position:relative;list-style:none;margin:0;padding:0}
@@ -80,9 +64,8 @@
 .leg .ago .num{font-size:46px;color:var(--bone)}
 .leg .ago .u{font-family:var(--f-jp);font-size:16px;color:var(--gold-text);letter-spacing:.12em}
 .leg .ago .u.big{font-size:30px;color:var(--gold-hi)}
+.leg .ago .bm{margin-left:10px;font-family:var(--f-lat);font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;font-size:15px;font-weight:600;letter-spacing:.06em;color:var(--gold);border:1px solid var(--line-gold);padding:2px 8px 1px;line-height:1.2;align-self:center}
 .leg h3{margin-top:10px;font-size:19px}
-.leg .cal-l{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:4px;font-size:12px;color:var(--muted);letter-spacing:.06em}
-.leg .cal-l b{font-weight:500;font-size:14.5px;color:var(--gold-text);letter-spacing:.04em}
 .leg .line{margin-top:6px;font-size:14px;color:#D6D0C3;line-height:1.85}
 .leg .hop{grid-area:hop;display:flex;align-items:center;gap:10px;margin:0 0 16px;font-size:15px;color:var(--gold-text);letter-spacing:.06em}
 .leg .hop i{flex:0 0 auto;width:30px;height:30px;margin-left:21px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:14px;background:var(--cave);border:1px solid var(--line-gold);color:var(--gold-text)}
@@ -103,22 +86,6 @@
   .leg .line{font-size:13.5px}
 }
 
-/* 大晦日、最後の10秒 */
-.eve{margin-top:26px;border:1px solid var(--line-gold);padding:26px 26px 22px;background:linear-gradient(180deg,rgba(201,164,106,.05),transparent)}
-.eve-t{font-family:var(--f-jp);font-size:19px}
-.eve-t span{display:block;font-family:var(--f-body);font-size:13px;color:var(--muted);margin-top:2px}
-.eve-bar{position:relative;height:56px;margin:26px 8px 8px;border-bottom:1px solid var(--line-gold);background:repeating-linear-gradient(90deg,var(--line-gold) 0,var(--line-gold) 1px,transparent 1px,transparent 10%)}
-.eve-bar .tk{position:absolute;left:var(--p);bottom:-26px;transform:translateX(-50%);font-size:12.5px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
-.eve-bar .tk.first{transform:none}
-.eve-bar .tk.last{transform:translateX(-100%);color:var(--gold-text)}
-.eve-bar .mk{position:absolute;left:var(--p);bottom:-6px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(201,164,106,.15)}
-.eve-bar .mk.now{width:16px;height:16px;margin-left:-8px;bottom:-8px;background:transparent;border:2px solid var(--gold);box-shadow:0 0 22px rgba(201,164,106,.45)}
-.eve-bar .hand{position:absolute;left:0;bottom:0;width:1px;height:100%;background:linear-gradient(180deg,transparent,var(--gold-hi));opacity:0}
-.eve.go .hand{animation:sweep 2.4s cubic-bezier(.22,.61,.36,1) forwards}
-@keyframes sweep{0%{left:0;opacity:1}96%{opacity:1}100%{left:100%;opacity:0}}
-.eve-l{list-style:none;margin:36px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:#D6D0C3}
-.eve-l li{display:grid;grid-template-columns:5.6em minmax(0,1fr);gap:10px}
-.eve-l .t{font-variant-numeric:tabular-nums;color:var(--gold-text);white-space:nowrap}
 .tl-note{margin-top:20px;font-size:12.5px;color:var(--muted);max-width:60em}
 .tl-cta{margin-top:24px}
 
@@ -133,7 +100,7 @@
 .final h2{font-size:clamp(30px,4.6vw,54px);line-height:1.5}
 .final-sub{max-width:34em;color:#DED8CB;font-size:15px}
 
-@media (prefers-reduced-motion:reduce){.eve.go .hand{animation:none}.route .rp,.route .seg{transition:none}}
+@media (prefers-reduced-motion:reduce){.route .rp,.route .seg{transition:none}}
 /* 全ページ撮影用（?shot=1）：画面の高さ基準の指定を固定値に */
 .shot .hero{min-height:880px}.shot .final{min-height:640px}.shot .js .rise.pre,.shot .rise.pre{opacity:1;transform:none}
 .shot .js .route.pre .rp,.shot .js .route.pre .seg{opacity:1}

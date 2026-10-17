@@ -1,8 +1,9 @@
-/* ページ全体の「水面」。マウスの通り道とクリックした所、タップした所（スクロールではない軽い指先）に、金色の細い波紋が広がる（2D canvas）。
+/* ページ全体の「水面」。マウスの通り道とクリックした所、指の通り道（スクロール中も）とタップした所に、金色の細い波紋が広がる（2D canvas）。
    トップの写真（WebGLの水面）の上では描かない。動きを減らす設定では何もしない。 */
 (function () {
   'use strict';
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (/[?&]nopond=1/.test(location.search)) return; // 点検用：金の輪を止める
   var cv = document.createElement('canvas');
   cv.setAttribute('aria-hidden', 'true');
   cv.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:45';
@@ -34,6 +35,19 @@
     down = null;
   }, { passive: true });
   window.addEventListener('pointercancel', function () { down = null; }, { passive: true });
+  // 指を滑らせている間（スクロール中も）は、マウスの通り道と同じように指の下に小さな輪を続けて出す
+  var tl = {};
+  window.addEventListener('touchmove', function (e) {
+    // 指の通り道は、トップの写真の上でも画面に金の輪を残す（写真の水面は ripple.js が揺らす）
+    var now = performance.now();
+    for (var i = 0; i < e.changedTouches.length; i++) {
+      var t = e.changedTouches[i], q = tl[t.identifier], dx = q ? t.clientX - q.x : 99, dy = q ? t.clientY - q.y : 99;
+      if (q && (now - q.t < 55 || dx * dx + dy * dy < 400)) continue;
+      tl[t.identifier] = { x: t.clientX, y: t.clientY, t: now }; add(t.clientX, t.clientY, false);
+    }
+  }, { passive: true });
+  var tend = function (e) { for (var i = 0; i < e.changedTouches.length; i++) delete tl[e.changedTouches[i].identifier]; };
+  window.addEventListener('touchend', tend, { passive: true }); window.addEventListener('touchcancel', tend, { passive: true });
   window.addEventListener('pointermove', function (e) {
     if (e.pointerType !== 'mouse' || skip(e)) return;
     var now = performance.now(), dx = e.clientX - lx, dy = e.clientY - ly;
