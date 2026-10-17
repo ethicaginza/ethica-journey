@@ -59,7 +59,9 @@
         else { try { v.pause(); } catch (e) {} }
       });
     }, { rootMargin: '200px 0px' });
-    vids.forEach(function (v) { vo.observe(v); });
+    /* トップの写真と回線を取り合わないよう、ページの読み込みが終わってから見張る */
+    var watch = function () { vids.forEach(function (v) { vo.observe(v); }); };
+    if (d.readyState === 'complete') watch(); else w.addEventListener('load', watch);
   } else vids.forEach(load);
 
   /* 水面（写真の上の波紋）。写真は <picture> が選んだもの（currentSrc）をそのまま使う（二重に読み込まない） */
