@@ -13,7 +13,7 @@
     'i.g+=(avg-i.r)*1.7;i.g*=0.986;i.r+=i.g;i.r=mix(i.r,avg,0.015)*0.9985;float k=smoothstep(0.0,0.0025,abs(i.r)+abs(i.g));i.r*=mix(0.93,1.0,k);i.g*=mix(0.93,1.0,k);gl_FragColor=i;}';
   // 描画：波の高さから傾きを出し、写真をわずかにずらす。小さな傾き（静止時に残る細かな揺れ）は写さない＝止まっている写真はくっきり
   function renderSrc(manual) {
-    return 'precision highp float;uniform sampler2D t;uniform sampler2D img;uniform vec2 dx;uniform vec2 res;uniform vec2 cover;uniform float zoom;uniform vec2 pan;uniform float pert;uniform float dim;uniform float asp;uniform sampler2D msk;uniform float um;uniform float live;uniform float thr;varying vec2 v;' +
+    return 'precision highp float;uniform sampler2D t;uniform sampler2D img;uniform vec2 dx;uniform vec2 res;uniform vec2 cover;uniform float zoom;uniform vec2 pan;uniform float pert;uniform float dim;uniform float asp;uniform sampler2D msk;uniform float um;uniform float live;uniform float thr;uniform float glint;varying vec2 v;' +
       (manual
         // 補間できないテクスチャ（iPhoneなど）では、4点を自分で混ぜて滑らかにする
         ? 'float H(vec2 uv){vec2 p=uv*res-0.5;vec2 f=fract(p);vec2 b=(floor(p)+0.5)/res;float a=texture2D(t,b).r;float c=texture2D(t,b+vec2(dx.x,0.0)).r;float e=texture2D(t,b+vec2(0.0,dx.y)).r;float g=texture2D(t,b+dx).r;return mix(mix(a,c,f.x),mix(e,g,f.x),f.y);}'
@@ -29,7 +29,7 @@
       'float sp=pow(max(0.0,dot(off,normalize(vec2(-0.6,1.0)))),4.0);' +
       'vec2 iuv=(v-0.5)*cover/zoom+0.5+pan;iuv+=off*pert*vec2(1.0,asp)*cover;iuv.y=1.0-iuv.y;' +
       'vec3 col=texture2D(img,clamp(iuv,0.001,0.999)).rgb*dim;' +
-      'gl_FragColor=vec4(col+sp*vec3(0.95,0.82,0.55)*0.32,1.0);}';
+      'gl_FragColor=vec4(col+sp*vec3(0.95,0.82,0.55)*glint,1.0);}';
   }
   var STEP_MS = 1000 / 120; // 1秒に120回シミュレーションを進める（画面の更新頻度によらず波の速さをそろえる）
 
@@ -39,6 +39,9 @@
     this.zoomFrom = opt.zoomFrom == null ? 1.0 : opt.zoomFrom; this.zoomTo = opt.zoomTo || 1.12; this.period = opt.period || 26;
     this.dim = opt.dim == null ? 1.0 : opt.dim;
     this.maxDpr = opt.dpr || 1.5;
+    this.vid = opt.video ? src : null; // 動画を水面にする（src が video 要素）
+    this.panAmp = opt.pan == null ? 1 : opt.pan;
+    this.panY = opt.panY == null ? -0.008 : opt.panY; // 寄るときの縦のずれ（正＝写真の上の方へ寄る）
     this.raf = 0; this.running = false; this.inView = true; this.tabOn = !document.hidden;
     this.ok = this.init();
     if (this.ok && opt.mask) { this.maskImg(opt.mask.landscape); this.maskImg(opt.mask.portrait); }
@@ -92,7 +95,7 @@
   };
   Ripple.prototype.upImg = function (im) {
     var gl = this.gl;
-    this.iw = im.naturalWidth; this.ih = im.naturalHeight; this.imEl = im;
+    this.iw = im.naturalWidth || im.videoWidth; this.ih = im.naturalHeight || im.videoHeight; this.imEl = im;
     if (!this.img) {
       this.img = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, this.img);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
@@ -198,10 +201,11 @@
     return M.a[Math.min(M.h - 1, Math.floor(t * M.h)) * M.w + Math.min(M.w - 1, Math.floor(u * M.w))] / 255;
   };
   Ripple.prototype.snap = function (x, y) {
-    if (!this.opt.mask || !this.maskOn) return null;
+    if (!this.opt.mask) return [x, y]; // 型の無い水面（動画の背景）は、触れた点そのまま
+    if (!this.maskOn) return null;
     var best = this.maskAt(x, y), bx = x, by = y;
     if (best >= 0.6) return [x, y];
-    // 指の腹は直径1cm（約40px）ほど。半径14pxと28pxの円の上で、いちばん青いレジンらしい点を探す（器の周りは、釉薬まで確実に外すため型を広めに取っている）
+    // 指の腹は直径1cm（約40px）ほど。中心が型の縁の外なら、半径14pxと28pxの円の上で、いちばん青いレジンらしい点を探す
     for (var ring = 14; ring <= 28; ring += 14) {
       for (var k = 0; k < 8; k++) {
         var a = (k + ring / 28) * Math.PI / 4, px = x + Math.cos(a) * ring, py = y + Math.sin(a) * ring, m = this.maskAt(px, py);
@@ -217,6 +221,7 @@
     if (!this.ok || !this.running) return;
     if (this.opt.mask && (!this.maskOn || this.maskAt(x, y) < 0.35)) return; // 型が届くまでと、木や皿の上では波紋を立てない
     this.lastDrop = performance.now();
+    if (this.sleeping) { this.sleeping = false; this.vNew = true; this.onFirst = this.opt.onWake || null; this.prev = performance.now(); this.kick(); } // 眠っていたら起きる（最初の1枚を描いてから見せる）
     var gl = this.gl, P = this.pDrop;
     gl.viewport(0, 0, this.sw, this.sh); gl.bindFramebuffer(gl.FRAMEBUFFER, this.b.f); gl.useProgram(P.p);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.a.t); gl.uniform1i(P.u.t, 0);
@@ -232,7 +237,13 @@
     gl.uniform2f(P.u.dx, 1 / this.sw, 1 / this.sh); this.quad(); this.swap();
   };
   Ripple.prototype.render = function (time) {
-    var gl = this.gl, P = this.pRen;
+    var gl = this.gl, P = this.pRen, v = this.vid;
+    if (v && this.vNew && v.readyState >= 2 && v.videoWidth) {
+      this.vNew = false;
+      if (v.videoWidth !== this.iw || v.videoHeight !== this.ih) { this.iw = v.videoWidth; this.ih = v.videoHeight; }
+      gl.bindTexture(gl.TEXTURE_2D, this.img); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+      try { gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, v); } catch (e) {}
+    }
     gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, this.W, this.H); gl.useProgram(P.p);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.a.t); gl.uniform1i(P.u.t, 0);
     gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, this.img); gl.uniform1i(P.u.img, 1);
@@ -242,18 +253,23 @@
     var k = 0.5 - 0.5 * Math.cos((time / this.period) * Math.PI * 2 / 2); // 0→1→0 のゆっくりした往復
     var z = this.zoomFrom + (this.zoomTo - this.zoomFrom) * k;
     gl.uniform2f(P.u.cover, cover[0], cover[1]); gl.uniform1f(P.u.zoom, z);
-    var pan = [0.01 * k * Math.sin(time / this.period * 1.3), -0.008 * k];
+    var pan = [0.01 * k * Math.sin(time / this.period * 1.3) * this.panAmp, this.panY * k * this.panAmp];
     gl.uniform2f(P.u.pan, pan[0], pan[1]);
     this.view = { cover: cover, zoom: z, pan: pan };
     gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, this.maskOn ? this.msk : this.img); gl.uniform1i(P.u.msk, 2); gl.uniform1f(P.u.um, this.maskOn ? 1 : 0);
     gl.uniform1f(P.u.pert, this.opt.pert || 0.03); gl.uniform1f(P.u.dim, this.dim);
     if (P.u.live) gl.uniform1f(P.u.live, (this.opt.lite && this.idle) ? 0 : 1);
     if (P.u.thr) gl.uniform1f(P.u.thr, this.opt.thr || 0.03);
+    if (P.u.glint) gl.uniform1f(P.u.glint, this.opt.glint == null ? 0.32 : this.opt.glint);
     this.quad();
   };
   Ripple.prototype.frame = function (now) {
     this.raf = 0;
     if (!this.running || !this.inView || !this.tabOn) return; // 止めるときは次のフレームを頼まない（kick で再開）
+    if (this.opt.sleep && !this.onFirst && now - (this.lastDrop || 0) > this.opt.sleep) { // 波が消えたら眠る（描かない）
+      if (!this.sleeping) { this.sleeping = true; if (this.opt.onSleep) this.opt.onSleep(); }
+      return;
+    }
     var dt = Math.min(100, now - this.prev); this.prev = now;
     if (this.opt.ambient && now - this.lastAmb > this.opt.ambient) {
       this.lastAmb = now;
@@ -263,7 +279,8 @@
     this.acc += dt; var n = 0;
     if (idle) { this.acc = 0; this.odd = !this.odd; } // 波が消えた後は計算を止め、描画も1フレームおき（ズームだけ動かす）
     else { while (this.acc >= STEP_MS && n < 8) { this.step(); this.acc -= STEP_MS; n++; } if (n === 8) this.acc = 0; }
-    if (!idle || this.odd || this.onFirst || this.dirty) { this.render((now - this.t0) / 1000); this.dirty = false; }
+    if (this.vid && !this.vfc && !this.vid.paused) this.vNew = true; // 動画のコマの知らせが無いブラウザは、毎フレーム写す
+    if (!idle || this.odd || this.onFirst || this.dirty || (this.vid && this.vNew)) { this.render((now - this.t0) / 1000); this.dirty = false; }
     if (this.onFirst) { var f = this.onFirst; this.onFirst = null; f(); }
     var self = this; this.raf = requestAnimationFrame(function (t) { self.frame(t); });
   };
@@ -273,7 +290,19 @@
     this.raf = requestAnimationFrame(function (t) { self.frame(t); });
   };
   Ripple.prototype.start = function (onReady) {
-    var self = this, gl = this.gl, im = new Image();
+    var self = this;
+    if (this.vid) { // 動画：最初のコマが来てから始める。新しいコマが来るたびに写す（requestVideoFrameCallback があれば使う）
+      var v = this.vid, go = function () {
+        if (self.running || self.dead || !v.videoWidth) return;
+        self.imEl = v; if (!self.ok) return;
+        self.upImg(v); self.t0 = performance.now(); self.lastAmb = 0; self.running = true; self.onFirst = onReady || null;
+        if (v.requestVideoFrameCallback) { self.vfc = true; var cb = function () { self.vNew = true; if (!self.dead) v.requestVideoFrameCallback(cb); }; v.requestVideoFrameCallback(cb); }
+        self.kick();
+      };
+      if (v.readyState >= 2 && v.videoWidth) go(); else { v.addEventListener('loadeddata', go); v.addEventListener('playing', go); }
+      return;
+    }
+    var gl = this.gl, im = new Image();
     im.decoding = 'async';
     im.onload = function () {
       self.imEl = im;
@@ -325,7 +354,8 @@
       for (var i = 0; i < e.changedTouches.length; i++) {
         var t = e.changedTouches[i], p = rel(t.clientX, t.clientY);
         if (!inside(p)) continue;
-        last[t.identifier] = { x: p[0], y: p[1], t: now }; lastTouch = { x: t.clientX, y: t.clientY, t: now }; tapAt(p[0], p[1]);
+        last[t.identifier] = { x: p[0], y: p[1], t: now, sx: p[0], sy: p[1], moved: 0 }; lastTouch = { x: t.clientX, y: t.clientY, t: now };
+        if (!T.onEnd) tapAt(p[0], p[1]);
       }
     }, { passive: true });
     on(window, 'touchmove', function (e) {
@@ -337,6 +367,7 @@
         var t = e.changedTouches[i], q = last[t.identifier], bx = t.clientX - r.left, by = t.clientY - r.top;
         if (!q) continue; // 描画面の外で始まった指は追わない
         var dx = bx - q.x, dy = by - q.y, dist = Math.sqrt(dx * dx + dy * dy);
+        q.moved = Math.max(q.moved || 0, Math.abs(bx - q.sx) + Math.abs(by - q.sy));
         if (dist < 10) {
           if (now - q.t < 50) continue;
           self.drop(bx, by, 30, MS * 1.1);
@@ -344,7 +375,7 @@
           var n = Math.min(8, Math.ceil(dist / 16));
           for (var k = 1; k <= n; k++) self.drop(q.x + dx * k / n, q.y + dy * k / n, 28, MS);
         }
-        last[t.identifier] = { x: bx, y: by, t: now };
+        last[t.identifier] = { x: bx, y: by, t: now, sx: q.sx, sy: q.sy, moved: q.moved, t0: q.t0 || q.t };
         lastTouch = { x: t.clientX, y: t.clientY, t: now };
       }
     }, { passive: true });
@@ -358,7 +389,16 @@
       if (yy < 0 || yy > r.height) return;
       self.drop(x, yy, 28, Math.min(MS * 1.1, 0.03 + v * 0.0008));
     }, { passive: true });
-    var end = function (e) { for (var i = 0; i < e.changedTouches.length; i++) { var t = e.changedTouches[i]; if (last[t.identifier]) lastTouch = { x: t.clientX, y: t.clientY, t: performance.now() }; delete last[t.identifier]; } };
+    var end = function (e) {
+      for (var i = 0; i < e.changedTouches.length; i++) {
+        var t = e.changedTouches[i], q = last[t.identifier];
+        if (q) {
+          lastTouch = { x: t.clientX, y: t.clientY, t: performance.now() };
+          if (T.onEnd && e.type === 'touchend' && (q.moved || 0) < 12 && performance.now() - (q.t0 || q.t) < 600) { var p = rel(t.clientX, t.clientY); if (inside(p)) tapAt(p[0], p[1]); }
+        }
+        delete last[t.identifier];
+      }
+    };
     on(window, 'touchend', end, { passive: true }); on(window, 'touchcancel', end, { passive: true });
     var pend = 0, onSize = function () { if (pend) return; pend = requestAnimationFrame(function () { pend = 0; var r = self.c.getBoundingClientRect(); if (self.ok && (Math.abs(r.width - self.cw) >= 1 || Math.abs(r.height - self.ch) >= 1)) self.resize(); }); };
     var ro = this._ro = window.ResizeObserver ? new ResizeObserver(onSize) : null;

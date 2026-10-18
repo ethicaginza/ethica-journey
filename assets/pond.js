@@ -28,7 +28,7 @@
   }
   // 指の点が、トップの写真の描画面の上か
   function onHero(x, y) {
-    var el = document.querySelector('[data-water] canvas'); if (!el) return false;
+    var el = document.querySelector('.hero[data-water] canvas'); if (!el) return false;
     var b = el.getBoundingClientRect(); return b.bottom > 0 && x >= b.left && x <= b.right && y >= b.top && y <= b.bottom;
   }
   // 写真の上で輪を出してよいか：水面が動いていて、型が届いていて、その点が青いレジン
@@ -36,7 +36,8 @@
     var h = window.__heroRipple; if (!h || !h.el.isConnected || !h.r.ok || !h.r.maskOn) return false;
     var b = h.el.getBoundingClientRect(); return h.r.maskAt(x - b.left, y - b.top) >= 0.35;
   }
-  function skip(e) { var t = e.target; return t && t.closest && t.closest('[data-water]'); }
+  // トップの写真の上と、水面が動いている動画の背景（.wv-ready）では、マウスの金の輪は出さない（水面の波紋が出る）
+  function skip(e) { var t = e.target, el = t && t.closest && t.closest('[data-water],[data-water-v]'); return !!(el && (el.hasAttribute('data-water') || el.classList.contains('wv-ready'))); }
   function go() { if (!running) { running = true; prevT = performance.now(); requestAnimationFrame(tick); } }
   function add(x, y, big) {
     rings.push({ x: x, y: y, r: big ? 6 : 2, max: big ? 150 : 46, life: 1, w: big ? 1.4 : 0.8, a: big ? 0.75 : 0.32, sp: big ? 3.2 : 1.1 });

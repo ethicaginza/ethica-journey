@@ -87,11 +87,12 @@ h2+.lede,.eyebrow+h2+.lede{margin-top:18px}
 /* ヒーロー：水面になった写真 */
 .hero{touch-action:pan-y pinch-zoom;position:relative;min-height:100vh;min-height:100svh;display:grid;align-items:end;overflow:hidden;background:#061418}
 .hero .stage{position:absolute;inset:0}
-.hero .still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kb 26s ease-in-out infinite alternate}
+.hero .still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kbh 24s ease-in-out infinite alternate}
 .hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1.2s}
 .hero.water canvas{opacity:1}
 .hero.water .still{opacity:0;transition:opacity 0s linear 1.3s;animation-play-state:paused}
 @keyframes kb{from{transform:scale(1)}to{transform:scale(1.1) translate(-1%,1%)}}
+@keyframes kbh{from{transform:scale(1)}to{transform:scale(1.16) translate(-1%,1.5%)}}
 .hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}
 .hero .inner{position:relative;z-index:2;padding-block:calc(var(--hdr) + env(safe-area-inset-top,0px) + 64px) 40px;pointer-events:none}
 .hero .inner a,.hero .inner button{pointer-events:auto}
@@ -410,21 +411,24 @@ h1,h2,h3,h4{font-weight:400}
 }
 .final .f-tel svg{flex:0 0 auto}
 
-/* v13: スマホ・タブレットでは、物語とフィロソフィーの文字の裏に、かなり暗くした水中・洞窟の動画を敷く。
-   動画は画面に貼りついたまま（文字だけが流れる）、上下は背景の色へ溶かす。PCでは出さない */
-.tbg{display:none}
-@media (max-width:900px){
-  .has-tbg{position:relative}
-  .has-tbg>.tbg{display:block;position:absolute;inset:0;z-index:0;pointer-events:none;overflow:clip}
-  .has-tbg .tbg-s{position:sticky;top:0;height:100vh;max-height:100%;overflow:hidden;background:var(--cave)}
-  .has-tbg .tbg-s video{display:block;width:100%;height:100%;object-fit:cover}
-  /* iPhone の省電力モードで自動再生が止められたとき、再生ボタンを出さない（暗い静止画のまま） */
-  .has-tbg .tbg-s video::-webkit-media-controls,.has-tbg .tbg-s video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
-  .has-tbg .tbg-s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--cave) 0%,rgba(6,8,7,.55) 12%,rgba(6,8,7,0) 30%,rgba(6,8,7,0) 68%,rgba(6,8,7,.6) 86%,var(--cave) 100%)}
-  .has-tbg>.wrap{position:relative;z-index:1}
-}
+/* v13→v14: 物語とフィロソフィーの文字の裏に、かなり暗くした水中・洞窟の動画を敷く（PCにも。横長の画面は横長版）。
+   動画は画面に貼りついたまま（文字だけが流れる）、上下は背景の色へ溶かす。その上に波紋の描画面（canvas.wv）を重ねる */
+.has-tbg{position:relative}
+.has-tbg>.tbg{display:block;position:absolute;inset:0;z-index:0;pointer-events:none;overflow:clip}
+.has-tbg .tbg-s{position:sticky;top:0;height:100vh;max-height:100%;overflow:hidden;background:var(--cave)}
+.has-tbg .tbg-s video,.has-tbg .tbg-s canvas.wv{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.has-tbg .tbg-s canvas.wv,.final canvas.wv{opacity:0;transition:opacity .2s}
+.has-tbg.wv-on .tbg-s canvas.wv,.final.wv-on canvas.wv{opacity:1;transition:none} /* 触れたら即座に出す（最初の波紋を薄くしない）。隠すときだけ0.2秒 */
+.final canvas.wv{position:absolute;inset:0;width:100%;height:100%}
+/* iPhone の省電力モードで自動再生が止められたとき、再生ボタンを出さない（暗い静止画のまま） */
+.has-tbg .tbg-s video::-webkit-media-controls,.has-tbg .tbg-s video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
+.has-tbg .tbg-s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--cave) 0%,rgba(6,8,7,.55) 12%,rgba(6,8,7,0) 30%,rgba(6,8,7,0) 68%,rgba(6,8,7,.6) 86%,var(--cave) 100%)}
+.has-tbg>.wrap{position:relative;z-index:1}
 /* シェフの写真：公式サイトと同じ正方形（名前と言葉が写真に入っているので切らない）。スマホでは画面の幅いっぱいに */
 .chef .c-img{aspect-ratio:1/1}
 .chef .c-img img{filter:none}
 @media (min-width:601px) and (max-width:900px){.chef .c-img{max-width:360px}}
 @media (max-width:600px){.chef .c-img{max-width:none;justify-self:stretch;width:auto;margin-inline:calc(-1 * var(--gut)) calc(-1 * var(--gut-r))}}
+/* v14: ヘッダーの「ETHICA」は、ロゴの文字を切り出した画像（代替テキスト ETHICA） */
+.brand img.wm{width:auto;height:19px;display:block}
+@media (max-width:600px){.brand img.wm{height:15px}}

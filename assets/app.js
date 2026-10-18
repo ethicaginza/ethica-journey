@@ -63,16 +63,17 @@
 
   /* 動画は近づいたら読み込み、画面外では止める */
   var vids = [].slice.call(d.querySelectorAll('video[data-src]:not(.dv)'));
-  /* 文字の裏の暗い動画（スマホ・タブレットだけ）。節が画面に入ってから読み、出たら止める（先読みしない） */
-  var dvs = [].slice.call(d.querySelectorAll('video.dv')), dvOn = false, dvMq = w.matchMedia && w.matchMedia('(max-width: 900px)');
+  /* 文字の裏の暗い動画（縦長の画面は縦長版、横長の画面＝PCなどは横長版）。静止画は読み込み直後に付け、動画は節が画面に入ってから読み、出たら止める（先読みしない） */
+  var dvs = [].slice.call(d.querySelectorAll('video.dv')), dvOn = false;
+  var dvWide = w.innerWidth > w.innerHeight; // 横長の画面（PC・タブレットの横向き）は横長版
   var dvInit = function () {
-    if (dvOn || !dvs.length || !dvMq || !dvMq.matches) return; dvOn = true;
-    dvs.forEach(function (v) { v.poster = v.getAttribute('data-poster'); });
+    if (dvOn || !dvs.length) return; dvOn = true;
+    dvs.forEach(function (v) { v.poster = (dvWide && v.getAttribute('data-poster-w')) || v.getAttribute('data-poster'); });
     if (IO && !reduce) {
       var dvo = new IntersectionObserver(function (es) {
         es.forEach(function (x) {
           var v = x.target;
-          if (x.isIntersecting) { if (!v.src) v.src = v.getAttribute('data-src'); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+          if (x.isIntersecting) { if (!v.src) v.src = (w.innerWidth > w.innerHeight && v.getAttribute('data-src-w')) || v.getAttribute('data-src'); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
           else { try { v.pause(); } catch (e) {} }
         });
       });
@@ -80,7 +81,6 @@
     }
   };
   dvInit();
-  if (dvMq && !dvOn) { if (dvMq.addEventListener) dvMq.addEventListener('change', dvInit); else if (dvMq.addListener) dvMq.addListener(dvInit); }
   var smallScr = w.matchMedia && w.matchMedia('(max-width: 600px)').matches;
   function load(v) {
     if (v.src) return;
@@ -133,7 +133,7 @@
       var make = function () {
         madeAt = Date.now();
         r = new w.EthicaRipple(cv, img.currentSrc || img.src,
-          i === 0 ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.1, period: 22, dpr: 3, lite: coarse, thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, onTap: function (x, y) { if (w.__pondHero) w.__pondHero(x, y); }, onLost: lost, onBack: back, mask: { landscape: 'assets/img/hero_mask.png', portrait: 'assets/img/hero_mask_m.png' } } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost, onBack: back });
+          i === 0 ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.16, period: 24, panY: 0.02, dpr: 3, lite: coarse, thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, onTap: function (x, y) { if (w.__pondHero) w.__pondHero(x, y); }, onLost: lost, onBack: back, mask: { landscape: 'assets/img/hero_mask.png?v=5', portrait: 'assets/img/hero_mask_m.png?v=5' } } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost, onBack: back });
         if (!r.ok) return;
         if (i === 0 && /[?&]debugdrops=1/.test(location.search)) { w.__drops = []; var od = r.drop; r.drop = function (x, y, rad, st) { w.__drops.push([Math.round(x), Math.round(y), st]); return od.apply(r, arguments); }; }
         r.start(function () { sec.classList.add('water'); });
@@ -156,6 +156,34 @@
       };
       if (i === 0) ready(img, start);
       else if (IO) { var once = new IntersectionObserver(function (es) { if (es[es.length - 1].isIntersecting) { once.disconnect(); img.loading = 'eager'; ready(img, start); } }, { rootMargin: '300px 0px' }); once.observe(sec); }
+    });
+  }
+
+  /* 背景が動画の所（物語・フィロソフィーの文字の裏、最後の節）にも水面。動画が読み込まれてから作る（読み込みは動画の監視がする）。
+     自動の波紋は立てない（文字の裏をチラつかせない）。指・マウスで触れた所だけ揺れる */
+  if (!reduce && w.EthicaRipple) {
+    [].forEach.call(d.querySelectorAll('[data-water-v]'), function (sec) {
+      var cv = sec.querySelector('canvas.wv'), vv = sec.querySelector('video'); if (!cv || !vv) return;
+      var rv = null, made = false, tries = 0, lostT = 0;
+      var show = function () { sec.classList.add('wv-on'); }, hide = function () { sec.classList.remove('wv-on'); };
+      var retry = function () { // 文脈が戻らないときは描画面を作り直す
+        if (!rv || rv.ok || tries >= 3) return;
+        if (d.hidden) { d.addEventListener('visibilitychange', function f() { if (!d.hidden) { d.removeEventListener('visibilitychange', f); lostT = setTimeout(retry, 1500); } }); return; }
+        tries++; rv.destroy(); sec.classList.remove('wv-ready');
+        var nc = cv.cloneNode(false); cv.parentNode.replaceChild(nc, cv); cv = nc; build();
+        if (!rv.ok) lostT = setTimeout(retry, 2500);
+      };
+      var build = function () {
+        rv = new w.EthicaRipple(cv, vv, { video: true, ambient: 0, pert: coarse ? 0.08 : 0.05, glint: 0.3, zoomFrom: 1, zoomTo: 1, pan: 0, period: 30, dpr: 1, lite: coarse, thr: coarse ? 0.012 : 0.02, dim: parseFloat(cv.getAttribute('data-dim')) || 1,
+          sleep: 2500, onSleep: hide, onWake: show, touch: { r: 44, s: 0.24, move: 0.05, echo: true, onEnd: true },
+          onLost: function () { hide(); clearTimeout(lostT); lostT = setTimeout(retry, 2500); }, onBack: function () { clearTimeout(lostT); } });
+        if (!rv.ok) return;
+        rv.start(function () { sec.classList.add('wv-ready'); }); // 最初は眠った状態（動画をそのまま見せる）。触れたら描画面に切り替わる
+        rv.bind(sec);
+        (w.__waterV = w.__waterV || []).push({ r: rv, el: cv, sec: sec }); // 点検用
+      };
+      var make = function () { if (made) return; made = true; build(); };
+      vv.addEventListener('loadeddata', make, { once: true }); if (vv.readyState >= 2) make();
     });
   }
 
