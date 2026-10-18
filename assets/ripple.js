@@ -13,12 +13,12 @@
     'i.g+=(avg-i.r)*1.7;i.g*=0.986;i.r+=i.g;i.r=mix(i.r,avg,0.015)*0.9985;float k=smoothstep(0.0,0.0025,abs(i.r)+abs(i.g));i.r*=mix(0.93,1.0,k);i.g*=mix(0.93,1.0,k);gl_FragColor=i;}';
   // 描画：波の高さから傾きを出し、写真をわずかにずらす。小さな傾き（静止時に残る細かな揺れ）は写さない＝止まっている写真はくっきり
   function renderSrc(manual) {
-    return 'precision highp float;uniform sampler2D t;uniform sampler2D img;uniform vec2 dx;uniform vec2 res;uniform vec2 cover;uniform float zoom;uniform vec2 pan;uniform float pert;uniform float dim;uniform float asp;uniform sampler2D msk;uniform float um;varying vec2 v;' +
+    return 'precision highp float;uniform sampler2D t;uniform sampler2D img;uniform vec2 dx;uniform vec2 res;uniform vec2 cover;uniform float zoom;uniform vec2 pan;uniform float pert;uniform float dim;uniform float asp;uniform sampler2D msk;uniform float um;uniform float live;varying vec2 v;' +
       (manual
         // 補間できないテクスチャ（iPhoneなど）では、4点を自分で混ぜて滑らかにする
         ? 'float H(vec2 uv){vec2 p=uv*res-0.5;vec2 f=fract(p);vec2 b=(floor(p)+0.5)/res;float a=texture2D(t,b).r;float c=texture2D(t,b+vec2(dx.x,0.0)).r;float e=texture2D(t,b+vec2(0.0,dx.y)).r;float g=texture2D(t,b+dx).r;return mix(mix(a,c,f.x),mix(e,g,f.x),f.y);}'
         : 'float H(vec2 uv){return texture2D(t,uv).r;}') +
-      'void main(){float h=H(v);float hx=H(v+vec2(dx.x,0.0));float hy=H(v+vec2(0.0,dx.y));' +
+      'void main(){if(live<0.5){vec2 q=(v-0.5)*cover/zoom+0.5+pan;q.y=1.0-q.y;gl_FragColor=vec4(texture2D(img,clamp(q,0.001,0.999)).rgb*dim,1.0);return;}float h=H(v);float hx=H(v+vec2(dx.x,0.0));float hy=H(v+vec2(0.0,dx.y));' +
       // 傾きはマス目あたりで縦横同じに扱い、ずらす量は画面のピクセルで縦横同じにする（波紋が楕円にならない）
       'vec3 ddx=vec3(1.0,(hx-h)*res.x,0.0);vec3 ddy=vec3(0.0,(hy-h)*res.x,1.0);vec2 off=-normalize(cross(ddy,ddx)).xz;' +
       'off*=smoothstep(0.03,0.12,length(off));' +
@@ -197,6 +197,7 @@
     this.view = { cover: cover, zoom: z, pan: pan };
     gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, this.maskOn ? this.msk : this.img); gl.uniform1i(P.u.msk, 2); gl.uniform1f(P.u.um, this.maskOn ? 1 : 0);
     gl.uniform1f(P.u.pert, this.opt.pert || 0.03); gl.uniform1f(P.u.dim, this.dim);
+    if (P.u.live) gl.uniform1f(P.u.live, (this.opt.lite && this.idle) ? 0 : 1);
     this.quad();
   };
   Ripple.prototype.frame = function (now) {
@@ -207,7 +208,7 @@
       this.lastAmb = now;
       for (var tries = 0; tries < 8; tries++) { var ax = this.cw * (0.1 + 0.8 * Math.random()), ay = this.ch * (0.1 + 0.8 * Math.random()); if (!this.opt.mask || (this.maskOn && this.maskAt(ax, ay) >= 0.6)) { this.drop(ax, ay, 26, 0.05); break; } }
     }
-    var idle = now - (this.lastDrop || 0) > 8000;
+    var idle = now - (this.lastDrop || 0) > 8000; this.idle = idle;
     this.acc += dt; var n = 0;
     if (idle) { this.acc = 0; this.odd = !this.odd; } // 波が消えた後は計算を止め、描画も1フレームおき（ズームだけ動かす）
     else { while (this.acc >= STEP_MS && n < 8) { this.step(); this.acc -= STEP_MS; n++; } if (n === 8) this.acc = 0; }

@@ -323,3 +323,89 @@ h1,h2,h3,h4{font-weight:400}
 .rb-video{aspect-ratio:9/16}
 .rb-video video{object-position:50% 50%}
 @media (min-width:601px){.rb-video{aspect-ratio:3/4}}
+/* v11: スマホ（読みやすさ・ワクワク感・予約導線。点検4観点の取りまとめ mobile_plan.md による） */
+.proof-sp{display:none}
+.final .f-tel{display:none}
+@media (max-width:900px){
+  .tiers .card.mid{order:-1;margin-top:14px}
+  .rebirth>.rb-media{order:2}
+  .seat .card .basis{order:1;font-size:12.5px;line-height:1.8;color:#C4BEB1;margin-top:2px}
+  .seat .card .btn{order:2}
+  .final .btn{width:100%;max-width:340px}
+  .final .f-tel{display:inline-flex}
+  .info details{padding:0}
+  .info summary{padding:14px 0;min-height:56px;align-items:center}
+  .info details[open]{padding-bottom:16px}
+  .info details p{margin-top:0}
+  .mapd{padding:0}
+  .mapd summary{min-height:48px;align-items:center;padding:0}
+  .access dd a:not(.tel){display:inline-flex;align-items:center;min-height:44px;margin-top:8px;padding:0 16px;border:1px solid var(--line-gold);color:var(--gold-text);text-decoration:none;font-size:14px;letter-spacing:.1em}
+  .access .tel{display:inline-flex;align-items:center;min-height:44px}
+}
+@media (max-width:600px){
+  .hero .ctas{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .hero .ctas .btn{width:100%;padding:0 10px;gap:8px}
+  .hero h1{font-size:min(36px,9.4vw)}
+  h2{font-size:min(26px,6.7vw)}
+  .hero .proof{display:none}
+  .proof-sp{display:block;margin-top:0;border-top:0;padding-bottom:6px}
+  .proof-sp ul{padding-top:4px}
+  .tl-cta .btn{width:100%}
+  .fine{font-size:13px}
+  .voyage-sec .tl-note{font-size:13px}
+  .voyage .leg .line{font-size:14.5px;line-height:1.85}
+  .route .rt-key{font-size:13.5px;line-height:1.75}
+  .calkey .route figcaption{font-size:12.5px;color:#C4BEB1}
+  footer a[href^="tel"]{white-space:nowrap}
+  footer a[href^="http"]{display:inline-block;padding:14px 6px;margin:-14px -6px}
+  .story figure.s-video,.rebirth>.rb-media,.k-grid .k-img{margin-inline:calc(-1 * var(--gut)) calc(-1 * var(--gut-r))}
+  .s-video figcaption,.rb-video figcaption{left:var(--gut)}
+  .k-grid .k-img{order:2;aspect-ratio:4/5}
+  .space .photos>img{aspect-ratio:1/1;object-position:58% 50%;width:calc(100% + var(--gut) + var(--gut-r));max-width:none;margin-inline:calc(-1 * var(--gut)) calc(-1 * var(--gut-r))}
+  .voyage .leg .hop.back{margin-top:18px;margin-bottom:16px;font-size:16px;letter-spacing:.08em}
+  .voyage .leg .hop.back i{width:36px;height:36px;margin-left:6px;font-size:18px;box-shadow:0 0 18px rgba(201,164,106,.35)}
+  .sub-head{margin:56px 0 22px;padding-top:24px;border-top:1px solid var(--line-gold)}
+  .top .btn.hdr{display:none}
+  .menu-btn{height:44px}
+}
+@media (prefers-reduced-motion:reduce){.dock,.dock:not(.show){transition:none}}
+
+/* 20. 料理の写真を横にめくる（1皿ずつ大きく。右に次の皿が少しのぞく） */
+@media (max-width:600px){
+  .gallery{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:28px;margin-inline:calc(-1 * var(--gut)) calc(-1 * var(--gut-r));padding-inline:var(--gut) var(--gut-r);scroll-padding-inline:var(--gut);overscroll-behavior-x:contain;scrollbar-width:none}
+  .gallery::-webkit-scrollbar{display:none}
+  .gallery figure{flex:0 0 80%;aspect-ratio:4/5;scroll-snap-align:start;grid-column:auto;grid-row:auto}
+}
+/* 8. 金のボタンは画面いっぱい（スマホ） */
+@media (max-width:600px){.tl-cta .btn{width:100%}}
+/* 12. 物語は段落ごとに静かに現れる。店の考えの前の金の線は左から引かれる */
+@media (max-width:900px){
+  .js:not(.shot) .story .text>p.rise.pre,.js:not(.shot) .points li.rise.pre,.js:not(.shot) .items>div.rise.pre{transform:translateY(14px)}
+  .story .text .s-view{border-top-color:transparent;position:relative}
+  .story .text .s-view::before{content:"";position:absolute;left:0;top:-1px;width:100%;height:1px;background:var(--line-gold);transform-origin:left;transition:transform 1.2s ease .2s}
+  .js:not(.shot) .story .text .s-view.pre::before{transform:scaleX(0)}
+}
+/* 19. 指で押したときの見た目（hover の見た目が押した後に残らないように。押した瞬間に少し沈む） */
+@media (hover:none){
+  .btn,.btn-gold{transition:transform .12s ease,background-position .9s ease,box-shadow .4s,color .3s,border-color .3s}
+  .btn-gold:hover{background-position:0% 0;box-shadow:inset 0 0 0 1px rgba(255,236,200,.28)}
+  .btn-line:hover{border-color:var(--line-gold);color:var(--gold-text)}
+  .btn:hover .arrow{transform:none}
+  .gallery figure:hover img{transform:none}
+  a,button,summary{-webkit-tap-highlight-color:transparent}
+  .btn:active{transform:scale(.97)}
+  .btn-gold:active{background-position:100% 0}
+}
+@media (hover:none) and (prefers-reduced-motion:reduce){.btn:active{transform:none}}
+/* 24. Q&A を開くと、答えが静かに出る */
+@media (max-width:900px) and (prefers-reduced-motion:no-preference){details[open]>p,details[open]>img{animation:qa .35s ease both}@keyframes qa{from{opacity:0;transform:translateY(-6px)}}}
+
+/* v12: スマホだけで割らない語／小さい画像の皿はスマホのめくりから外す／フッターの電話と食べログ・一休／最後の節の余白と電話の印 */
+@media (max-width:600px){
+  .nw-sp{white-space:nowrap}.nw-sp wbr{display:none}
+  .gallery figure.sq{display:none}
+  footer a[href^="tel"]{display:inline-block;padding:14px 6px;margin:-14px -6px}
+  footer .ftl{white-space:nowrap}
+  .final{min-height:0;padding-block:96px 104px}
+}
+.final .f-tel svg{flex:0 0 auto}
