@@ -409,3 +409,22 @@ h1,h2,h3,h4{font-weight:400}
   .final{min-height:0;padding-block:96px 104px}
 }
 .final .f-tel svg{flex:0 0 auto}
+
+/* v13: スマホ・タブレットでは、物語とフィロソフィーの文字の裏に、かなり暗くした水中・洞窟の動画を敷く。
+   動画は画面に貼りついたまま（文字だけが流れる）、上下は背景の色へ溶かす。PCでは出さない */
+.tbg{display:none}
+@media (max-width:900px){
+  .has-tbg{position:relative}
+  .has-tbg>.tbg{display:block;position:absolute;inset:0;z-index:0;pointer-events:none;overflow:clip}
+  .has-tbg .tbg-s{position:sticky;top:0;height:100vh;max-height:100%;overflow:hidden;background:var(--cave)}
+  .has-tbg .tbg-s video{display:block;width:100%;height:100%;object-fit:cover}
+  /* iPhone の省電力モードで自動再生が止められたとき、再生ボタンを出さない（暗い静止画のまま） */
+  .has-tbg .tbg-s video::-webkit-media-controls,.has-tbg .tbg-s video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
+  .has-tbg .tbg-s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--cave) 0%,rgba(6,8,7,.55) 12%,rgba(6,8,7,0) 30%,rgba(6,8,7,0) 68%,rgba(6,8,7,.6) 86%,var(--cave) 100%)}
+  .has-tbg>.wrap{position:relative;z-index:1}
+}
+/* シェフの写真：公式サイトと同じ正方形（名前と言葉が写真に入っているので切らない）。スマホでは画面の幅いっぱいに */
+.chef .c-img{aspect-ratio:1/1}
+.chef .c-img img{filter:none}
+@media (min-width:601px) and (max-width:900px){.chef .c-img{max-width:360px}}
+@media (max-width:600px){.chef .c-img{max-width:none;justify-self:stretch;width:auto;margin-inline:calc(-1 * var(--gut)) calc(-1 * var(--gut-r))}}

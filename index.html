@@ -16,11 +16,13 @@
 <link rel="icon" href="assets/img/logo.png">
 <link rel="preload" as="image" media="(max-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_table_m1080.webp 1080w, assets/img/hero_table_m1440.webp 1440w, assets/img/hero_table_m1800.webp 1800w" imagesizes="(max-aspect-ratio: 2/3) 67vh, 100vw" fetchpriority="high">
 <link rel="preload" as="image" media="not all and (max-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_table_1440.webp 1440w, assets/img/hero_table_2560.webp 2560w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/hero_mask_m.png" media="(max-aspect-ratio: 4/5) and (prefers-reduced-motion: no-preference)">
+<link rel="preload" as="image" href="assets/img/hero_mask.png" media="(min-aspect-ratio: 801/1000) and (prefers-reduced-motion: no-preference)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Inter:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=24">
-<link rel="stylesheet" href="assets/timeline.css?v=24">
+<link rel="stylesheet" href="assets/site.css?v=25">
+<link rel="stylesheet" href="assets/timeline.css?v=25">
 </head>
 <body>
 <a class="sr skip" href="#main">本文へ移動</a>
@@ -67,7 +69,8 @@
 <li><span>ディナー <span class="nw">火〜日</span>・ランチ <span class="nw">土・日</span></span></li>
 <li><span>キッチンの<wbr>中の<wbr>個室・カウンター 各<span class="nw">1日1組</span></span></li></ul></div>
 
-<section class="sec" id="story">
+<section class="sec has-tbg" id="story">
+  <div class="tbg" aria-hidden="true"><div class="tbg-s"><video class="dv" muted loop playsinline preload="none" disablepictureinpicture data-src="assets/video/cenote/d_c01.mp4?v=1" data-poster="assets/video/cenote/d_c01.webp?v=1"></video></div></div>
   <div class="wrap story solo">
     <div class="s-head rise">
       <p class="eyebrow">Our Story</p>
@@ -88,7 +91,7 @@
 
 <section class="sec alt" id="chef" aria-labelledby="chef-title">
   <div class="wrap chef">
-    <figure class="c-img rise"><img src="assets/img/chef.webp" alt="エグゼクティブシェフ 松苗" loading="lazy" width="600" height="750"></figure>
+    <figure class="c-img rise"><img src="assets/img/chef_sq_1200.webp" srcset="assets/img/chef_sq_720.webp 720w, assets/img/chef_sq_1200.webp 1200w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 360px, 440px" alt="エグゼクティブシェフ 松苗（MASAO ANDRÉS MATSUNAE GUZMÁN）。写真には「AYNI — Cómo la tierra y la lluvia, todo lo que das vuelve.」の言葉" loading="lazy" width="1200" height="1200"></figure>
     <div class="rise">
       <p class="eyebrow">Executive Chef</p>
       <h2 id="chef-title">料理を、<wbr>土地と歴史を語る言葉に。</h2>
@@ -98,7 +101,8 @@
   </div>
 </section>
 
-<section class="sec concept" id="concept" aria-labelledby="concept-title">
+<section class="sec concept has-tbg" id="concept" aria-labelledby="concept-title">
+  <div class="tbg" aria-hidden="true"><div class="tbg-s"><video class="dv" muted loop playsinline preload="none" disablepictureinpicture data-src="assets/video/cenote/d_c10.mp4?v=1" data-poster="assets/video/cenote/d_c10.webp?v=1"></video></div></div>
   <div class="wrap">
     <div class="k-head rise"><p class="eyebrow">Philosophy</p><h2 id="concept-title">目指すのは、<wbr>「<span class="nw-sp">食の<span class="nw">時空</span>体験</span>」。</h2></div>
     <div class="k-grid">
@@ -399,8 +403,8 @@
   <a class="btn btn-line call" href="tel:+81362287313" aria-label="電話をかける（受付 12:00〜17:00）" data-cta="dock_tel"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.9 2.2z"/></svg><span class="off-hours">受付<br>12-17時</span></a>
 </nav>
 
-<script src="assets/ripple.js?v=24"></script>
-<script src="assets/app.js?v=24"></script>
-<script src="assets/pond.js?v=24"></script>
+<script src="assets/ripple.js?v=25"></script>
+<script src="assets/app.js?v=25"></script>
+<script src="assets/pond.js?v=25"></script>
 </body>
 </html>

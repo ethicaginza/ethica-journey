@@ -62,7 +62,25 @@
   }
 
   /* 動画は近づいたら読み込み、画面外では止める */
-  var vids = [].slice.call(d.querySelectorAll('video[data-src]'));
+  var vids = [].slice.call(d.querySelectorAll('video[data-src]:not(.dv)'));
+  /* 文字の裏の暗い動画（スマホ・タブレットだけ）。節が画面に入ってから読み、出たら止める（先読みしない） */
+  var dvs = [].slice.call(d.querySelectorAll('video.dv')), dvOn = false, dvMq = w.matchMedia && w.matchMedia('(max-width: 900px)');
+  var dvInit = function () {
+    if (dvOn || !dvs.length || !dvMq || !dvMq.matches) return; dvOn = true;
+    dvs.forEach(function (v) { v.poster = v.getAttribute('data-poster'); });
+    if (IO && !reduce) {
+      var dvo = new IntersectionObserver(function (es) {
+        es.forEach(function (x) {
+          var v = x.target;
+          if (x.isIntersecting) { if (!v.src) v.src = v.getAttribute('data-src'); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+          else { try { v.pause(); } catch (e) {} }
+        });
+      });
+      dvs.forEach(function (v) { dvo.observe(v); });
+    }
+  };
+  dvInit();
+  if (dvMq && !dvOn) { if (dvMq.addEventListener) dvMq.addEventListener('change', dvInit); else if (dvMq.addListener) dvMq.addListener(dvInit); }
   var smallScr = w.matchMedia && w.matchMedia('(max-width: 600px)').matches;
   function load(v) {
     if (v.src) return;
@@ -92,18 +110,45 @@
     [].forEach.call(d.querySelectorAll('[data-water]'), function (sec, i) {
       var cv = sec.querySelector('canvas'), img = sec.querySelector('img.still');
       if (!cv || !img) return;
-      var start = function () {
-        var lost = function () { sec.classList.remove('water'); };
-        var r = new w.EthicaRipple(cv, img.currentSrc || img.src,
-          i === 0 ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.1, period: 22, dpr: 3, lite: coarse, onLost: lost, mask: { landscape: 'assets/img/hero_mask.png', portrait: 'assets/img/hero_mask_m.png' } } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost });
+      var tries = 0, lostT = 0, r = null, cur = img.currentSrc;
+      var top0 = d.getElementById('top');
+      // 一番上にいる間（ヘッダーが透明な間）は、ヘッダーの帯の下でも指を受ける。ロゴ・メニューの釦と、開いたメニューの中では立てない
+      var accept = i === 0 ? function (t) { return !!(top0 && top0.contains(t) && !top0.classList.contains('solid') && !root.classList.contains('menu-open') && !(t.closest && t.closest('a,button'))); } : null;
+      var madeAt = 0;
+      var lost = function () {
+        sec.classList.remove('water');
+        if (Date.now() - madeAt > 30000) tries = 0; // 30秒以上もった後の喪失は、数え直す（続けて失敗するときだけ3回で止める）
+        // 文脈が戻らない端末への保険：見えている状態で2.5秒たっても戻らなければ、描画面を作り直す（3回まで）
+        clearTimeout(lostT); lostT = setTimeout(retry, 2500);
+      };
+      var back = function () { clearTimeout(lostT); sec.classList.add('water'); if (img.currentSrc && img.currentSrc !== r.src) r.setSrc(img.currentSrc); };
+      var retry = function () {
+        if (!r || r.ok || tries >= 3) return;
+        if (d.hidden) { d.addEventListener('visibilitychange', function f() { if (!d.hidden) { d.removeEventListener('visibilitychange', f); lostT = setTimeout(retry, 1500); } }); return; }
+        var b = cv.getBoundingClientRect(); if (b.bottom < 0 || b.top > w.innerHeight) { lostT = setTimeout(retry, 2500); return; } // 写真が見えてから作り直す
+        tries++; r.destroy(); if (i === 0) w.__heroRipple = null;
+        var nc = cv.cloneNode(false); cv.parentNode.replaceChild(nc, cv); cv = nc; make();
+        if (!r.ok) { lostT = setTimeout(retry, 2500); } // 作り直しに失敗したら、また試す（3回まで）
+      };
+      var make = function () {
+        madeAt = Date.now();
+        r = new w.EthicaRipple(cv, img.currentSrc || img.src,
+          i === 0 ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.1, period: 22, dpr: 3, lite: coarse, thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, onTap: function (x, y) { if (w.__pondHero) w.__pondHero(x, y); }, onLost: lost, onBack: back, mask: { landscape: 'assets/img/hero_mask.png', portrait: 'assets/img/hero_mask_m.png' } } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost, onBack: back });
         if (!r.ok) return;
         if (i === 0 && /[?&]debugdrops=1/.test(location.search)) { w.__drops = []; var od = r.drop; r.drop = function (x, y, rad, st) { w.__drops.push([Math.round(x), Math.round(y), st]); return od.apply(r, arguments); }; }
         r.start(function () { sec.classList.add('water'); });
         if (i === 0) w.__heroRipple = { r: r, el: cv };
-        r.bind(sec);
+        r.bind(sec, accept);
+        cur = img.currentSrc;
+      };
+      var start = function () {
+        make();
+        if (!r || !r.ok) return;
+        // ページに戻ったとき（別のアプリ・タブから）、文脈が失われたままなら作り直す
+        w.addEventListener('pageshow', function () { if (r && !r.ok) { clearTimeout(lostT); lostT = setTimeout(retry, 1500); } });
         if (i === 0) {
           setTimeout(function () { sec.classList.add('touched'); }, 9000);
-          var cur = img.currentSrc, swap = function () { if (img.currentSrc && img.currentSrc !== cur) { cur = img.currentSrc; r.setSrc(cur); } };
+          var swap = function () { if (img.currentSrc && img.currentSrc !== cur) { cur = img.currentSrc; r.setSrc(cur); } };
           img.addEventListener('load', swap); w.addEventListener('resize', function () { setTimeout(swap, 300); });
           var t0 = Date.now(), touched = function () { if (Date.now() - t0 > 1500) { sec.classList.add('touched'); sec.removeEventListener('pointerdown', touched); sec.removeEventListener('pointermove', touched); } };
           sec.addEventListener('pointerdown', touched, { passive: true }); sec.addEventListener('pointermove', touched, { passive: true });
@@ -112,6 +157,17 @@
       if (i === 0) ready(img, start);
       else if (IO) { var once = new IntersectionObserver(function (es) { if (es[es.length - 1].isIntersecting) { once.disconnect(); img.loading = 'eager'; ready(img, start); } }, { rootMargin: '300px 0px' }); once.observe(sec); }
     });
+  }
+
+  /* 点検用（?rdebug=1）：トップの水面の状態を画面の左下に出す。実機で「効かない時」の状態を確かめるため */
+  if (/[?&]rdebug=1/.test(location.search)) {
+    var dbg = d.createElement('div'); dbg.style.cssText = 'position:fixed;left:6px;bottom:6px;z-index:99;font:11px/1.4 monospace;color:#9f9;background:rgba(0,0,0,.75);padding:4px 6px;pointer-events:none;white-space:pre';
+    d.body.appendChild(dbg); var dn = 0, lastD = 0;
+    setInterval(function () {
+      var h = w.__heroRipple, r = h && h.r, gl = h && h.el.getContext && h.el.getContext('webgl');
+      if (r && r.lastDrop !== lastD) { lastD = r.lastDrop; dn++; }
+      dbg.textContent = r ? ('ok:' + r.ok + ' run:' + r.running + ' mask:' + r.maskOn + ' view:' + r.inView + '\nlost:' + (gl ? gl.isContextLost() : '-') + ' idle:' + !!r.idle + ' drops:' + dn + '\nsrc:' + String(r.src || '').split('/').pop()) : 'ripple: none (reduce=' + reduce + ')';
+    }, 250);
   }
 
   /* 年表：航路図は画面に入ると、番号と線が出てくる順に現れる。画面の中央にある皿の番号が、一覧と航路図の両方で光る */

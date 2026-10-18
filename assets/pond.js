@@ -1,5 +1,5 @@
 /* ページ全体の「水面」。マウスの通り道とクリックした所、指の通り道（スクロール中も）とタップした所に、金色の細い波紋が広がる（2D canvas）。
-   トップの写真（WebGLの水面）の上では描かない。動きを減らす設定では何もしない。 */
+   トップの写真の上では、輪を青いレジンの型で切り抜いて、木・皿・その外には描かない。動きを減らす設定では何もしない。 */
 (function () {
   'use strict';
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -9,49 +9,69 @@
   cv.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:45';
   document.body.appendChild(cv);
   var ctx = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0;
+  // 写真の上の輪は、別の描画面に描いてから型で切り抜き、上の描画面へ重ねる
+  var hc = document.createElement('canvas'), hctx = hc.getContext('2d');
   function size() {
     var w = document.documentElement.clientWidth || window.innerWidth, h = window.innerHeight;
     if (w === W && h === H) return;
     W = w; H = h; cv.style.width = W + 'px'; cv.style.height = H + 'px';
-    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cv.width = hc.width = Math.round(W * dpr); cv.height = hc.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); hctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   size(); window.addEventListener('resize', size);
-  var rings = [], running = false, lastTrail = 0, lx = -1, ly = -1, down = null, prevT = 0;
-  // トップの写真の上で、青いレジンでない所（木・皿）なら true
+  var rings = [], hrings = [], running = false, lastTrail = 0, lx = -1, ly = -1, down = null, prevT = 0;
+  // トップの写真の上で、青いレジンでない所（木・皿）なら true（マウス用）
   function offResin(x, y) {
     var h = window.__heroRipple; if (!h || !h.r.maskOn) return false;
     var b = h.el.getBoundingClientRect(); if (x < b.left || x > b.right || y < b.top || y > b.bottom) return false;
     return h.r.maskAt(x - b.left, y - b.top) < 0.35;
   }
+  // 指の点が、トップの写真の描画面の上か
+  function onHero(x, y) {
+    var el = document.querySelector('[data-water] canvas'); if (!el) return false;
+    var b = el.getBoundingClientRect(); return b.bottom > 0 && x >= b.left && x <= b.right && y >= b.top && y <= b.bottom;
+  }
+  // 写真の上で輪を出してよいか：水面が動いていて、型が届いていて、その点が青いレジン
+  function heroOk(x, y) {
+    var h = window.__heroRipple; if (!h || !h.el.isConnected || !h.r.ok || !h.r.maskOn) return false;
+    var b = h.el.getBoundingClientRect(); return h.r.maskAt(x - b.left, y - b.top) >= 0.35;
+  }
   function skip(e) { var t = e.target; return t && t.closest && t.closest('[data-water]'); }
+  function go() { if (!running) { running = true; prevT = performance.now(); requestAnimationFrame(tick); } }
   function add(x, y, big) {
     rings.push({ x: x, y: y, r: big ? 6 : 2, max: big ? 150 : 46, life: 1, w: big ? 1.4 : 0.8, a: big ? 0.75 : 0.32, sp: big ? 3.2 : 1.1 });
     if (big) rings.push({ x: x, y: y, r: 2, max: 90, life: 1, w: 0.9, a: 0.5, sp: 2.2, delay: 7 });
-    if (!running) { running = true; prevT = performance.now(); requestAnimationFrame(tick); }
+    go();
   }
+  // 写真の上の輪（型で切り抜く）。タップは ripple.js が青いレジンへ寄せた点で呼ぶ（水面の波紋と同じ点・同じ瞬間）
+  function addHero(x, y, big) {
+    hrings.push({ x: x, y: y, r: big ? 5 : 2, max: big ? 110 : 40, life: 1, w: big ? 1.3 : 0.8, a: big ? 0.8 : 0.34, sp: big ? 2.6 : 1.0 });
+    if (big) hrings.push({ x: x, y: y, r: 2, max: 70, life: 1, w: 0.9, a: 0.55, sp: 1.8, delay: 7 });
+    go();
+  }
+  window.__pondHero = function (x, y) { addHero(x, y, true); };
   window.addEventListener('pointerdown', function (e) {
-    if (skip(e)) return;
-    if (e.pointerType === 'mouse') { if (!offResin(e.clientX, e.clientY)) add(e.clientX, e.clientY, true); }
-    else down = { x: e.clientX, y: e.clientY, t: performance.now(), id: e.pointerId };
+    // マウスはトップの写真の上では描かない（写真の水面が揺れる）
+    if (e.pointerType === 'mouse') { if (!skip(e) && !offResin(e.clientX, e.clientY)) add(e.clientX, e.clientY, true); }
+    else down = onHero(e.clientX, e.clientY) ? null : { x: e.clientX, y: e.clientY, t: performance.now(), id: e.pointerId }; // 写真の上のタップは ripple.js から
   }, { passive: true });
   window.addEventListener('pointerup', function (e) {
     if (!down || e.pointerId !== down.id) return;
     var dx = e.clientX - down.x, dy = e.clientY - down.y, quick = performance.now() - down.t < 500;
-    if (quick && dx * dx + dy * dy < 100 && !offResin(e.clientX, e.clientY)) add(e.clientX, e.clientY, true);
+    if (quick && dx * dx + dy * dy < 100 && !onHero(e.clientX, e.clientY)) add(e.clientX, e.clientY, true);
     down = null;
   }, { passive: true });
   window.addEventListener('pointercancel', function () { down = null; }, { passive: true });
   // 指を滑らせている間（スクロール中も）は、マウスの通り道と同じように指の下に小さな輪を続けて出す
   var tl = {};
   window.addEventListener('touchmove', function (e) {
-    // 指の通り道は、トップの写真の上でも画面に金の輪を残す（写真の水面は ripple.js が揺らす）
-    var now = performance.now();
+    var now = performance.now(), menu = document.documentElement.classList.contains('menu-open');
     for (var i = 0; i < e.changedTouches.length; i++) {
       var t = e.changedTouches[i], q = tl[t.identifier], dx = q ? t.clientX - q.x : 99, dy = q ? t.clientY - q.y : 99;
       if (q && (now - q.t < 55 || dx * dx + dy * dy < 400)) continue;
       tl[t.identifier] = { x: t.clientX, y: t.clientY, t: now };
-      if (offResin(t.clientX, t.clientY)) continue;
-      add(t.clientX, t.clientY, false);
+      if (onHero(t.clientX, t.clientY)) { if (!menu && heroOk(t.clientX, t.clientY)) addHero(t.clientX, t.clientY, false); }
+      else add(t.clientX, t.clientY, false);
     }
   }, { passive: true });
   var tend = function (e) { for (var i = 0; i < e.changedTouches.length; i++) delete tl[e.changedTouches[i].identifier]; };
@@ -62,17 +82,52 @@
     if (now - lastTrail < 90 || dx * dx + dy * dy < 900) return;
     lastTrail = now; lx = e.clientX; ly = e.clientY; if (!offResin(e.clientX, e.clientY)) add(e.clientX, e.clientY, false);
   }, { passive: true });
+  // 型の画像（白黒）を、透明度の型に作り直して持っておく（型の URL ごと）
+  var am = null, amUrl = '';
+  function alphaMask(r) {
+    var url = r.maskUrl, im = r.mimgs && r.mimgs[url];
+    if (!url || !im || !im.naturalWidth) return null;
+    if (url === amUrl) return am;
+    try {
+      var w = Math.round(im.naturalWidth / 2), h = Math.round(im.naturalHeight / 2), c = document.createElement('canvas'), x = c.getContext('2d');
+      c.width = w; c.height = h; x.drawImage(im, 0, 0, w, h);
+      var d = x.getImageData(0, 0, w, h), p = d.data;
+      // 波紋を立てる境（0.35）より外は描かない。0.35〜0.65 で滑らかに濃くする
+      for (var i = 0; i < p.length; i += 4) { var v = Math.min(1, Math.max(0, (p[i] / 255 - 0.35) / 0.3)); p[i + 3] = Math.round(v * v * (3 - 2 * v) * 255); p[i] = p[i + 1] = p[i + 2] = 0; }
+      x.putImageData(d, 0, 0); am = c; amUrl = url; return am;
+    } catch (e) { return null; }
+  }
+  function step(list, c, f) {
+    for (var i = list.length - 1; i >= 0; i--) {
+      var g = list[i];
+      if (g.delay > 0) { g.delay -= f; continue; }
+      g.r += g.sp * f * (1 - g.r / g.max * 0.6); g.life = 1 - g.r / g.max;
+      if (g.life <= 0) { list.splice(i, 1); continue; }
+      c.beginPath(); c.arc(g.x, g.y, g.r, 0, Math.PI * 2);
+      c.strokeStyle = 'rgba(214,183,124,' + (g.a * g.life).toFixed(3) + ')'; c.lineWidth = g.w; c.stroke();
+    }
+  }
   function tick(now) {
     var f = Math.min(3, Math.max(0.25, (now - prevT) / 16.7)); prevT = now; // 画面の更新頻度によらず同じ速さで広げる
     ctx.clearRect(0, 0, W, H);
-    for (var i = rings.length - 1; i >= 0; i--) {
-      var g = rings[i];
-      if (g.delay > 0) { g.delay -= f; continue; }
-      g.r += g.sp * f * (1 - g.r / g.max * 0.6); g.life = 1 - g.r / g.max;
-      if (g.life <= 0) { rings.splice(i, 1); continue; }
-      ctx.beginPath(); ctx.arc(g.x, g.y, g.r, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(214,183,124,' + (g.a * g.life).toFixed(3) + ')'; ctx.lineWidth = g.w; ctx.stroke();
+    step(rings, ctx, f);
+    if (hrings.length) {
+      var h = window.__heroRipple, m = h && h.el.isConnected && h.r.ok && h.r.maskOn && h.r.view ? alphaMask(h.r) : null;
+      if (!m) hrings.length = 0; // 型が使えないときは、写真の上には描かない
+      else {
+        hctx.clearRect(0, 0, W, H); step(hrings, hctx, f);
+        // 型を、写真と同じ位置合わせ（cover・zoom・pan）で画面に置き、型の外を消す
+        var V = h.r.view, b = h.el.getBoundingClientRect(), cw = b.width, ch = b.height;
+        var mw = cw * V.zoom / V.cover[0], mh = ch * V.zoom / V.cover[1];
+        var mx = b.left + cw * (0.5 + (-0.5 - V.pan[0]) * V.zoom / V.cover[0]), my = b.top + ch * (0.5 - (0.5 - V.pan[1]) * V.zoom / V.cover[1]);
+        hctx.globalCompositeOperation = 'destination-in'; hctx.drawImage(m, mx, my, mw, mh);
+        // さらに、見えている写真の矩形の中だけに（ヘッダーが不透明なら、その下から）
+        var tp = document.getElementById('top'), y0 = b.top;
+        if (tp && tp.classList.contains('solid')) y0 = Math.max(y0, tp.getBoundingClientRect().bottom);
+        hctx.fillStyle = '#000'; hctx.fillRect(b.left, y0, cw, Math.max(0, b.bottom - y0)); hctx.globalCompositeOperation = 'source-over';
+        ctx.drawImage(hc, 0, 0, W, H);
+      }
     }
-    if (rings.length) requestAnimationFrame(tick); else { running = false; ctx.clearRect(0, 0, W, H); }
+    if (rings.length || hrings.length) requestAnimationFrame(tick); else { running = false; ctx.clearRect(0, 0, W, H); }
   }
 })();
