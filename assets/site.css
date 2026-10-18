@@ -3,9 +3,9 @@
 :root{
   --cave:#060807; --stone:#0E1211; --stone2:#141918; --line:#26302E; --line-gold:rgba(201,164,106,.32);
   --bone:#EEE8DC; --muted:#AEA89B; --gold:#C9A46A; --gold-hi:#E6CD98; --gold-lo:#A07E4A; --gold-text:#E2C890;
-  --f-jp:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
-  --f-body:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
-  --f-lat:"Cormorant Garamond","Times New Roman",serif;
+  --f-jp:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"Inter","Yu Gothic",YuGothic,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  --f-lat:"Inter","Helvetica Neue",Arial,sans-serif;
   --gut:max(20px,env(safe-area-inset-left,0px)); --gut-r:max(20px,env(safe-area-inset-right,0px));
   --hdr:68px;
   color-scheme:dark;
@@ -312,3 +312,14 @@ footer a{color:var(--gold-text);text-decoration:none}
   .story .s-head{grid-area:head}.story .text{grid-area:body}
   .story figure.s-video{grid-area:fig;order:0}
 }
+/* v9: 公式サイト（ethicatokyo.jp）と同じ書体に。見出し＝Shippori Mincho（細め）、本文＝游ゴシック、欧文と数字＝Inter。太さを抑えてミニマムに */
+h1,h2,h3,h4{font-weight:400}
+.story .text p,.lede,.items dt,.items dd,summary,.d,.line,details p{font-family:var(--f-body);font-weight:400;letter-spacing:.05em}
+.story .text p{font-size:16px;line-height:2.1}
+.num,.price,.leg .ago .bm,.rt-key b{font-weight:300}
+.points b,.space ul b,.calkey b{font-weight:400}
+.eyebrow{font-family:var(--f-lat);font-weight:400}
+/* v9: 再生の節の動画は縦長の枠で、空間を広く見せる（スマホ＝元の9:16のまま、タブレット・PC＝3:4） */
+.rb-video{aspect-ratio:9/16}
+.rb-video video{object-position:50% 50%}
+@media (min-width:601px){.rb-video{aspect-ratio:3/4}}
