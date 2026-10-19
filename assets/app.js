@@ -133,7 +133,7 @@
       var make = function () {
         madeAt = Date.now();
         r = new w.EthicaRipple(cv, img.currentSrc || img.src,
-          i === 0 ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.16, period: 24, panY: 0.02, dpr: 3, lite: coarse, thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, onTap: function (x, y) { if (w.__pondHero) w.__pondHero(x, y); }, onLost: lost, onBack: back, mask: { landscape: 'assets/img/hero_mask.png?v=5', portrait: 'assets/img/hero_mask_m.png?v=5' } } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost, onBack: back });
+          i === 0 ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.2, period: 14, panY: 0.02, dpr: 3, lite: coarse, thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, onTap: function (x, y) { if (w.__pondHero) w.__pondHero(x, y); }, onLost: lost, onBack: back, mask: { landscape: 'assets/img/hero_mask.png?v=5', portrait: 'assets/img/hero_mask_m.png?v=5' } } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost, onBack: back });
         if (!r.ok) return;
         if (i === 0 && /[?&]debugdrops=1/.test(location.search)) { w.__drops = []; var od = r.drop; r.drop = function (x, y, rad, st) { w.__drops.push([Math.round(x), Math.round(y), st]); return od.apply(r, arguments); }; }
         r.start(function () { sec.classList.add('water'); });
