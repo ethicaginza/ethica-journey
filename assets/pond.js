@@ -26,15 +26,21 @@
     var b = h.el.getBoundingClientRect(); if (x < b.left || x > b.right || y < b.top || y > b.bottom) return false;
     return h.r.maskAt(x - b.left, y - b.top) < 0.35;
   }
-  // 指の点が、トップの写真の描画面の上か
+  // 指の点が、写真の水面（トップの写真と、その写し）の描画面の上か
+  function inRect(el, x, y) { var b = el.getBoundingClientRect(); return b.bottom > 0 && b.width > 0 && x >= b.left && x <= b.right && y >= b.top && y <= b.bottom; }
   function onHero(x, y) {
-    var el = document.querySelector('.hero[data-water] canvas'); if (!el) return false;
-    var b = el.getBoundingClientRect(); return b.bottom > 0 && x >= b.left && x <= b.right && y >= b.top && y <= b.bottom;
+    var els = document.querySelectorAll('[data-water] canvas');
+    for (var i = 0; i < els.length; i++) if (inRect(els[i], x, y)) return true;
+    return false;
   }
-  // 写真の上で輪を出してよいか：水面が動いていて、型が届いていて、その点が青いレジン
+  // その点の水面（動いていて、型が届いていて、その点が青いレジン）を返す。無ければ null
   function heroOk(x, y) {
-    var h = window.__heroRipple; if (!h || !h.el.isConnected || !h.r.ok || !h.r.maskOn) return false;
-    var b = h.el.getBoundingClientRect(); return h.r.maskAt(x - b.left, y - b.top) >= 0.35;
+    var a = window.__waterImg || [];
+    for (var i = 0; i < a.length; i++) {
+      var r = a[i]; if (!r || r.dead || !r.ok || !r.maskOn || !r.c.isConnected || !inRect(r.c, x, y)) continue;
+      var b = r.c.getBoundingClientRect(); if (r.maskAt(x - b.left, y - b.top) >= 0.35) return r;
+    }
+    return null;
   }
   // トップの写真の上と、水面が動いている動画の背景（.wv-ready）では、マウスの金の輪は出さない（水面の波紋が出る）
   function skip(e) { var t = e.target, el = t && t.closest && t.closest('[data-water],[data-water-v]'); return !!(el && (el.hasAttribute('data-water') || el.classList.contains('wv-ready'))); }
@@ -47,12 +53,13 @@
     go();
   }
   // 写真の上の輪（型で切り抜く）。タップは ripple.js が青いレジンへ寄せた点で呼ぶ（水面の波紋と同じ点・同じ瞬間）
-  function addHero(x, y, big) {
-    hrings.push({ x: x, y: y, r: big ? 5 : 2, max: big ? 110 : 40, life: 1, w: big ? 1.3 : 0.8, a: big ? 0.8 : 0.34, sp: big ? 2.6 : 1.0 });
-    if (big) hrings.push({ x: x, y: y, r: 2, max: 70, life: 1, w: 0.9, a: 0.55, sp: 1.8, delay: 7 });
+  function addHero(x, y, big, wr) {
+    if (!wr) return;
+    hrings.push({ x: x, y: y, r: big ? 5 : 2, max: big ? 110 : 40, life: 1, w: big ? 1.3 : 0.8, a: big ? 0.8 : 0.34, sp: big ? 2.6 : 1.0, wr: wr });
+    if (big) hrings.push({ x: x, y: y, r: 2, max: 70, life: 1, w: 0.9, a: 0.55, sp: 1.8, delay: 7, wr: wr });
     go();
   }
-  window.__pondHero = function (x, y) { addHero(x, y, true); };
+  window.__pondHero = function (x, y, wr) { addHero(x, y, true, wr || (window.__heroRipple && window.__heroRipple.r)); };
   window.addEventListener('pointerdown', function (e) {
     // マウスはトップの写真の上では描かない（写真の水面が揺れる）
     if (e.pointerType === 'mouse') { if (!skip(e) && !offResin(e.clientX, e.clientY)) add(e.clientX, e.clientY, true); }
@@ -73,7 +80,7 @@
       var t = e.changedTouches[i], q = tl[t.identifier], dx = q ? t.clientX - q.x : 99, dy = q ? t.clientY - q.y : 99;
       if (q && (now - q.t < 55 || dx * dx + dy * dy < 400)) continue;
       tl[t.identifier] = { x: t.clientX, y: t.clientY, t: now };
-      if (onHero(t.clientX, t.clientY)) { if (!menu && heroOk(t.clientX, t.clientY)) addHero(t.clientX, t.clientY, false); }
+      if (onHero(t.clientX, t.clientY)) { var hr = !menu && heroOk(t.clientX, t.clientY); if (hr) addHero(t.clientX, t.clientY, false, hr); }
       else add(t.clientX, t.clientY, false);
     }
   }, { passive: true });
@@ -115,16 +122,19 @@
     ctx.clearRect(0, 0, W, H);
     step(rings, ctx, f);
     if (hrings.length) {
-      var h = window.__heroRipple, m = h && h.el.isConnected && h.r.ok && h.r.maskOn && h.r.view ? alphaMask(h.r) : null;
-      if (!m) hrings.length = 0; // 型が使えないときは、写真の上には描かない
-      else {
-        hctx.clearRect(0, 0, W, H); step(hrings, hctx, f);
-        // 型を、写真と同じ位置合わせ（cover・zoom・pan）で画面に置き、型の外を消す
-        var V = h.r.view, b = h.el.getBoundingClientRect(), cw = b.width, ch = b.height;
+      // 水面ごとに描いて、その水面の型（cover・zoom・pan で写真に合わせる）と見えている矩形で切り抜く
+      var groups = [];
+      for (var gi = 0; gi < hrings.length; gi++) { var wr = hrings[gi].wr; if (groups.indexOf(wr) < 0) groups.push(wr); }
+      for (var k = 0; k < groups.length; k++) {
+        var R = groups[k], list = hrings.filter(function (g) { return g.wr === R; });
+        var m = R && !R.dead && R.ok && R.maskOn && R.view && R.c.isConnected ? alphaMask(R) : null;
+        if (!m) { hrings = hrings.filter(function (g) { return g.wr !== R; }); continue; } // 型が使えないときは描かない
+        hctx.clearRect(0, 0, W, H); step(list, hctx, f);
+        hrings = hrings.filter(function (g) { return g.wr !== R || g.life > 0; });
+        var V = R.view, b = R.c.getBoundingClientRect(), cw = b.width, ch = b.height;
         var mw = cw * V.zoom / V.cover[0], mh = ch * V.zoom / V.cover[1];
         var mx = b.left + cw * (0.5 + (-0.5 - V.pan[0]) * V.zoom / V.cover[0]), my = b.top + ch * (0.5 - (0.5 - V.pan[1]) * V.zoom / V.cover[1]);
         hctx.globalCompositeOperation = 'destination-in'; hctx.drawImage(m, mx, my, mw, mh);
-        // さらに、見えている写真の矩形の中だけに（ヘッダーが不透明なら、その下から）
         var tp = document.getElementById('top'), y0 = b.top;
         if (tp && tp.classList.contains('solid')) y0 = Math.max(y0, tp.getBoundingClientRect().bottom);
         hctx.fillStyle = '#000'; hctx.fillRect(b.left, y0, cw, Math.max(0, b.bottom - y0)); hctx.globalCompositeOperation = 'source-over';

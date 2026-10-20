@@ -125,12 +125,33 @@
     if (img.complete && img.naturalWidth) return fn();
     img.addEventListener('load', fn, { once: true });
   }
+  var unreg = function (r) { var a = w.__waterImg || [], k = a.indexOf(r); if (k >= 0) a.splice(k, 1); };
+  /* フィロソフィーの見出しと最初の段落の裏の写し：高さを、「時空の断片を…」の手前まで合わせる（そこから下は今の背景） */
+  var khbg = d.querySelector('.k-hbg');
+  if (khbg) {
+    var kSec = khbg.closest('section'), kLede = kSec && kSec.querySelector('.k-grid .lede');
+    var kHead = kSec && kSec.querySelector('.k-head'), kLead = kSec && kSec.querySelector('.k-lead');
+    // 節の上端からの位置。浮き上がりの動き（.rise の translateY）に左右されないよう、配置上の位置で測る
+    var oy = function (el) { var y = 0, e = el; while (e && e !== kSec) { y += e.offsetTop; e = e.offsetParent; } return e === kSec ? y : el.getBoundingClientRect().top - kSec.getBoundingClientRect().top; };
+    var fitK = function () {
+      // 下端は「時空の断片を…」の手前まで。下の 72px で今の背景（動画）へ溶かす（CSS の mask）
+      if (!kLede) return; var h = kLead ? oy(kLead) : oy(kLede) + kLede.offsetHeight + 10;
+      khbg.style.setProperty('--khbg-h', Math.max(0, Math.round(h)) + 'px');
+      // 見出しの中心と半分の高さ（縦長の画面で、見出しの裏だけ少し暗くする覆いの位置）
+      if (kHead) { var ht = oy(kHead), hh = kHead.offsetHeight; khbg.style.setProperty('--kh-y', Math.round(ht + hh / 2) + 'px'); khbg.style.setProperty('--kh-r', Math.round(hh / 2 + 56) + 'px'); }
+    };
+    fitK(); w.addEventListener('resize', fitK); w.addEventListener('load', fitK);
+    if (w.ResizeObserver) new ResizeObserver(fitK).observe(kSec);
+    if (d.fonts && d.fonts.ready) d.fonts.ready.then(fitK);
+  }
   if (!reduce && w.EthicaRipple) {
     [].forEach.call(d.querySelectorAll('[data-water]'), function (sec, i) {
       var cv = sec.querySelector('canvas'), img = sec.querySelector('img.still');
       if (!cv || !img) return;
       var tries = 0, lostT = 0, r = null, cur = img.currentSrc;
       var top0 = d.getElementById('top');
+      var heroLike = i === 0 || sec.hasAttribute('data-water-copy'); // トップの写真と、その写し（フィロソフィーの見出しの裏）
+      var host = sec.closest('section') || sec; // 指を受ける範囲（写しは節全体で受け、描画面の矩形の中だけ立てる）
       // 一番上にいる間（ヘッダーが透明な間）は、ヘッダーの帯の下でも指を受ける。ロゴ・メニューの釦と、開いたメニューの中では立てない
       var accept = i === 0 ? function (t) { return !!(top0 && top0.contains(t) && !top0.classList.contains('solid') && !root.classList.contains('menu-open') && !(t.closest && t.closest('a,button'))); } : null;
       var madeAt = 0;
@@ -145,19 +166,20 @@
         if (!r || r.ok || tries >= 3) return;
         if (d.hidden) { d.addEventListener('visibilitychange', function f() { if (!d.hidden) { d.removeEventListener('visibilitychange', f); lostT = setTimeout(retry, 1500); } }); return; }
         var b = cv.getBoundingClientRect(); if (b.bottom < 0 || b.top > w.innerHeight) { lostT = setTimeout(retry, 2500); return; } // 写真が見えてから作り直す
-        tries++; r.destroy(); if (i === 0) w.__heroRipple = null;
+        tries++; unreg(r); r.destroy(); if (i === 0) w.__heroRipple = null;
         var nc = cv.cloneNode(false); cv.parentNode.replaceChild(nc, cv); cv = nc; make();
         if (!r.ok) { lostT = setTimeout(retry, 2500); } // 作り直しに失敗したら、また試す（3回まで）
       };
       var make = function () {
         madeAt = Date.now();
         r = new w.EthicaRipple(cv, img.currentSrc || img.src,
-          i === 0 ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.2, period: 14, panY: 0.02, dpr: 3, lite: coarse, thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, onTap: function (x, y) { if (w.__pondHero) w.__pondHero(x, y); }, onLost: lost, onBack: back, mask: { landscape: 'assets/img/hero_mask.png?v=5', portrait: 'assets/img/hero_mask_m.png?v=5' } } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost, onBack: back });
+          heroLike ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.2, period: 14, panY: 0.02, dpr: 3, lite: coarse, thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, onTap: function (x, y) { if (w.__pondHero) w.__pondHero(x, y, r); }, onLost: lost, onBack: back, mask: { landscape: 'assets/img/hero_mask.png?v=5', portrait: 'assets/img/hero_mask_m.png?v=5' } } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost, onBack: back });
         if (!r.ok) return;
         if (i === 0 && /[?&]debugdrops=1/.test(location.search)) { w.__drops = []; var od = r.drop; r.drop = function (x, y, rad, st) { w.__drops.push([Math.round(x), Math.round(y), st]); return od.apply(r, arguments); }; }
         r.start(function () { sec.classList.add('water'); });
         if (i === 0) w.__heroRipple = { r: r, el: cv };
-        r.bind(sec, accept);
+        if (heroLike) (w.__waterImg = w.__waterImg || []).push(r); // 金の輪（pond.js）が、どの水面の型で切り抜くかを知るため
+        r.bind(host, accept);
         cur = img.currentSrc;
       };
       var start = function () {
@@ -165,10 +187,12 @@
         if (!r || !r.ok) return;
         // ページに戻ったとき（別のアプリ・タブから）、文脈が失われたままなら作り直す
         w.addEventListener('pageshow', function () { if (r && !r.ok) { clearTimeout(lostT); lostT = setTimeout(retry, 1500); } });
-        if (i === 0) {
-          setTimeout(function () { sec.classList.add('touched'); }, 9000);
+        if (heroLike) {
           var swap = function () { if (img.currentSrc && img.currentSrc !== cur) { cur = img.currentSrc; r.setSrc(cur); } };
           img.addEventListener('load', swap); w.addEventListener('resize', function () { setTimeout(swap, 300); });
+        }
+        if (i === 0) {
+          setTimeout(function () { sec.classList.add('touched'); }, 9000);
           var t0 = Date.now(), touched = function () { if (Date.now() - t0 > 1500) { sec.classList.add('touched'); sec.removeEventListener('pointerdown', touched); sec.removeEventListener('pointermove', touched); } };
           sec.addEventListener('pointerdown', touched, { passive: true }); sec.addEventListener('pointermove', touched, { passive: true });
         }
@@ -193,7 +217,8 @@
         if (!rv.ok) lostT = setTimeout(retry, 2500);
       };
       var build = function () {
-        rv = new w.EthicaRipple(cv, vv, { video: true, ambient: 0, pert: coarse ? 0.08 : 0.05, glint: 0.3, zoomFrom: 1, zoomTo: 1, pan: 0, period: 30, dpr: 1, lite: coarse, thr: coarse ? 0.012 : 0.02, dim: parseFloat(cv.getAttribute('data-dim')) || 1,
+        var kh = sec.querySelector('.k-hbg');
+        rv = new w.EthicaRipple(cv, vv, { video: true, ambient: 0, skip: kh ? function (x, y) { var b = kh.getBoundingClientRect(); return y >= b.top && y <= b.bottom && x >= b.left && x <= b.right; } : null, pert: coarse ? 0.08 : 0.05, glint: 0.3, zoomFrom: 1, zoomTo: 1, pan: 0, period: 30, dpr: 1, lite: coarse, thr: coarse ? 0.012 : 0.02, dim: parseFloat(cv.getAttribute('data-dim')) || 1,
           sleep: 2500, onSleep: hide, onWake: show, touch: { r: 44, s: 0.24, move: 0.05, echo: true, onEnd: true },
           onLost: function () { hide(); clearTimeout(lostT); lostT = setTimeout(retry, 2500); }, onBack: function () { clearTimeout(lostT); } });
         if (!rv.ok) return;

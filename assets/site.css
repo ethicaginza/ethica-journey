@@ -470,3 +470,15 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
 /* v16: シェフの節の背景は、公式サイトと同じ「器に盛り付ける手元」の写真を明るさ30%で（PC・スマホとも） */
 #chef{position:relative;isolation:isolate;background:#0a0a0a}
 #chef::before{content:"";position:absolute;inset:0;z-index:-1;background:url(img/chef_bg_2048.webp) 50% 50%/cover no-repeat;filter:brightness(.3)}
+
+/* v17: フィロソフィーの見出しと最初の段落の裏だけに、トップの写真の水面をそのまま（高さは app.js が「時空の断片を…」の手前まで合わせ、下の 72px で今の背景の動画へ溶かす） */
+.k-hbg{position:absolute;left:0;right:0;top:0;height:var(--khbg-h,55%);z-index:0;overflow:hidden;pointer-events:none;background:#061418;-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 72px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 72px),transparent)}
+.k-hbg .stage{position:absolute;inset:0}
+.k-hbg .still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kbh 14s ease-in-out infinite alternate}
+.k-hbg canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1.2s}
+.k-hbg.water canvas{opacity:1}
+.k-hbg.water .still{opacity:0;transition:opacity 0s linear 1.3s;animation-play-state:paused}
+.k-hbg::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}
+@media (prefers-reduced-motion:reduce){.k-hbg .still{animation:none}}
+/* 縦長の画面では見出しが白い皿の上に来るので、見出しの裏だけ楕円で少し暗くする（写真・波紋・ズームはそのまま） */
+@media (max-aspect-ratio:4/5){.k-hbg::after{background:radial-gradient(85% var(--kh-r,110px) at 50% var(--kh-y,140px),rgba(6,8,7,.66) 0%,rgba(6,8,7,.5) 55%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}}

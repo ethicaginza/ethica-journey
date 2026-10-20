@@ -220,6 +220,7 @@
   Ripple.prototype.drop = function (x, y, radiusPx, strength) {
     if (!this.ok || !this.running) return;
     if (this.opt.mask && (!this.maskOn || this.maskAt(x, y) < 0.35)) return; // 型が届くまでと、木や皿の上では波紋を立てない
+    if (this.opt.skip) { var sb = this.c.getBoundingClientRect(); if (this.opt.skip(sb.left + x, sb.top + y)) return; } // 別の水面が重なっている所では立てない
     this.lastDrop = performance.now();
     if (this.sleeping) { this.sleeping = false; this.vNew = true; this.onFirst = this.opt.onWake || null; this.prev = performance.now(); this.kick(); } // 眠っていたら起きる（最初の1枚を描いてから見せる）
     var gl = this.gl, P = this.pDrop;
