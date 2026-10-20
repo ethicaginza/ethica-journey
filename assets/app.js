@@ -135,10 +135,16 @@
     var oy = function (el) { var y = 0, e = el; while (e && e !== kSec) { y += e.offsetTop; e = e.offsetParent; } return e === kSec ? y : el.getBoundingClientRect().top - kSec.getBoundingClientRect().top; };
     var fitK = function () {
       // 下端は「時空の断片を…」の手前まで。下の 72px で今の背景（動画）へ溶かす（CSS の mask）
-      if (!kLede) return; var h = kLead ? oy(kLead) : oy(kLede) + kLede.offsetHeight + 10;
-      khbg.style.setProperty('--khbg-h', Math.max(0, Math.round(h)) + 'px');
+      if (!kLede) return;
+      // 横長の画面では、写真（3:2）の全体（上の木と3つの料理）が入る高さまで帯を伸ばす。伸ばした分は見出しの上に足す（--k-extra）
+      var cur = parseFloat(kSec.style.getPropertyValue('--k-extra')) || 0;
+      var base = (kLead ? oy(kLead) : oy(kLede) + kLede.offsetHeight + 10) - cur;
+      var land = !(w.matchMedia && w.matchMedia('(max-aspect-ratio: 4/5)').matches);
+      var extra = land ? Math.max(0, Math.round(khbg.clientWidth * 2 / 3 - base)) : 0;
+      if (Math.abs(extra - cur) >= 1) kSec.style.setProperty('--k-extra', extra + 'px');
+      khbg.style.setProperty('--khbg-h', Math.max(0, Math.round(base + extra)) + 'px');
       // 見出しの中心と半分の高さ（縦長の画面で、見出しの裏だけ少し暗くする覆いの位置）
-      if (kHead) { var ht = oy(kHead), hh = kHead.offsetHeight; khbg.style.setProperty('--kh-y', Math.round(ht + hh / 2) + 'px'); khbg.style.setProperty('--kh-r', Math.round(hh / 2 + 56) + 'px'); }
+      if (kHead) { var ht = oy(kHead) - cur + extra, hh = kHead.offsetHeight; khbg.style.setProperty('--kh-y', Math.round(ht + hh / 2) + 'px'); khbg.style.setProperty('--kh-r', Math.round(hh / 2 + 56) + 'px'); }
     };
     fitK(); w.addEventListener('resize', fitK); w.addEventListener('load', fitK);
     if (w.ResizeObserver) new ResizeObserver(fitK).observe(kSec);

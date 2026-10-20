@@ -480,5 +480,6 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
 .k-hbg.water .still{opacity:0;transition:opacity 0s linear 1.3s;animation-play-state:paused}
 .k-hbg::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}
 @media (prefers-reduced-motion:reduce){.k-hbg .still{animation:none}}
+#concept .k-head{margin-top:var(--k-extra,0px)} /* 横長の画面で写真の全体を見せるために伸ばした分（app.js） */
 /* 縦長の画面では見出しが白い皿の上に来るので、見出しの裏だけ楕円で少し暗くする（写真・波紋・ズームはそのまま） */
 @media (max-aspect-ratio:4/5){.k-hbg::after{background:radial-gradient(85% var(--kh-r,110px) at 50% var(--kh-y,140px),rgba(6,8,7,.66) 0%,rgba(6,8,7,.5) 55%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}}
