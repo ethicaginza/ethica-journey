@@ -432,3 +432,11 @@ h1,h2,h3,h4{font-weight:400}
 /* v14: ヘッダーの「ETHICA」は、ロゴの文字を切り出した画像（代替テキスト ETHICA） */
 .brand img.wm{width:auto;height:19px;display:block}
 @media (max-width:600px){.brand img.wm{height:15px}}
+
+/* v15: 再生の節のセノーテの往復動画は、10秒かけてゆっくり寄って引く（動画は0.4倍速の往復） */
+.rb-video video{transform-origin:50% 60%;animation:rbz 10s ease-in-out infinite alternate}
+@keyframes rbz{from{transform:scale(1)}to{transform:scale(1.12)}}
+@media (prefers-reduced-motion:reduce){.rb-video video{animation:none}}
+/* v15: すりガラス。PCの上のメニュー（スクロール後）と、スマホの下の予約バーを、もう少し透けるように。ボタンはそのまま */
+@media (min-width:901px){.top.solid{background:rgba(6,8,7,.55);backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25)}}
+.dock{background:rgba(6,8,7,.55);backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25)}
