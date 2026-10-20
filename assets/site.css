@@ -475,7 +475,8 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
 .top.over-ss .mich{display:block}
 @media (max-width:600px){.top .mich img{width:40px;height:40px}}
 /* スマホでは、物語の冒頭のセノーテの動画を出さない（読み込みもしない） */
-@media (max-width:600px){.story figure.s-video{display:none}}
+/* スマホ：物語の動画（セノーテ）は、2段落目（二人の志）と3段落目（朽ちたポプラは泉を映すテーブルへ）の間に入れる（文字が続きすぎないように・2026-10-20 オーナー指示） */
+@media (max-width:600px){.story.solo>.text{display:contents}.story .s-head{order:1}.story .text>p:nth-child(1){order:2}.story .text>p:nth-child(2){order:3}.story figure.s-video{order:4;margin-top:14px;margin-bottom:14px}.story .text>p:nth-child(n+3){order:5}}
 /* v16: シェフの節の背景は、公式サイトと同じ「器に盛り付ける手元」の写真を明るさ30%で（PC・スマホとも） */
 #chef{position:relative;isolation:isolate;background:#0a0a0a}
 #chef::before{content:"";position:absolute;inset:0;z-index:-1;background:url(img/chef_bg_2048.webp) 50% 50%/cover no-repeat;filter:brightness(.3)}
