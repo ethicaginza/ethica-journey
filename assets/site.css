@@ -438,5 +438,7 @@ h1,h2,h3,h4{font-weight:400}
 @keyframes rbz{from{transform:scale(1)}to{transform:scale(1.12)}}
 @media (prefers-reduced-motion:reduce){.rb-video video{animation:none}}
 /* v15: すりガラス。PCの上のメニュー（スクロール後）と、スマホの下の予約バーを、もう少し透けるように。ボタンはそのまま */
-@media (min-width:901px){.top.solid{background:rgba(6,8,7,.55);backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25)}}
+/* 上のメニュー（スクロール後）もPC・スマホとも同じすりガラス。メニューを開いている間は、読みやすさのため前の濃さ */
+.top.solid{background:rgba(6,8,7,.55);backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25)}
+.top.solid.open{background:rgba(6,8,7,.86)}
 .dock{background:rgba(6,8,7,.55);backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25)}
