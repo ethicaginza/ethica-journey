@@ -16,7 +16,7 @@
   function setDock() { var on = pastHero && !inlineOn; dock.classList.toggle('show', on); root.classList.toggle('docked', pastHero); }
   if (IO && heroCtas) {
     var hdrH = (top && top.offsetHeight) || 68;
-    new IntersectionObserver(function (es) { var x = es[es.length - 1]; pastHero = !x.isIntersecting && x.boundingClientRect.top < hdrH; setDock(); }, { rootMargin: '-' + hdrH + 'px 0px 0px 0px' }).observe(heroCtas);
+    new IntersectionObserver(function (es) { var x = es[es.length - 1]; pastHero = !x.isIntersecting; setDock(); }, { rootMargin: '-' + hdrH + 'px 0px 0px 0px' }).observe(heroCtas);
     // 金のボタン（最後の節・年代図の後・コレクションのカード）が画面に見えている間は、予約バーを隠す
     var inl = [].slice.call(d.querySelectorAll('.final .btn-gold, .tl-cta .btn, .card.mid .btn')), seen = [];
     var io2 = new IntersectionObserver(function (es) {
@@ -25,6 +25,25 @@
     }, { rootMargin: '-' + hdrH + 'px 0px -' + Math.max(90, (dock && dock.offsetHeight) || 0) + 'px 0px' });
     inl.forEach(function (b) { io2.observe(b); });
   } else { pastHero = true; setDock(); }
+
+  /* 一番上のスライドショー（公式サイトと同じ）：4枚を5秒ごとに。画面の外・別のタブの間は止める。動きを減らす設定では1枚目のまま */
+  var ss = d.getElementById('ss');
+  if (ss) {
+    var sl = [].slice.call(ss.querySelectorAll('.ss-slide')), si = 0, sOn = true;
+    var bg = function (el) { if (!el.style.backgroundImage) el.style.backgroundImage = 'url(' + el.getAttribute('data-bg') + ')'; };
+    bg(sl[0]); requestAnimationFrame(function () { requestAnimationFrame(function () { sl[0].classList.add('on'); }); });
+    if (!reduce && sl.length > 1) {
+      w.addEventListener('load', function () { sl.forEach(function (el, i) { if (i) { var im = new Image(); im.src = el.getAttribute('data-bg'); } }); });
+      setInterval(function () {
+        if (!sOn || d.hidden) return;
+        var cur = sl[si]; si = (si + 1) % sl.length; bg(sl[si]); cur.classList.remove('on'); sl[si].classList.add('on');
+      }, 5000);
+      if (IO) new IntersectionObserver(function (es) { sOn = es[es.length - 1].isIntersecting; }).observe(ss);
+    }
+    // スライドショーがヘッダーの下にある間は、ヘッダーの左にミシュランの印（ロゴは中央にあるため）
+    var overSS = function () { top.classList.toggle('over-ss', ss.getBoundingClientRect().bottom > ((top && top.offsetHeight) || 68)); };
+    w.addEventListener('scroll', overSS, { passive: true }); w.addEventListener('resize', overSS); overSS();
+  }
 
   /* スマホのメニュー */
   var mb = d.querySelector('.menu-btn'), mnav = d.getElementById('mnav');

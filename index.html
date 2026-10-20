@@ -14,21 +14,23 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#060807">
 <link rel="icon" href="assets/img/logo.png">
-<link rel="preload" as="image" media="(max-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_table_m1080.webp 1080w, assets/img/hero_table_m1440.webp 1440w, assets/img/hero_table_m1800.webp 1800w" imagesizes="(max-aspect-ratio: 2/3) 67vh, 100vw" fetchpriority="high">
-<link rel="preload" as="image" media="not all and (max-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_table_1440.webp 1440w, assets/img/hero_table_2560.webp 2560w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" media="(max-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_table_m1080.webp 1080w, assets/img/hero_table_m1440.webp 1440w, assets/img/hero_table_m1800.webp 1800w" imagesizes="(max-aspect-ratio: 2/3) 67vh, 100vw" fetchpriority="low">
+<link rel="preload" as="image" media="not all and (max-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_table_1440.webp 1440w, assets/img/hero_table_2560.webp 2560w" imagesizes="100vw" fetchpriority="low">
+<link rel="preload" as="image" href="assets/img/ss1_2048.webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/hero_mask_m.png?v=5" media="(max-aspect-ratio: 4/5) and (prefers-reduced-motion: no-preference)">
 <link rel="preload" as="image" href="assets/img/hero_mask.png?v=5" media="(min-aspect-ratio: 801/1000) and (prefers-reduced-motion: no-preference)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Inter:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=30">
-<link rel="stylesheet" href="assets/timeline.css?v=30">
+<link rel="stylesheet" href="assets/site.css?v=31">
+<link rel="stylesheet" href="assets/timeline.css?v=31">
 </head>
 <body>
 <a class="sr skip" href="#main">本文へ移動</a>
 <header class="top" id="top">
   <div class="wrap">
     <a class="brand" href="#" aria-label="ETHICA ページの先頭へ"><img src="assets/img/logo.png" alt="" width="34" height="35"><img class="wm" src="assets/img/wordmark_64.webp" alt="ETHICA" width="358" height="64"></a>
+    <a class="mich" href="https://guide.michelin.com/jp/ja/tokyo-region/tokyo/restaurant/ethica" target="_blank" rel="noopener" aria-label="ミシュランガイド東京 3年連続掲載（ミシュランガイドの ETHICA のページ）"><img src="assets/img/michelin_2026.png" alt="MICHELIN 2026" width="192" height="192"></a>
     <nav aria-label="ページ内のメニュー">
       <a class="nl" href="#story">物語</a><a class="nl" href="#chef">シェフ</a><a class="nl" href="#chapters">時代の章</a><a class="nl" href="#courses">コース</a><a class="nl" href="#access">アクセス</a>
       <a class="btn btn-gold hdr" href="https://res-reserve.com/ja/restaurants/ethicatokyo?utm_source=ethica_lp&amp;utm_medium=referral&amp;utm_campaign=lp_2026autumn&amp;utm_content=header" target="_blank" rel="noopener" data-cta="header">空席を見る<span class="arrow" aria-hidden="true">→</span></a>
@@ -41,11 +43,23 @@
 </header>
 
 <main id="main">
-<section class="hero" data-water aria-label="ETHICA">
+<section class="ss" id="ss" aria-label="ETHICA 銀座">
+  <div class="ss-track" aria-hidden="true">
+    <div class="ss-slide" data-bg="assets/img/ss1_2048.webp"></div>
+    <div class="ss-slide" data-bg="assets/img/ss2_2048.webp"></div>
+    <div class="ss-slide" data-bg="assets/img/ss3_2048.webp"></div>
+    <div class="ss-slide" data-bg="assets/img/ss4_2048.webp"></div>
+  </div>
+  <img class="ss-logo" src="assets/img/logo_full.webp" alt="ETHICA" width="335" height="305" fetchpriority="high">
+  <p class="ss-cap">銀座 ETHICA | MAZ出身シェフのイノベーティブ（ペルー料理）・ミシュラン3年連続掲載</p>
+  <a class="ss-down" href="#hero" aria-label="下へ進む"></a>
+</section>
+
+<section class="hero" id="hero" data-water aria-label="ETHICA">
   <div class="stage">
     <picture>
       <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/hero_table_m1080.webp 1080w, assets/img/hero_table_m1440.webp 1440w, assets/img/hero_table_m1800.webp 1800w" sizes="(max-aspect-ratio: 2/3) 67vh, 100vw">
-      <img class="still" src="assets/img/hero_table_1440.webp" srcset="assets/img/hero_table_1440.webp 1440w, assets/img/hero_table_2560.webp 2560w" sizes="100vw" alt="青いレジンのテーブルに並ぶ、ETHICAの料理を真上から見たところ" fetchpriority="high">
+      <img class="still" src="assets/img/hero_table_1440.webp" srcset="assets/img/hero_table_1440.webp 1440w, assets/img/hero_table_2560.webp 2560w" sizes="100vw" alt="青いレジンのテーブルに並ぶ、ETHICAの料理を真上から見たところ">
     </picture>
     <canvas aria-hidden="true"></canvas>
   </div>
@@ -79,7 +93,7 @@
     <figure class="s-video rise"><video class="sv" muted loop playsinline preload="none" data-src="assets/video/cenote/n02.mp4?v=2" poster="assets/video/cenote/n02.webp?v=2" aria-hidden="true"></video><figcaption>セノーテ</figcaption></figure>
     <div class="text rise">
       <p>地球が<wbr>生まれて<span class="nw">46億年</span>。<br>燃える<wbr>大地、<wbr>生命を<wbr><span class="nw">育んだ</span>深海、<wbr>文明が<wbr><span class="nw">育んだ</span>知恵。<br>ETHICAの<wbr>コースは、<wbr>地球の<wbr>記憶を<wbr>一皿ずつたどる<wbr><span class="nw">時空</span>の<wbr>旅です。</p>
-<p>その<wbr>始まりには、<wbr>二人の<wbr>志が<wbr>あります。<br>二ツ星MAZでの<wbr>キャリアを<wbr>離れ、<wbr>ペルー・イノベーティブを<wbr>日本に<wbr>広める<wbr>料理人、<wbr>MASAO ANDRÉS MATSUNAE GUZMÁN。<br>モルガン・スタンレーでの<wbr>キャリアを<wbr>離れ、<wbr>食を<wbr>通じて<wbr>未来に<wbr>つながる<wbr>価値を<wbr>形に<wbr>する<wbr>オーナー、<wbr>鈴木。<br>二人が<wbr>目指すのは、<wbr>受け継いだものを<wbr>次の<wbr>世代へ<wbr><span class="nw">つなぐ</span>ことです。</p>
+<p>その<wbr>始まりには、<wbr>二人の<wbr>志が<wbr>あります。<br>二ツ星MAZでの<wbr>キャリアを<wbr>離れ、<wbr>ペルー・イノベーティブを<wbr>日本に<wbr>広める<wbr>料理人、<wbr>MASAO ANDRÉS MATSUNAE GUZMÁN。<br>外資系投資銀行モルガン・スタンレーでの<wbr>キャリアを<wbr>離れ、<wbr>食を<wbr>通じて<wbr>未来に<wbr>つながる<wbr>価値を<wbr>形に<wbr>する<wbr>オーナー、<wbr>鈴木。<br>二人が<wbr>目指すのは、<wbr>受け継いだものを<wbr>次の<wbr>世代へ<wbr><span class="nw">つなぐ</span>ことです。</p>
 <p>朽ちた<wbr>ポプラは<wbr>泉を<wbr>映すテーブルへ。<br>卵の<wbr>殻は<wbr>床の<wbr>タイルへ。<br>食材の<wbr>端材は<wbr>カトラリーレストや<wbr>ペアリングの<wbr>一杯へ。<br>役目を<wbr>終えた<wbr>ものに<wbr>新たな<wbr>価値を<wbr>見いだす<wbr>再生が、<wbr>ETHICAの<wbr>空間と<wbr>料理に<wbr>息づいています。</p>
 <p class="s-view"><span class="nw">私たち</span>に<wbr>とって<wbr>エシカルとは、<wbr>正しさを<wbr>掲げる<wbr>ことではなく、<wbr>地球から<wbr><span class="nw-sp">受け取った<wbr>もの</span>を<wbr><span class="nw-sp">無駄に<wbr>せず</span>、<wbr>その<wbr>価値を<wbr>未来へ<wbr>手渡す<wbr>こと。</p>
 <p><span class="nw">46億年</span>の<wbr>旅を<wbr>終え、<wbr>銀座の<wbr>日常へ<wbr><span class="nw-sp">戻る<wbr>とき</span>、<wbr>いつもの<wbr>景色が<wbr>少し<wbr>違って<wbr>見える。<br>何を<wbr>受け取り、<wbr>何を<wbr>未来へ<wbr>手渡すのか。<br>その<wbr>問いが<wbr>心に<wbr>残る<wbr>食体験を<wbr>目指しています。</p>
@@ -247,7 +261,7 @@
 
 <section class="sec alt" aria-labelledby="rebirth-title">
   <div class="wrap rebirth">
-    <div class="rb-media rise"><img src="assets/img/rebirth_top.webp" alt="朽ちたポプラの木目に青い樹脂が流れるテーブルと、その上の料理" loading="lazy" width="1600" height="1200"><figure class="rb-video"><video class="rv" muted loop playsinline preload="none" data-src-m="assets/video/cenote/n01s_m.mp4?v=2" data-src="assets/video/cenote/n01s.mp4?v=2" poster="assets/video/cenote/n01s.webp?v=2" aria-hidden="true"></video><figcaption>セノーテ</figcaption></figure></div>
+    <div class="rb-media rise"><img src="assets/img/rebirth_top.webp" alt="朽ちたポプラの木目に青い樹脂が流れるテーブルと、その上の料理" loading="lazy" width="1600" height="1200"><figure class="rb-video"><video class="rv" muted loop playsinline preload="none" data-src-m="assets/video/cenote/n01g_m.mp4?v=2" data-src="assets/video/cenote/n01g.mp4?v=2" poster="assets/video/cenote/n01g.webp?v=2" aria-hidden="true"></video><figcaption>セノーテ</figcaption></figure></div>
     <div class="rise">
       <p class="eyebrow">Rebirth</p>
       <h2 id="rebirth-title">朽ちた木が、<wbr>テーブルになる。</h2>
@@ -403,8 +417,8 @@
   <a class="btn btn-line call" href="tel:+81362287313" aria-label="電話をかける（受付 12:00〜17:00）" data-cta="dock_tel"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.9 2.2z"/></svg><span class="off-hours">受付<br>12-17時</span></a>
 </nav>
 
-<script src="assets/ripple.js?v=30"></script>
-<script src="assets/app.js?v=30"></script>
-<script src="assets/pond.js?v=30"></script>
+<script src="assets/ripple.js?v=31"></script>
+<script src="assets/app.js?v=31"></script>
+<script src="assets/pond.js?v=31"></script>
 </body>
 </html>
