@@ -460,7 +460,7 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
 }
 @media (prefers-reduced-motion:reduce){.ss-slide,.ss-slide.on{transition:none}}
 /* ミシュランの印：スライドショーの上にいる間は、ヘッダーの左にロゴの代わりに出す（公式サイトと同じ並び） */
-.top .mich{display:none;line-height:0}
+.top .mich{display:none;line-height:0;transform:translateY(8px)} /* 少し下げる（公式の位置に近く） */
 .top .mich img{width:46px;height:46px;border-radius:50%}
 .top.over-ss .brand{display:none}
 .top.over-ss .mich{display:block}
