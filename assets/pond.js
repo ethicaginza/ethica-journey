@@ -1,5 +1,5 @@
-/* ページ全体の「水面」。マウスの通り道とクリックした所、指の通り道（スクロール中も）とタップした所に、金色の細い波紋が広がる（2D canvas）。
-   トップの写真の上では、輪を青いレジンの型で切り抜いて、木・皿・その外には描かない。動きを減らす設定では何もしない。 */
+/* トップの写真の水面に重ねる金色の細い輪（2D canvas）。指のタップ・なぞりで、青いレジンの型で切り抜いて描く（下半分の暗い所でも水面の反応が見えるように）。
+   黒い背景の上（ページのほかの所・動画の背景）には描かない（2026-10-20 オーナー指示）。動きを減らす設定では何もしない。 */
 (function () {
   'use strict';
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -39,7 +39,9 @@
   // トップの写真の上と、水面が動いている動画の背景（.wv-ready）では、マウスの金の輪は出さない（水面の波紋が出る）
   function skip(e) { var t = e.target, el = t && t.closest && t.closest('[data-water],[data-water-v]'); return !!(el && (el.hasAttribute('data-water') || el.classList.contains('wv-ready'))); }
   function go() { if (!running) { running = true; prevT = performance.now(); requestAnimationFrame(tick); } }
+  var PAGE_RINGS = false; // 黒い背景の上の輪は出さない
   function add(x, y, big) {
+    if (!PAGE_RINGS) return;
     rings.push({ x: x, y: y, r: big ? 6 : 2, max: big ? 150 : 46, life: 1, w: big ? 1.4 : 0.8, a: big ? 0.75 : 0.32, sp: big ? 3.2 : 1.1 });
     if (big) rings.push({ x: x, y: y, r: 2, max: 90, life: 1, w: 0.9, a: 0.5, sp: 2.2, delay: 7 });
     go();
