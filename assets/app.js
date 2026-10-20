@@ -170,7 +170,9 @@
         else { khbg.style.removeProperty('--k-stage-h'); px('--khbg-h', T); }
       } else {
         kSec.style.removeProperty('--k-extra'); khbg.style.removeProperty('--k-stage-h');
-        px('--khbg-h', Math.max(0, kLead ? oy(kLead) : oy(kLede) + kLede.offsetHeight + 10));
+        // 1段：本文の下に料理の写真が来るときは、写真の上端から 60px 下まで（溶かす所は写真の裏に隠れる）。そうでなければ「時空の断片を…」の手前まで
+        var it = kImg ? oy(kImg) : 0;
+        px('--khbg-h', Math.max(0, it > oy(kLede) ? it + 60 : kLead ? oy(kLead) : oy(kLede) + kLede.offsetHeight + 10));
       }
       // 見出しと本文の裏だけ少し暗くする覆いの位置と大きさ（CSS の radial-gradient）
       var hb = khbg.getBoundingClientRect();

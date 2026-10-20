@@ -204,7 +204,7 @@ h2+.lede,.eyebrow+h2+.lede{margin-top:18px}
 /* 2段組み：見出しの下に本文（左寄せ・幅は右の段と同じ）、その下の段に料理の写真と「時空の断片を…」・リスト（上端をそろえる）。
    段の間（--k-extra・app.js）は、横長の画面では写真（3:2）の全体が見える高さから、写真の帯の暗い下端に少し重なる所まで */
 @media (min-width:901px){.k-grid{grid-template-areas:"copy copy" "img rest";row-gap:var(--k-extra,var(--kg));align-items:start}.k-grid .k-img{grid-area:img}.k-grid .k-copy{grid-area:copy;max-width:calc((100% - var(--kg)) * .575)}.k-grid .k-rest{grid-area:rest}}
-@media (max-width:900px){.k-grid{grid-template-columns:1fr}.k-grid .k-img{aspect-ratio:4/3}.k-grid .k-rest{margin-top:calc(-1 * var(--kg))} /* 1段のときは本文と「時空の断片を…」を前と同じ間隔（18px）に */}
+@media (max-width:900px){.k-grid{grid-template-columns:1fr;gap:40px}.k-grid .k-img{aspect-ratio:4/3}.k-grid .k-copy{order:1}.k-grid .k-img{order:2}.k-grid .k-rest{order:3}.k-grid .k-rest .k-lead{margin-top:0} /* 1段のときは 本文 → 料理の写真 → 「時空の断片を…」・リスト（文字が続きすぎないように・オーナー指示） */}
 @media (max-width:600px){.points li{grid-template-columns:1fr;gap:2px}}
 
 /* 空間 */
@@ -324,7 +324,7 @@ h1,h2,h3,h4{font-weight:400}
 .points b,.space ul b,.calkey b{font-weight:400}
 .eyebrow{font-family:var(--f-lat);font-weight:400}
 /* v9: 再生の節の動画は縦長の枠で、空間を広く見せる（スマホ＝元の9:16のまま、タブレット・PC＝3:4） */
-.rb-video{aspect-ratio:9/16}
+.rb-video{aspect-ratio:4/5} /* スマホは 4:5（9:16 だと画面ほぼ1枚分で粗く見えた・2026-10-20） */
 .rb-video video{object-position:50% 50%}
 @media (min-width:601px){.rb-video{aspect-ratio:3/4}}
 /* v11: スマホ（読みやすさ・ワクワク感・予約導線。点検4観点の取りまとめ mobile_plan.md による） */
@@ -332,7 +332,12 @@ h1,h2,h3,h4{font-weight:400}
 .final .f-tel{display:none}
 @media (max-width:900px){
   .tiers .card.mid{order:-1;margin-top:14px}
-  .rebirth>.rb-media{order:2}
+  .rebirth{display:flex;flex-direction:column;gap:0}
+  .rebirth>.rb-media,.rebirth>div:not(.rb-media){display:contents} /* 写真・リスト・動画を文字の間に並べ替える */
+  .rebirth .eyebrow{order:1}.rebirth h2{order:2}.rebirth .lede{order:3}
+  .rebirth .rb-media>img{order:4;margin-top:36px}
+  .rebirth .items{order:5;margin-top:36px}
+  .rebirth .rb-video{order:6;margin-top:40px}
   .seat .card .basis{order:1;font-size:12.5px;line-height:1.8;color:#C4BEB1;margin-top:2px}
   .seat .card .btn{order:2}
   .final .btn{width:100%;max-width:340px}
@@ -362,9 +367,10 @@ h1,h2,h3,h4{font-weight:400}
   .calkey .route figcaption{font-size:12.5px;color:#C4BEB1}
   footer a[href^="tel"]{white-space:nowrap}
   footer a[href^="http"]{display:inline-block;padding:14px 6px;margin:-14px -6px}
-  .story figure.s-video,.rebirth>.rb-media,.k-grid .k-img{margin-inline:calc(-1 * var(--gut)) calc(-1 * var(--gut-r))}
+  .story figure.s-video,.rebirth .rb-media>img,.rebirth .rb-video,.k-grid .k-img{margin-inline:calc(-1 * var(--gut)) calc(-1 * var(--gut-r))}
+  .rebirth .rb-media>img{width:calc(100% + var(--gut) + var(--gut-r));max-width:none}
   .s-video figcaption,.rb-video figcaption{left:var(--gut)}
-  .k-grid .k-img{order:2;aspect-ratio:4/5}
+  .k-grid .k-img{aspect-ratio:1/1}
   .space .photos>img{aspect-ratio:1/1;object-position:58% 50%;width:calc(100% + var(--gut) + var(--gut-r));max-width:none;margin-inline:calc(-1 * var(--gut)) calc(-1 * var(--gut-r))}
   .voyage .leg .hop.back{margin-top:18px;margin-bottom:16px;font-size:16px;letter-spacing:.08em}
   .voyage .leg .hop.back i{width:36px;height:36px;margin-left:6px;font-size:18px;box-shadow:0 0 18px rgba(201,164,106,.35)}
