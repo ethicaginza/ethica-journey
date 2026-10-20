@@ -93,7 +93,7 @@ h2+.lede,.eyebrow+h2+.lede{margin-top:18px}
 .hero.water .still{opacity:0;transition:opacity 0s linear 1.3s;animation-play-state:paused}
 @keyframes kb{from{transform:scale(1)}to{transform:scale(1.1) translate(-1%,1%)}}
 @keyframes kbh{from{transform:scale(1)}to{transform:scale(1.2) translate(-1%,1.5%)}}
-.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(var(--hs-rx,42%) var(--hs-ry,22%) at var(--hs-x,32%) var(--hs-y,55%),rgba(6,8,7,.6) 0%,rgba(6,8,7,.45) 60%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.5) 0%,rgba(6,8,7,.2) 45%,rgba(6,8,7,0) 65%),linear-gradient(180deg,rgba(6,8,7,.45) 0%,rgba(6,8,7,0) 16%,rgba(6,8,7,0) 55%,rgba(6,8,7,.55) 78%,rgba(6,8,7,.9) 92%,var(--cave) 100%)} /* v18: セノーテ（公式サイトの concept の背景）に合わせて軽く。見出しの裏（楕円・位置は app.js）と左・下端だけ暗く */
 .hero .inner{position:relative;z-index:2;padding-block:calc(var(--hdr) + env(safe-area-inset-top,0px) + 64px) 40px;pointer-events:none}
 .hero .inner a,.hero .inner button{pointer-events:auto}
 .mich{font-family:var(--f-body);font-size:13px;letter-spacing:.2em;text-transform:none;color:var(--gold-text);display:inline-flex;align-items:center;gap:12px;margin-bottom:20px}
@@ -193,7 +193,7 @@ h2+.lede,.eyebrow+h2+.lede{margin-top:18px}
 
 /* 時空体験 */
 .k-head{margin-bottom:34px}
-.k-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,5vw,72px);align-items:center}
+.k-grid{--kg:clamp(28px,5vw,72px);display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:var(--kg);align-items:center}
 .k-grid .k-img{margin:0;overflow:hidden;aspect-ratio:4/5}
 .k-grid .k-img img{width:100%;height:100%;object-fit:cover;animation:kb 30s ease-in-out infinite alternate}
 .k-lead{margin-top:18px;font-family:var(--f-jp);font-size:16.5px;color:var(--gold-hi);letter-spacing:.06em;line-height:1.9}
@@ -201,7 +201,9 @@ h2+.lede,.eyebrow+h2+.lede{margin-top:18px}
 .points li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
 .points b{font-family:var(--f-jp);font-weight:500;color:var(--gold-text);font-size:15px;letter-spacing:.08em}
 .points span{font-size:14.5px;color:#D6D0C3;line-height:1.85}
-@media (max-width:900px){.k-grid{grid-template-columns:1fr}.k-grid .k-img{aspect-ratio:4/3}}
+/* 2段組み：右上に本文、その下の段に料理の写真と「時空の断片を…」・リスト。横長の画面で写真（3:2）の全体を見せるために伸ばした分（--k-extra・app.js）は、本文の下の段の間に足す */
+@media (min-width:901px){.k-grid{grid-template-areas:". copy" "img rest";row-gap:var(--k-extra,0px)}.k-grid .k-img{grid-area:img}.k-grid .k-copy{grid-area:copy}.k-grid .k-rest{grid-area:rest}}
+@media (max-width:900px){.k-grid{grid-template-columns:1fr}.k-grid .k-img{aspect-ratio:4/3}.k-grid .k-rest{margin-top:calc(-1 * var(--kg))} /* 1段のときは本文と「時空の断片を…」を前と同じ間隔（18px）に */}
 @media (max-width:600px){.points li{grid-template-columns:1fr;gap:2px}}
 
 /* 空間 */
@@ -480,6 +482,6 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
 .k-hbg.water .still{opacity:0;transition:opacity 0s linear 1.3s;animation-play-state:paused}
 .k-hbg::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}
 @media (prefers-reduced-motion:reduce){.k-hbg .still{animation:none}}
-#concept .k-head{margin-top:var(--k-extra,0px)} /* 横長の画面で写真の全体を見せるために伸ばした分（app.js） */
+@media not all and (max-aspect-ratio:4/5){.k-hbg::after{background:radial-gradient(var(--kl-rx,420px) var(--kl-ry,220px) at var(--kl-x,70%) var(--kl-y,380px),rgba(6,8,7,.5) 0%,rgba(6,8,7,.36) 55%,rgba(6,8,7,0) 100%),radial-gradient(var(--kh-rx,560px) var(--kh-r,110px) at var(--kh-x,35%) var(--kh-y,140px),rgba(6,8,7,.42) 0%,rgba(6,8,7,.28) 55%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}}
 /* 縦長の画面では見出しが白い皿の上に来るので、見出しの裏だけ楕円で少し暗くする（写真・波紋・ズームはそのまま） */
 @media (max-aspect-ratio:4/5){.k-hbg::after{background:radial-gradient(85% var(--kh-r,110px) at 50% var(--kh-y,140px),rgba(6,8,7,.66) 0%,rgba(6,8,7,.5) 55%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}}

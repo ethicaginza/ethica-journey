@@ -126,25 +126,48 @@
     img.addEventListener('load', fn, { once: true });
   }
   var unreg = function (r) { var a = w.__waterImg || [], k = a.indexOf(r); if (k >= 0) a.splice(k, 1); };
+  /* トップ（セノーテ）：見出し（ミシュランの一行と h1）の裏だけ楕円で少し暗くする。位置と大きさを CSS（.hero::after の radial-gradient）へ渡す */
+  var heroS = d.getElementById('hero');
+  if (heroS) {
+    var hsA = heroS.querySelector('.inner .eyebrow'), hsB = heroS.querySelector('.inner h1');
+    var tr = function (el) { var g = d.createRange(); g.selectNodeContents(el); return g.getBoundingClientRect(); };
+    var fitH = function () {
+      if (!hsB) return; var hb = heroS.getBoundingClientRect(), b = tr(hsB), a = hsA ? tr(hsA) : b;
+      var l = Math.min(a.left, b.left), r = Math.max(a.right, b.right), t = Math.min(a.top, b.top), m = Math.max(a.bottom, b.bottom);
+      var st = heroS.style; st.setProperty('--hs-x', Math.round((l + r) / 2 - hb.left) + 'px'); st.setProperty('--hs-y', Math.round((t + m) / 2 - hb.top) + 'px');
+      st.setProperty('--hs-rx', Math.round((r - l) / 2 + 150) + 'px'); st.setProperty('--hs-ry', Math.round((m - t) / 2 + 110) + 'px');
+    };
+    fitH(); w.addEventListener('resize', fitH); w.addEventListener('load', fitH);
+    if (d.fonts && d.fonts.ready) d.fonts.ready.then(fitH);
+  }
   /* フィロソフィーの見出しと最初の段落の裏の写し：高さを、「時空の断片を…」の手前まで合わせる（そこから下は今の背景） */
   var khbg = d.querySelector('.k-hbg');
   if (khbg) {
     var kSec = khbg.closest('section'), kLede = kSec && kSec.querySelector('.k-grid .lede');
-    var kHead = kSec && kSec.querySelector('.k-head'), kLead = kSec && kSec.querySelector('.k-lead');
+    var kHead = kSec && kSec.querySelector('.k-head'), kLead = kSec && kSec.querySelector('.k-lead'), kImg = kSec && kSec.querySelector('.k-img'), kH2 = kSec && kSec.querySelector('h2');
     // 節の上端からの位置。浮き上がりの動き（.rise の translateY）に左右されないよう、配置上の位置で測る
     var oy = function (el) { var y = 0, e = el; while (e && e !== kSec) { y += e.offsetTop; e = e.offsetParent; } return e === kSec ? y : el.getBoundingClientRect().top - kSec.getBoundingClientRect().top; };
+    var mq = function (q) { return !!(w.matchMedia && w.matchMedia(q).matches); };
+    var px = function (k, v) { khbg.style.setProperty(k, Math.round(v) + 'px'); };
     var fitK = function () {
-      // 下端は「時空の断片を…」の手前まで。下の 72px で今の背景（動画）へ溶かす（CSS の mask）
       if (!kLede) return;
-      // 横長の画面では、写真（3:2）の全体（上の木と3つの料理）が入る高さまで帯を伸ばす。伸ばした分は見出しの上に足す（--k-extra）
+      // 下端は「時空の断片を…」（2段組みでは料理の写真も）の手前まで。下の 72px で今の背景（動画）へ溶かす（CSS の mask）
+      var two = mq('(min-width: 901px)'), land = !mq('(max-aspect-ratio: 4/5)');
       var cur = parseFloat(kSec.style.getPropertyValue('--k-extra')) || 0;
       var base = (kLead ? oy(kLead) : oy(kLede) + kLede.offsetHeight + 10) - cur;
-      var land = !(w.matchMedia && w.matchMedia('(max-aspect-ratio: 4/5)').matches);
-      var extra = land ? Math.max(0, Math.round(khbg.clientWidth * 2 / 3 - base)) : 0;
+      if (two && kImg) base = Math.min(base, oy(kImg) - cur);
+      // 横長の2段組みでは、写真（3:2）の全体（上の木と3つの料理）が入る高さまで帯を伸ばす。伸ばした分は本文の下の段の間に足す（--k-extra）
+      var extra = two && land ? Math.max(0, Math.round(khbg.clientWidth * 2 / 3 - base)) : 0;
       if (Math.abs(extra - cur) >= 1) kSec.style.setProperty('--k-extra', extra + 'px');
-      khbg.style.setProperty('--khbg-h', Math.max(0, Math.round(base + extra)) + 'px');
-      // 見出しの中心と半分の高さ（縦長の画面で、見出しの裏だけ少し暗くする覆いの位置）
-      if (kHead) { var ht = oy(kHead) - cur + extra, hh = kHead.offsetHeight; khbg.style.setProperty('--kh-y', Math.round(ht + hh / 2) + 'px'); khbg.style.setProperty('--kh-r', Math.round(hh / 2 + 56) + 'px'); }
+      px('--khbg-h', Math.max(0, base + extra));
+      // 見出しと本文の裏だけ少し暗くする覆いの位置と大きさ（CSS の radial-gradient）
+      var hb = khbg.getBoundingClientRect();
+      if (kHead) {
+        var ht = oy(kHead), hh = kHead.offsetHeight; px('--kh-y', ht + hh / 2); px('--kh-r', hh / 2 + 56);
+        if (kH2) { var g = d.createRange(); g.selectNodeContents(kH2); var tb = g.getBoundingClientRect(); px('--kh-x', (tb.left + tb.right) / 2 - hb.left); px('--kh-rx', (tb.right - tb.left) / 2 + 160); }
+      }
+      var lb = kLede.getBoundingClientRect(), lt = oy(kLede), lh = kLede.offsetHeight;
+      px('--kl-x', (lb.left + lb.right) / 2 - hb.left); px('--kl-rx', (lb.right - lb.left) / 2 + 150); px('--kl-y', lt + lh / 2); px('--kl-ry', lh / 2 + 90);
     };
     fitK(); w.addEventListener('resize', fitK); w.addEventListener('load', fitK);
     if (w.ResizeObserver) new ResizeObserver(fitK).observe(kSec);
@@ -156,7 +179,8 @@
       if (!cv || !img) return;
       var tries = 0, lostT = 0, r = null, cur = img.currentSrc;
       var top0 = d.getElementById('top');
-      var heroLike = i === 0 || sec.hasAttribute('data-water-copy'); // トップの写真と、その写し（フィロソフィーの見出しの裏）
+      // トップ（セノーテの水中・型なしで全面が揺れる）と、フィロソフィーの見出しの裏（テーブルの写真・青いレジンの型で切り抜く）
+      var heroLike = i === 0 || sec.hasAttribute('data-water-copy');
       var host = sec.closest('section') || sec; // 指を受ける範囲（写しは節全体で受け、描画面の矩形の中だけ立てる）
       // 一番上にいる間（ヘッダーが透明な間）は、ヘッダーの帯の下でも指を受ける。ロゴ・メニューの釦と、開いたメニューの中では立てない
       var accept = i === 0 ? function (t) { return !!(top0 && top0.contains(t) && !top0.classList.contains('solid') && !root.classList.contains('menu-open') && !(t.closest && t.closest('a,button'))); } : null;
@@ -179,7 +203,7 @@
       var make = function () {
         madeAt = Date.now();
         r = new w.EthicaRipple(cv, img.currentSrc || img.src,
-          heroLike ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.2, period: 14, panY: 0.02, dpr: 3, lite: coarse, thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, onTap: function (x, y) { if (w.__pondHero) w.__pondHero(x, y, r); }, onLost: lost, onBack: back, mask: { landscape: 'assets/img/hero_mask.png?v=5', portrait: 'assets/img/hero_mask_m.png?v=5' } } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost, onBack: back });
+          heroLike ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.2, period: 14, panY: 0.02, dpr: 3, lite: coarse, thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, onTap: function (x, y) { if (w.__pondHero) w.__pondHero(x, y, r); }, onLost: lost, onBack: back, mask: sec.hasAttribute('data-water-copy') ? { landscape: 'assets/img/hero_mask.png?v=5', portrait: 'assets/img/hero_mask_m.png?v=5' } : null } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost, onBack: back });
         if (!r.ok) return;
         if (i === 0 && /[?&]debugdrops=1/.test(location.search)) { w.__drops = []; var od = r.drop; r.drop = function (x, y, rad, st) { w.__drops.push([Math.round(x), Math.round(y), st]); return od.apply(r, arguments); }; }
         r.start(function () { sec.classList.add('water'); });
