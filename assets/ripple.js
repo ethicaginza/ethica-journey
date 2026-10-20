@@ -150,10 +150,13 @@
     this.cw = r.width; this.ch = r.height;
     var sw = r.width > 900 ? 384 : 256, sh = Math.max(64, Math.round(sw * r.height / Math.max(1, r.width)));
     if (sh > 640) { sh = 640; sw = Math.round(sh * r.width / r.height); }
-    if (sw === this.sw && Math.abs(sh - this.sh) < 24 && this.a) return;
-    this.sw = sw; this.sh = sh;
-    this.free(this.a); this.free(this.b);
-    this.a = this.makeTarget(sw, sh); this.b = this.makeTarget(sw, sh);
+    if (!(sw === this.sw && Math.abs(sh - this.sh) < 24 && this.a)) {
+      this.sw = sw; this.sh = sh;
+      this.free(this.a); this.free(this.b);
+      this.a = this.makeTarget(sw, sh); this.b = this.makeTarget(sw, sh);
+    }
+    // 大きさを変えると描画面は黒に戻る。次のコマを待たずにこの場で描き直す（スマホでアドレスバーが出入りするたびに、写真が一瞬黒くなっていた）
+    if (this.running && this.ok && this.a && this.iw) { try { this.render((performance.now() - this.t0) / 1000); this.dirty = false; } catch (e) {} }
   };
   /* 型（マスク）。写真の向き（縦長か横長か）に合う型を読み、GPU用のテクスチャと、点の判定用の小さな配列を作る */
   Ripple.prototype.loadMask = function () {
