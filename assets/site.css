@@ -201,8 +201,9 @@ h2+.lede,.eyebrow+h2+.lede{margin-top:18px}
 .points li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
 .points b{font-family:var(--f-jp);font-weight:500;color:var(--gold-text);font-size:15px;letter-spacing:.08em}
 .points span{font-size:14.5px;color:#D6D0C3;line-height:1.85}
-/* 2段組み：右上に本文、その下の段に料理の写真と「時空の断片を…」・リスト。横長の画面で写真（3:2）の全体を見せるために伸ばした分（--k-extra・app.js）は、本文の下の段の間に足す */
-@media (min-width:901px){.k-grid{grid-template-areas:". copy" "img rest";row-gap:var(--k-extra,0px)}.k-grid .k-img{grid-area:img}.k-grid .k-copy{grid-area:copy}.k-grid .k-rest{grid-area:rest}}
+/* 2段組み：見出しの下に本文（左寄せ・幅は右の段と同じ）、その下の段に料理の写真と「時空の断片を…」・リスト（上端をそろえる）。
+   段の間（--k-extra・app.js）は、横長の画面では写真（3:2）の全体が見える高さから、写真の帯の暗い下端に少し重なる所まで */
+@media (min-width:901px){.k-grid{grid-template-areas:"copy copy" "img rest";row-gap:var(--k-extra,var(--kg));align-items:start}.k-grid .k-img{grid-area:img}.k-grid .k-copy{grid-area:copy;max-width:calc((100% - var(--kg)) * .575)}.k-grid .k-rest{grid-area:rest}}
 @media (max-width:900px){.k-grid{grid-template-columns:1fr}.k-grid .k-img{aspect-ratio:4/3}.k-grid .k-rest{margin-top:calc(-1 * var(--kg))} /* 1段のときは本文と「時空の断片を…」を前と同じ間隔（18px）に */}
 @media (max-width:600px){.points li{grid-template-columns:1fr;gap:2px}}
 

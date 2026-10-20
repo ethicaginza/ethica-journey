@@ -151,15 +151,22 @@
     var px = function (k, v) { khbg.style.setProperty(k, Math.round(v) + 'px'); };
     var fitK = function () {
       if (!kLede) return;
-      // 下端は「時空の断片を…」（2段組みでは料理の写真も）の手前まで。下の 72px で今の背景（動画）へ溶かす（CSS の mask）
+      // 下端：1段では「時空の断片を…」の手前まで。下の 72px で今の背景（動画）へ溶かす（CSS の mask）
       var two = mq('(min-width: 901px)'), land = !mq('(max-aspect-ratio: 4/5)');
-      var cur = parseFloat(kSec.style.getPropertyValue('--k-extra')) || 0;
-      var base = (kLead ? oy(kLead) : oy(kLede) + kLede.offsetHeight + 10) - cur;
-      if (two && kImg) base = Math.min(base, oy(kImg) - cur);
-      // 横長の2段組みでは、写真（3:2）の全体（上の木と3つの料理）が入る高さまで帯を伸ばす。伸ばした分は本文の下の段の間に足す（--k-extra）
-      var extra = two && land ? Math.max(0, Math.round(khbg.clientWidth * 2 / 3 - base)) : 0;
-      if (Math.abs(extra - cur) >= 1) kSec.style.setProperty('--k-extra', extra + 'px');
-      px('--khbg-h', Math.max(0, base + extra));
+      var kRest = kSec.querySelector('.k-rest'), kGrid = kSec.querySelector('.k-grid');
+      if (two && kRest && kGrid) {
+        // 2段組み：下の段（料理の写真と「時空の断片を…」）の上端を決め、段の間（--k-extra）にする
+        var gap = parseFloat(getComputedStyle(kGrid).rowGap) || 0, kg = parseFloat(getComputedStyle(kGrid).columnGap) || 0;
+        var top0 = oy(kRest) - gap; // 本文の下端（段の間を除いた位置）
+        // 横長では、写真（3:2）の全体が見える高さ H まで帯を伸ばし、下の段は帯の暗い下端（12%）に重ねて始める
+        var H = land ? Math.round(khbg.clientWidth * 2 / 3) : 0, T = Math.max(top0 + kg, H - Math.round(H * 0.12));
+        var ng = Math.round(T - top0);
+        if (Math.abs(ng - gap) >= 1) kSec.style.setProperty('--k-extra', ng + 'px');
+        px('--khbg-h', Math.max(T, H));
+      } else {
+        kSec.style.removeProperty('--k-extra');
+        px('--khbg-h', Math.max(0, kLead ? oy(kLead) : oy(kLede) + kLede.offsetHeight + 10));
+      }
       // 見出しと本文の裏だけ少し暗くする覆いの位置と大きさ（CSS の radial-gradient）
       var hb = khbg.getBoundingClientRect();
       if (kHead) {
