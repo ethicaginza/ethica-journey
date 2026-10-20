@@ -158,13 +158,18 @@
         // 2段組み：下の段（料理の写真と「時空の断片を…」）の上端を決め、段の間（--k-extra）にする
         var gap = parseFloat(getComputedStyle(kGrid).rowGap) || 0, kg = parseFloat(getComputedStyle(kGrid).columnGap) || 0;
         var top0 = oy(kRest) - gap; // 本文の下端（段の間を除いた位置）
-        // 横長では、写真（3:2）の全体が見える高さ H まで帯を伸ばし、下の段は帯の暗い下端（12%）に重ねて始める
-        var H = land ? Math.round(khbg.clientWidth * 2 / 3) : 0, T = Math.max(top0 + kg, H - Math.round(H * 0.12));
+        // 横長では、写真（3:2）の全体が見える高さ H まで帯を伸ばす。下の段は、本文から節の上の余白と同じだけ空け、
+        // 帯の 68% の所より下で始める（余白をそろえる・オーナー指示）。帯はそこから暗くなり、下の段の文字の裏は暗い（CSS の --k-t）
+        var H = land ? Math.round(khbg.clientWidth * 2 / 3) : 0, pad = parseFloat(getComputedStyle(kSec).paddingTop) || kg;
+        var T = land ? Math.max(top0 + pad, Math.round(H * 0.68)) : top0 + kg;
+        px('--k-t', T);
         var ng = Math.round(T - top0);
         if (Math.abs(ng - gap) >= 1) kSec.style.setProperty('--k-extra', ng + 'px');
-        px('--khbg-h', Math.max(T, H));
+        // 写真は高さ H のまま置き（上の木まで見える大きさ）、見せる範囲は下の段の少し下（T + 110px）まで。そこから下は今の背景（動画の水面）
+        if (H) { px('--k-stage-h', H); px('--khbg-h', Math.min(Math.max(T, H), T + 110)); }
+        else { khbg.style.removeProperty('--k-stage-h'); px('--khbg-h', T); }
       } else {
-        kSec.style.removeProperty('--k-extra');
+        kSec.style.removeProperty('--k-extra'); khbg.style.removeProperty('--k-stage-h');
         px('--khbg-h', Math.max(0, kLead ? oy(kLead) : oy(kLede) + kLede.offsetHeight + 10));
       }
       // 見出しと本文の裏だけ少し暗くする覆いの位置と大きさ（CSS の radial-gradient）

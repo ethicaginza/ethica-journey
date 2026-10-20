@@ -476,13 +476,13 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
 
 /* v17: フィロソフィーの見出しと最初の段落の裏だけに、トップの写真の水面をそのまま（高さは app.js が「時空の断片を…」の手前まで合わせ、下の 72px で今の背景の動画へ溶かす） */
 .k-hbg{position:absolute;left:0;right:0;top:0;height:var(--khbg-h,55%);z-index:0;overflow:hidden;pointer-events:none;background:#061418;-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 72px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 72px),transparent)}
-.k-hbg .stage{position:absolute;inset:0}
+.k-hbg .stage{position:absolute;left:0;right:0;top:0;height:var(--k-stage-h,100%)} /* 横長の2段組みでは写真を高さ H のまま置き、.k-hbg の高さで切る（app.js） */
 .k-hbg .still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kbh 14s ease-in-out infinite alternate}
 .k-hbg canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1.2s}
 .k-hbg.water canvas{opacity:1}
 .k-hbg.water .still{opacity:0;transition:opacity 0s linear 1.3s;animation-play-state:paused}
 .k-hbg::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}
 @media (prefers-reduced-motion:reduce){.k-hbg .still{animation:none}}
-@media not all and (max-aspect-ratio:4/5){.k-hbg::after{background:radial-gradient(var(--kl-rx,420px) var(--kl-ry,220px) at var(--kl-x,70%) var(--kl-y,380px),rgba(6,8,7,.5) 0%,rgba(6,8,7,.36) 55%,rgba(6,8,7,0) 100%),radial-gradient(var(--kh-rx,560px) var(--kh-r,110px) at var(--kh-x,35%) var(--kh-y,140px),rgba(6,8,7,.42) 0%,rgba(6,8,7,.28) 55%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}}
+@media not all and (max-aspect-ratio:4/5){.k-hbg::after{background:radial-gradient(var(--kl-rx,420px) var(--kl-ry,220px) at var(--kl-x,70%) var(--kl-y,380px),rgba(6,8,7,.5) 0%,rgba(6,8,7,.36) 55%,rgba(6,8,7,0) 100%),radial-gradient(var(--kh-rx,560px) var(--kh-r,110px) at var(--kh-x,35%) var(--kh-y,140px),rgba(6,8,7,.42) 0%,rgba(6,8,7,.28) 55%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) calc(var(--k-t,68%) - 200px),rgba(6,8,7,.88) calc(var(--k-t,68%) + 30px),var(--cave) 100%)}}
 /* 縦長の画面では見出しが白い皿の上に来るので、見出しの裏だけ楕円で少し暗くする（写真・波紋・ズームはそのまま） */
 @media (max-aspect-ratio:4/5){.k-hbg::after{background:radial-gradient(85% var(--kh-r,110px) at 50% var(--kh-y,140px),rgba(6,8,7,.66) 0%,rgba(6,8,7,.5) 55%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}}

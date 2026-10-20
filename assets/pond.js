@@ -132,12 +132,13 @@
         hctx.clearRect(0, 0, W, H); step(list, hctx, f);
         hrings = hrings.filter(function (g) { return g.wr !== R || g.life > 0; });
         var V = R.view, b = R.c.getBoundingClientRect(), cw = b.width, ch = b.height;
+        var box = R.c.closest('.k-hbg'), bb = box ? box.getBoundingClientRect().bottom : b.bottom, yb = Math.min(b.bottom, bb); // 写しは見せている範囲（.k-hbg）の中だけ
         var mw = cw * V.zoom / V.cover[0], mh = ch * V.zoom / V.cover[1];
         var mx = b.left + cw * (0.5 + (-0.5 - V.pan[0]) * V.zoom / V.cover[0]), my = b.top + ch * (0.5 - (0.5 - V.pan[1]) * V.zoom / V.cover[1]);
         hctx.globalCompositeOperation = 'destination-in'; hctx.drawImage(m, mx, my, mw, mh);
         var tp = document.getElementById('top'), y0 = b.top;
         if (tp && tp.classList.contains('solid')) y0 = Math.max(y0, tp.getBoundingClientRect().bottom);
-        hctx.fillStyle = '#000'; hctx.fillRect(b.left, y0, cw, Math.max(0, b.bottom - y0)); hctx.globalCompositeOperation = 'source-over';
+        hctx.fillStyle = '#000'; hctx.fillRect(b.left, y0, cw, Math.max(0, yb - y0)); hctx.globalCompositeOperation = 'source-over';
         ctx.drawImage(hc, 0, 0, W, H);
       }
     }
