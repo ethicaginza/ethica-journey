@@ -93,7 +93,7 @@ h2+.lede,.eyebrow+h2+.lede{margin-top:18px}
 .hero.water .still{opacity:0;transition:opacity 0s linear 1.3s;animation-play-state:paused}
 @keyframes kb{from{transform:scale(1)}to{transform:scale(1.1) translate(-1%,1%)}}
 @keyframes kbh{from{transform:scale(1)}to{transform:scale(1.2) translate(-1%,1.5%)}}
-.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(var(--hs-rx,42%) var(--hs-ry,22%) at var(--hs-x,32%) var(--hs-y,55%),rgba(6,8,7,.6) 0%,rgba(6,8,7,.45) 60%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.5) 0%,rgba(6,8,7,.2) 45%,rgba(6,8,7,0) 65%),linear-gradient(180deg,rgba(6,8,7,.45) 0%,rgba(6,8,7,0) 16%,rgba(6,8,7,0) 55%,rgba(6,8,7,.55) 78%,rgba(6,8,7,.9) 92%,var(--cave) 100%)} /* v18: セノーテ（公式サイトの concept の背景）に合わせて軽く。見出しの裏（楕円・位置は app.js）と左・下端だけ暗く */
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(var(--hs-rx,42%) var(--hs-ry,22%) at var(--hs-x,32%) var(--hs-y,55%),rgba(6,8,7,var(--hs-a,.6)) 0%,rgba(6,8,7,var(--hs-b,.45)) 60%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.5) 0%,rgba(6,8,7,.2) 45%,rgba(6,8,7,0) 65%),linear-gradient(180deg,rgba(6,8,7,.45) 0%,rgba(6,8,7,0) 16%,rgba(6,8,7,0) 55%,rgba(6,8,7,.55) 78%,rgba(6,8,7,.9) 92%,var(--cave) 100%)} /* v18: セノーテ（公式サイトの concept の背景）に合わせて軽く。見出しの裏（楕円・位置は app.js）と左・下端だけ暗く */
 .hero .inner{position:relative;z-index:2;padding-block:calc(var(--hdr) + env(safe-area-inset-top,0px) + 64px) 40px;pointer-events:none}
 .hero .inner a,.hero .inner button{pointer-events:auto}
 .mich{font-family:var(--f-body);font-size:13px;letter-spacing:.2em;text-transform:none;color:var(--gold-text);display:inline-flex;align-items:center;gap:12px;margin-bottom:20px}
@@ -493,3 +493,16 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
 @media not all and (max-aspect-ratio:4/5){.k-hbg::after{background:radial-gradient(var(--kl-rx,420px) var(--kl-ry,220px) at var(--kl-x,70%) var(--kl-y,380px),rgba(6,8,7,.5) 0%,rgba(6,8,7,.36) 55%,rgba(6,8,7,0) 100%),radial-gradient(var(--kh-rx,560px) var(--kh-r,110px) at var(--kh-x,35%) var(--kh-y,140px),rgba(6,8,7,.42) 0%,rgba(6,8,7,.28) 55%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) calc(var(--k-t,68%) - 200px),rgba(6,8,7,.88) calc(var(--k-t,68%) + 30px),var(--cave) 100%)}}
 /* 縦長の画面では見出しが白い皿の上に来るので、見出しの裏だけ楕円で少し暗くする（写真・波紋・ズームはそのまま） */
 @media (max-aspect-ratio:4/5){.k-hbg::after{background:radial-gradient(85% var(--kh-r,110px) at 50% var(--kh-y,140px),rgba(6,8,7,.66) 0%,rgba(6,8,7,.5) 55%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.66) 0%,rgba(6,8,7,.3) 55%,rgba(6,8,7,0) 82%),linear-gradient(180deg,rgba(6,8,7,.62) 0%,rgba(6,8,7,.22) 22%,rgba(6,8,7,.45) 52%,rgba(6,8,7,.93) 84%,var(--cave) 100%)}}
+
+/* v22（2026-10-20 オーナー指示・スマホ）
+   2ページ目：文字のかたまりを、上のヘッダーと画面の下の間の真ん中に置く（下寄せだと上の余白が大きすぎた）
+   シェフ：見出し → 説明文 → 写真 → 名前と経歴 の順。写真は画面幅いっぱいにせず、本文と同じ幅（左右に余白） */
+@media (max-width:600px){
+  .hero{align-items:center;--hs-a:.76;--hs-b:.6} /* 文字が光の筋の上に来るので、見出しの裏を少し濃く */
+  .hero .inner{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px) + 8px);padding-bottom:40px}
+  .chef{display:flex;flex-direction:column;align-items:stretch;gap:0}
+  .chef>div{display:contents}
+  .chef .eyebrow{order:1}.chef h2{order:2}.chef .lede{order:3}
+  .chef .c-img{order:4;margin:32px 0 0;max-width:none;width:100%;justify-self:auto}
+  .chef .who{order:5;margin-top:28px}
+}
