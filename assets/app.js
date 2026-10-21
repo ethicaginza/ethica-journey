@@ -90,6 +90,29 @@
     var ctick = function () { clearTimeout(cT); if (reduce) return; cT = setTimeout(function () { if (cOn && !d.hidden) cgo(ci + 1); ctick(); }, 4000); };
     cdb.forEach(function (b, i) { b.addEventListener('click', function () { cgo(i); ctick(); }); });
     if (IO) new IntersectionObserver(function (es) { cOn = es[es.length - 1].isIntersecting; }).observe(cs);
+    // 指で左右に動かす（2026-10-22 オーナー指示）：写真が指についてきて、隣の写真が横から出る。幅の2割（最大80px）を超えて離すと切り替え、届かなければ戻す。縦の動きはそのままスクロール
+    var drag = null, W = function () { return cs.clientWidth; };
+    var clear = function (els) { els.forEach(function (el) { el.style.transition = 'none'; el.style.transform = ''; el.style.opacity = ''; }); void cs.offsetWidth; els.forEach(function (el) { el.style.transition = ''; }); };
+    cs.addEventListener('touchstart', function (e) { if (e.touches.length !== 1 || drag) return; var t = e.touches[0]; drag = { x: t.clientX, y: t.clientY, dx: 0, h: null, nb: null }; clearTimeout(cT); }, { passive: true });
+    cs.addEventListener('touchmove', function (e) {
+      if (!drag) return; var t = e.touches[0], dx = t.clientX - drag.x, dy = t.clientY - drag.y;
+      if (drag.h === null) { if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return; drag.h = Math.abs(dx) > Math.abs(dy); if (!drag.h) { drag = null; ctick(); return; } }
+      if (e.cancelable) e.preventDefault();
+      var cur = csl[ci], dir = dx < 0 ? 1 : -1, nb = csl[(ci + dir + csl.length) % csl.length];
+      if (drag.nb && drag.nb !== nb) clear([drag.nb]);
+      drag.nb = nb; drag.dx = dx;
+      cur.style.transition = nb.style.transition = 'none';
+      cur.style.transform = 'translateX(' + dx + 'px)'; nb.style.opacity = '1'; nb.style.transform = 'translateX(' + (dx + dir * W()) + 'px)';
+    }, { passive: false });
+    var dend = function () {
+      if (!drag) return; var d0 = drag; drag = null;
+      if (!d0.h || !d0.nb) { ctick(); return; }
+      var cur = csl[ci], nb = d0.nb, w = W(), dir = d0.dx < 0 ? 1 : -1, go = Math.abs(d0.dx) > Math.min(80, w * 0.2);
+      cur.style.transition = nb.style.transition = 'transform .38s cubic-bezier(.2,.7,.2,1)';
+      cur.style.transform = 'translateX(' + (go ? -dir * w : 0) + 'px)'; nb.style.transform = 'translateX(' + (go ? 0 : dir * w) + 'px)';
+      setTimeout(function () { if (go) cgo(ci + dir); clear([cur, nb]); ctick(); }, 400);
+    };
+    cs.addEventListener('touchend', dend, { passive: true }); cs.addEventListener('touchcancel', dend, { passive: true });
     ctick();
   }
   /* 文字の裏の暗い動画（縦長の画面は縦長版、横長の画面＝PCなどは横長版）。静止画は読み込み直後に付け、動画は節が画面に入ってから読み、出たら止める（先読みしない） */

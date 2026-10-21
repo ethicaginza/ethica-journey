@@ -529,7 +529,7 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
 }
 
 /* v26（2026-10-22 オーナー指示）THE CAVE：店内の写真をスライドショーに（テーブル席・シェフズ・カウンター・個室）。4秒ごとに切り替え、点で選べる */
-.space .photos .cave-ss{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#0a0c0b}
+.space .photos .cave-ss{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#0a0c0b;touch-action:pan-y} /* 横の指の動きはスライドショーが受け、縦はスクロール */
 .cave-ss .cs-slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.2s ease}
 .cave-ss .cs-slide.on{opacity:1}
 .space .photos .cave-ss img{display:block;width:100%;height:100%;aspect-ratio:auto;object-fit:cover}
