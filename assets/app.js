@@ -126,14 +126,14 @@
     img.addEventListener('load', fn, { once: true });
   }
   var unreg = function (r) { var a = w.__waterImg || [], k = a.indexOf(r); if (k >= 0) a.splice(k, 1); };
-  /* トップ（セノーテ）：見出し（ミシュランの一行と h1）の裏だけ楕円で少し暗くする。位置と大きさを CSS（.hero::after の radial-gradient）へ渡す */
+  /* トップ（セノーテ）：見出し（ミシュランの一行と h1）と説明文の裏だけ楕円で少し暗くする。位置と大きさを CSS（.hero::after の radial-gradient）へ渡す */
   var heroS = d.getElementById('hero');
   if (heroS) {
-    var hsA = heroS.querySelector('.inner .eyebrow'), hsB = heroS.querySelector('.inner h1');
+    var hsA = heroS.querySelector('.inner .eyebrow'), hsB = heroS.querySelector('.inner h1'), hsC = heroS.querySelector('.inner .sub');
     var tr = function (el) { var g = d.createRange(); g.selectNodeContents(el); return g.getBoundingClientRect(); };
     var fitH = function () {
-      if (!hsB) return; var hb = heroS.getBoundingClientRect(), b = tr(hsB), a = hsA ? tr(hsA) : b;
-      var l = Math.min(a.left, b.left), r = Math.max(a.right, b.right), t = Math.min(a.top, b.top), m = Math.max(a.bottom, b.bottom);
+      if (!hsB) return; var hb = heroS.getBoundingClientRect(), b = tr(hsB), a = hsA ? tr(hsA) : b, c = hsC ? tr(hsC) : b; // 見出しの下の説明文まで含める
+      var l = Math.min(a.left, b.left, c.left), r = Math.max(a.right, b.right, c.right), t = Math.min(a.top, b.top), m = Math.max(a.bottom, b.bottom, c.bottom);
       var st = heroS.style; st.setProperty('--hs-x', Math.round((l + r) / 2 - hb.left) + 'px'); st.setProperty('--hs-y', Math.round((t + m) / 2 - hb.top) + 'px');
       st.setProperty('--hs-rx', Math.round((r - l) / 2 + 150) + 'px'); st.setProperty('--hs-ry', Math.round((m - t) / 2 + 110) + 'px');
     };

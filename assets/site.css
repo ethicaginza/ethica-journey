@@ -498,7 +498,7 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
    2ページ目：文字のかたまりを、上のヘッダーと画面の下の間の真ん中に置く（下寄せだと上の余白が大きすぎた）
    シェフ：見出し → 説明文 → 写真 → 名前と経歴 の順。写真は画面幅いっぱいにせず、本文と同じ幅（左右に余白） */
 @media (max-width:600px){
-  .hero{align-items:center;--hs-a:.76;--hs-b:.6} /* 文字が光の筋の上に来るので、見出しの裏を少し濃く */
+  .hero{align-items:center;--hs-a:.8;--hs-b:.64} /* 文字が光の筋の上に来るので、見出しの裏を少し濃く */
   .hero .inner{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px) + 8px);padding-bottom:40px}
   .chef{display:flex;flex-direction:column;align-items:stretch;gap:0}
   .chef>div{display:contents}
