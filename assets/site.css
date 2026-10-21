@@ -519,4 +519,11 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
    文字は左の列のまま。爆発の中心は動画の中で横 70% の位置にあり、文字の右の空いた所で広がる */
 @media (min-width:601px){.story figure.s-video{display:none}}
 /* 第3章の対の2行（シェフ／オーナー）は1行ずつで見せる（2026-10-21 オーナー指示）。長い方（27字分）が本文の幅に収まる大きさまで、狭い画面では文字を小さくする */
-.story .text .s-one{white-space:nowrap;font-size:min(16px,calc((100vw - var(--gut) - var(--gut-r)) / 27.5))}
+@media (min-width:601px){.story .text .s-one{white-space:nowrap}} /* 2026-10-22：文字の大きさは他の本文と同じ（オーナー指示）。スマホでは収まらないので、意味の切れ目（料理で描きたいシェフ。／追い求めるオーナー。の前）で折り返す */
+
+/* v25（2026-10-22 オーナー指示・スマホ）：2ページ目の下の4項目（二ツ星 MAZ 出身のシェフ…）を、写真の外ではなくボタンのすぐ下に出す（ボタンとの間が空きすぎていた） */
+@media (max-width:600px){
+  .hero .proof{display:block;margin-top:28px;border-top:0}
+  .hero .proof ul{padding-top:0}
+  .proof-sp{display:none}
+}

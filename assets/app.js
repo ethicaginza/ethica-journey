@@ -134,7 +134,7 @@
     var fitH = function () {
       if (!hsB) return; var hb = heroS.getBoundingClientRect(), b = tr(hsB), a = hsA ? tr(hsA) : b, c = hsC ? tr(hsC) : b; // 見出しの下の説明文まで含める
       var l = Math.min(a.left, b.left, c.left), r = Math.max(a.right, b.right, c.right), t = Math.min(a.top, b.top), m = Math.max(a.bottom, b.bottom, c.bottom);
-      var st = heroS.style; st.setProperty('--hs-x', Math.round((l + r) / 2 - hb.left) + 'px'); st.setProperty('--hs-y', Math.round((t + m) / 2 - hb.top) + 'px');
+      var st = heroS.style; st.setProperty('--hs-x', Math.round((l + r) / 2 - hb.left) + 'px'); st.setProperty('--hs-y', Math.round(t + (m - t) * 0.42 - hb.top) + 'px'); // 中心をやや上（ミシュランの一行の側）へ
       st.setProperty('--hs-rx', Math.round((r - l) / 2 + 150) + 'px'); st.setProperty('--hs-ry', Math.round((m - t) / 2 + 110) + 'px');
     };
     fitH(); w.addEventListener('resize', fitH); w.addEventListener('load', fitH);
@@ -217,7 +217,7 @@
       var make = function () {
         madeAt = Date.now();
         r = new w.EthicaRipple(cv, img.currentSrc || img.src,
-          heroLike ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.2, period: 14, panY: 0.02, dpr: 3, lite: coarse, thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, onTap: function (x, y) { if (w.__pondHero) w.__pondHero(x, y, r); }, onLost: lost, onBack: back, mask: sec.hasAttribute('data-water-copy') ? { landscape: 'assets/img/hero_mask.png?v=5', portrait: 'assets/img/hero_mask_m.png?v=5' } : null } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost, onBack: back });
+          heroLike ? { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.2, period: 14, panY: 0.02, dpr: 3, lite: coarse, thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, onLost: lost, onBack: back, mask: sec.hasAttribute('data-water-copy') ? { landscape: 'assets/img/hero_mask.png?v=5', portrait: 'assets/img/hero_mask_m.png?v=5' } : null } : { ambient: coarse ? 0 : 3200, pert: coarse ? 0.06 : 0.03, zoomFrom: 1.0, zoomTo: 1.07, period: 30, dim: 0.62, onLost: lost, onBack: back });
         if (!r.ok) return;
         if (i === 0 && /[?&]debugdrops=1/.test(location.search)) { w.__drops = []; var od = r.drop; r.drop = function (x, y, rad, st) { w.__drops.push([Math.round(x), Math.round(y), st]); return od.apply(r, arguments); }; }
         r.start(function () { sec.classList.add('water'); });
