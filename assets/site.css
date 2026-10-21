@@ -547,3 +547,7 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
 @media (prefers-reduced-motion:reduce){.cave-ss .cs-slide{transition:none}}
 /* 席の一覧：説明文を灰色にする書式が、見出しの中の折り返さないまとまり（シェフズ・カウンター・ガストロノミー体験）に当たって灰色になっていた。見出しは全部金色に */
 .space ul b span{color:inherit}
+
+/* 2026-10-22 オーナー指示（PC）：コースの説明文（迷われたら…）を、見出しの右上ではなく見出しの下（左）に */
+.courses-head{grid-template-columns:minmax(0,1fr);align-items:start}
+.courses-head .lede{max-width:40em}
