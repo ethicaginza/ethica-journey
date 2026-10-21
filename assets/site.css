@@ -514,3 +514,9 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
 .story .text .s-ch-sep{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .story .text .s-ch-t{font-family:var(--f-jp);font-size:clamp(19px,2.1vw,23px);line-height:1.6;letter-spacing:.06em;color:var(--bone)}
 @media (max-width:600px){.story .text .s-ch{margin-top:30px}.story .text .s-ch-t{font-size:19px}}
+
+/* v24（2026-10-21・オーナー指示）物語の節：背景はビッグバンの動画（d_bigbang）。右側のセノーテの動画は PC・タブレットでは出さない（スマホは第3章の直前に残す）。
+   文字は左の列のまま。爆発の中心は動画の中で横 70% の位置にあり、文字の右の空いた所で広がる */
+@media (min-width:601px){.story figure.s-video{display:none}}
+/* 第3章の対の2行（シェフ／オーナー）は1行ずつで見せる（2026-10-21 オーナー指示）。長い方（27字分）が本文の幅に収まる大きさまで、狭い画面では文字を小さくする */
+.story .text .s-one{white-space:nowrap;font-size:min(16px,calc((100vw - var(--gut) - var(--gut-r)) / 27.5))}

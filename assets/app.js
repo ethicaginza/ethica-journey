@@ -26,7 +26,7 @@
     inl.forEach(function (b) { io2.observe(b); });
   } else { pastHero = true; setDock(); }
 
-  /* 一番上のスライドショー（公式サイトと同じ）：4枚を5秒ごとに。画面の外・別のタブの間は止める。動きを減らす設定では1枚目のまま */
+  /* 一番上のスライドショー（公式サイトと同じ）：4枚を3秒ごとに（2026-10-21 オーナー指示で5秒→3秒）。画面の外・別のタブの間は止める。動きを減らす設定では1枚目のまま */
   var ss = d.getElementById('ss');
   if (ss) {
     var sl = [].slice.call(ss.querySelectorAll('.ss-slide')), si = 0, sOn = true;
@@ -37,7 +37,7 @@
       setInterval(function () {
         if (!sOn || d.hidden) return;
         var cur = sl[si]; si = (si + 1) % sl.length; bg(sl[si]); cur.classList.remove('on'); sl[si].classList.add('on');
-      }, 5000);
+      }, 3000);
       if (IO) new IntersectionObserver(function (es) { sOn = es[es.length - 1].isIntersecting; }).observe(ss);
     }
     // スライドショーがヘッダーの下にある間は、ヘッダーの左にミシュランの印（ロゴは中央にあるため）
