@@ -31,6 +31,13 @@
       'vec3 col=texture2D(img,clamp(iuv,0.001,0.999)).rgb*dim;' +
       'gl_FragColor=vec4(col+sp*vec3(0.95,0.82,0.55)*glint,1.0);}';
   }
+  // 空間の歪み（opt.warp・物語の節のビッグバンの上）：触れた点ごとに、まわりを中心へ引き込み、少しねじる。色は赤と青をわずかにずらす（重力レンズ風）。輪や波は出さない
+  var NL = 16;
+  var WARP = 'precision highp float;uniform sampler2D img;uniform vec2 cover;uniform float zoom;uniform vec2 pan;uniform float dim;uniform float asp;uniform vec4 L[16];varying vec2 v;' +
+    'vec3 S(vec2 p){vec2 q=(p-0.5)*cover/zoom+0.5+pan;q.y=1.0-q.y;return texture2D(img,clamp(q,0.001,0.999)).rgb;}' +
+    'void main(){vec2 off=vec2(0.0);for(int i=0;i<16;i++){vec4 l=L[i];if(l.w<=0.0)continue;vec2 d=(v-l.xy)*vec2(asp,1.0);float r=length(d);float R=l.z;' +
+    'float f=exp(-r*r/(R*R))*l.w;vec2 n=r>1e-5?d/r:vec2(0.0);vec2 t=vec2(-n.y,n.x);off+=(-n*0.5+t*0.32)*f*R;}' +
+    'off.x/=asp;vec3 c=vec3(S(v+off*1.08).r,S(v+off).g,S(v+off*0.92).b);gl_FragColor=vec4(c*dim,1.0);}';
   var STEP_MS = 1000 / 120; // 1秒に120回シミュレーションを進める（画面の更新頻度によらず波の速さをそろえる）
 
   function Ripple(canvas, src, opt) {
@@ -64,6 +71,12 @@
   };
   Ripple.prototype.setup = function () {
     var gl = this.gl;
+    if (this.opt.warp) { // 歪み：波の計算をしないので、描画のプログラムと四角形だけ
+      this.pRen = this.prog(WARP); if (!this.pRen) return false;
+      this.buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, this.buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      this.lenses = []; this.lbuf = new Float32Array(NL * 4); this.resize(); return true;
+    }
     // 波の計算用テクスチャの型：なめらかに補間できる（linear 拡張がある）型を優先する。iPhone では FLOAT に linear が無いことが多い
     var fl = gl.getExtension('OES_texture_float'), fll = fl && gl.getExtension('OES_texture_float_linear');
     var hf = gl.getExtension('OES_texture_half_float'), hfl = hf && gl.getExtension('OES_texture_half_float_linear');
@@ -150,13 +163,13 @@
     this.cw = r.width; this.ch = r.height;
     var sw = r.width > 900 ? 384 : 256, sh = Math.max(64, Math.round(sw * r.height / Math.max(1, r.width)));
     if (sh > 640) { sh = 640; sw = Math.round(sh * r.width / r.height); }
-    if (!(sw === this.sw && Math.abs(sh - this.sh) < 24 && this.a)) {
+    if (!this.opt.warp && !(sw === this.sw && Math.abs(sh - this.sh) < 24 && this.a)) {
       this.sw = sw; this.sh = sh;
       this.free(this.a); this.free(this.b);
       this.a = this.makeTarget(sw, sh); this.b = this.makeTarget(sw, sh);
     }
     // 大きさを変えると描画面は黒に戻る。次のコマを待たずにこの場で描き直す（スマホでアドレスバーが出入りするたびに、写真が一瞬黒くなっていた）
-    if (this.running && this.ok && this.a && this.iw) { try { this.render((performance.now() - this.t0) / 1000); this.dirty = false; } catch (e) {} }
+    if (this.running && this.ok && (this.a || this.opt.warp) && this.iw) { try { this.render((performance.now() - this.t0) / 1000); this.dirty = false; } catch (e) {} }
   };
   /* 型（マスク）。写真の向き（縦長か横長か）に合う型を読み、GPU用のテクスチャと、点の判定用の小さな配列を作る */
   Ripple.prototype.loadMask = function () {
@@ -226,6 +239,7 @@
     if (this.opt.skip) { var sb = this.c.getBoundingClientRect(); if (this.opt.skip(sb.left + x, sb.top + y)) return; } // 別の水面が重なっている所では立てない
     this.lastDrop = performance.now();
     if (this.sleeping) { this.sleeping = false; this.vNew = true; this.onFirst = this.opt.onWake || null; this.prev = performance.now(); this.kick(); } // 眠っていたら起きる（最初の1枚を描いてから見せる）
+    if (this.opt.warp) { this.warpAt(x, y, strength >= 0.1); return; }
     var gl = this.gl, P = this.pDrop;
     gl.viewport(0, 0, this.sw, this.sh); gl.bindFramebuffer(gl.FRAMEBUFFER, this.b.f); gl.useProgram(P.p);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.a.t); gl.uniform1i(P.u.t, 0);
@@ -234,6 +248,38 @@
     gl.uniform1f(P.u.s, strength); gl.uniform2f(P.u.px, this.cw / m, this.ch / m);
     this.quad(); this.swap();
   };
+  /* 歪みの点：タップ・クリック＝大きく広がって消える（1.7秒）。なぞり・マウスの移動＝指の下で動き、120ミリ秒か40pxごとに残して跡にする（0.9秒で消える） */
+  Ripple.prototype.warpAt = function (x, y, tap) {
+    var now = performance.now(), L = this.lenses, last = L[L.length - 1];
+    if (tap) { for (var i = L.length - 1; i >= 0; i--) { var q = L[i]; if (q.tap && now - q.t < 400 && Math.abs(q.x - x) + Math.abs(q.y - y) < 30) return; } } // 余韻の2回目・3回目は足さない
+    else if (last && !last.tap && now - last.t0 < 120 && Math.abs(last.x - x) + Math.abs(last.y - y) < 40) { last.x = x; last.y = y; last.t = now; return; }
+    L.push({ x: x, y: y, t: now, t0: now, tap: tap }); if (L.length > NL) L.shift();
+  };
+  Ripple.prototype.renderWarp = function (time) {
+    var gl = this.gl, P = this.pRen, v = this.vid, now = performance.now(), L = this.lenses, a = this.lbuf;
+    if (v && this.vNew && v.readyState >= 2 && v.videoWidth) {
+      this.vNew = false;
+      if (v.videoWidth !== this.iw || v.videoHeight !== this.ih) { this.iw = v.videoWidth; this.ih = v.videoHeight; }
+      gl.bindTexture(gl.TEXTURE_2D, this.img); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+      try { gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, v); } catch (e) {}
+    }
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, this.W, this.H); gl.useProgram(P.p);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.img); gl.uniform1i(P.u.img, 0);
+    var ca = this.cw / this.ch, ia = this.iw / this.ih, cover = ca > ia ? [1, ia / ca] : [ca / ia, 1];
+    gl.uniform2f(P.u.cover, cover[0], cover[1]); gl.uniform1f(P.u.zoom, 1); gl.uniform2f(P.u.pan, 0, 0);
+    gl.uniform1f(P.u.dim, this.dim); gl.uniform1f(P.u.asp, ca);
+    this.view = { cover: cover, zoom: 1, pan: [0, 0] };
+    for (var i = L.length - 1; i >= 0; i--) { var age = (now - L[i].t) / 1000; if (age > (L[i].tap ? 1.7 : 0.9)) L.splice(i, 1); }
+    for (var k = 0; k < NL; k++) {
+      var q = L[k], o = k * 4; if (!q) { a[o + 3] = 0; continue; }
+      var g = (now - q.t) / 1000, w, R;
+      if (q.tap) { var e = Math.min(1, g / 0.18), dcy = 1 - Math.min(1, Math.max(0, (g - 0.15) / 1.55)); w = e * Math.pow(dcy * dcy * (3 - 2 * dcy), 1.3); R = 0.12 * (1 + 0.9 * Math.min(1, g / 1.7)); } // 広がりながら消える
+      else { var u = Math.max(0, 1 - g / 0.9); w = u * u * 0.6; R = 0.075 * (1 + 0.3 * g); }
+      a[o] = q.x / this.cw; a[o + 1] = 1 - q.y / this.ch; a[o + 2] = R; a[o + 3] = w;
+    }
+    gl.uniform4fv(P.u['L[0]'], a);
+    this.quad();
+  };
   Ripple.prototype.step = function () {
     var gl = this.gl, P = this.pUpd;
     gl.viewport(0, 0, this.sw, this.sh); gl.bindFramebuffer(gl.FRAMEBUFFER, this.b.f); gl.useProgram(P.p);
@@ -241,6 +287,7 @@
     gl.uniform2f(P.u.dx, 1 / this.sw, 1 / this.sh); this.quad(); this.swap();
   };
   Ripple.prototype.render = function (time) {
+    if (this.opt.warp) return this.renderWarp(time);
     var gl = this.gl, P = this.pRen, v = this.vid;
     if (v && this.vNew && v.readyState >= 2 && v.videoWidth) {
       this.vNew = false;
@@ -282,6 +329,7 @@
     var idle = now - (this.lastDrop || 0) > 8000; this.idle = idle;
     this.acc += dt; var n = 0;
     if (idle) { this.acc = 0; this.odd = !this.odd; } // 波が消えた後は計算を止め、描画も1フレームおき（ズームだけ動かす）
+    else if (this.opt.warp) { this.acc = 0; }
     else { while (this.acc >= STEP_MS && n < 8) { this.step(); this.acc -= STEP_MS; n++; } if (n === 8) this.acc = 0; }
     if (this.vid && !this.vfc && !this.vid.paused) this.vNew = true; // 動画のコマの知らせが無いブラウザは、毎フレーム写す
     if (!idle || this.odd || this.onFirst || this.dirty || (this.vid && this.vNew)) { this.render((now - this.t0) / 1000); this.dirty = false; }

@@ -262,7 +262,8 @@
       };
       var build = function () {
         var kh = sec.querySelector('.k-hbg');
-        rv = new w.EthicaRipple(cv, vv, { video: true, ambient: 0, skip: kh ? function (x, y) { var b = kh.getBoundingClientRect(); return y >= b.top && y <= b.bottom && x >= b.left && x <= b.right; } : null, pert: coarse ? 0.08 : 0.05, glint: 0.3, zoomFrom: 1, zoomTo: 1, pan: 0, period: 30, dpr: 1, lite: coarse, thr: coarse ? 0.012 : 0.02, dim: parseFloat(cv.getAttribute('data-dim')) || 1,
+        // 物語の節（ビッグバンの動画）は波紋ではなく空間の歪み（warp・2026-10-22 オーナー指示）。ほかの節は水面の波紋
+        rv = new w.EthicaRipple(cv, vv, { video: true, warp: sec.id === 'story', ambient: 0, skip: kh ? function (x, y) { var b = kh.getBoundingClientRect(); return y >= b.top && y <= b.bottom && x >= b.left && x <= b.right; } : null, pert: coarse ? 0.08 : 0.05, glint: 0.3, zoomFrom: 1, zoomTo: 1, pan: 0, period: 30, dpr: 1, lite: coarse, thr: coarse ? 0.012 : 0.02, dim: parseFloat(cv.getAttribute('data-dim')) || 1,
           sleep: 2500, onSleep: hide, onWake: show, touch: { r: 44, s: 0.24, move: 0.05, echo: true, onEnd: true },
           onLost: function () { hide(); clearTimeout(lostT); lostT = setTimeout(retry, 2500); }, onBack: function () { clearTimeout(lostT); } });
         if (!rv.ok) return;
