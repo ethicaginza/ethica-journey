@@ -82,6 +82,16 @@
 
   /* 動画は近づいたら読み込み、画面外では止める */
   var vids = [].slice.call(d.querySelectorAll('video[data-src]:not(.dv)'));
+  /* THE CAVE のスライドショー（テーブル席・シェフズ・カウンター・個室）：4秒ごと。画面の外・別のタブでは止める。動きを減らす設定では自動で切り替えない（点で選べる） */
+  var cs = d.querySelector('.cave-ss');
+  if (cs) {
+    var csl = [].slice.call(cs.querySelectorAll('.cs-slide')), cdb = [].slice.call(cs.querySelectorAll('.cs-dots button')), ci = 0, cOn = !IO, cT = 0;
+    var cgo = function (n) { csl[ci].classList.remove('on'); cdb[ci].removeAttribute('aria-current'); ci = (n + csl.length) % csl.length; csl[ci].classList.add('on'); cdb[ci].setAttribute('aria-current', 'true'); };
+    var ctick = function () { clearTimeout(cT); if (reduce) return; cT = setTimeout(function () { if (cOn && !d.hidden) cgo(ci + 1); ctick(); }, 4000); };
+    cdb.forEach(function (b, i) { b.addEventListener('click', function () { cgo(i); ctick(); }); });
+    if (IO) new IntersectionObserver(function (es) { cOn = es[es.length - 1].isIntersecting; }).observe(cs);
+    ctick();
+  }
   /* 文字の裏の暗い動画（縦長の画面は縦長版、横長の画面＝PCなどは横長版）。静止画は読み込み直後に付け、動画は節が画面に入ってから読み、出たら止める（先読みしない） */
   var dvs = [].slice.call(d.querySelectorAll('video.dv')), dvOn = false;
   var dvWide = w.innerWidth > w.innerHeight; // 横長の画面（PC・タブレットの横向き）は横長版

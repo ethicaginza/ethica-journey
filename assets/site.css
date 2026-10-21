@@ -527,3 +527,23 @@ html:not(.js) .ss-slide:first-child{opacity:1;background-image:url(../assets/img
   .hero .proof ul{padding-top:0}
   .proof-sp{display:none}
 }
+
+/* v26（2026-10-22 オーナー指示）THE CAVE：店内の写真をスライドショーに（テーブル席・シェフズ・カウンター・個室）。4秒ごとに切り替え、点で選べる */
+.space .photos .cave-ss{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#0a0c0b}
+.cave-ss .cs-slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.2s ease}
+.cave-ss .cs-slide.on{opacity:1}
+.space .photos .cave-ss img{display:block;width:100%;height:100%;aspect-ratio:auto;object-fit:cover}
+.cave-ss .cs-slide:nth-child(1) img{object-position:58% 50%}
+.cave-ss .cs-slide:nth-child(2) img{object-position:40% 50%}
+.cave-ss .cs-slide:nth-child(3) img{object-position:55% 50%}
+.cave-ss .cs-slide::after{content:"";position:absolute;left:0;right:0;bottom:0;height:35%;background:linear-gradient(0deg,rgba(6,8,7,.62),rgba(6,8,7,0));pointer-events:none}
+.cave-ss figcaption{position:absolute;left:14px;bottom:14px;z-index:1;font-size:12.5px;letter-spacing:.12em;color:rgba(238,232,220,.92);text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.cave-ss .cs-dots{position:absolute;right:8px;bottom:6px;z-index:2;display:flex;gap:2px}
+.cave-ss .cs-dots button{width:30px;height:30px;padding:0;border:0;background:transparent;cursor:pointer;display:grid;place-items:center}
+.cave-ss .cs-dots button::before{content:"";width:7px;height:7px;border-radius:50%;background:rgba(238,232,220,.42);transition:background .3s}
+.cave-ss .cs-dots button[aria-current="true"]::before{background:var(--gold)}
+.cave-ss .cs-dots button:focus-visible{outline:1px solid var(--gold);outline-offset:-4px}
+@media (max-width:600px){.space .photos .cave-ss{aspect-ratio:1/1;width:calc(100% + var(--gut) + var(--gut-r));max-width:none;margin-inline:calc(-1 * var(--gut)) calc(-1 * var(--gut-r))}.cave-ss figcaption{left:var(--gut)}.cave-ss .cs-dots{right:calc(var(--gut-r) - 8px)}}
+@media (prefers-reduced-motion:reduce){.cave-ss .cs-slide{transition:none}}
+/* 席の一覧：説明文を灰色にする書式が、見出しの中の折り返さないまとまり（シェフズ・カウンター・ガストロノミー体験）に当たって灰色になっていた。見出しは全部金色に */
+.space ul b span{color:inherit}
