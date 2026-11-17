@@ -146,3 +146,23 @@
 @media (max-width:380px){.tm-p{width:18px;height:18px;margin:-9px 0 0 -9px}.tm-p b{font-size:10.5px}}
 /* 360px以下の画面では、下の軸の目盛り文字を少し小さく（くっついて1本の文字列に見えないように） */
 @media (max-width:380px){.rt .rp.zoom i,.rt .band.zoom .lab.l{font-size:11px;letter-spacing:0}}
+
+/* 潜水図（2026-11-17）：水面＝いま、下ほど昔。年表の一覧の上に横いっぱいで置く（右の航路図は外した） */
+.dive{margin:0 0 44px}
+.dive-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line-gold);background:#0e1214}
+.dive-scroll svg{display:block;width:100%;height:auto;min-width:720px}
+.dive figcaption{margin-top:10px;font-size:12.5px;color:var(--muted);line-height:1.7}
+.dive-hint{display:none}
+@media (max-width:760px){.dive-hint{display:block;margin-top:2px;color:var(--gold-text)}}
+.dive .dv-grid{stroke:#fff;stroke-opacity:.07}.dive .dv-grid.end{stroke-opacity:.25}
+.dive .dv-y{font-family:var(--f-lat);font-size:15px;fill:#8f9a9c;font-variant-numeric:lining-nums}
+.dive .dv-sf{stroke:#7fd0de;stroke-width:2}
+.dive .dv-sfl{font-family:var(--f-jp);font-size:19px;fill:#7fd0de}
+.dive .dv-end{font-family:var(--f-jp);font-size:17px;fill:#b9c4c4}
+.dive .dv-met{stroke:#e0866e;stroke-opacity:.8;stroke-dasharray:3 5}
+.dive .dv-metl{font-family:var(--f-jp);font-size:15px;fill:#e0866e}
+.dive .dv-path{fill:none;stroke:var(--gold);stroke-width:2.4;stroke-linejoin:round}
+.dive .dv-pt{fill:var(--gold-hi);stroke:#0e1214;stroke-width:2}
+.dive .dv-nm{font-family:var(--f-jp);font-size:18px;fill:var(--bone)}
+.tl-grid.one{grid-template-columns:minmax(0,1fr)}
+.tl-grid.one .voyage{max-width:760px}
