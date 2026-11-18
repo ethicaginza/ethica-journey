@@ -166,3 +166,6 @@
 .dive .dv-nm{font-family:var(--f-jp);font-size:18px;fill:var(--bone)}
 .tl-grid.one{grid-template-columns:minmax(0,1fr)}
 .tl-grid.one .voyage{max-width:760px}
+/* 2026-11-18 時代の章の頭＝セノーテの説明（段落を分けて読む） */
+.tl-lede{display:flex;flex-direction:column;gap:14px}
+.tl-lede .lede{margin:0}
