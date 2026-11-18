@@ -105,3 +105,19 @@ h1{font-family:var(--f-jp);font-weight:400;letter-spacing:.08em;margin:0;line-he
 .d-foot a{text-decoration:none}
 .d-foot a:hover{color:var(--gold-hi)}
 .d-foot p{margin:0}
+
+/* 目次のペアリング（一番売りたい）：最初から全部見せる。金の枠と淡い光で一段目立たせる */
+.d-pairing{position:relative;margin:0 0 clamp(44px,7vw,64px);padding:clamp(30px,5vw,44px) clamp(22px,5vw,44px) clamp(24px,4vw,34px);border:1px solid var(--gold);border-radius:2px;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,164,106,.16),transparent 70%),linear-gradient(170deg,rgba(201,164,106,.07),var(--stone) 55%);box-shadow:0 0 0 1px rgba(201,164,106,.08) inset,0 18px 48px rgba(0,0,0,.35);text-align:center}
+.d-pairing-tag{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);margin:0;padding:3px 14px;background:var(--cave);border:1px solid var(--gold);font-family:var(--f-lat);font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-hi);white-space:nowrap}
+.d-pairing h2{font-family:var(--f-jp);font-weight:400;font-size:clamp(34px,5.4vw,46px);letter-spacing:.08em;line-height:1.25;margin:0;color:var(--bone)}
+.d-pairing-lead{font-family:var(--f-jp);font-size:clamp(16px,2vw,18px);letter-spacing:.12em;color:var(--gold-text);margin:12px 0 0}
+.d-pairing-list{list-style:none;margin:clamp(22px,4vw,30px) 0 0;padding:0;text-align:left;border-top:1px solid var(--line-gold)}
+.d-pairing-list li{padding:20px 2px 18px;border-bottom:1px solid var(--line)}
+.d-pairing-list li:last-child{border-bottom:0}
+.d-pairing-list .d-name{font-family:var(--f-jp);font-weight:400;font-size:clamp(18px,2.4vw,21px);letter-spacing:.05em;line-height:1.5}
+.d-pairing-list .price{font-size:clamp(19px,2.5vw,22px);color:var(--gold-hi)}
+.d-pairing-list .d-note{margin-top:6px}
+.d-pairing-foot{margin:18px 0 0;font-size:12.5px;color:var(--muted);letter-spacing:.1em}
+.d-sub{font-family:var(--f-body);font-weight:400;font-size:12px;letter-spacing:.3em;color:var(--gold);margin:0 0 14px}
+.d-hub .d-cards li:first-child{grid-column:auto}
+@media (max-width:600px){.d-pairing{margin-top:6px}.d-pairing-list li{padding:18px 0 16px}}
