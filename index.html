@@ -9,6 +9,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-N2TRHGDV');</script>
 <!-- End Google Tag Manager -->
+<script>(function(){try{var k='ethica_lang',m=localStorage.getItem(k),p=location.pathname.split('/').pop()||'index.html';
+if(!m&&p==='index.html'){var l=((navigator.languages&&navigator.languages[0])||navigator.language||'ja').toLowerCase(),t;
+if(l.indexOf('ja')===0)t='index.html';else if(/^zh-(tw|hk|mo)|^zh-hant/.test(l))t='zh-tw.html';else if(l.indexOf('zh')===0)t='zh-cn.html';else if(l.indexOf('ko')===0)t='ko.html';else if(l.indexOf('es')===0)t='es.html';else t='en.html';
+localStorage.setItem(k,t);if(t!==p){location.replace(t+location.hash);}}}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>銀座 ETHICA | 二ツ星MAZ出身シェフのイノベーティブ（ペルー料理×フレンチの技法）・ミシュラン3年連続掲載</title>
@@ -28,7 +32,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Inter:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=62">
+<link rel="stylesheet" href="assets/site.css?v=64">
 <link rel="stylesheet" href="assets/timeline.css?v=62">
 </head>
 <body>
@@ -44,7 +48,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav aria-label="ページ内のメニュー">
       <a class="nl" href="#chapters">時代の章</a><a class="nl" href="#chef">シェフ</a><a class="nl" href="#courses">コース</a><a class="nl" href="drinks/">ドリンク</a><a class="nl" href="#access">アクセス</a>
       <a class="btn btn-gold hdr" href="https://res-reserve.com/ja/restaurants/ethicatokyo?utm_source=ethica_lp&amp;utm_medium=referral&amp;utm_campaign=lp_2026autumn&amp;utm_content=header" target="_blank" rel="noopener" data-cta="header">空席を見る<span class="arrow" aria-hidden="true">→</span></a>
-      <select class="lsel" aria-label="Language" onchange="location.href=this.value"><option value="index.html" selected>日本語</option><option value="en.html">English</option><option value="zh-cn.html">简体中文</option><option value="zh-tw.html">繁體中文</option><option value="ko.html">한국어</option><option value="es.html">Español</option></select>
+      <select class="lsel" aria-label="Language" onchange="if(this.value){try{localStorage.setItem('ethica_lang',this.value)}catch(e){}location.href=this.value}"><option value="" selected hidden>English</option><option value="index.html">日本語</option><option value="en.html">English</option><option value="zh-cn.html">简体中文</option><option value="zh-tw.html">繁體中文</option><option value="ko.html">한국어</option><option value="es.html">Español</option></select>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav"><span class="mb-l" aria-hidden="true"></span><span class="mb-t">メニュー</span></button>
     </nav>
   </div>
