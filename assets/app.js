@@ -352,7 +352,7 @@
     var setMini = function (n) {
       var k = +n; if (!info[n] || k === curMini) return; curMini = k;
       pins.forEach(function (p) { var m = +p.getAttribute('data-n'); p.classList.toggle('cur', m === k); p.classList.toggle('seen', m < k); });
-      nEl.textContent = k === 9 ? '最後に' : k + '皿目'; agoEl.textContent = info[n].ago; tEl.textContent = info[n].t;
+      nEl.textContent = k === 9 ? (mini.getAttribute('data-last') || '最後に') : (mini.getAttribute('data-dish') || '{n}皿目').replace('{n}', k); agoEl.textContent = info[n].ago; tEl.textContent = info[n].t;
       if (arc && k >= 2) {
         // 橋の形の線（両端で立ち上がる）。間の番号の上を越えるのに要る高さだけ持ち上げ、上の年代の文字には届かせない
         var a = xOf(k - 1), b = xOf(k), aw = axis.offsetWidth || 300, r = (pins[0].offsetWidth || 20) / 2 + 2, H = 12;
