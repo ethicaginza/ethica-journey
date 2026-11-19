@@ -168,4 +168,5 @@ h1{font-family:var(--f-jp);font-weight:400;letter-spacing:.08em;margin:0;line-he
   .w-spec{gap:12px}
   .w-spec div{grid-template-columns:5.2em minmax(0,1fr);align-items:baseline;gap:0 12px}
   .w-spec dd{font-size:15px}
+  .w-pn-n{font-size:13.5px;letter-spacing:.03em}
 }
