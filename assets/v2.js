@@ -40,7 +40,13 @@
       var arrow = dockMain.querySelector('.arrow');
       dockMain.textContent = p.getAttribute('data-dock') || '';
       if (arrow) dockMain.appendChild(arrow);
-      dockA.setAttribute('href', link(p.getAttribute('data-href'), 'dock', 'scene_' + key));
+      // 行き先のコースだけを差し替える。リンクに後から付いた印（広告のクリックの引き継ぎなど）は残す
+      var href = link(p.getAttribute('data-href'), 'dock', 'scene_' + key);
+      try {
+        var u = new URL(dockA.href), t = new URL(p.getAttribute('data-href'));
+        u.pathname = t.pathname; u.searchParams.set('utm_term', 'scene_' + key); href = u.toString();
+      } catch (e) {}
+      dockA.setAttribute('href', href);
       dockA.setAttribute('data-scene', key);
       dockA.classList.add('sc-on');
     }
