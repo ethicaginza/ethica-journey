@@ -1,0 +1,81 @@
+/* v2：ご利用シーンの節、コースの節のペアリングの一行。site.css・timeline.css の後に読み込む */
+
+/* ご利用シーン */
+.sc-head{margin-bottom:clamp(26px,3.6vw,44px)}
+.sc-head h2{margin:0}
+.sc-head .lede{margin:12px 0 0}
+.sc-tabs{display:none}
+.js .sc-tabs{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:clamp(26px,3.6vw,44px)}
+.sc-tab{appearance:none;-webkit-appearance:none;background:none;border:0;border-radius:0;margin:0;color:var(--muted);font-family:var(--f-jp);font-size:clamp(14.5px,1.3vw,16.5px);line-height:1.6;letter-spacing:.08em;padding:14px clamp(12px,1.9vw,26px) 15px;cursor:pointer;position:relative;white-space:nowrap;transition:color .3s}
+.sc-tab:first-child{padding-left:0}
+.sc-tab::after{content:"";position:absolute;left:clamp(12px,1.9vw,26px);right:clamp(12px,1.9vw,26px);bottom:-1px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.sc-tab:first-child::after{left:0}
+.sc-tab[aria-selected="true"]{color:var(--gold-text)}
+.sc-tab[aria-selected="true"]::after{transform:scaleX(1)}
+@media (hover:hover) and (pointer:fine){.sc-tab:hover{color:var(--bone)}}
+
+.sc-panel{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,4.6vw,64px);align-items:start}
+.sc-panel+.sc-panel{margin-top:64px}
+.js .sc-panel+.sc-panel{margin-top:0}
+.js .sc-panel[hidden]{display:none}
+.sc-img{margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--stone2)}
+.sc-img img{width:100%;height:100%;object-fit:cover}
+.sc-body{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sc-body .use{margin:0}
+.sc-body h3{font-family:var(--f-jp);font-weight:400;font-size:clamp(21px,2.5vw,30px);line-height:1.6;letter-spacing:.04em;margin:0;color:var(--bone)}
+.sc-body .d{margin:0;color:#DED8CB;max-width:34em}
+.sc-fact{margin:2px 0 0;padding-left:14px;border-left:1px solid var(--gold);color:var(--gold-text);font-family:var(--f-jp);font-size:15px;line-height:1.8}
+.sc-spec{margin:8px 0 0;border-top:1px solid var(--line)}
+.sc-spec>div{display:grid;grid-template-columns:6em minmax(0,1fr);gap:12px;padding:11px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.sc-spec dt{font-size:12px;letter-spacing:.14em;color:var(--muted)}
+.sc-spec dd{margin:0;font-size:14.5px;line-height:1.7;color:var(--bone)}
+.sc-pr{margin-left:16px;white-space:nowrap}
+.sc-pr .price{font-size:20px}
+.sc-pr small{font-size:11.5px;color:var(--muted);margin-left:7px;letter-spacing:.04em}
+.sc-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;margin-top:12px}
+.sc-alt{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;line-height:1.6;color:var(--gold-text);text-decoration:none;border-bottom:1px solid var(--line-gold);padding-bottom:3px;transition:border-color .3s}
+@media (hover:hover) and (pointer:fine){.sc-alt:hover{border-color:var(--gold)}}
+.sc-body .basis{margin:0}
+.sc-note{font-size:11.5px;color:var(--muted);margin:30px 0 0;line-height:1.8}
+@media (prefers-reduced-motion:no-preference){
+  .js .sc-panel:not([hidden]) .sc-img{animation:sc-in .9s ease both}
+  .js .sc-panel:not([hidden]) .sc-body{animation:sc-up .7s ease both}
+}
+@keyframes sc-in{from{opacity:0}to{opacity:1}}
+@keyframes sc-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+@media (max-width:900px){
+  .js .sc-tabs{gap:8px;border-bottom:0;margin-bottom:22px}
+  .sc-tab,.sc-tab:first-child{font-family:var(--f-body);font-size:13px;letter-spacing:.06em;line-height:1.5;padding:9px 14px;border:1px solid var(--line);border-radius:2px}
+  .sc-tab::after{display:none}
+  .sc-tab[aria-selected="true"]{border-color:rgba(201,164,106,.75);background:rgba(201,164,106,.09)}
+  .sc-panel{grid-template-columns:minmax(0,1fr);gap:22px;align-items:start}
+  .sc-panel+.sc-panel{margin-top:52px}
+  .sc-img{aspect-ratio:16/10}
+  .sc-cta{flex-direction:column;align-items:stretch;gap:16px}
+  .sc-cta .btn{width:100%}
+  .sc-cta .sc-alt{align-self:flex-start}
+  .sc-note{margin-top:24px}
+}
+
+/* 場面を選んだあとの、コースのカードの印 */
+.rec-tag{align-self:flex-start;font-size:11.5px;line-height:1.5;letter-spacing:.14em;color:var(--gold-text);border:1px solid var(--line-gold);padding:3px 10px}
+.card.rec{border-color:rgba(201,164,106,.7)}
+
+/* 場面を選んだあとの、下の予約バーの文字（長い名前でも収まるように） */
+.dock .btn-gold.sc-on .d-main{letter-spacing:.06em;gap:8px}
+@media (max-width:380px){.dock .btn-gold.sc-on .d-main{font-size:13.5px;letter-spacing:.03em}}
+
+/* コースの節：ペアリングの案内 */
+.pairing{margin:64px 0 0;padding:clamp(22px,3vw,36px);border:1px solid var(--line-gold);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px clamp(24px,4.6vw,64px);align-items:center}
+.pg-head{display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-width:0}
+.pg-head .use{margin:0;font-family:var(--f-lat);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.pg-head h3{font-family:var(--f-jp);font-weight:400;font-size:clamp(20px,2.3vw,27px);line-height:1.6;letter-spacing:.04em;margin:0}
+.pg-head .d{margin:0;color:#DED8CB}
+.pg-list{margin:0;border-top:1px solid var(--line)}
+.pg-list>div{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:4px 16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.pg-list dt{font-family:var(--f-jp);font-size:15.5px;letter-spacing:.04em}
+.pg-list dd{margin:0;white-space:nowrap}
+.pg-list .price{font-size:19px}
+.pg-list small{display:block;font-family:var(--f-body);font-size:11.5px;letter-spacing:.04em;color:var(--muted);margin-top:2px}
+@media (max-width:900px){.pairing{grid-template-columns:minmax(0,1fr);margin-top:48px;align-items:start}}
