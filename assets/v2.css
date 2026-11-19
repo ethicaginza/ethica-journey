@@ -79,3 +79,5 @@
 .pg-list .price{font-size:19px}
 .pg-list small{display:block;font-family:var(--f-body);font-size:11.5px;letter-spacing:.04em;color:var(--muted);margin-top:2px}
 @media (max-width:900px){.pairing{grid-template-columns:minmax(0,1fr);margin-top:48px;align-items:start}}
+/* ご利用シーンとコースの節は同じ地色が続くので、細い線で区切る */
+.scenes-sec+.courses-sec{border-top:1px solid var(--line)}
