@@ -11,8 +11,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>採用・求人｜銀座 ETHICA</title>
-<meta name="description" content="銀座 ETHICA（ミシュラン3年連続掲載・二ツ星MAZ出身シェフのイノベーティブ）の採用・求人情報。サービススタッフ・料理長候補・調理スタッフ・洗い場を募集しています。">
+<title>採用・求人｜本気で星を獲りに行く仲間へ｜銀座 ETHICA</title>
+<meta name="description" content="銀座 ETHICA の採用・求人情報。完全実力主義、実力を示した瞬間に昇給、店舗利益の0〜4％を還元。一流店出身者と世界各国の仲間と、本気で星を獲りに行く。料理長候補・調理・サービス・洗い場を募集。">
 <meta name="theme-color" content="#060807">
 <link rel="icon" href="../assets/img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,22 +20,54 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Inter:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="../assets/drinks.css?v=6">
 <style>
-.r-sec{padding:clamp(40px,7vw,64px) 0;border-top:1px solid rgba(201,164,106,.14)}
-.r-sec h2{font-size:clamp(24px,4vw,32px);color:var(--bone);margin:0 0 20px;font-weight:500}
-.r-sec p,.r-sec li{color:var(--muted);line-height:1.95;font-size:15px}
-.r-sec strong{color:var(--bone);font-weight:500}
-.r-lead{text-align:center;color:var(--bone)!important;font-size:16px!important}
-.r-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.r-card{border:1px solid rgba(201,164,106,.22);padding:22px;border-radius:2px}
-.r-card h3{color:var(--gold-text);font-size:17px;margin:0 0 10px;font-weight:500}
-.r-card ul{margin:0;padding-left:1.1em}
-.r-job{border:1px solid rgba(201,164,106,.22);padding:24px;margin:0 0 18px;border-radius:2px}
-.r-job h3{color:var(--bone);font-size:20px;margin:0 0 6px;font-weight:500}
-.r-pay{color:var(--gold-text)!important;margin:0 0 12px!important}
-.r-job ul{padding-left:1.1em;margin:0 0 16px}
-.r-faq details{border-bottom:1px solid rgba(201,164,106,.14);padding:14px 0}
-.r-faq summary{cursor:pointer;color:var(--bone);font-size:15px}
-.r-faq h3{color:var(--gold);font-size:13px;letter-spacing:.2em;margin:28px 0 4px;font-weight:400}
+.rc{--pad:clamp(64px,10vw,120px)}
+.rc-hero{position:relative;min-height:min(92vh,860px);display:flex;align-items:flex-end;overflow:hidden;padding:0 0 clamp(56px,9vw,96px)}
+.rc-hero-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,8,7,.35) 0%,rgba(6,8,7,.6) 45%,var(--cave) 100%),url(../assets/img/chef_bg_2048.webp) center 30%/cover no-repeat}
+.rc-hero .d-wrap{position:relative;width:100%}
+.rc-kicker{font-family:var(--f-lat);font-size:12px;letter-spacing:.42em;color:var(--gold);margin:0 0 22px}
+.rc-hero h1{font-family:var(--f-jp);font-weight:500;font-size:clamp(40px,8.4vw,88px);line-height:1.18;color:var(--bone);margin:0;letter-spacing:.04em}
+.rc-hero h1 em{font-style:normal;color:var(--gold-text)}
+.rc-quote{font-family:var(--f-jp);font-size:clamp(17px,2.4vw,22px);color:var(--bone);margin:28px 0 0;line-height:1.8}
+.rc-hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
+.rc-btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 34px;font-size:14px;letter-spacing:.16em;text-decoration:none;border-radius:2px}
+.rc-btn-fill{background:var(--gold);color:var(--cave);font-weight:500}
+.rc-btn-fill:hover{background:var(--gold-hi)}
+.rc-btn-line{border:1px solid var(--line-gold);color:var(--gold-text)}
+.rc-sec{padding:var(--pad) 0;border-top:1px solid rgba(201,164,106,.14)}
+.rc-label{font-family:var(--f-lat);font-size:12px;letter-spacing:.38em;color:var(--gold);margin:0 0 16px}
+.rc-sec h2{font-family:var(--f-jp);font-weight:500;font-size:clamp(28px,5vw,46px);line-height:1.35;color:var(--bone);margin:0 0 28px;letter-spacing:.03em}
+.rc-sec p,.rc-sec li{color:var(--muted);line-height:2;font-size:15.5px}
+.rc-sec strong{color:var(--bone);font-weight:500}
+.rc-manifesto p{font-family:var(--f-jp);font-size:clamp(17px,2.3vw,20px);color:var(--bone);line-height:2.2;margin:0 0 1.2em}
+.rc-manifesto .sign{color:var(--gold-text)}
+.rc-rules{list-style:none;margin:0;padding:0;counter-reset:r}
+.rc-rules li{display:grid;grid-template-columns:auto 1fr;gap:6px 28px;padding:30px 0;border-bottom:1px solid rgba(201,164,106,.14);counter-increment:r}
+.rc-rules li::before{content:counter(r,decimal-leading-zero);grid-row:span 2;font-family:var(--f-lat);font-weight:300;font-size:clamp(34px,5vw,52px);line-height:1;color:var(--gold)}
+.rc-rules h3{font-family:var(--f-jp);font-weight:500;font-size:clamp(20px,3vw,26px);color:var(--bone);margin:0;line-height:1.5}
+.rc-rules p{margin:0}
+.rc-big{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.rc-stat{border:1px solid var(--line-gold);padding:26px 22px;border-radius:2px}
+.rc-stat b{display:block;font-family:var(--f-lat);font-weight:300;font-size:clamp(36px,5.4vw,54px);color:var(--gold-text);line-height:1.05;letter-spacing:.02em}
+.rc-stat b small{font-size:.42em;margin:0 3px;color:var(--gold)}
+.rc-stat span{display:block;color:var(--bone);font-size:14px;margin-top:10px;line-height:1.7}
+.rc-split{display:grid;gap:clamp(28px,5vw,56px);grid-template-columns:1fr}
+@media(min-width:860px){.rc-split{grid-template-columns:1.05fr 1fr;align-items:center}}
+.rc-sec h2,.rc-hero h1,.rc-rules h3{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+.rc-split h2{font-size:clamp(26px,3.3vw,36px)}
+.rc-img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:2px;display:block}
+.rc-alumni{list-style:none;margin:0 0 30px;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.rc-alumni li{border:1px solid var(--line-gold);padding:9px 16px;color:var(--bone);font-size:15px;line-height:1.4;border-radius:2px}
+.rc-alumni .st{color:var(--gold);letter-spacing:.08em;margin-left:6px;font-size:13px}
+.rc-press{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));column-gap:28px}
+.rc-press li{padding:14px 0;border-bottom:1px solid rgba(201,164,106,.12);font-size:14.5px}
+.r-job{border:1px solid rgba(201,164,106,.22);padding:clamp(22px,4vw,34px);margin:0 0 18px;border-radius:2px}
+.r-job h3{font-family:var(--f-jp);color:var(--bone);font-size:clamp(20px,3vw,24px);margin:0 0 8px;font-weight:500}
+.r-tag{display:inline-block;font-size:12px;letter-spacing:.12em;color:var(--cave);background:var(--gold);padding:3px 10px;border-radius:2px;margin:0 0 12px}
+.r-pay{color:var(--gold-text)!important;font-size:17px!important;margin:0 0 12px!important}
+.r-job ul{padding-left:1.1em;margin:0 0 20px}
+.r-faq details{border-bottom:1px solid rgba(201,164,106,.14);padding:16px 0}
+.r-faq summary{cursor:pointer;color:var(--bone);font-size:15.5px}
+.r-faq h3{color:var(--gold);font-family:var(--f-lat);font-size:12px;letter-spacing:.3em;margin:34px 0 4px;font-weight:400}
 .r-note{font-size:13px!important}
 </style>
 </head>
@@ -50,38 +82,87 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="d-btn d-btn-line" href="#apply">応募する</a>
   </div>
 </header>
-<main class="d-main">
-  <section class="d-hero"><div class="d-hero-bg" aria-hidden="true"></div><div class="d-wrap">
-    <p class="d-eyebrow">採用・求人情報</p><h1>Recruit</h1><p class="d-hero-sub">イノベーティブに興味のある方へ</p></div></section>
-  <div class="d-wrap">
-  <section class="r-sec"><p class="r-lead">二ツ星イノベーティブ【MAZ】出身シェフが贈る、唯一無二の時空体験。<br>地球誕生から未来を旅する物語の没入型ガストロノミー。<br>神秘の泉セノーテを模した空間、燕三条の職人が放つ「再生のテーブル」が五感すべてを揺さぶる。<br>一本の映画を鑑賞するような、一生消えない記憶に残る旅。</p></section>
-  <section class="r-sec"><p class="d-sub">WHY ETHICA</p><h2>ETHICAで働くメリット</h2><div class="r-grid">
-    <div class="r-card"><h3>手取り・時給の昇給</h3><ul><li><strong>手取り額UP：</strong>業務委任制度により、平均月5万円の増収を実現。<br><span class="r-note">※現在、全スタッフがこの制度を選択しています。</span></li><li><strong>インセンティブ：</strong>店舗利益の0〜4％を還元（経営者視点で「成果が収入に直結」する仕組みです）</li></ul></div>
-    <div class="r-card"><h3>話題のお店</h3><ul><li>ミシュラン3年連続掲載</li><li>食べログ：3.69</li><li>Ozmall：2023年お一人様ランキング首都圏6位</li><li>Google評価：星4.4</li><li>Tokyo Sustainable Seafood Summit 2023 Award</li><li>東京カレンダー：2024年1月「銀座な日、行くべき店」</li><li>東京カレンダー：2022年12月「2022年、輝いた店」</li></ul></div>
-    <div class="r-card"><h3>キャリアアップ</h3><p>意欲のある方には重要な仕事をどんどん任せて、経営にも携わっていただきます。今後も店舗を拡大していくので、その分だけ活躍のチャンスも豊富です。経営やマーケティングのノウハウを学んでいただくことで、独立や起業の糧となります。「自分がいたから星が取れた」という実績になります。</p><p>また、在籍中に名前をしっかりと売り出したり、顧客に対して「仲間が旅立ちます、応援して下さい」とお願いしたり、コラボをしたり、取引先を紹介したり、銀行融資や出資の相談などの支援も豊富です。</p></div>
+<main class="d-main rc">
+  <section class="rc-hero"><div class="rc-hero-bg" aria-hidden="true"></div><div class="d-wrap">
+    <p class="rc-kicker">RECRUIT ── ETHICA GINZA</p>
+    <h1>本気で、<br><em>星</em>を獲りに行く。</h1>
+    <p class="rc-quote">「あなたのおかげで、星が取れた。」<br>そう言い合える仲間を探しています。</p>
+    <div class="rc-hero-cta"><a class="rc-btn rc-btn-fill" href="#apply">応募する</a><a class="rc-btn rc-btn-line" href="#jobs">募集職種を見る</a></div>
   </div></section>
-  <section class="r-sec"><p class="d-sub">OPEN POSITIONS</p><h2>現在募集中の求人</h2>
-    <div class="r-job"><h3>サービススタッフ</h3><p class="r-pay">月給30万円〜45万円（経験・能力をダイレクトに反映します）</p><ul><li><strong>手取り額UP：</strong>業務委任制度により、平均月5万円の増収を実現。<br><span class="r-note">※現在、全スタッフがこの制度を選択しています。</span></li><li><strong>インセンティブ：</strong>店舗利益の0〜4％を還元（経営者視点で「成果が収入に直結」する仕組みです）</li><li>昇給：年1回 ／ 賞与：年1回</li></ul><a class="d-btn d-btn-line" href="#apply">応募する</a></div>
-    <div class="r-job"><h3>料理長候補（シェフ・板長など）</h3><p class="r-pay">スーシェフ：月給35万円〜50万円（経験・能力をダイレクトに反映します）</p><p class="r-note">※2027年9月、日本橋の新店舗のシェフ就任キャリアパスの最有力候補となります。</p><ul><li><strong>手取り額UP：</strong>業務委任制度により、平均月5万円の増収を実現。<br><span class="r-note">※現在、全スタッフがこの制度を選択しています。</span></li><li><strong>インセンティブ：</strong>店舗利益の0〜4％を還元（経営者視点で「成果が収入に直結」する仕組みです）</li><li>昇給：年1回 ／ 賞与：年1回</li></ul><a class="d-btn d-btn-line" href="#apply">応募する</a></div>
-    <div class="r-job"><h3>調理スタッフ</h3><p class="r-pay">月給30万円〜40万円（経験・能力をダイレクトに反映します）</p><ul><li><strong>手取り額UP：</strong>業務委任制度により、平均月5万円の増収を実現。<br><span class="r-note">※現在、全スタッフがこの制度を選択しています。</span></li><li><strong>インセンティブ：</strong>店舗利益の0〜4％を還元（経営者視点で「成果が収入に直結」する仕組みです）</li><li>昇給：年1回 ／ 賞与：年1回</li></ul><a class="d-btn d-btn-line" href="#apply">応募する</a></div>
-    <div class="r-job"><h3>洗い場・皿洗い</h3><p class="r-pay">アルバイト　時給1,300円〜1,500円</p><p>研修期間なし／昇給あり／交通費全額支給<br>応募資格：調理経験はないが、いつかETHICAの調理場で働きたいという方にも最適</p><ul><li><strong>手取り額UP：</strong>業務委任制度により、平均月5万円の増収を実現。<br><span class="r-note">※現在、全スタッフがこの制度を選択しています。</span></li><li>社員登用制度あり（調理スタッフへ）</li></ul><a class="d-btn d-btn-line" href="#apply">応募する</a></div>
+
+  <div class="d-wrap">
+  <section class="rc-sec rc-manifesto"><p class="rc-label">MESSAGE</p>
+    <h2>ここは、腕で評価される場所。</h2>
+    <p>銀座 ETHICA は、地球46億年の物語を一皿ずつ旅するイノベーティブ・レストランです。ミシュランガイドに3年連続で掲載されました。けれど、私たちの目標はその先にあります。</p>
+    <p>年次も、前職の肩書も関係ありません。結果を出した人が、すぐに報われる。利益はチームで分け合う。独立を目指す人には、経営のすべてを開いて支援する。</p>
+    <p>楽な職場ではありません。ただ、本気の人にとってこれ以上の場所はないと、私たちは信じています。</p>
+    <p class="sign">一緒に、星を獲りに行きましょう。</p>
   </section>
-  <section class="r-sec r-faq"><p class="d-sub">Q&amp;A</p><h2>よくある質問</h2>
-    <h3>採用や職場に関して</h3>
-    <details><summary>いつから働けるの？</summary><p>すぐにでも可能です。合流が少し先になる方でも、もちろん相談可能です。お気軽にご相談下さい。</p></details>
-    <details><summary>どういう人を求めているの？</summary><p>店名にもある通り、エシカル（倫理的）なお店を目指しております。特に社訓として下記の4つの要素を重視しております。<br>・利他的<br>・顧客第一主義<br>・ポジティブ<br>・オープンマインド</p></details>
-    <details><summary>イノベーティブは初めてだけど大丈夫？</summary><p>99％の方にとって、ペルー料理をベースにしたイノベーティブは初めてですのでご安心下さい。コースは1つのみなので、覚える量も少ないです。シーズン毎にコース内容を変えていて、事前に試食会と料理説明の意見出しやテンプレ作成などを行なっています。</p></details>
-    <details><summary>キャリアとして良い選択なのか？</summary><p>当店は個人経営の小さなお店です。<br>・人数も少なく、現場に任せる裁量権が大きく経営にも深く関わっていただきます。<br>・イベントなど様々なことにチャレンジができます。<br>・ミシュラン掲載など、急成長中のお店なので、「自分がいたからETHICAはあそこまで成長できたんだ」と振り返った時に言うことができます。<br>・マイナージャンルや新概念における「差別化」に対するお客様の反応を学んでいただけます。<br>・通常の飲食店では学べない海外仕込みの経営学やマーケティングを学べます。<br>・オーナーは資本主義を攻略することを宿命としています。従業員に対しても、社会の歯車の一部として居続けるのではなく、いつか独立し成功できるように導きます。<br>・独立の意思がなかったとしても、問題はありません。単純に接客が好きという方も大歓迎です。その場合、社会から搾取されないように最低限の防護策を提供します。</p></details>
-    <h3>シェフについて</h3>
-    <details><summary>シェフはどんな経歴？</summary><p>・Instituto Superior Expro（ペルーの調理師専門学校）卒業<br>・調理経験 16年<br>・ペルーでの生活年数 15年<br>・ペルーでの就業年数 4年<br>・虎峰 2年間<br>・MAZ 3年間</p></details>
-    <h3>オーナーについて</h3>
-    <details><summary>オーナーはどんな経歴？</summary><p>オーナーは経営と金融のスペシャリスト。【慶應義塾大学経済学部】と【世界大学ランキング経営学の部門において世界ランク6位のボッコーニ大学の国際経営学部】を飛び級で同時卒業。中学時代に吹奏楽で全米1位受賞、大学時代は体育会と塾の経営を兼任、卒業後は外資系投資銀行にて4年間金融マーケットでのトレーディングを経て、2019年に不動産デベロッパーを副業として起業。環境に優しいZero Emission Houseのマンションを建てたり、日本の労働生産性を底上げするインフラ構築をしています。</p></details>
-    <details><summary>オーナーはどんな性格？</summary><p>最近流行りのMBTI診断ではINTJ（建築家）という性格。責任感がものすごく、理想を抱き、その理想に対して理論的にアプローチを取る。誰が言ってるかを重視するのではなく、何を言っているのかを重視し、常に物事を客観的にみて判断する性格。31歳ということもあり、柔軟でオープンマインドなので風通しが良いのが特徴。</p></details>
-    <h3>給与やボーナスに関して</h3>
-    <details><summary>手取りはなぜ増えるの？</summary><p>業務委任契約と個人事業主のシステムを利用し、手続きややり方まで完全にサポートします。600万円の年収があったとしても、300万円程度の経費を計上し、税務上は差額の300万円の儲けとして申告します。つまり、300万円分の「年金と保険と税金」しか払わなくて済むようになります。面倒で複雑なのでこの手法を取らない方が多いですが、その面倒な作業も自動化させることができます。この手法を用いて、当店の全スタッフは毎月の手取りを5万円〜10万円程度増やすことに成功しています。</p></details>
-    <details><summary>ボーナスはどういう仕組み？</summary><p>お店の利益の原則0〜4％前後を支給します。お店全体としての目標達成率やスタッフ間での360度評価によって、多少数字が前後します。共通の目標をお店全体で持つことにより、足の引っ張り合いではなくチームワークが機能します。また、年に一度「360度評価」という他のスタッフから1年間の評価を受けるので、エシカル（倫理的）なコミュニケーションを日々心がけるように機能します。</p></details>
+
+  <section class="rc-sec"><p class="rc-label">NUMBERS</p><h2>本気には、本気で応える。</h2>
+    <div class="rc-big">
+      <div class="rc-stat"><b>0〜4<small>%</small></b><span>店舗利益をスタッフに還元。<br>インセンティブがベース給を超えることも</span></div>
+      <div class="rc-stat"><b>3<small>ヶ月で</small>2<small>回</small></b><span>昇給した実績。<br>昇給は年1回ではなく、実力を示した瞬間に</span></div>
+      <div class="rc-stat"><b>3<small>年連続</small></b><span>ミシュランガイド東京 掲載</span></div>
+    </div>
   </section>
-  <section class="r-sec" id="apply"><p class="d-sub">APPLY</p><h2>応募フォーム</h2>
+
+  <section class="rc-sec"><p class="rc-label">WHY ETHICA</p><h2>ETHICAで働く、5つの理由。</h2>
+    <ol class="rc-rules">
+      <li><h3>完全な実力主義</h3><p>年齢・社歴・前職は問いません。任せる仕事も、報酬も、出した結果で決まります。意欲のある人には、重要な仕事をどんどん任せます。</p></li>
+      <li><h3>実力を示した瞬間に、すぐ昇給</h3><p>昇給を年に一度の査定まで待たせることはありません。3ヶ月以内に2回昇給したスタッフもいます。</p></li>
+      <li><h3>店舗利益の0〜4％を還元</h3><p>お店の利益を、目標の達成率とスタッフ同士の360度評価に応じて分け合います。インセンティブがベース給を超えることもあります。共通の目標があるから、足の引っ張り合いではなくチームワークが生まれます。</p></li>
+      <li><h3>手取りが、一般的な飲食店より高い</h3><p>ETHICA独自の報酬設計により、手取りが多くなる働き方を選べます。現在、全スタッフがこの働き方を選んでいます。手続きはお店が完全にサポートします。詳しくは面接でご説明します。</p></li>
+      <li><h3>経営者目線と、独立の支援</h3><p>経営・マーケティングに深く関わり、通常の飲食店では学べないノウハウを身につけられます。独立する時は、お客様へのご紹介、コラボ、取引先の紹介、融資や出資の相談まで支援します。独立を考えていない方も、もちろん歓迎です。</p></li>
+    </ol>
+  </section>
+
+  <section class="rc-sec"><div class="rc-split">
+    <div><p class="rc-label">TEAM</p><h2>一流店の出身者と、<br>世界中の仲間が集う。</h2>
+      <p>ETHICA には、ミシュランの星付き店で腕を磨いた料理人・サービスマンが集まっています。</p>
+      <ul class="rc-alumni"><li>MAZ<span class="st" aria-label="ミシュラン2つ星">★★</span></li><li>ジョエル・ロブション<span class="st" aria-label="ミシュラン3つ星">★★★</span></li><li>アサヒナ ガストロノーム<span class="st" aria-label="ミシュラン2つ星">★★</span></li><li>レスピラシオン<span class="st" aria-label="ミシュラン2つ星">★★</span></li><li>NARISAWA<span class="st" aria-label="ミシュラン2つ星">★★</span></li><li>ラルジャン<span class="st" aria-label="ミシュラン1つ星">★</span></li></ul>
+      <p>出身国も、ペルー・スイス・アメリカ・フィリピン・メキシコとさまざま。国際色豊かなチームで、世界基準の仕事に触れられます。</p>
+      <p>エグゼクティブシェフは、二ツ星 MAZ 出身の松苗シェフ。ペルーで15年暮らし、ペルーの料理学校 Instituto Superior Expro を卒業。調理経験は16年、虎峰・MAZ を経て ETHICA の厨房に立っています。</p>
+    </div>
+    <img class="rc-img" src="../assets/img/cave_counter_1440.webp" alt="ETHICA の厨房内カウンター" loading="lazy">
+  </div></section>
+
+  <section class="rc-sec"><p class="rc-label">CAREER</p><h2>2027年冬、<br>東京ミッドタウンに新店舗。</h2>
+    <p>ETHICA はこれからも店舗を広げていきます。2027年冬には、東京ミッドタウンに新店舗を開業予定です。料理長候補の方は、新店舗のシェフ就任の最有力候補となります。店が増える分だけ、任せられるポジションも増えていきます。</p>
+  </section>
+
+  <section class="rc-sec"><p class="rc-label">RECOGNITION</p><h2>お店の実績</h2>
+    <ul class="rc-press">
+      <li>ミシュランガイド東京 3年連続掲載</li><li>食べログ 3.69</li><li>Google 評価 星4.4</li>
+      <li>Ozmall 2023年 お一人様ランキング 首都圏6位</li><li>Tokyo Sustainable Seafood Summit 2023 Award</li>
+      <li>東京カレンダー 2024年1月「銀座な日、行くべき店」</li><li>東京カレンダー 2022年12月「2022年、輝いた店」</li>
+    </ul>
+  </section>
+
+  <section class="rc-sec" id="jobs"><p class="rc-label">OPEN POSITIONS</p><h2>募集中の職種</h2>
+    <div class="r-job"><span class="r-tag">新店舗シェフ候補</span><h3>料理長候補（シェフ・板長など）</h3><p class="r-pay">スーシェフ：月給35万円〜50万円＋利益還元</p><p>2027年冬、東京ミッドタウンに開業予定の新店舗で、シェフ就任の最有力候補となります。</p><ul><li><strong>手取りが高い：</strong>ETHICA独自の報酬設計で、一般的な飲食店より手取りが多くなる働き方を選べます（現在、全スタッフが選択。詳しくは面接で）</li><li><strong>即昇給：</strong>年1回ではなく、実力を示した瞬間に昇給（3ヶ月以内に2回昇給した実績あり）</li><li><strong>利益還元：</strong>店舗利益の0〜4％を支給。インセンティブがベース給を超えることもあります</li></ul><a class="rc-btn rc-btn-line" href="#apply">この職種に応募する</a></div>
+    <div class="r-job"><h3>調理スタッフ</h3><p class="r-pay">月給30万円〜40万円＋利益還元</p><ul><li><strong>手取りが高い：</strong>ETHICA独自の報酬設計で、一般的な飲食店より手取りが多くなる働き方を選べます（現在、全スタッフが選択。詳しくは面接で）</li><li><strong>即昇給：</strong>年1回ではなく、実力を示した瞬間に昇給（3ヶ月以内に2回昇給した実績あり）</li><li><strong>利益還元：</strong>店舗利益の0〜4％を支給。インセンティブがベース給を超えることもあります</li></ul><a class="rc-btn rc-btn-line" href="#apply">この職種に応募する</a></div>
+    <div class="r-job"><h3>サービススタッフ</h3><p class="r-pay">月給30万円〜45万円＋利益還元</p><ul><li><strong>手取りが高い：</strong>ETHICA独自の報酬設計で、一般的な飲食店より手取りが多くなる働き方を選べます（現在、全スタッフが選択。詳しくは面接で）</li><li><strong>即昇給：</strong>年1回ではなく、実力を示した瞬間に昇給（3ヶ月以内に2回昇給した実績あり）</li><li><strong>利益還元：</strong>店舗利益の0〜4％を支給。インセンティブがベース給を超えることもあります</li></ul><a class="rc-btn rc-btn-line" href="#apply">この職種に応募する</a></div>
+    <div class="r-job"><span class="r-tag">アルバイト</span><h3>洗い場・皿洗い</h3><p class="r-pay">時給1,300円〜1,500円</p><p>研修期間なし／昇給あり／交通費全額支給<br>調理経験がなくても、いつか ETHICA の厨房に立ちたい方に最適です。</p><ul><li><strong>手取りが高い：</strong>ETHICA独自の報酬設計で、一般的な飲食店より手取りが多くなる働き方を選べます（現在、全スタッフが選択。詳しくは面接で）</li><li><strong>社員登用あり：</strong>調理スタッフへの登用制度があります</li></ul><a class="rc-btn rc-btn-line" href="#apply">この職種に応募する</a></div>
+    <p class="r-note">※月給は経験・能力をダイレクトに反映して決めます。</p>
+  </section>
+
+  <section class="rc-sec r-faq"><p class="rc-label">Q&amp;A</p><h2>よくある質問</h2>
+    <h3>WORK</h3>
+    <details><summary>いつから働けますか？</summary><p>すぐにでも可能です。合流が少し先になる方も、ご相談ください。</p></details>
+    <details><summary>どんな人を求めていますか？</summary><p>本気で星を獲りに行きたい方です。店名の通りエシカル（倫理的）なお店を目指しており、社訓として「利他的」「顧客第一主義」「ポジティブ」「オープンマインド」の4つを大切にしています。</p></details>
+    <details><summary>イノベーティブもペルー料理も初めてですが、大丈夫ですか？</summary><p>ほとんどの方が初めてですので、ご安心ください。シーズンごとにコースを変えており、その前に試食会と料理説明のすり合わせを行っています。</p></details>
+    <details><summary>キャリアとして良い選択ですか？</summary><p>少人数のお店なので裁量が大きく、経営にも深く関わっていただきます。イベントなど新しい挑戦も多く、「自分がいたから ETHICA はここまで来られた」と言える経験になります。独立を目指す方には、経営とマーケティングのノウハウを開いて支援します。</p></details>
+    <h3>PAY</h3>
+    <details><summary>なぜ手取りが高くなるのですか？</summary><p>ETHICA独自の報酬設計によるものです。現在、全スタッフがこの働き方を選んでいます。手続きはお店が完全にサポートしますので、面倒なことはありません。詳しい仕組みは面接でご説明します。</p></details>
+    <details><summary>インセンティブはどういう仕組みですか？</summary><p>お店の利益の0〜4％前後を支給します。お店全体の目標の達成率と、スタッフ同士の360度評価によって金額が決まります。インセンティブがベース給を超えることもあります。</p></details>
+    <details><summary>昇給はいつですか？</summary><p>年に一度の査定を待つことはありません。実力を示した時点で昇給します。3ヶ月以内に2回昇給したスタッフもいます。</p></details>
+    <h3>OWNER</h3>
+    <details><summary>オーナーはどんな人ですか？</summary><p>経営と金融のスペシャリストです。慶應義塾大学経済学部と、ボッコーニ大学国際経営学部を飛び級で同時卒業。外資系投資銀行で4年間トレーディングを経験した後、2019年に不動産デベロッパーを起業しました。MBTI は INTJ（建築家）。誰が言ったかではなく何を言ったかを重視し、物事を客観的に判断します。柔軟でオープンマインドなので、風通しの良さが特徴です。</p></details>
+  </section>
+
+  <section class="rc-sec" id="apply"><p class="rc-label">APPLY</p><h2>応募する</h2>
+    <p>本気で星を獲りに行きたい方からのご応募を、お待ちしています。</p>
     <style>
 .rf{display:grid;gap:22px;margin-top:8px}
 .rf label,.rf legend{display:block;color:var(--bone);font-size:14px;margin:0 0 8px;padding:0}
