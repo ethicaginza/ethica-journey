@@ -29,7 +29,6 @@ localStorage.setItem(k,t);if(t!==p){location.replace(t+location.hash);}}}catch(e
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#060807">
 <link rel="icon" href="assets/img/logo.png">
-<link rel="alternate" hreflang="ja" href="https://ethicatokyo.jp/"><link rel="alternate" hreflang="en" href="https://ethicatokyo.jp/en.html"><link rel="alternate" hreflang="zh-Hans" href="https://ethicatokyo.jp/zh-cn.html"><link rel="alternate" hreflang="zh-Hant" href="https://ethicatokyo.jp/zh-tw.html"><link rel="alternate" hreflang="ko" href="https://ethicatokyo.jp/ko.html"><link rel="alternate" hreflang="es" href="https://ethicatokyo.jp/es.html">
 <link rel="preload" as="image" media="(max-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_cenote_m720.webp 720w, assets/img/hero_cenote_m1031.webp 1031w" imagesizes="(max-aspect-ratio: 1031/1850) 56vh, 100vw" fetchpriority="low">
 <link rel="preload" as="image" media="not all and (max-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_cenote_1440.webp 1440w, assets/img/hero_cenote_2560.webp 2560w" imagesizes="100vw" fetchpriority="low">
 <link rel="preload" as="image" href="assets/img/ss1_2048.webp" fetchpriority="high">
@@ -39,6 +38,8 @@ localStorage.setItem(k,t);if(t!==p){location.replace(t+location.hash);}}}catch(e
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/site.css?v=64">
 <link rel="stylesheet" href="assets/timeline.css?v=62">
+<link rel="stylesheet" href="assets/v2.css?v=7">
+<link rel="alternate" hreflang="ja" href="https://ethicatokyo.jp/"><link rel="alternate" hreflang="en" href="https://ethicatokyo.jp/en.html"><link rel="alternate" hreflang="zh-Hans" href="https://ethicatokyo.jp/zh-cn.html"><link rel="alternate" hreflang="zh-Hant" href="https://ethicatokyo.jp/zh-tw.html"><link rel="alternate" hreflang="ko" href="https://ethicatokyo.jp/ko.html"><link rel="alternate" hreflang="es" href="https://ethicatokyo.jp/es.html">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -51,14 +52,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="brand" href="#" aria-label="Volver al inicio de la página de ETHICA"><img src="assets/img/logo.png" alt="" width="34" height="35"><img class="wm" src="assets/img/wordmark_64.webp" alt="ETHICA" width="358" height="64"></a>
     <a class="mich" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" aria-label="Seleccionado en la Guía MICHELIN Tokio durante 3 años consecutivos (página de ETHICA en OMAKASE)"><img src="assets/img/michelin_2026.png" alt="MICHELIN 2026" width="192" height="192"></a>
     <nav aria-label="Menú de la página">
-      <a class="nl" href="#chapters">Capítulos del tiempo</a><a class="nl" href="#chef">Chef</a><a class="nl" href="#courses">Menús</a><a class="nl" href="drinks/">Bebidas</a><a class="nl" href="#access">Cómo llegar</a>
+      <a class="nl" href="#chapters">Capítulos del tiempo</a><a class="nl" href="#scenes">Ocasiones</a><a class="nl" href="#courses">Menús</a><a class="nl" href="drinks/en/">Bebidas</a><a class="nl" href="#access">Cómo llegar</a>
       <a class="btn btn-gold hdr" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="header">Ver disponibilidad<span class="arrow" aria-hidden="true">→</span></a>
       <select class="lsel" aria-label="Language" onchange="if(this.value){try{localStorage.setItem('ethica_lang',this.value)}catch(e){}location.href=this.value}"><option value="index.html">日本語</option><option value="en.html">English</option><option value="zh-cn.html">简体中文</option><option value="zh-tw.html">繁體中文</option><option value="ko.html">한국어</option><option value="es.html" selected>Español</option></select>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav"><span class="mb-l" aria-hidden="true"></span><span class="mb-t">Menú</span></button>
     </nav>
   </div>
   <nav class="mnav" id="mnav" aria-label="Menú" hidden>
-    <div class="wrap"><a href="#chapters">Capítulos del tiempo</a><a href="#chef">Chef</a><a href="#courses">Menús</a><a href="drinks/">Bebidas</a><a href="#access">Cómo llegar</a><a href="#purpose">Aniversarios y vegetarianos</a><a href="#seats">Comidas de negocios (mesas dentro de la cocina)</a><a href="#faq">Q&amp;A</a><a class="btn btn-gold btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="menu">Ver disponibilidad<span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="wrap"><a href="#concept">Un viaje por el tiempo y el sabor</a><a href="#chapters">Capítulos del tiempo</a><a href="#chef">Chef</a><a href="#space">Espacio y mesas</a><a href="#scenes">Ocasiones</a><a href="#courses">Menús y precios</a><a href="drinks/en/">Bebidas</a><a href="#faq">Q&amp;A</a><a href="#access">Cómo llegar</a><a class="btn btn-gold btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="menu">Ver disponibilidad<span class="arrow" aria-hidden="true">→</span></a></div>
   </nav>
 </header>
 
@@ -89,7 +90,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="sub">Una «experiencia gastronómica a través del tiempo» que recorre, plato a plato, los 4600 millones de años de historia de la Tierra. Un menú basado en la cocina peruana y enriquecido con técnicas francesas, servido en un espacio que evoca una cueva.</p>
     <div class="ctas" id="hero-ctas">
       <a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="hero">Ver disponibilidad<span class="arrow" aria-hidden="true">→</span></a>
-      <a class="btn btn-line" href="#courses">Ver los menús</a>
+      <a class="btn btn-line" href="#scenes">Elegir por ocasión</a>
     </div>
     <div class="proof"><ul><li><span>Chef formado en MAZ, con dos estrellas MICHELIN</span></li>
 <li><span>A 3 minutos a pie de la estación de Ginza</span></li>
@@ -101,6 +102,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li><span>A 3 minutos a pie de la estación de Ginza</span></li>
 <li><span>Cocina innovadora (cocina peruana × técnica francesa)</span></li>
 <li><span>Sala privada y barra dentro de la cocina: un solo grupo al día en cada una</span></li></ul></div>
+
+<section class="sec concept has-tbg" id="concept" aria-labelledby="concept-title" data-water-v>
+  <div class="tbg" aria-hidden="true"><div class="tbg-s"><video class="dv" muted loop playsinline preload="none" disablepictureinpicture data-src="assets/video/cenote/d_c10.mp4?v=1" data-src-w="assets/video/cenote/d_c10_w.mp4?v=1" data-poster="assets/video/cenote/d_c10.webp?v=1" data-poster-w="assets/video/cenote/d_c10_w.webp?v=1"></video><canvas class="wv"></canvas></div></div>
+  <div class="k-hbg" data-water data-water-copy aria-hidden="true">
+    <div class="stage">
+      <picture>
+        <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/hero_table_m1080.webp 1080w, assets/img/hero_table_m1440.webp 1440w, assets/img/hero_table_m1800.webp 1800w" sizes="(max-aspect-ratio: 2/3) 67vh, 100vw">
+        <img class="still" src="assets/img/hero_table_1440.webp" srcset="assets/img/hero_table_1440.webp 1440w, assets/img/hero_table_2560.webp 2560w" sizes="100vw" alt="" loading="lazy">
+      </picture>
+      <canvas></canvas>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="k-head rise"><p class="eyebrow">Philosophy</p><h2 id="concept-title">Nuestra meta: una «experiencia gastronómica a través del tiempo».</h2></div>
+    <div class="k-grid">
+      <figure class="k-img rise"><img src="assets/img/kitchen_plate.webp" alt="Plato con pétalos morados y finas líneas rojas sobre un fondo blanco y negro, como tinta flotando en el agua" loading="lazy" width="1200" height="1500"></figure>
+      <div class="k-copy rise"><p class="lede">En la carta no aparecen nombres de platos, solo nombres de épocas, como «Nacimiento de la Tierra» o «Era de los dinosaurios y gran extinción». Lo que llega a la mesa solo se descubre al tenerlo delante. Los paisajes de una Tierra recién nacida y los saberes, técnicas y especias de cada civilización se reconstruyen con técnicas actuales y se entrelazan en un menú como una sola historia. Para que las horas que pase aquí permanezcan en su memoria como algo más que una comida.</p></div>
+      <div class="k-rest rise"><p class="k-lead">Condensamos fragmentos del tiempo en cada plato, en un viaje que despierta los cinco sentidos.</p><ul class="points"><li><b>Sabor</b><span>Técnicas francesas sobre una base de cocina peruana. Lo esencial es la armonía de sabores y un hilo conductor que une del primer al último plato. Incluso ante sabores desconocidos, el aroma de las especias y un umami honesto llegan con claridad.</span></li><li><b>Tiempo</b><span>El océano de hace 3800 millones de años, la era de los dinosaurios, el comercio a través de los mares. Cada plato encierra una escena de una época pasada.</span></li><li><b>Paisaje</b><span>La quietud de las profundidades marinas, el latido de la tierra. Dibujamos en el plato el paisaje de cada época.</span></li><li><b>Vajilla y sonido</b><span>El viaje comienza envuelto en el sonido de la sala, y con cada capítulo cambia también la vajilla, creada a medida por ceramistas de todo Japón.</span></li></ul></div>
+    </div>
+  </div>
+</section>
 
 <section class="sec voyage-sec" id="chapters" aria-labelledby="tl-title">
   <div class="wrap">
@@ -252,27 +274,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec concept has-tbg" id="concept" aria-labelledby="concept-title" data-water-v>
-  <div class="tbg" aria-hidden="true"><div class="tbg-s"><video class="dv" muted loop playsinline preload="none" disablepictureinpicture data-src="assets/video/cenote/d_c10.mp4?v=1" data-src-w="assets/video/cenote/d_c10_w.mp4?v=1" data-poster="assets/video/cenote/d_c10.webp?v=1" data-poster-w="assets/video/cenote/d_c10_w.webp?v=1"></video><canvas class="wv"></canvas></div></div>
-  <div class="k-hbg" data-water data-water-copy aria-hidden="true">
-    <div class="stage">
-      <picture>
-        <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/hero_table_m1080.webp 1080w, assets/img/hero_table_m1440.webp 1440w, assets/img/hero_table_m1800.webp 1800w" sizes="(max-aspect-ratio: 2/3) 67vh, 100vw">
-        <img class="still" src="assets/img/hero_table_1440.webp" srcset="assets/img/hero_table_1440.webp 1440w, assets/img/hero_table_2560.webp 2560w" sizes="100vw" alt="" loading="lazy">
-      </picture>
-      <canvas></canvas>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="k-head rise"><p class="eyebrow">Philosophy</p><h2 id="concept-title">Nuestra meta: una «experiencia gastronómica a través del tiempo».</h2></div>
-    <div class="k-grid">
-      <figure class="k-img rise"><img src="assets/img/kitchen_plate.webp" alt="Plato con pétalos morados y finas líneas rojas sobre un fondo blanco y negro, como tinta flotando en el agua" loading="lazy" width="1200" height="1500"></figure>
-      <div class="k-copy rise"><p class="lede">En la carta no aparecen nombres de platos, solo nombres de épocas, como «Nacimiento de la Tierra» o «Era de los dinosaurios y gran extinción». Lo que llega a la mesa solo se descubre al tenerlo delante. Los paisajes de una Tierra recién nacida y los saberes, técnicas y especias de cada civilización se reconstruyen con técnicas actuales y se entrelazan en un menú como una sola historia. Para que las horas que pase aquí permanezcan en su memoria como algo más que una comida.</p></div>
-      <div class="k-rest rise"><p class="k-lead">Condensamos fragmentos del tiempo en cada plato, en un viaje que despierta los cinco sentidos.</p><ul class="points"><li><b>Sabor</b><span>Técnicas francesas sobre una base de cocina peruana. Lo esencial es la armonía de sabores y un hilo conductor que une del primer al último plato. Incluso ante sabores desconocidos, el aroma de las especias y un umami honesto llegan con claridad.</span></li><li><b>Tiempo</b><span>El océano de hace 3800 millones de años, la era de los dinosaurios, el comercio a través de los mares. Cada plato encierra una escena de una época pasada.</span></li><li><b>Paisaje</b><span>La quietud de las profundidades marinas, el latido de la tierra. Dibujamos en el plato el paisaje de cada época.</span></li><li><b>Vajilla y sonido</b><span>El viaje comienza envuelto en el sonido de la sala, y con cada capítulo cambia también la vajilla, creada a medida por ceramistas de todo Japón.</span></li></ul></div>
-    </div>
-  </div>
-</section>
-
 <section class="sec" id="space" aria-labelledby="space-title">
   <div class="wrap space">
     <div class="photos rise">
@@ -292,6 +293,112 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li><b>Sala privada · Experiencia Gastronómica</b><span>De 2 a 4 personas, un solo grupo al día. Dentro de la cocina. Para comidas de negocios</span></li></ul>
       <details class="mapd"><summary>Ver el plano</summary><img src="assets/img/floormap.webp" alt="Plano del local. Desde la entrada se suceden las mesas; al fondo, la barra, la cocina y la sala privada dentro de la cocina" loading="lazy" width="900" height="1923"></details>
     </aside>
+  </div>
+</section>
+
+<section class="sec alt scenes-sec" id="scenes" aria-labelledby="scenes-title">
+  <div class="wrap">
+    <div class="sc-head rise">
+      <p class="eyebrow">Occasions</p>
+      <h2 id="scenes-title">Una noche que ningún restaurante habitual puede crear.</h2>
+      <p class="lede">Deje en nuestras manos la organización de su noche especial.</p>
+    </div>
+    <div class="sc rise" data-scenes data-rec="Recomendado para su ocasión">
+      <div class="sc-tabs" role="tablist" aria-label="Ocasiones">
+        <button type="button" class="sc-tab" role="tab" id="sc-t-first" aria-controls="sc-p-first" aria-selected="true" data-scene="first">Primera visita</button><button type="button" class="sc-tab" role="tab" id="sc-t-repeat" aria-controls="sc-p-repeat" aria-selected="false" data-scene="repeat">Clientes que repiten</button><button type="button" class="sc-tab" role="tab" id="sc-t-anniv" aria-controls="sc-p-anniv" aria-selected="false" data-scene="anniv">Cumpleaños y aniversarios</button><button type="button" class="sc-tab" role="tab" id="sc-t-date" aria-controls="sc-p-date" aria-selected="false" data-scene="date">Cita</button><button type="button" class="sc-tab" role="tab" id="sc-t-biz" aria-controls="sc-p-biz" aria-selected="false" data-scene="biz">Comidas de negocios</button><button type="button" class="sc-tab" role="tab" id="sc-t-short" aria-controls="sc-p-short" aria-selected="false" data-scene="short">Con planes después</button>
+      </div>
+      <article class="sc-panel" role="tabpanel" id="sc-p-first" aria-labelledby="sc-t-first" data-scene="first" data-course="collection" data-dock="Ver disponibilidad de la Colección" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/d2_tri.webp" alt="Plato en tres recipientes sobre una mesa de resina azul" loading="lazy" width="1400" height="933" style="object-position:45% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">Para su primera visita</p>
+          <h3>Para empezar, la historia de ETHICA tal cual.</h3>
+          <p class="d">La Colección ETHICA recorre los 4.600 millones de años de la Tierra en 8 platos. Si duda, empiece por aquí.</p>
+          <p class="sc-fact">Nuestro menú más elegido.</p>
+          <dl class="sc-spec">
+            <div><dt>Recomendado</dt><dd>Colección ETHICA</dd></div>
+            <div><dt>Mesa y comensales</dt><dd>Mesas · De 1 a 8 personas</dd></div>
+            <div><dt>Menús</dt><dd>8 capítulos</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_first">Ver disponibilidad de la Colección<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="#courses"><span>Ver todos los menús</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+<article class="sc-panel" role="tabpanel" id="sc-p-repeat" aria-labelledby="sc-t-repeat" data-scene="repeat" data-course="grand" data-dock="Ver disponibilidad de la Gran Colección" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/d2_caviar.webp" alt="Círculos blancos con borde rojo y caviar sobre vajilla negra" loading="lazy" width="1400" height="785" style="object-position:46% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">Desde su segunda visita</p>
+          <h3>En su segunda visita, un viaje un paso más profundo.</h3>
+          <p class="d">La Gran Colección ETHICA amplía la historia de la Colección a 9 capítulos, con ingredientes excepcionales. Para noches en las que desee viajar un poco más lejos y más hondo.</p>
+          <p class="sc-fact">Los ingredientes cambian con la temporada y el mercado: un paisaje distinto al de la vez anterior.</p>
+          <dl class="sc-spec">
+            <div><dt>Recomendado</dt><dd>Gran Colección ETHICA</dd></div>
+            <div><dt>Mesa y comensales</dt><dd>Mesas · De 1 a 8 personas</dd></div>
+            <div><dt>Menús</dt><dd>9 capítulos</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_repeat">Ver disponibilidad de la Gran Colección<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="#seats"><span>Ver la mesa de un solo grupo al día dentro de la cocina</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+<article class="sc-panel" role="tabpanel" id="sc-p-anniv" aria-labelledby="sc-t-anniv" data-scene="anniv" data-course="anniversary" data-dock="Ver disponibilidad del menú de aniversario" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/d_pink.webp" alt="Plato rosado que florece sobre un recipiente de roca" loading="lazy" width="1000" height="1056" style="object-position:50% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">Para cumpleaños y aniversarios</p>
+          <h3>Al final de un viaje de 4.600 millones de años, un plato para celebrar.</h3>
+          <p class="d">Celebramos con los 9 capítulos de la Gran Colección ETHICA, con ingredientes excepcionales, y un plato con un mensaje pintado a mano. Si lo desea, también podemos preparar un «ramo eterno» de Ginza Calon.</p>
+          <p class="sc-fact">Para un día especial, ingredientes excepcionales.</p>
+          <dl class="sc-spec">
+            <div><dt>Recomendado</dt><dd>Menú de Cumpleaños y Aniversario</dd></div>
+            <div><dt>Mesa y comensales</dt><dd>Mesas · Desde 2 personas · Con plato de mensaje</dd></div>
+            <div><dt>Menús</dt><dd>9 capítulos</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_anniv">Ver disponibilidad del menú de aniversario<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="#c-chefs"><span>Solo para dos: la Barra del Chef</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+<article class="sc-panel" role="tabpanel" id="sc-p-date" aria-labelledby="sc-t-date" data-scene="date" data-course="collection" data-dock="Ver disponibilidad de la Colección" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/interior.webp" alt="Interior como una cueva, con mesas de madera junto a paredes de roca" loading="lazy" width="1920" height="1280" style="object-position:58% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">Para una cita</p>
+          <h3>Lo que viene después solo se revela cuando llega el plato.</h3>
+          <p class="d">La carta solo muestra los nombres de las eras. Cada plato abre una nueva conversación entre ustedes dos. Viva el viaje de 8 capítulos en una mesa que parece una cueva; dentro de la cocina está también la Barra del Chef, para un solo grupo al día de hasta dos personas.</p>
+          <p class="sc-fact">Para una primera cita o para una noche más entre ustedes.</p>
+          <dl class="sc-spec">
+            <div><dt>Recomendado</dt><dd>Colección ETHICA</dd></div>
+            <div><dt>Mesa y comensales</dt><dd>Mesas · De 1 a 8 personas</dd></div>
+            <div><dt>Menús</dt><dd>8 capítulos</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_date">Ver disponibilidad de la Colección<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="#c-chefs"><span>Para una mesa de un solo grupo al día: la Barra del Chef</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+<article class="sc-panel" role="tabpanel" id="sc-p-biz" aria-labelledby="sc-t-biz" data-scene="biz" data-course="gastro" data-dock="Ver disponibilidad en la sala privada" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/cave_private2_1440.webp" alt="Sala privada rodeada de paredes de roca, con una mesa de resina azul iluminada y sofás enfrentados" loading="lazy" width="1440" height="960" style="object-position:55% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">Para comidas de negocios</p>
+          <h3>Una sala privada dentro de la cocina, un solo grupo al día.</h3>
+          <p class="d">A solo 30 cm de la zona de emplatado. Reciba a 2–4 invitados en una sala privada dentro de la cocina, con 9 capítulos creados con ingredientes que rara vez llegan al mercado y piezas maduradas.</p>
+          <p class="sc-fact">Seleccionado en la Guía MICHELIN Tokio durante 3 años consecutivos. A 3 minutos a pie de la estación de Ginza.</p>
+          <dl class="sc-spec">
+            <div><dt>Recomendado</dt><dd>Experiencia Gastronómica</dd></div>
+            <div><dt>Mesa y comensales</dt><dd>Sala privada dentro de la cocina · De 2 a 4 personas · Un solo grupo al día</dd></div>
+            <div><dt>Menús</dt><dd>9 capítulos</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_biz">Ver disponibilidad en la sala privada<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="tel:+81362287313" data-cta="scene_biz_tel"><span>Consultar por teléfono (solo en japonés, 12:00–17:00)</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+<article class="sc-panel" role="tabpanel" id="sc-p-short" aria-labelledby="sc-t-short" data-scene="short" data-course="short" data-dock="Ver disponibilidad del Menú Breve" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/d2_pour.webp" alt="El instante en que se vierte un líquido azul en vajilla blanca y negra" loading="lazy" width="1400" height="785" style="object-position:40% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">Para noches con planes después</p>
+          <h3>5 capítulos, para quedarse en su punto justo.</h3>
+          <p class="d">Un menú breve nacido para quienes tienen planes después o prefieren centrarse en la bebida. De martes a viernes desde las 17:30; sábados y domingos desde las 18:00.</p>
+          <p class="sc-fact">Calcule alrededor de 1,5 horas en la mesa.</p>
+          <dl class="sc-spec">
+            <div><dt>Recomendado</dt><dd>Menú Breve</dd></div>
+            <div><dt>Mesa y comensales</dt><dd>Mesas · De 1 a 8 personas</dd></div>
+            <div><dt>Menús</dt><dd>5 capítulos</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_short">Ver disponibilidad del Menú Breve<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="drinks/en/"><span>Ver la carta de bebidas</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+      
+    </div>
   </div>
 </section>
 
@@ -335,7 +442,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="chap">9 capítulos<span class="sep"> · </span>Barra privada dentro de la cocina · De 1 a 2 personas · Un solo grupo al día</p>
   <p class="d">Una barra dentro de la cocina para un solo grupo al día. Sobre la base de la Gran Colección, el chef incorpora cortes más exclusivos e ingredientes del día, y termina ante usted los 9 capítulos.</p>
   <p class="pr"><span class="price">27,800</span><small>impuestos incluidos</small></p>
-  <a class="btn btn-line btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="card_chefs">Ver disponibilidad en la barra<span class="arrow" aria-hidden="true">→</span></a><p class="basis">En la página de reservas, selecciónelo como opción dentro de la «Gran Colección» (cena y almuerzo).</p></div>
+  <a class="btn btn-line btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="card_chefs">Ver disponibilidad en la barra<span class="arrow" aria-hidden="true">→</span></a></div>
 </article>
       <article class="seat rise" id="c-gastro">
   <img src="assets/img/hand_place.webp" alt="Manos ajustando un plato sobre una roca" loading="lazy" width="1600" height="1067">
@@ -343,7 +450,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="chap">9 capítulos<span class="sep"> · </span>Sala privada dentro de la cocina · De 2 a 4 personas · Un solo grupo al día</p>
   <p class="d">Una sala privada dentro de la cocina para un solo grupo al día. 9 capítulos con ingredientes que rara vez llegan al mercado y piezas maduradas, a solo 30 cm del pase.</p>
   <p class="pr"><span class="price">29,800</span><small>impuestos incluidos</small></p>
-  <a class="btn btn-line btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="card_gastro">Ver disponibilidad en la sala privada<span class="arrow" aria-hidden="true">→</span></a><p class="basis">En la página de reservas, selecciónelo como opción dentro de la «Gran Colección» (cena y almuerzo).</p></div>
+  <a class="btn btn-line btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="card_gastro">Ver disponibilidad en la sala privada<span class="arrow" aria-hidden="true">→</span></a></div>
 </article>
     </div>
     <div class="sub-head rise" id="purpose"><h3>Para celebraciones y necesidades alimentarias</h3></div>
@@ -365,6 +472,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a class="btn btn-line btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="card_veg">Ver disponibilidad<span class="arrow" aria-hidden="true">→</span></a>
 </article>
     </div>
+    <aside class="pairing rise" aria-labelledby="pairing-title"><div class="pg-head"><p class="use">Pairing</p><h3 id="pairing-title">Una copa para cada plato.</h3><p class="d">Tres maridajes, incluido uno sin alcohol.</p><a class="sc-alt" href="drinks/en/"><span>Ver la carta de bebidas</span><span class="arrow" aria-hidden="true">→</span></a></div><dl class="pg-list"><div><dt>Maridaje sin alcohol</dt><dd><span class="price">9,800</span></dd></div><div><dt>Maridaje ETHICA</dt><dd><span class="price">14,800</span></dd></div><div><dt>Gran Maridaje<small>Con la Gran Colección, la Barra del Chef o la Experiencia Gastronómica</small></dt><dd><span class="price">19,800</span></dd></div></dl></aside>
     <p class="fine">Todos los precios son por persona, impuestos incluidos.<br>*«El más popular» se basa en la etiqueta «Popular N.º 1» de Tabelog (el menú con más reservas en los últimos 30 días, a octubre de 2026).</p>
   </div>
 </section>
@@ -375,10 +483,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="eyebrow">Q&amp;A</p>
       <h2 class="faq-t">Antes de reservar.</h2>
       <details><summary><span>Es mi primera visita y no sé qué menú elegir</span></summary><p>Le recomendamos la Colección ETHICA (8 capítulos), que recorre la historia de ETHICA tal como fue concebida. Si tiene planes después, puede optar por el Menú Breve de 5 capítulos.</p></details>
-<details><summary><span>¿Hay salas privadas para comidas de negocios?</span></summary><p>Sí, dentro de la cocina hay una sala privada para 2 a 4 personas, un solo grupo al día. Resérvela en la página de reservas desde «Experiencia Gastronómica (9 capítulos)», dentro de la «Gran Colección ETHICA».</p></details>
-<details><summary><span>¿Pueden preparar algo para un aniversario?</span></summary><p>Podemos preparar un plato con un mensaje pintado a mano. Elija el Menú de Cumpleaños y Aniversario o consúltenos al reservar. También podemos ofrecer un ramo de flores que no se marchitan, de Ginza Calon, para conservar durante mucho tiempo; indíquenoslo si lo desea.</p></details>
-<details><summary><span>¿Puedo reservar para una sola persona?</span></summary><p>Sí. El Menú Breve, la Colección ETHICA, la Gran Colección, la Colección ETHICA Vegetariana y la Barra del Chef pueden reservarse desde 1 persona. El Menú de Cumpleaños y Aniversario y la Experiencia Gastronómica en sala privada, desde 2 personas.</p></details>
+<details><summary><span>¿Cuánto dura la comida?</span></summary><p>Unas 1,5 horas el Menú Breve (5 capítulos), unas 2,5 horas la Colección ETHICA (8 capítulos) y de 2,5 a 3 horas los menús de 9 capítulos.</p></details>
+<details><summary><span>¿Pueden preparar algo para un aniversario?</span></summary><p>Podemos preparar un plato con un mensaje pintado a mano. Elija el Menú de Cumpleaños y Aniversario o consúltenos al reservar. También podemos preparar un «ramo eterno» de Ginza Calon; indíquenoslo si lo desea.</p></details>
+<details><summary><span>¿Hay salas privadas para comidas de negocios?</span></summary><p>Dentro de la cocina hay una sala privada para 2 a 4 personas, un solo grupo al día. Reserve la Experiencia Gastronómica (9 capítulos).</p></details>
+<details><summary><span>¿Puedo disfrutar sin beber alcohol?</span></summary><p>Ofrecemos un maridaje sin alcohol (9,800) pensado para cada plato. Indíquenoslo al reservar.</p></details>
 <details><summary><span>¿Atienden alergias y dietas vegetarianas?</span></summary><p>Indíquenos las alergias al reservar, también las de sus acompañantes. Ofrecemos la Colección ETHICA Vegetariana, y atendemos peticiones veganas y aptas para musulmanes si nos lo comunica al reservar.</p></details>
+<details><summary><span>¿Puedo reservar para una sola persona?</span></summary><p>Sí. El Menú Breve, la Colección ETHICA, la Gran Colección, la Colección ETHICA Vegetariana y la Barra del Chef pueden reservarse desde 1 persona. El Menú de Cumpleaños y Aniversario y la Experiencia Gastronómica en sala privada, desde 2 personas.</p></details>
+<details><summary><span>¿Hay código de vestimenta?</span></summary><p>Smart casual, por favor. Le pedimos evitar camisetas de tirantes, pantalones cortos y chanclas; por lo demás, siéntase cómodo.</p></details>
+<details><summary><span>¿Qué formas de pago aceptan?</span></summary><p>Aceptamos tarjetas de crédito (VISA, Mastercard, JCB, AMEX, Diners), así como tarjetas IC de transporte, iD y QUICPay.</p></details>
+<details><summary><span>¿Puedo reservar con poca antelación?</span></summary><p>Sí: si hay mesas libres, puede reservar incluso a última hora. Consulte primero la disponibilidad.</p></details>
 <details><summary><span>¿Es posible reservar el local para grupos grandes?</span></summary><p>Puede consultarnos la reserva exclusiva del local para hasta 20 personas (consúltenos también para formato de pie). Contáctenos por teléfono (03-6228-7313, de 12:00 a 17:00; atención solo en japonés).</p></details>
     </div>
     <div class="access rise" id="access">
@@ -387,8 +500,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dl>
         <dt>Dirección</dt><dd><span class="nw">1-3-3 Ginza, Chuo-ku, Tokio</span> <span class="nw">Edificio Toa, planta baja</span><br><a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A71-3-3%20ETHICA" target="_blank" rel="noopener">Ver en el mapa</a></dd>
         <dt>Desde la estación</dt><dd><span class="nw">A 3 minutos a pie de la estación de Ginza</span><br><span class="nw">Ginza-itchome: 30 segundos a pie</span><br><span class="nw">Yurakucho: 2 minutos a pie</span><br><span class="nw">Tokio: 5 minutos a pie</span></dd>
-        <dt>Cena</dt><dd><span class="nw">Mar.–vie., desde las 17:30</span> / <span class="nw">Sáb. y dom., desde las 18:00</span><br><span class="nw">Última entrada: 20:30</span></dd>
-        <dt>Almuerzo</dt><dd><span class="nw">Sáb. y dom., desde las 11:30</span><span class="nw">(última entrada: 13:00)</span></dd>
+        <dt>Cena</dt><dd><span class="nw">Mar.–vie. 17:30–23:00</span> / <span class="nw">Sáb. y dom. 18:00–23:00</span><br><span class="nw">Última entrada: 20:30</span></dd>
+        <dt>Almuerzo</dt><dd><span class="nw">Sáb. y dom. 11:30–14:30</span><span class="nw">(última entrada: 12:30)</span></dd>
         <dt>Cerrado</dt><dd>Lunes</dd>
         <dt>Teléfono</dt><dd><a class="tel" href="tel:+81362287313">03-6228-7313</a><span class="nw">(de 12:00 a 17:00)</span></dd>
       </dl>
@@ -421,7 +534,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </nav>
 
 <script src="assets/ripple.js?v=56"></script>
-<script src="assets/app.js?v=62"></script>
+<script src="assets/app_v2.js?v=1"></script>
+<script src="assets/v2.js?v=4"></script>
 <!-- 金色の輪（pond.js）は 2026-10-22 オーナー指示で外した（フィロソフィーも普通の波紋だけ） -->
 </body>
 </html>

@@ -29,7 +29,6 @@ localStorage.setItem(k,t);if(t!==p){location.replace(t+location.hash);}}}catch(e
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#060807">
 <link rel="icon" href="assets/img/logo.png">
-<link rel="alternate" hreflang="ja" href="https://ethicatokyo.jp/"><link rel="alternate" hreflang="en" href="https://ethicatokyo.jp/en.html"><link rel="alternate" hreflang="zh-Hans" href="https://ethicatokyo.jp/zh-cn.html"><link rel="alternate" hreflang="zh-Hant" href="https://ethicatokyo.jp/zh-tw.html"><link rel="alternate" hreflang="ko" href="https://ethicatokyo.jp/ko.html"><link rel="alternate" hreflang="es" href="https://ethicatokyo.jp/es.html">
 <link rel="preload" as="image" media="(max-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_cenote_m720.webp 720w, assets/img/hero_cenote_m1031.webp 1031w" imagesizes="(max-aspect-ratio: 1031/1850) 56vh, 100vw" fetchpriority="low">
 <link rel="preload" as="image" media="not all and (max-aspect-ratio: 4/5)" imagesrcset="assets/img/hero_cenote_1440.webp 1440w, assets/img/hero_cenote_2560.webp 2560w" imagesizes="100vw" fetchpriority="low">
 <link rel="preload" as="image" href="assets/img/ss1_2048.webp" fetchpriority="high">
@@ -39,6 +38,8 @@ localStorage.setItem(k,t);if(t!==p){location.replace(t+location.hash);}}}catch(e
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/site.css?v=64">
 <link rel="stylesheet" href="assets/timeline.css?v=62">
+<link rel="stylesheet" href="assets/v2.css?v=7">
+<link rel="alternate" hreflang="ja" href="https://ethicatokyo.jp/"><link rel="alternate" hreflang="en" href="https://ethicatokyo.jp/en.html"><link rel="alternate" hreflang="zh-Hans" href="https://ethicatokyo.jp/zh-cn.html"><link rel="alternate" hreflang="zh-Hant" href="https://ethicatokyo.jp/zh-tw.html"><link rel="alternate" hreflang="ko" href="https://ethicatokyo.jp/ko.html"><link rel="alternate" hreflang="es" href="https://ethicatokyo.jp/es.html">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -51,14 +52,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="brand" href="#" aria-label="回到 ETHICA 頁面頂端"><img src="assets/img/logo.png" alt="" width="34" height="35"><img class="wm" src="assets/img/wordmark_64.webp" alt="ETHICA" width="358" height="64"></a>
     <a class="mich" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" aria-label="連續三年入選《米其林指南東京》（OMAKASE 上的 ETHICA 頁面）"><img src="assets/img/michelin_2026.png" alt="MICHELIN 2026" width="192" height="192"></a>
     <nav aria-label="頁面選單">
-      <a class="nl" href="#chapters">時代篇章</a><a class="nl" href="#chef">主廚</a><a class="nl" href="#courses">套餐</a><a class="nl" href="drinks/">飲品</a><a class="nl" href="#access">交通</a>
+      <a class="nl" href="#chapters">時代篇章</a><a class="nl" href="#scenes">用餐情境</a><a class="nl" href="#courses">套餐</a><a class="nl" href="drinks/en/">飲品</a><a class="nl" href="#access">交通</a>
       <a class="btn btn-gold hdr" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="header">查看空位<span class="arrow" aria-hidden="true">→</span></a>
       <select class="lsel" aria-label="Language" onchange="if(this.value){try{localStorage.setItem('ethica_lang',this.value)}catch(e){}location.href=this.value}"><option value="index.html">日本語</option><option value="en.html">English</option><option value="zh-cn.html">简体中文</option><option value="zh-tw.html" selected>繁體中文</option><option value="ko.html">한국어</option><option value="es.html">Español</option></select>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav"><span class="mb-l" aria-hidden="true"></span><span class="mb-t">選單</span></button>
     </nav>
   </div>
   <nav class="mnav" id="mnav" aria-label="選單" hidden>
-    <div class="wrap"><a href="#chapters">時代篇章</a><a href="#chef">主廚</a><a href="#courses">套餐</a><a href="drinks/">飲品</a><a href="#access">交通</a><a href="#purpose">紀念日・素食</a><a href="#seats">商務宴請（廚房內座位）</a><a href="#faq">Q&amp;A</a><a class="btn btn-gold btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="menu">查看空位<span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="wrap"><a href="#concept">味覺時空之旅</a><a href="#chapters">時代篇章</a><a href="#chef">主廚</a><a href="#space">空間與座位</a><a href="#scenes">用餐情境</a><a href="#courses">套餐與價格</a><a href="drinks/en/">飲品</a><a href="#faq">Q&amp;A</a><a href="#access">交通</a><a class="btn btn-gold btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="menu">查看空位<span class="arrow" aria-hidden="true">→</span></a></div>
   </nav>
 </header>
 
@@ -89,7 +90,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="sub">一道菜一個時代，穿越地球46億年的故事——一場「味覺的時空之旅」。以祕魯料理為核心，融入法式技法，在洞穴般的空間中為您呈上整套饗宴。</p>
     <div class="ctas" id="hero-ctas">
       <a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="hero">查看空位<span class="arrow" aria-hidden="true">→</span></a>
-      <a class="btn btn-line" href="#courses">查看套餐</a>
+      <a class="btn btn-line" href="#scenes">依用餐情境選擇</a>
     </div>
     <div class="proof"><ul><li><span>米其林二星 MAZ 出身主廚</span></li>
 <li><span>銀座站步行3分鐘</span></li>
@@ -101,6 +102,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li><span>銀座站步行3分鐘</span></li>
 <li><span>創新料理（祕魯料理 × 法式技法）</span></li>
 <li><span>廚房內包廂・吧檯　每日各限1組</span></li></ul></div>
+
+<section class="sec concept has-tbg" id="concept" aria-labelledby="concept-title" data-water-v>
+  <div class="tbg" aria-hidden="true"><div class="tbg-s"><video class="dv" muted loop playsinline preload="none" disablepictureinpicture data-src="assets/video/cenote/d_c10.mp4?v=1" data-src-w="assets/video/cenote/d_c10_w.mp4?v=1" data-poster="assets/video/cenote/d_c10.webp?v=1" data-poster-w="assets/video/cenote/d_c10_w.webp?v=1"></video><canvas class="wv"></canvas></div></div>
+  <div class="k-hbg" data-water data-water-copy aria-hidden="true">
+    <div class="stage">
+      <picture>
+        <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/hero_table_m1080.webp 1080w, assets/img/hero_table_m1440.webp 1440w, assets/img/hero_table_m1800.webp 1800w" sizes="(max-aspect-ratio: 2/3) 67vh, 100vw">
+        <img class="still" src="assets/img/hero_table_1440.webp" srcset="assets/img/hero_table_1440.webp 1440w, assets/img/hero_table_2560.webp 2560w" sizes="100vw" alt="" loading="lazy">
+      </picture>
+      <canvas></canvas>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="k-head rise"><p class="eyebrow">Philosophy</p><h2 id="concept-title">追求的，是「味覺的時空之旅」。</h2></div>
+    <div class="k-grid">
+      <figure class="k-img rise"><img src="assets/img/kitchen_plate.webp" alt="在墨流般的黑白紋理上，點綴紫色花瓣與細紅線條的料理" loading="lazy" width="1200" height="1500"></figure>
+      <div class="k-copy rise"><p class="lede">菜單上沒有菜名，只寫著「地球誕生」「恐龍時代與大滅絕」等時代名稱。端上什麼，唯有料理來到眼前才會揭曉。地球誕生之初的風景，各文明孕育的智慧、技法與香料，以現代技術重新構築，編織成一套完整的故事。願在此度過的數小時，成為超越一餐的難忘記憶。</p></div>
+      <div class="k-rest rise"><p class="k-lead">將時空的碎片凝縮於每一道菜，打造觸動五感的旅程。</p><ul class="points"><li><b>味</b><span>以祕魯料理為基礎，融入法式技法。最重視的，是味道的和諧，以及從第一道貫穿到最後一道的一條主軸。即使是初次邂逅的滋味，香料的芬芳與純粹的鮮味也能直達心底。</span></li><li><b>時間</b><span>38億年前的海洋、恐龍時代、跨越海洋的貿易。將逝去時代的一幕，凝聚於一盤之中。</span></li><li><b>景色</b><span>深海的靜謐、大地的脈動。連同那個時代的景色，一併描繪於盤上。</span></li><li><b>器皿與聲音</b><span>旅程伴隨著縈繞店內的聲音展開；每換一章，器皿也隨之更替——皆為向日本各地陶藝家特別訂製。</span></li></ul></div>
+    </div>
+  </div>
+</section>
 
 <section class="sec voyage-sec" id="chapters" aria-labelledby="tl-title">
   <div class="wrap">
@@ -252,27 +274,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec concept has-tbg" id="concept" aria-labelledby="concept-title" data-water-v>
-  <div class="tbg" aria-hidden="true"><div class="tbg-s"><video class="dv" muted loop playsinline preload="none" disablepictureinpicture data-src="assets/video/cenote/d_c10.mp4?v=1" data-src-w="assets/video/cenote/d_c10_w.mp4?v=1" data-poster="assets/video/cenote/d_c10.webp?v=1" data-poster-w="assets/video/cenote/d_c10_w.webp?v=1"></video><canvas class="wv"></canvas></div></div>
-  <div class="k-hbg" data-water data-water-copy aria-hidden="true">
-    <div class="stage">
-      <picture>
-        <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/hero_table_m1080.webp 1080w, assets/img/hero_table_m1440.webp 1440w, assets/img/hero_table_m1800.webp 1800w" sizes="(max-aspect-ratio: 2/3) 67vh, 100vw">
-        <img class="still" src="assets/img/hero_table_1440.webp" srcset="assets/img/hero_table_1440.webp 1440w, assets/img/hero_table_2560.webp 2560w" sizes="100vw" alt="" loading="lazy">
-      </picture>
-      <canvas></canvas>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="k-head rise"><p class="eyebrow">Philosophy</p><h2 id="concept-title">追求的，是「味覺的時空之旅」。</h2></div>
-    <div class="k-grid">
-      <figure class="k-img rise"><img src="assets/img/kitchen_plate.webp" alt="在墨流般的黑白紋理上，點綴紫色花瓣與細紅線條的料理" loading="lazy" width="1200" height="1500"></figure>
-      <div class="k-copy rise"><p class="lede">菜單上沒有菜名，只寫著「地球誕生」「恐龍時代與大滅絕」等時代名稱。端上什麼，唯有料理來到眼前才會揭曉。地球誕生之初的風景，各文明孕育的智慧、技法與香料，以現代技術重新構築，編織成一套完整的故事。願在此度過的數小時，成為超越一餐的難忘記憶。</p></div>
-      <div class="k-rest rise"><p class="k-lead">將時空的碎片凝縮於每一道菜，打造觸動五感的旅程。</p><ul class="points"><li><b>味</b><span>以祕魯料理為基礎，融入法式技法。最重視的，是味道的和諧，以及從第一道貫穿到最後一道的一條主軸。即使是初次邂逅的滋味，香料的芬芳與純粹的鮮味也能直達心底。</span></li><li><b>時間</b><span>38億年前的海洋、恐龍時代、跨越海洋的貿易。將逝去時代的一幕，凝聚於一盤之中。</span></li><li><b>景色</b><span>深海的靜謐、大地的脈動。連同那個時代的景色，一併描繪於盤上。</span></li><li><b>器皿與聲音</b><span>旅程伴隨著縈繞店內的聲音展開；每換一章，器皿也隨之更替——皆為向日本各地陶藝家特別訂製。</span></li></ul></div>
-    </div>
-  </div>
-</section>
-
 <section class="sec" id="space" aria-labelledby="space-title">
   <div class="wrap space">
     <div class="photos rise">
@@ -292,6 +293,112 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li><b>包廂・美饌體驗</b><span>2–4位・每日限1組。位於廚房內。適合商務宴請</span></li></ul>
       <details class="mapd"><summary>查看平面圖</summary><img src="assets/img/floormap.webp" alt="店內平面圖。從入口往內依序為餐桌席，深處為吧檯、廚房及廚房內包廂" loading="lazy" width="900" height="1923"></details>
     </aside>
+  </div>
+</section>
+
+<section class="sec alt scenes-sec" id="scenes" aria-labelledby="scenes-title">
+  <div class="wrap">
+    <div class="sc-head rise">
+      <p class="eyebrow">Occasions</p>
+      <h2 id="scenes-title">在平常的餐廳，創造不出的夜晚。</h2>
+      <p class="lede">重要夜晚的安排，請放心交給我們。</p>
+    </div>
+    <div class="sc rise" data-scenes data-rec="適合您所選情境">
+      <div class="sc-tabs" role="tablist" aria-label="用餐情境">
+        <button type="button" class="sc-tab" role="tab" id="sc-t-first" aria-controls="sc-p-first" aria-selected="true" data-scene="first">初次光臨</button><button type="button" class="sc-tab" role="tab" id="sc-t-repeat" aria-controls="sc-p-repeat" aria-selected="false" data-scene="repeat">再次光臨</button><button type="button" class="sc-tab" role="tab" id="sc-t-anniv" aria-controls="sc-p-anniv" aria-selected="false" data-scene="anniv">生日・紀念日</button><button type="button" class="sc-tab" role="tab" id="sc-t-date" aria-controls="sc-p-date" aria-selected="false" data-scene="date">約會</button><button type="button" class="sc-tab" role="tab" id="sc-t-biz" aria-controls="sc-p-biz" aria-selected="false" data-scene="biz">商務宴請</button><button type="button" class="sc-tab" role="tab" id="sc-t-short" aria-controls="sc-p-short" aria-selected="false" data-scene="short">餐後另有安排</button>
+      </div>
+      <article class="sc-panel" role="tabpanel" id="sc-p-first" aria-labelledby="sc-t-first" data-scene="first" data-course="collection" data-dock="查看典藏套餐空位" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/d2_tri.webp" alt="排列於藍色樹脂餐桌上、以三只器皿呈現的料理" loading="lazy" width="1400" height="933" style="object-position:45% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">初次造訪首選</p>
+          <h3>先體驗 ETHICA 故事的原貌。</h3>
+          <p class="d">以8道菜往返地球46億年故事的「ETHICA 典藏」。若難以抉擇，請從這裡開始。</p>
+          <p class="sc-fact">最受歡迎的套餐。</p>
+          <dl class="sc-spec">
+            <div><dt>推薦</dt><dd>ETHICA 典藏</dd></div>
+            <div><dt>座位・人數</dt><dd>餐桌席・1–8位</dd></div>
+            <div><dt>套餐</dt><dd>全8章</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_first">查看典藏套餐空位<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="#courses"><span>查看全部套餐</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+<article class="sc-panel" role="tabpanel" id="sc-p-repeat" aria-labelledby="sc-t-repeat" data-scene="repeat" data-course="grand" data-dock="查看尊享典藏空位" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/d2_caviar.webp" alt="黑色器皿上排列的紅邊白色圓片與魚子醬" loading="lazy" width="1400" height="785" style="object-position:46% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">第二次光臨起</p>
+          <h3>第二次，走進更深的旅程。</h3>
+          <p class="d">在典藏的故事上升級為珍稀食材、擴展為全9章的「ETHICA 尊享典藏」。適合想旅行得更久、更深的夜晚。</p>
+          <p class="sc-fact">食材依季節與進貨更換，帶來與上次不同的風景。</p>
+          <dl class="sc-spec">
+            <div><dt>推薦</dt><dd>ETHICA 尊享典藏</dd></div>
+            <div><dt>座位・人數</dt><dd>餐桌席・1–8位</dd></div>
+            <div><dt>套餐</dt><dd>全9章</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_repeat">查看尊享典藏空位<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="#seats"><span>查看廚房內每日限1組的座位</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+<article class="sc-panel" role="tabpanel" id="sc-p-anniv" aria-labelledby="sc-t-anniv" data-scene="anniv" data-course="anniversary" data-dock="查看紀念日套餐空位" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/d_pink.webp" alt="綻放於岩石器皿上的粉色料理" loading="lazy" width="1000" height="1056" style="object-position:50% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">生日・紀念日</p>
+          <h3>在46億年旅程的終點，獻上慶祝的一盤。</h3>
+          <p class="d">以升級為珍稀食材的「ETHICA 尊享典藏」全9章，搭配手繪祝福甜點盤為您慶祝。如有需要，另可準備銀座 Calon「永不凋謝的花束」。</p>
+          <p class="sc-fact">特別的日子，以珍稀食材款待。</p>
+          <dl class="sc-spec">
+            <div><dt>推薦</dt><dd>生日・紀念日套餐</dd></div>
+            <div><dt>座位・人數</dt><dd>餐桌席・2位起・附祝福甜點盤</dd></div>
+            <div><dt>套餐</dt><dd>全9章</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_anniv">查看紀念日套餐空位<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="#c-chefs"><span>只屬於兩人的座位：主廚吧檯</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+<article class="sc-panel" role="tabpanel" id="sc-p-date" aria-labelledby="sc-t-date" data-scene="date" data-course="collection" data-dock="查看典藏套餐空位" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/interior.webp" alt="木製餐桌沿岩壁排列、宛如洞穴的店內" loading="lazy" width="1920" height="1280" style="object-position:58% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">約會</p>
+          <h3>下一道是什麼，要等菜上桌才揭曉。</h3>
+          <p class="d">菜單上只寫著時代的名稱。每一道菜，都為兩人帶來新的話題。在洞穴般的餐桌上，展開全8章的旅程。廚房內還有每日限1組、最多2位的「主廚吧檯」。</p>
+          <p class="sc-fact">無論是第一次約會，還是已共度許多夜晚。</p>
+          <dl class="sc-spec">
+            <div><dt>推薦</dt><dd>ETHICA 典藏</dd></div>
+            <div><dt>座位・人數</dt><dd>餐桌席・1–8位</dd></div>
+            <div><dt>套餐</dt><dd>全8章</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_date">查看典藏套餐空位<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="#c-chefs"><span>每日限1組的座位：主廚吧檯</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+<article class="sc-panel" role="tabpanel" id="sc-p-biz" aria-labelledby="sc-t-biz" data-scene="biz" data-course="gastro" data-dock="查看包廂空位" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/cave_private2_1440.webp" alt="岩壁環繞的包廂。泛著藍光的樹脂餐桌與相對而設的沙發座" loading="lazy" width="1440" height="960" style="object-position:55% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">商務宴請</p>
+          <h3>廚房之中，每日限1組的包廂。</h3>
+          <p class="d">距離擺盤台僅30公分。在廚房內的包廂款待2–4位賓客。以市面罕見的食材與熟成珍品，描繪全9章。</p>
+          <p class="sc-fact">連續三年入選《米其林指南東京》。距銀座站步行3分鐘。</p>
+          <dl class="sc-spec">
+            <div><dt>推薦</dt><dd>美饌體驗</dd></div>
+            <div><dt>座位・人數</dt><dd>廚房內包廂・2–4位・每日限1組</dd></div>
+            <div><dt>套餐</dt><dd>全9章</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_biz">查看包廂空位<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="tel:+81362287313" data-cta="scene_biz_tel"><span>電話洽詢（僅限日語，12:00–17:00）</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+<article class="sc-panel" role="tabpanel" id="sc-p-short" aria-labelledby="sc-t-short" data-scene="short" data-course="short" data-dock="查看短程套餐空位" data-href="https://omakaseje.com/z5e4g">
+        <figure class="sc-img"><img src="assets/img/d2_pour.webp" alt="將藍色液體倒入黑白器皿的瞬間" loading="lazy" width="1400" height="785" style="object-position:40% 50%"></figure>
+        <div class="sc-body">
+          <p class="use">適合飯後還有行程的夜晚</p>
+          <h3>刻意保留八分飽的全5章。</h3>
+          <p class="d">為「餐後另有安排」「想以品酒為主」的客人而生的短程套餐。週二至週五17:30起、週六・週日18:00起供應。</p>
+          <p class="sc-fact">用餐時間約1.5小時。</p>
+          <dl class="sc-spec">
+            <div><dt>推薦</dt><dd>短程套餐</dd></div>
+            <div><dt>座位・人數</dt><dd>餐桌席・1–8位</dd></div>
+            <div><dt>套餐</dt><dd>全5章</dd></div>
+          </dl>
+          <div class="sc-cta"><a class="btn btn-gold" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="scene_short">查看短程套餐空位<span class="arrow" aria-hidden="true">→</span></a><a class="sc-alt" href="drinks/en/"><span>查看酒單</span><span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+      
+    </div>
   </div>
 </section>
 
@@ -335,7 +442,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="chap">全9章<span class="sep">・</span>廚房內包廂吧檯・1–2位・每日限1組</p>
   <p class="d">廚房內每日僅限1組的吧檯。以尊享典藏為基礎，融入更稀有的部位與當日限定食材，由主廚在您眼前完成的全9章。</p>
   <p class="pr"><span class="price">27,800</span><small>含稅</small></p>
-  <a class="btn btn-line btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="card_chefs">查看吧檯空位<span class="arrow" aria-hidden="true">→</span></a><p class="basis">請於訂位頁面「尊享典藏」中選擇此方案（晚餐、午餐皆同）。</p></div>
+  <a class="btn btn-line btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="card_chefs">查看吧檯空位<span class="arrow" aria-hidden="true">→</span></a></div>
 </article>
       <article class="seat rise" id="c-gastro">
   <img src="assets/img/hand_place.webp" alt="整理岩石上餐盤的手部特寫" loading="lazy" width="1600" height="1067">
@@ -343,7 +450,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="chap">全9章<span class="sep">・</span>廚房內包廂・2–4位・每日限1組</p>
   <p class="d">廚房內每日僅限1組的包廂。以市面罕見的食材與熟成珍品描繪全9章，距離擺盤台僅30cm。</p>
   <p class="pr"><span class="price">29,800</span><small>含稅</small></p>
-  <a class="btn btn-line btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="card_gastro">查看包廂空位<span class="arrow" aria-hidden="true">→</span></a><p class="basis">請於訂位頁面「尊享典藏」中選擇此方案（晚餐、午餐皆同）。</p></div>
+  <a class="btn btn-line btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="card_gastro">查看包廂空位<span class="arrow" aria-hidden="true">→</span></a></div>
 </article>
     </div>
     <div class="sub-head rise" id="purpose"><h3>慶祝場合與飲食需求</h3></div>
@@ -365,6 +472,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a class="btn btn-line btn-wide" href="https://omakaseje.com/z5e4g" target="_blank" rel="noopener" data-cta="card_veg">查看空位<span class="arrow" aria-hidden="true">→</span></a>
 </article>
     </div>
+    <aside class="pairing rise" aria-labelledby="pairing-title"><div class="pg-head"><p class="use">Pairing</p><h3 id="pairing-title">配合每道菜，一杯一杯。</h3><p class="d">餐酒搭配共3種，也備有無酒精選擇。</p><a class="sc-alt" href="drinks/en/"><span>查看酒單</span><span class="arrow" aria-hidden="true">→</span></a></div><dl class="pg-list"><div><dt>無酒精餐搭</dt><dd><span class="price">9,800</span></dd></div><div><dt>ETHICA 餐酒搭配</dt><dd><span class="price">14,800</span></dd></div><div><dt>尊享餐酒搭配<small>適用於尊享典藏、主廚吧檯、美饌體驗</small></dt><dd><span class="price">19,800</span></dd></div></dl></aside>
     <p class="fine">所有價格皆為每位、含稅。<br>※「人氣第一」依據 Tabelog 的「人氣No.1」標示（近30天訂位組數最多的套餐・截至2026年10月）。</p>
   </div>
 </section>
@@ -375,10 +483,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="eyebrow">Q&amp;A</p>
       <h2 class="faq-t">訂位前須知。</h2>
       <details><summary><span>初次造訪，不知該選哪個套餐</span></summary><p>推薦完整走過 ETHICA 故事的「ETHICA 典藏」（全8章）。若飯後另有安排，也可選擇全5章的短程套餐。</p></details>
-<details><summary><span>有適合商務宴請的包廂嗎？</span></summary><p>廚房內設有2–4位、每日限1組的包廂。請於訂位頁面「ETHICA 尊享典藏」中選擇「美饌體驗（全9章）」預訂。</p></details>
-<details><summary><span>可以安排紀念日慶祝嗎？</span></summary><p>可為您準備手繪祝福甜點盤。請選擇生日・紀念日套餐，或於訂位時與我們洽詢。另可代為準備銀座 Calon 可長久擺飾、永不凋謝的花束，如有需要請告知。</p></details>
-<details><summary><span>一位也可以訂位嗎？</span></summary><p>可以。短程套餐、ETHICA 典藏、尊享典藏、素食 ETHICA 典藏及主廚吧檯，皆可1位起訂。生日・紀念日套餐與包廂美饌體驗則需2位起。</p></details>
+<details><summary><span>用餐時間大約多久？</span></summary><p>短程套餐（全5章）約1.5小時，ETHICA 典藏（全8章）約2.5小時，全9章的套餐約2.5–3小時。</p></details>
+<details><summary><span>可以安排紀念日慶祝嗎？</span></summary><p>可為您準備手繪祝福甜點盤。請選擇生日・紀念日套餐，或於訂位時與我們洽詢。另可準備銀座 Calon「永不凋謝的花束」，如有需要請告知。</p></details>
+<details><summary><span>有適合商務宴請的包廂嗎？</span></summary><p>廚房內設有2–4位、每日限1組的包廂。請預訂「美饌體驗（全9章）」。</p></details>
+<details><summary><span>不喝酒也能盡興嗎？</span></summary><p>我們備有搭配料理的無酒精餐搭（9,800）。如有需要，請於訂位時告知。</p></details>
 <details><summary><span>可因應過敏或素食需求嗎？</span></summary><p>如有過敏，請於訂位時一併告知同行者的情況。我們亦提供素食 ETHICA 典藏。純素與穆斯林友善的需求，只要於訂位時告知，皆可配合。</p></details>
+<details><summary><span>一位也可以訂位嗎？</span></summary><p>可以。短程套餐、ETHICA 典藏、尊享典藏、素食 ETHICA 典藏及主廚吧檯，皆可1位起訂。生日・紀念日套餐與包廂美饌體驗則需2位起。</p></details>
+<details><summary><span>有服裝規定嗎？</span></summary><p>請以休閒正式（Smart Casual）服裝光臨。恕不接待背心、短褲及海灘拖鞋，其餘請輕鬆自在。</p></details>
+<details><summary><span>可以使用哪些付款方式？</span></summary><p>可使用信用卡（VISA・Master・JCB・AMEX・Diners），以及交通系電子錢包、iD、QUICPay。</p></details>
+<details><summary><span>臨時也能訂位嗎？</span></summary><p>若有空位，臨時也可訂位。請先查看空位。</p></details>
 <details><summary><span>可以多人包場嗎？</span></summary><p>最多可洽詢20位包場（站立式餐會請另行洽詢）。請來電（03-6228-7313・受理時間 12:00–17:00）詢問。</p></details>
     </div>
     <div class="access rise" id="access">
@@ -387,8 +500,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dl>
         <dt>地址</dt><dd><span class="nw">東京都中央區銀座1-3-3</span> <span class="nw">東亞大樓 1F</span><br><a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A71-3-3%20ETHICA" target="_blank" rel="noopener">在地圖上查看</a></dd>
         <dt>車站步行</dt><dd><span class="nw">銀座站步行3分鐘</span><br><span class="nw">銀座一丁目站 步行30秒</span><br><span class="nw">有樂町站 步行2分鐘</span><br><span class="nw">東京站 步行5分鐘</span></dd>
-        <dt>晚餐</dt><dd><span class="nw">週二至週五 17:30起</span>／<span class="nw">週六・週日 18:00起</span><br><span class="nw">最後入店 20:30</span></dd>
-        <dt>午餐</dt><dd><span class="nw">週六・週日 11:30起</span><span class="nw">（最後入店 13:00）</span></dd>
+        <dt>晚餐</dt><dd><span class="nw">週二至週五 17:30–23:00</span>／<span class="nw">週六・週日 18:00–23:00</span><br><span class="nw">最後入店 20:30</span></dd>
+        <dt>午餐</dt><dd><span class="nw">週六・週日 11:30–14:30</span><span class="nw">（最後入店 12:30）</span></dd>
         <dt>公休日</dt><dd>週一</dd>
         <dt>電話</dt><dd><a class="tel" href="tel:+81362287313">03-6228-7313</a><span class="nw">（受理時間 12:00–17:00）</span></dd>
       </dl>
@@ -421,7 +534,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </nav>
 
 <script src="assets/ripple.js?v=56"></script>
-<script src="assets/app.js?v=62"></script>
+<script src="assets/app_v2.js?v=1"></script>
+<script src="assets/v2.js?v=4"></script>
 <!-- 金色の輪（pond.js）は 2026-10-22 オーナー指示で外した（フィロソフィーも普通の波紋だけ） -->
 </body>
 </html>
