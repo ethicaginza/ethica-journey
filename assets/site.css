@@ -566,9 +566,11 @@ html[lang="ko"]{--f-jp:"Noto Serif KR","AppleMyungjo","Batang",serif}
 html[lang="en"],html[lang="es"]{--f-jp:"Cormorant Garamond","Shippori Mincho",Georgia,serif}
 
 /* 2026-11-22 スマホ：ボタンの文字が箱に収まらないときは折り返す（外国語でページの幅ごと広がっていた）。トップの2つのボタンは、並ばないときは1つずつ横いっぱいに */
-@media (max-width:600px){
+@media (max-width:900px){
   .btn{white-space:normal;text-align:center;line-height:1.35;padding-block:9px;min-width:0;max-width:100%}
   .btn>.arrow,.btn .d-main>.arrow{flex:0 0 auto}
+}
+@media (max-width:600px){
   .hero .ctas{display:flex;flex-wrap:wrap}
   .hero .ctas .btn{flex:1 1 auto;width:auto;white-space:nowrap}
   .dock .btn-gold{padding-block:6px}.dock .btn-gold small{line-height:1.3}
