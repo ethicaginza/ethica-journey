@@ -564,3 +564,17 @@ html[lang="zh-Hans"]{--f-jp:"Noto Serif SC","Songti SC","SimSun",serif}
 html[lang="zh-Hant"]{--f-jp:"Noto Serif TC","Songti TC","PMingLiU",serif}
 html[lang="ko"]{--f-jp:"Noto Serif KR","AppleMyungjo","Batang",serif}
 html[lang="en"],html[lang="es"]{--f-jp:"Cormorant Garamond","Shippori Mincho",Georgia,serif}
+
+/* 2026-11-22 スマホ：ボタンの文字が箱に収まらないときは折り返す（外国語でページの幅ごと広がっていた）。トップの2つのボタンは、並ばないときは1つずつ横いっぱいに */
+@media (max-width:600px){
+  .btn{white-space:normal;text-align:center;line-height:1.35;padding-block:9px;min-width:0;max-width:100%}
+  .btn>.arrow,.btn .d-main>.arrow{flex:0 0 auto}
+  .hero .ctas{display:flex;flex-wrap:wrap}
+  .hero .ctas .btn{flex:1 1 auto;width:auto;white-space:nowrap}
+  .dock .btn-gold{padding-block:6px}.dock .btn-gold small{line-height:1.3}
+  .dock .d-main{min-width:0}
+  /* 英語・スペイン語は語の間で折り返せるので、長い句の「折り返さない」指定を外す（アクセスの道案内がページの幅を広げていた） */
+  html[lang="en"] .nw,html[lang="es"] .nw{white-space:normal}
+}
+/* 言語の箱：「Español」「简体中文」の最後の字が切れていたので、361px以上の画面では少し広げる */
+@media (min-width:361px) and (max-width:600px){.lsel{max-width:108px}}

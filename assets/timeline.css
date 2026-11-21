@@ -114,33 +114,32 @@
   .tl-mini.on{transform:none;opacity:1;visibility:visible;transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .35s,visibility 0s}
   .menu-open .tl-mini{visibility:hidden}
   .tm-in{padding:9px var(--gut-r,16px) 8px var(--gut,16px)}
-  .tm-axis{position:relative;height:41px;margin:0 10px;cursor:pointer}.tm-axis::after{content:"";position:absolute;left:-10px;right:-10px;top:-4px;bottom:-12px}
-  .tm-line{position:absolute;top:25px;height:1px;background:rgba(236,230,218,.28)}
-  .tm-line.old{left:0;width:17.6%}.tm-line.new{left:20.6%;right:0;background:rgba(201,164,106,.7)}
-  .tm-brk{position:absolute;top:20px;left:18.2%;width:6px;height:11px;border-left:1px solid rgba(236,230,218,.35);border-right:1px solid rgba(236,230,218,.35);transform:skewX(-18deg)}
-  .tm-p{position:absolute;left:var(--x);top:26px;width:20px;height:20px;margin:-10px 0 0 -10px;pointer-events:none;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .tm-axis{position:relative;height:59px;cursor:pointer}.tm-axis::after{content:"";position:absolute;left:0;right:0;top:-4px;bottom:-12px}
+  .tm-plot{position:absolute;left:38px;right:12px;top:8px;height:40px}
+  .tm-plot::before{content:"";position:absolute;inset:0 -12px -11px -12px;background:linear-gradient(180deg,rgba(45,111,125,.34),rgba(23,63,74,.24) 35%,rgba(10,26,32,.2))}
+  .tm-sf{position:absolute;left:-12px;right:-12px;top:0;height:1px;background:#7fd0de;opacity:.85}
+  .tm-yl{position:absolute;left:0;font-family:var(--f-lat);font-size:10px;letter-spacing:.02em;line-height:1;color:#8f9a9c;font-variant-numeric:lining-nums}
+  .tm-yl.t{top:3px}.tm-yl.b{top:41px}
+  .tm-path{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+  .tm-path polyline{fill:none;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+  .tm-path .all{stroke:rgba(201,164,106,.36);stroke-width:1.2}
+  .tm-path .done{stroke:var(--gold);stroke-width:2}
+  .tm-p{position:absolute;left:var(--x);top:var(--y);width:20px;height:20px;margin:-10px 0 0 -10px;pointer-events:none;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
   .tm-p b{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:var(--cave);border:1px solid rgba(201,164,106,.6);font-family:var(--f-lat);font-size:11px;font-weight:500;line-height:1;color:var(--muted);transition:transform .35s,background .35s,color .35s,box-shadow .35s}
   .tm-p.seen b{color:var(--bone);border-color:var(--gold)}
   .tm-p.cur b{background:var(--gold);color:#17120A;border-color:var(--gold);transform:scale(1.2);box-shadow:0 0 0 3px rgba(201,164,106,.18),0 0 14px rgba(201,164,106,.5)}
   .tm-now-pin b{width:12px;height:12px;margin:3px;border:2px solid var(--gold)}
   .tm-now-pin.cur b{transform:scale(1.3)}
-  .tm-lab{position:absolute;top:-1px;font-family:var(--f-body);font-size:11px;letter-spacing:.04em;color:var(--muted);white-space:nowrap;line-height:1}
-  .tm-lab.l{left:-6px}.tm-lab.m{left:21%;transform:translateX(-25%)}.tm-lab.r{right:-4px;color:var(--gold-text)}
   .tm-now{display:flex;align-items:baseline;gap:11px;margin:5px 0 0;font-size:12.5px;line-height:1.4;color:var(--bone);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .tm-now .tm-n{font-family:var(--f-body);font-weight:500;color:var(--gold-hi);font-size:12.5px;letter-spacing:.06em;padding-right:11px;border-right:1px solid var(--line-gold)}
   .tm-now .tm-ago{font-family:var(--f-lat);color:var(--gold-text);letter-spacing:.04em}
   .tm-now .tm-t{overflow:hidden;text-overflow:ellipsis;letter-spacing:.06em}
 }
-@media (max-width:900px) and (prefers-reduced-motion:reduce){.tl-mini,.tl-mini.on,.tm-arc path,.tm-p b{transition:none}}
+@media (max-width:900px) and (prefers-reduced-motion:reduce){.tl-mini,.tl-mini.on,.tm-p b{transition:none}}
 /* スマホでは「4B」の文字が1皿目（3.8B）の丸と重なるので、文字だけ消す（目盛りの線は残す） */
 @media (max-width:600px){.rt .band.year>span.tk4B[style]:not(.zz){color:transparent}}
 
-/* v12: 移動の線は弧で（間の番号の上を通らない）。スマホを横向きにしたとき（高さ500px以下）は帯を出さない */
-@media (max-width:900px){
-  .tm-arc{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-  .tm-arc path{fill:none;stroke:var(--gold);stroke-width:2;vector-effect:non-scaling-stroke;opacity:0;transition:opacity .35s}
-  .tm-arc.on path{opacity:1}.tm-arc.back path{stroke:var(--gold-hi);stroke-dasharray:4 4}
-}
+/* スマホを横向きにしたとき（高さ500px以下）は帯を出さない */
 @media (max-width:900px) and (max-height:500px){.tl-mini{display:none}}
 
 @media (max-width:380px){.tm-p{width:18px;height:18px;margin:-9px 0 0 -9px}.tm-p b{font-size:10.5px}}
@@ -152,15 +151,11 @@
 .dive-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line-gold);background:#0e1214}
 .dive-scroll svg{display:block;width:100%;height:auto;min-width:720px}
 .dive figcaption{margin-top:10px;font-size:12.5px;color:var(--muted);line-height:1.7}
-.dive-hint{display:none}
-@media (max-width:760px){.dive-hint{display:block;margin-top:2px;color:var(--gold-text)}}
 .dive .dv-grid{stroke:#fff;stroke-opacity:.07}.dive .dv-grid.end{stroke-opacity:.25}
 .dive .dv-y{font-family:var(--f-lat);font-size:15px;fill:#8f9a9c;font-variant-numeric:lining-nums}
 .dive .dv-sf{stroke:#7fd0de;stroke-width:2}
 .dive .dv-sfl{font-family:var(--f-jp);font-size:19px;fill:#7fd0de}
 .dive .dv-end{font-family:var(--f-jp);font-size:17px;fill:#b9c4c4}
-.dive .dv-met{stroke:#e0866e;stroke-opacity:.8;stroke-dasharray:3 5}
-.dive .dv-metl{font-family:var(--f-jp);font-size:15px;fill:#e0866e}
 .dive .dv-path{fill:none;stroke:var(--gold);stroke-width:2.4;stroke-linejoin:round}
 .dive .dv-pt{fill:var(--gold-hi);stroke:#0e1214;stroke-width:2}
 .dive .dv-nm{font-family:var(--f-jp);font-size:18px;fill:var(--bone)}
@@ -169,3 +164,21 @@
 /* 2026-11-18 時代の章の頭＝セノーテの説明（段落を分けて読む） */
 .tl-lede{display:flex;flex-direction:column;gap:14px}
 .tl-lede .lede{margin:0}
+
+/* 2026-11-22 スマホ（760px以下）：潜水図は横スクロールをやめ、1画面に収まる縦長の図に。点は出てくる順の番号、時代名は図の下の一覧 */
+.dive-m{display:none}
+@media (max-width:760px){
+  .dive-scroll{display:none}
+  .dive-m{display:block;max-width:520px;margin-inline:auto;border:1px solid var(--line-gold);background:#0e1214}
+  .dive-m svg{display:block;width:100%;height:auto}
+  .dive-m .dv-y{font-size:10.5px}.dive-m .dv-sfl{font-size:12px}.dive-m .dv-end{font-size:11px}
+  .dive-m .dv-path{stroke-width:1.8}.dive-m .dv-sf{stroke-width:1.5}
+  .dive-m .dv-pt{fill:#0e1214;stroke:var(--gold);stroke-width:1.2}
+  .dive-m .dv-no{font-family:var(--f-lat);font-size:12px;font-weight:500;fill:var(--gold-hi);font-variant-numeric:lining-nums}
+  .dive-key{list-style:none;margin:0;padding:11px 12px 12px;display:grid;grid-template-rows:repeat(4,auto);grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:6px 12px;border-top:1px solid var(--line)}
+  .dive-key li{display:flex;align-items:flex-start;gap:7px;min-width:0;font-size:11.5px;line-height:1.5;letter-spacing:.02em;color:var(--bone)}
+  .dive-key b{flex:0 0 18px;height:18px;display:grid;place-items:center;border:1px solid rgba(201,164,106,.7);border-radius:50%;font-family:var(--f-lat);font-size:10.5px;font-weight:500;line-height:1;color:var(--gold-hi);font-variant-numeric:lining-nums}
+  html[lang="en"] .dive-key,html[lang="es"] .dive-key{grid-template-rows:none;grid-auto-flow:row;gap:5px 12px}
+}
+/* いちばん狭い画面（340px以下）で、年数と目盛りの札が1行に収まらないときは札を次の行へ */
+@media (max-width:340px){.leg .ago{flex-wrap:wrap;row-gap:6px}}

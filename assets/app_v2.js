@@ -340,12 +340,12 @@
     }, { rootMargin: '-45% 0px -45% 0px' });
     legs.forEach(function (li) { co.observe(li); });
   }
-  /* スマホ：皿の一覧を読んでいる間だけ、上に細い年代図を出す。帯のすぐ下の「読む位置」にある皿を光らせ、前の皿からの移動を弧で描く。
+  /* スマホ：皿の一覧を読んでいる間だけ、上に細い年代図を出す。帯のすぐ下の「読む位置」にある皿を光らせ、水面からその皿までの道のりを光らせる。
      帯のどこを押しても、いちばん近い番号の皿へ移る（移った皿は読む位置に来るので、帯は消えず、押した番号が光る） */
   var mini = d.querySelector('.tl-mini'), voyage = d.getElementById('voyage');
   if (mini && voyage) {
     var info = {}; mini.getAttribute('data-info').split(';').forEach(function (r) { var a = r.split('|'); info[a[0]] = { ago: a[1], t: a[2] }; });
-    var pins = [].slice.call(mini.querySelectorAll('.tm-p')), axis = mini.querySelector('.tm-axis'), arc = mini.querySelector('.tm-arc'), arcPath = arc && arc.querySelector('path');
+    var pins = [].slice.call(mini.querySelectorAll('.tm-p')), axis = mini.querySelector('.tm-axis'), plot = mini.querySelector('.tm-plot') || axis, pathEl = mini.querySelector('.tm-path'), doneEl = pathEl && pathEl.querySelector('.done'), ptsAll = pathEl ? (pathEl.getAttribute('data-pts') || '').split(' ') : [];
     var nEl = mini.querySelector('.tm-n'), agoEl = mini.querySelector('.tm-ago'), tEl = mini.querySelector('.tm-t');
     var legsArr = [].slice.call(voyage.querySelectorAll('.leg')), curMini = 0;
     var xOf = function (n) { var p = mini.querySelector('.tm-p[data-n="' + n + '"]'); return p ? parseFloat(p.style.getPropertyValue('--x')) : 0; };
@@ -353,19 +353,8 @@
       var k = +n; if (!info[n] || k === curMini) return; curMini = k;
       pins.forEach(function (p) { var m = +p.getAttribute('data-n'); p.classList.toggle('cur', m === k); p.classList.toggle('seen', m < k); });
       nEl.textContent = k === 9 ? (mini.getAttribute('data-last') || '最後に') : (mini.getAttribute('data-dish') || '{n}皿目').replace('{n}', k); agoEl.textContent = info[n].ago; tEl.textContent = info[n].t;
-      if (arc && k >= 2) {
-        // 橋の形の線（両端で立ち上がる）。間の番号の上を越えるのに要る高さだけ持ち上げ、上の年代の文字には届かせない
-        var a = xOf(k - 1), b = xOf(k), aw = axis.offsetWidth || 300, r = (pins[0].offsetWidth || 20) / 2 + 2, H = 12;
-        pins.forEach(function (p) {
-          var xp = xOf(p.getAttribute('data-n')), f = (xp - a) / (b - a);
-          if (f <= 0 || f >= 1) return;
-          var lo = 0, hi = 1; for (var q = 0; q < 20; q++) { var m = (lo + hi) / 2; if (3 * m * m - 2 * m * m * m < f) lo = m; else hi = m; }
-          H = Math.max(H, r / (3 * lo * (1 - lo)));
-        });
-        H = Math.min(H, 20);
-        arcPath.setAttribute('d', 'M' + a + ' 26 C' + a + ' ' + (26 - H) + ' ' + b + ' ' + (26 - H) + ' ' + b + ' 26');
-        arc.classList.toggle('back', b < a); arc.classList.add('on');
-      } else if (arc) arc.classList.remove('on');
+      // 水面から今の皿までの道のりを光らせる（潜水図と同じ形）
+      if (doneEl) doneEl.setAttribute('points', ptsAll.slice(0, k === 9 ? ptsAll.length : k + 1).join(' '));
     };
     var hdrEl = d.getElementById('top');
     var readLine = function () { var top0 = (hdrEl ? hdrEl.getBoundingClientRect().bottom : 68) + mini.offsetHeight; return top0 + (w.innerHeight - top0) * 0.3; };
@@ -380,7 +369,7 @@
     var tick = 0; w.addEventListener('scroll', function () { if (tick) return; tick = requestAnimationFrame(function () { tick = 0; onScrollMini(); }); }, { passive: true });
     w.addEventListener('resize', onScrollMini); onScrollMini();
     axis.addEventListener('click', function (ev) {
-      var b = axis.getBoundingClientRect(), x = (ev.clientX - b.left) / b.width * 100, best = null, bd = 1e9;
+      var b = plot.getBoundingClientRect(), x = (ev.clientX - b.left) / b.width * 100, best = null, bd = 1e9;
       pins.forEach(function (p) { var dd = Math.abs(xOf(p.getAttribute('data-n')) - x); if (dd < bd) { bd = dd; best = p; } });
       if (!best) return;
       var li = voyage.querySelector('.leg[data-n="' + best.getAttribute('data-n') + '"]'); if (!li) return;
