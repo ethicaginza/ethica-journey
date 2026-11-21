@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="google-site-verification" content="tkWqhBnp-jhcpOyMYqcmMAuNHVxGXUJ_z2PC40ilsBM" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ER9M6JBZMR"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-ER9M6JBZMR");</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N2TRHGDV');</script>
+<!-- End Google Tag Manager -->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>ご来店アンケート｜ETHICA</title>
+<link rel="canonical" href="https://ethicatokyo.jp/survey/">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="icon" href="../assets/img/logo.png">
+<style>html,body{margin:0;background:#0b0b0b}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2TRHGDV"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<script>
+(function(){
+"use strict";
+var CHAPTERS = [
+{id:"oxygen", ja:"光合成と酸素革命（甘海老）", sja:"「光合成と酸素革命」", en:"Photosynthesis and the Oxygen Revolution (sweet shrimp)", sen:"“Photosynthesis and the Oxygen Revolution”"},
+{id:"symbiosis", ja:"真核生物と共生（すっぽん）", sja:"「真核生物と共生」", en:"Cells with a Nucleus — Symbiosis (soft-shell turtle)", sen:"“Cells with a Nucleus — Symbiosis”"},
+{id:"ocean", ja:"海の誕生・熱水噴出孔（戻り鰹・甘鯛）", sja:"「海の誕生・熱水噴出孔」", en:"The Birth of the Ocean and Hydrothermal Vents (bonito / tilefish)", sen:"“The Birth of the Ocean and Hydrothermal Vents”"},
+{id:"verts", ja:"脊椎動物の上陸（鹿）", sja:"「脊椎動物の上陸」", en:"Vertebrates Move onto Land (venison)", sen:"“Vertebrates Move onto Land”"},
+{id:"earth", ja:"地球の誕生（ムール貝）", sja:"「地球の誕生」", en:"Earth — The Birth (mussels)", sen:"“Earth — The Birth”"},
+{id:"plants", ja:"植物の上陸＋土壌・菌糸網（虹鱒）", sja:"「植物の上陸」", en:"Plant colonization of land + mycelial networks (rainbow trout)", sen:"“Plant colonization of land + mycelial networks”"},
+{id:"dino", ja:"恐竜の時代と大絶滅（太刀魚・鰻）", sja:"「恐竜の時代と大絶滅」", en:"The Age of Dinosaurs and the Great Extinction (cutlassfish / eel)", sen:"“The Age of Dinosaurs and the Great Extinction”"},
+{id:"mammals", ja:"哺乳類の繁栄・霊長類（豚肩ロース・ラム）", sja:"「哺乳類の繁栄・霊長類」", en:"The Flourishing of Mammals — Primates (pork shoulder / lamb)", sen:"“The Flourishing of Mammals — Primates”"},
+{id:"trade", ja:"文明と交易（栗）", sja:"「文明と交易」", en:"Civilization & Trade — Columbian Exchange (chestnut)", sen:"“Civilization & Trade — Columbian Exchange”"},
+{id:"life", ja:"最初の生命（シャインマスカット）", sja:"「最初の生命」", en:"The First Life — Microbes (Shine Muscat)", sen:"“The First Life — Microbes”"},
+{id:"flowers", ja:"昆虫と花の共進化（ルクマ）", sja:"「昆虫と花の共進化」", en:"Insects & Flowers — Co-evolution (lucuma)", sen:"“Insects & Flowers — Co-evolution”"}
+];
+function O(list){ return list.map(function(x){ return {id:x[0], ja:x[1], en:x[2]}; }); }
+var TERMS = {
+service:{ja:"サービス",en:"Service"}, space:{ja:"空間",en:"Space"}, food:{ja:"料理",en:"Food"}, dessert:{ja:"デザート",en:"Dessert"},
+music:{ja:"音楽",en:"Music"}, wine:{ja:"ワイン",en:"Wine"}, pairing:{ja:"ペアリング",en:"Pairing"}, cocktail:{ja:"カクテル",en:"Cocktails"},
+mocktail:{ja:"モクテル",en:"Mocktails"}, tableware:{ja:"器",en:"Tableware"}, concept:{ja:"コンセプト",en:"Concept"},
+pace:{ja:"提供のペース",en:"Pace"}, portion:{ja:"量",en:"Portions"}, explanation:{ja:"料理の説明",en:"Explanations"}
+};
+var GOOD_ORDER = ["service","space","food","dessert","music","wine","pairing","cocktail","mocktail","tableware","concept"];
+var BAD_ORDER  = ["service","space","food","dessert","music","wine","pairing","cocktail","mocktail","tableware","concept","pace","portion","explanation"];
+var WHO = O([["sommelier","ソムリエ","the sommelier"],["chef","シェフ","the chef"],["pastry","パティシエ","the pastry chef"],["floor","ホールスタッフ","the floor staff"]]);
+var DRINKS = O([["sparkling","スパークリングワイン","sparkling wine"],["white","白ワイン","white wine"],["orange","オレンジワイン","orange wine"],["rose","ロゼワイン","rosé"],["red","赤ワイン","red wine"],["na","ノンアルコールドリンク","non-alcoholic drinks"]]);
+var WINES = DRINKS.slice(0,5);
+var DETAIL = {
+good:{
+food:{slots:[
+{k:"a",max:3,opts:CHAPTERS,q:{ja:"特に印象に残った章は？",en:"Which chapters stood out?"}},
+{k:"b",max:2,opts:O([["taste","味わい","flavour"],["combo","食材の組み合わせ","ingredient pairings"],["plating","盛り付け","plating"],["story","時代の物語との結びつき","storytelling"],["cook","火入れ","cooking technique"],["veg","ベジタリアン・ヴィーガン対応","vegetarian / vegan options"]]),q:{ja:"どんなところが良かったですか？",en:"What did you like about them?"}}],
+tpl:{ja:[
+"料理はどれも印象的でしたが、なかでも{a}は{b}が素晴らしく、今でも思い出します。",
+"{a}の一皿は{b}が見事で、この日いちばん心に残りました。",
+"特に{a}が好きでした。{b}に驚かされ、一皿ごとに物語を味わっている感覚がありました。",
+"料理はどれも驚きの連続で、特に{a}の一皿が忘れられません。",
+"{a}の一皿がとても美味しく、もう一度食べたいと思うほどでした。",
+"どの料理も{b}が素晴らしく、一皿ごとに感動がありました。",
+"料理の{b}にこだわりを感じ、最後まで飽きることがありませんでした。",
+"料理はどれも驚きがあり、初めて出会う味なのにすっと心に入ってきました。",
+"一皿ごとに物語があり、料理そのものを心から楽しめました。"],
+en:[
+"Every dish was memorable, but {a} stood out for the {b} — I still think about it.",
+"The {b} of {a} was superb and the highlight of my evening.",
+"I especially loved {a} — the {b} surprised me, and each plate felt like a chapter of a story.",
+"Every dish was a surprise, and I will not forget {a}.",
+"I would happily come back just for {a}.",
+"The {b} of every dish was outstanding.",
+"I could feel the care put into the {b}, and I never got bored.",
+"Every dish was full of surprises — flavours I had never met before, yet they felt instantly familiar.",
+"Each plate told a story, and I truly enjoyed the food itself."]}},
+pairing:{slots:[
+{k:"a",max:2,opts:CHAPTERS,q:{ja:"好きだった組み合わせの料理（章）は？",en:"Which dish (chapter) was your favourite match?"}},
+{k:"b",max:2,opts:DRINKS,q:{ja:"合わせた飲み物は？",en:"Which drink was paired with it?"}}],
+tpl:{ja:[
+"特にソムリエが構築したペアリングは料理と驚くほど合っていて、なかでも{a}に合わせた{b}が大好きでした。",
+"ペアリングが本当に素晴らしく、{a}に{b}を合わせた組み合わせは今も記憶に残っています。",
+"一皿ごとに飲み物が変わるペアリングが楽しく、{a}に寄り添う{b}はこの日いちばんの発見でした。",
+"ペアリングはどれも料理にぴったりで、特に{a}との組み合わせが印象的でした。",
+"{a}に合わせたペアリングが絶妙で、料理の印象がさらに深まりました。",
+"ペアリングで出てきた{b}が料理と見事に調和していて、驚きました。",
+"ペアリングの{b}がどれも料理を引き立てていて、最後まで楽しめました。",
+"ソムリエが組み立てたペアリングが料理と見事に合っていて、一皿ごとに発見がありました。",
+"ペアリングのおかげで、料理の物語がより鮮やかに感じられました。"],
+en:[
+"The pairing the sommelier built matched the food beautifully — I especially loved the {b} served with {a}.",
+"The pairing was superb; the {b} with {a} is still on my mind.",
+"I loved how the drinks changed with each plate, and the {b} alongside {a} was my discovery of the night.",
+"Every pairing suited the food perfectly, especially the one for {a}.",
+"The pairing for {a} was spot on and deepened the impression of the dish.",
+"The {b} served in the pairing harmonised wonderfully with the food.",
+"The {b} in the pairing lifted every dish.",
+"The pairing created by the sommelier matched the food beautifully, with a new discovery at every course.",
+"Thanks to the pairing, the story of each dish felt even more vivid."]}},
+service:{slots:[
+{k:"a",max:2,opts:WHO,q:{ja:"特に良かったのは誰の対応ですか？",en:"Whose service stood out?"}},
+{k:"b",max:2,opts:O([["explain","料理の説明","explanations of the dishes"],["care","さりげない気配り","thoughtful attention"],["talk","楽しい会話","conversation"],["timing","提供のタイミング","timing"]]),q:{ja:"どんなところが良かったですか？",en:"What was good about it?"}}],
+tpl:{ja:[
+"{a}の{b}が特に印象に残っていて、居心地の良い時間になりました。",
+"サービスが素晴らしく、なかでも{a}の{b}に心がこもっているのを感じました。",
+"{a}の{b}のおかげで、最後まで安心して食事を楽しめました。",
+"{a}の対応がとても温かく、特別な時間を過ごせました。",
+"{a}が一皿ごとに寄り添ってくれて、心地よく過ごせました。",
+"スタッフの方々の{b}が素晴らしく、心地よく過ごせました。",
+"サービスは{b}が素晴らしく、終始リラックスして楽しめました。",
+"サービスがとても温かく、最後まで気持ちよく過ごせました。",
+"さりげない心配りが行き届いたサービスで、居心地が良かったです。"],
+en:[
+"The {b} from {a} made the evening especially comfortable.",
+"The service was wonderful — I could feel real warmth in the {b} from {a}.",
+"Thanks to the {b} from {a}, I could relax and enjoy the meal to the end.",
+"The warmth of {a} made the evening feel special.",
+"I felt looked after by {a} throughout the meal.",
+"The staff's {b} was excellent, and I felt at ease all evening.",
+"The service stood out for its {b}.",
+"The service was warm and attentive from start to finish.",
+"Thoughtful, unobtrusive service made the evening very comfortable."]}},
+wine:{slots:[
+{k:"a",max:2,opts:WINES,q:{ja:"気に入ったワインは？",en:"Which wines did you enjoy?"}},
+{k:"b",max:2,opts:O([["aroma","香り","aroma"],["match","料理との相性","harmony with the food"],["rare","珍しい産地や造り手","rare regions and producers"]]),q:{ja:"どんなところが良かったですか？",en:"What did you like about them?"}}],
+tpl:{ja:[
+"ワインが素晴らしく、特に{a}は{b}が印象的でした。",
+"いただいた{a}は{b}が見事で、とても満足しました。",
+"{a}の{b}に惹かれ、ワインの時間も心から楽しめました。",
+"ワインのセレクションが素晴らしく、特に{a}が好みでした。",
+"いただいた{a}がとても美味しく、料理とともに楽しめました。",
+"ワインは{b}が素晴らしく、選ぶ楽しさがありました。",
+"ワインの{b}に驚かされ、新しい一本に出会えました。",
+"ワインのセレクションが素晴らしく、料理との時間がより豊かになりました。",
+"ワインリストが魅力的で、どれにするか迷うほどでした。"],
+en:[
+"The wine was excellent — the {a} stood out for the {b}.",
+"The {a} impressed me with the {b}.",
+"I was drawn in by the {b} of the {a}, and loved the wine side of the evening.",
+"The wine selection was wonderful, and the {a} was right up my street.",
+"The {a} I had was delicious and went beautifully with the food.",
+"The wines stood out for their {b}.",
+"I was surprised by the {b} of the wines and discovered something new.",
+"The wine selection was excellent and made the meal even richer.",
+"The wine list was so tempting that I struggled to choose."]}},
+space:{slots:[
+{k:"a",max:3,opts:O([["rock","洞窟のような岩壁","the cave-like rock walls"],["cenote","セノーテを表した青いテーブル","the blue tables recreating a cenote"],["light","ほの暗い照明","the dim lighting"],["room","キッチン内の個室","the private room inside the kitchen"],["counter","キッチンカウンター","the kitchen counter"]]),q:{ja:"特に印象に残ったのは？",en:"What stood out?"}}],
+tpl:{ja:[
+"{a}がつくる空間に一歩入った瞬間から、銀座にいることを忘れました。",
+"{a}が印象的で、非日常の世界に引き込まれました。",
+"{a}のおかげで、特別な夜にふさわしい雰囲気でした。",
+"扉を開けた瞬間から非日常の空間が広がっていて、気分が高まりました。",
+"落ち着いた空間で、会話も料理もゆっくり楽しめました。"],
+en:[
+"From the moment I stepped in, {a} made me forget I was in Ginza.",
+"I was drawn into another world by {a}.",
+"Thanks to {a}, the atmosphere was perfect for a special night.",
+"An extraordinary space opened up the moment the door opened.",
+"The calm space let us take our time over both conversation and food."]}},
+dessert:{slots:[
+{k:"a",max:2,opts:[{id:"trade",ja:"文明と交易（栗）",sja:"「文明と交易」の栗",en:"Civilization & Trade — Columbian Exchange (chestnut)",sen:"the chestnut of “Civilization & Trade”"},{id:"life",ja:"最初の生命（シャインマスカット）",sja:"「最初の生命」のシャインマスカット",en:"The First Life — Microbes (Shine Muscat)",sen:"the Shine Muscat of “The First Life”"},{id:"flowers",ja:"昆虫と花の共進化（ルクマ）",sja:"「昆虫と花の共進化」のルクマ",en:"Insects & Flowers — Co-evolution (lucuma)",sen:"the lucuma of “Insects & Flowers”"},{id:"coffee",ja:"食後のコーヒー・ハーブティー",en:"After-dinner coffee or herbal tea",sen:"the after-dinner coffee or herbal tea"}],q:{ja:"特に良かったのは？",en:"Which stood out?"}}],
+tpl:{ja:[
+"デザートは{a}まで抜かりがなく、最後の一口まで楽しめました。",
+"締めくくりの{a}が素晴らしく、余韻まで美しいコースでした。",
+"{a}が特に印象的で、パティシエの技を感じました。",
+"デザートまで丁寧に作り込まれていて、最後まで感動がありました。",
+"デザートが美しく、コースの締めくくりにふさわしい一皿でした。"],
+en:[
+"Even {a} was flawless, right down to the last bite.",
+"Ending with {a} left a beautiful aftertaste to the whole course.",
+"I was especially impressed by {a}, which showed real pastry craftsmanship.",
+"The desserts were crafted with as much care as everything else.",
+"The dessert was beautiful and a fitting finale to the course."]}},
+music:{slots:[
+{k:"a",max:2,opts:O([["select","選曲","song selection"],["volume","音量のバランス","volume"],["atmos","空間との一体感","atmosphere"]]),q:{ja:"どんなところが良かったですか？",en:"What did you like?"}}],
+tpl:{ja:[
+"音楽の{a}が素晴らしく、食事の時間をさらに特別なものにしてくれました。",
+"流れていた音楽は{a}が心地よく、自然と会話も弾みました。",
+"流れる音楽が空間によく合っていて、心地よい時間でした。",
+"BGMが料理の世界観とよく合っていて、没入感が高まりました。"],
+en:[
+"The {a} of the background music was just right and made the meal even more special.",
+"I loved the {a} of the music, and conversation flowed naturally.",
+"The music suited the space perfectly and made for a relaxing time.",
+"The background music matched the world of the food and drew me in even more."]}},
+cocktail:{slots:[
+{k:"a",max:2,opts:O([["look","見た目の美しさ","presentation"],["balance","味のバランス","balance of flavours"],["latam","ペルーらしい素材使い","Peruvian ingredients"],["original","独創性","originality"]]),q:{ja:"どんなところが良かったですか？",en:"What did you like?"}}],
+tpl:{ja:[
+"カクテルは{a}が素晴らしく、一杯目から気分が上がりました。",
+"{a}が光るカクテルで、料理の前から世界観に引き込まれました。",
+"カクテルがとても美味しく、つい何杯も頼みたくなりました。",
+"オリジナリティのあるカクテルで、ここでしか飲めない一杯でした。"],
+en:[
+"The cocktails stood out for their {a} and lifted my mood from the first sip.",
+"With their {a}, the cocktails drew me into the world of the restaurant even before the food.",
+"The cocktails were delicious — I wanted to order one after another.",
+"Original cocktails I could not have anywhere else."]}},
+mocktail:{slots:[
+{k:"a",max:2,opts:O([["look","見た目の美しさ","presentation"],["depth","味の奥行き","depth of flavour"],["match","料理との相性","harmony with the food"]]),q:{ja:"どんなところが良かったですか？",en:"What did you like?"}}],
+tpl:{ja:[
+"モクテルは{a}が素晴らしく、ノンアルコールでも十分に満足できました。",
+"{a}が際立つモクテルで、お酒を飲まない日でも特別な一杯を楽しめました。",
+"モクテルの完成度が高く、ノンアルコールでも心から楽しめました。",
+"ノンアルコールの選択肢が充実していて、とても嬉しかったです。"],
+en:[
+"The mocktails stood out for their {a} and were fully satisfying without alcohol.",
+"Thanks to their {a}, the mocktails felt just as special as any cocktail.",
+"The mocktails were so well made that I fully enjoyed the evening without alcohol.",
+"I was very happy with the range of non-alcoholic options."]}},
+tableware:{slots:[
+{k:"a",max:2,opts:O([["potter","陶芸家に特注した器","the custom pieces by Japanese potters"],["rest","食材の端材で作ったカトラリー置き","the cutlery rests made from ingredient trimmings"],["change","章ごとに変わる器","the vessels changing with each chapter"]]),q:{ja:"特に印象に残ったのは？",en:"What stood out?"}}],
+tpl:{ja:[
+"{a}がとても美しく、料理を一層引き立てていました。",
+"{a}にも物語が込められていて、細部までのこだわりに感動しました。",
+"器のひとつひとつにこだわりが感じられ、目でも楽しめました。",
+"料理ごとに変わる器が美しく、毎回楽しみでした。"],
+en:[
+"I loved {a}, which made the food even more beautiful.",
+"Even {a} told a story — I was moved by the attention to detail.",
+"Every vessel showed real care, and the food was a feast for the eyes.",
+"The tableware changed with every dish, and I looked forward to each one."]}},
+concept:{slots:[
+{k:"a",max:2,opts:O([["eras","料理名ではなく時代名だけのメニュー","a menu listing only the names of eras"],["story","地球46億年の物語","the 4.6-billion-year story of the Earth"],["ethical","エシカルな食材選び","the ethical choice of ingredients"],["surprise","皿が届くまで分からない驚き","not knowing what will arrive until it is served"]]),q:{ja:"特に惹かれたのは？",en:"What drew you in?"}}],
+tpl:{ja:[
+"{a}というコンセプトが新鮮で、最後までわくわくしながら過ごせました。",
+"特に{a}に惹かれました。食事がひとつの物語として記憶に残っています。",
+"地球の歴史をたどるコンセプトがユニークで、食事がひとつの旅のようでした。",
+"ここでしか味わえない世界観で、コンセプトそのものを楽しめました。"],
+en:[
+"The concept of {a} felt fresh, and I was excited until the very end.",
+"I was especially drawn to {a}; the meal stays with me as a single story.",
+"Tracing the history of the Earth through food is a unique concept — the meal felt like a journey.",
+"A world you can only experience here; I enjoyed the concept itself."]}}
+},
+bad:{
+food:{slots:[
+{k:"a",max:3,opts:CHAPTERS,q:{ja:"気になった章は？",en:"Which chapters?"}},
+{k:"b",max:2,opts:O([["season","味付け","seasoning"],["temp","温度","temperature"],["amount","量","portion size"],["texture","食感","texture"],["plating","盛り付け","plating"]]),q:{ja:"どんな点が気になりましたか？",en:"What was the issue?"}}],
+tpl:{ja:[
+"{a}の一皿は、{b}がもう少し好みに合うと嬉しかったです。",
+"{a}については、{b}に少し物足りなさを感じました。",
+"{a}の一皿は、少し好みと違うと感じました。",
+"{a}については、もう一工夫あるとさらに良くなると思いました。",
+"料理の{b}は、もう少し調整があると嬉しいです。",
+"全体的に料理の{b}が少し気になりました。",
+"料理については、期待していたほどの驚きは感じられませんでした。",
+"料理に関しては、もう少し印象に残る一皿があると嬉しいです。"],
+en:[
+"For {a}, I would have liked the {b} to suit my taste a little better.",
+"With {a}, the {b} felt slightly lacking.",
+"I felt {a} was a little different from my taste.",
+"I think {a} could be even better with a little more refinement.",
+"I hope the {b} of the dishes can be adjusted a little.",
+"Overall, the {b} of the dishes bothered me slightly.",
+"The food did not surprise me as much as I had hoped.",
+"I would have liked at least one more dish that truly stayed with me."]}},
+service:{slots:[
+{k:"a",max:2,opts:WHO,q:{ja:"気になったのは誰の対応ですか？",en:"Whose service?"}},
+{k:"b",max:2,opts:O([["clarity","説明のわかりやすさ","clarity of explanations"],["checkin","声かけのタイミング","timing of check-ins"],["speed","対応の早さ","speed of response"],["care","気配り","attentiveness"]]),q:{ja:"どんな点が気になりましたか？",en:"What was the issue?"}}],
+tpl:{ja:[
+"{a}の{b}については、もう少し改善の余地があると感じました。",
+"{a}の{b}が少し気になりました。",
+"{a}の対応に、少し物足りなさを感じました。",
+"{a}の接客については、もう少し配慮があると嬉しいです。",
+"サービスの{b}が、少し気になりました。",
+"スタッフの{b}がもう少し整うと、さらに心地よく過ごせると思います。",
+"サービスについては、もう少し心配りがあると嬉しいです。",
+"接客の面で、少し気になる点がありました。"],
+en:[
+"I felt there was room to improve the {b} of {a}.",
+"The {b} of {a} bothered me a little.",
+"I found the service from {a} slightly lacking.",
+"I would appreciate a little more care in the service from {a}.",
+"The {b} of the service bothered me a little.",
+"Better {b} from the staff would make the evening even more comfortable.",
+"I would appreciate a little more attentiveness in the service.",
+"There were a few things about the service that bothered me."]}},
+pairing:{slots:[
+{k:"a",max:2,opts:CHAPTERS,q:{ja:"気になった組み合わせの料理（章）は？",en:"Which dish (chapter)?"}},
+{k:"b",max:2,opts:O([["match","料理との相性","match with the food"],["pour","量","pour size"],["timing","注ぐタイミング","timing of pours"],["explain","説明","explanations"]]),q:{ja:"どんな点が気になりましたか？",en:"What was the issue?"}}],
+tpl:{ja:[
+"{a}に合わせたペアリングは、{b}がもう少し良くなると嬉しいです。",
+"{a}のペアリングについては、{b}が少し気になりました。",
+"{a}との組み合わせは、少し好みと違うと感じました。",
+"{a}のペアリングは、もう一工夫あるとさらに良いと思います。",
+"ペアリング全体の{b}が少し気になりました。",
+"ペアリングは、{b}がもう少し整うとさらに楽しめると思います。",
+"ペアリングについては、期待していたほどの驚きはありませんでした。",
+"ペアリングに関しては、もう少し改善の余地があると感じました。"],
+en:[
+"For the pairing with {a}, I hope the {b} can be improved a little.",
+"The {b} in the pairing for {a} bothered me slightly.",
+"The pairing for {a} was a little different from my taste.",
+"I think the pairing for {a} could be even better with a little more refinement.",
+"The {b} across the pairing bothered me a little.",
+"Better {b} would make the pairing even more enjoyable.",
+"The pairing did not surprise me as much as I had hoped.",
+"There is room to improve the pairing."]}},
+space:{slots:[
+{k:"a",max:2,opts:O([["light","照明の明るさ","lighting level"],["temp","室温","room temperature"],["chair","椅子の座り心地","chair comfort"],["spacing","席の間隔","table spacing"],["sound","音の響き","acoustics"]]),q:{ja:"どんな点が気になりましたか？",en:"What was the issue?"}}],
+tpl:{ja:[
+"{a}が少し気になりました。",
+"空間はとても素敵でしたが、{a}がもう少し改善されると、より快適に過ごせると思います。",
+"空間について、少し落ち着かない点がありました。",
+"居心地の面で、もう少し改善の余地があると感じました。"],
+en:[
+"The {a} bothered me a little.",
+"The space is lovely, but improving the {a} would make it more comfortable.",
+"Something about the space made it hard to fully relax.",
+"There is room to improve the comfort of the space."]}},
+music:{slots:[
+{k:"a",max:2,opts:O([["volume","音量","volume"],["select","選曲","song selection"],["switch","曲の切り替わり","transitions between songs"]]),q:{ja:"どんな点が気になりましたか？",en:"What was the issue?"}}],
+tpl:{ja:[
+"音楽の{a}が少し気になりました。",
+"音楽は、{a}がもう少し空間に合うとさらに良いと思います。",
+"音楽が少し気になり、会話に集中しにくい場面がありました。",
+"BGMについては、もう少し調整の余地があると感じました。"],
+en:[
+"The {a} of the music bothered me a little.",
+"I think the music would be better if the {a} suited the space more.",
+"The music was a little distracting and made conversation harder at times.",
+"There is room to adjust the background music."]}},
+wine:{slots:[
+{k:"a",max:2,opts:O([["selection","品揃え","selection"],["price","価格帯の幅","price range"],["clarity","説明のわかりやすさ","clarity of explanations"],["temp","温度","serving temperature"]]),q:{ja:"どんな点が気になりましたか？",en:"What was the issue?"}}],
+tpl:{ja:[
+"ワインの{a}については、もう少し改善の余地があると感じました。",
+"ワインは{a}が少し気になりました。",
+"ワインについては、もう少し選びやすいと嬉しいです。",
+"ワインに関しては、期待していたほどではありませんでした。"],
+en:[
+"I felt the {a} of the wine could be improved.",
+"The {a} of the wine bothered me a little.",
+"I would appreciate it if the wine were a little easier to choose.",
+"The wine did not quite meet my expectations."]}},
+cocktail:{slots:[
+{k:"a",max:2,opts:O([["balance","味のバランス","balance of flavours"],["choice","種類の少なさ","limited choice"],["speed","提供の早さ","speed of service"]]),q:{ja:"どんな点が気になりましたか？",en:"What was the issue?"}}],
+tpl:{ja:[
+"カクテルは{a}が少し気になりました。",
+"カクテルについては、{a}がもう少し改善されると嬉しいです。",
+"カクテルについては、もう少し選択肢があると嬉しいです。",
+"カクテルは、期待していたほどではありませんでした。"],
+en:[
+"The {a} of the cocktails bothered me a little.",
+"I would appreciate improvement in the {a} of the cocktails.",
+"I would like a few more cocktail options.",
+"The cocktails did not quite meet my expectations."]}},
+mocktail:{slots:[
+{k:"a",max:2,opts:O([["balance","味のバランス","balance of flavours"],["choice","種類の少なさ","limited choice"],["match","料理との相性","match with the food"]]),q:{ja:"どんな点が気になりましたか？",en:"What was the issue?"}}],
+tpl:{ja:[
+"モクテルは{a}が少し気になりました。",
+"モクテルについては、{a}がもう少し改善されると嬉しいです。",
+"ノンアルコールの選択肢がもう少しあると嬉しいです。",
+"モクテルについては、もう少し改善の余地があると感じました。"],
+en:[
+"The {a} of the mocktails bothered me a little.",
+"I would appreciate improvement in the {a} of the mocktails.",
+"I would appreciate a few more non-alcoholic options.",
+"There is room to improve the mocktails."]}},
+dessert:{slots:[
+{k:"a",max:2,opts:O([["sweet","甘さ","sweetness"],["amount","量","portion size"],["temp","温度","temperature"],["texture","食感","texture"]]),q:{ja:"どんな点が気になりましたか？",en:"What was the issue?"}}],
+tpl:{ja:[
+"デザートは{a}が少し気になりました。",
+"デザートについては、{a}がもう少し好みに合うと嬉しいです。",
+"デザートは、もう少し印象に残る一皿だと嬉しいです。",
+"デザートについては、期待していたほどではありませんでした。"],
+en:[
+"The {a} of the dessert bothered me a little.",
+"I would have liked the {a} of the dessert to suit my taste a little better.",
+"I would have liked a more memorable dessert.",
+"The dessert did not quite meet my expectations."]}},
+tableware:{slots:[
+{k:"a",max:2,opts:O([["use","使いやすさ","ease of use"],["harmony","料理との調和","harmony with the food"],["weight","器の重さ","weight"]]),q:{ja:"どんな点が気になりましたか？",en:"What was the issue?"}}],
+tpl:{ja:[
+"器の{a}が少し気になりました。",
+"器については、{a}がもう少し良くなると嬉しいです。",
+"器について、少し気になる点がありました。",
+"器の使い勝手に、もう少し配慮があると嬉しいです。"],
+en:[
+"The {a} of the tableware bothered me a little.",
+"I hope the {a} of the tableware can be improved.",
+"A few things about the tableware bothered me.",
+"The tableware could be a little easier to use."]}},
+concept:{slots:[
+{k:"a",max:2,opts:O([["explain","説明がわかりにくかった","the explanation was hard to follow"],["link","料理との結びつきが見えにくかった","the link to the food was unclear"],["menu","メニューが分かりにくかった","the menu was confusing"]]),q:{ja:"どんな点が気になりましたか？",en:"What was the issue?"}}],
+tpl:{ja:[
+"コンセプトについては、{a}と感じました。",
+"コンセプトは魅力的でしたが、{a}ように思います。",
+"コンセプトが少し伝わりにくいと感じました。",
+"コンセプトと料理のつながりが、もう少し分かりやすいと嬉しいです。"],
+en:[
+"Regarding the concept, I felt {a}.",
+"The concept is appealing, but I felt {a}.",
+"The concept was a little hard to grasp.",
+"I would like the connection between the concept and the food to be clearer."]}},
+pace:{slots:[
+{k:"a",max:1,opts:O([["fast","全体的に早すぎた","everything came too quickly"],["slow","全体的に遅すぎた","everything came too slowly"],["wait","待ち時間の長い章があった","some courses had long waits"]]),q:{ja:"どう感じましたか？",en:"How did it feel?"}}],
+tpl:{ja:[
+"提供のペースは、{a}ように感じました。",
+"料理が出てくるペースについて、{a}点が少し気になりました。",
+"料理の提供ペースが少し気になりました。",
+"提供のペースがもう少し整うと、より落ち着いて楽しめると思います。"],
+en:[
+"Regarding the pace, I felt {a}.",
+"As for the timing of the courses, {a}, which bothered me a little.",
+"The pace of service bothered me a little.",
+"A smoother pace would let me enjoy the meal more calmly."]}},
+portion:{slots:[
+{k:"a",max:1,opts:O([["much","多すぎた","too much"],["little","少なかった","too little"]]),q:{ja:"どう感じましたか？",en:"How did it feel?"}}],
+tpl:{ja:[
+"料理の量は、私には{a}と感じました。",
+"全体の量が{a}ので、調整できると嬉しいです。",
+"料理の量が少し気になりました。",
+"量については、もう少し調整があると嬉しいです。"],
+en:[
+"For me, the overall portion was {a}.",
+"The portions were {a}, so I would appreciate some adjustment.",
+"The portion size bothered me a little.",
+"I hope the portions can be adjusted a little."]}},
+explanation:{slots:[
+{k:"a",max:2,opts:O([["long","長すぎた","too long"],["short","短すぎた","too short"],["hear","聞き取りにくかった","hard to hear"],["tech","専門的すぎた","too technical"]]),q:{ja:"どう感じましたか？",en:"How did it feel?"}}],
+tpl:{ja:[
+"料理の説明は、少し{a}ように感じました。",
+"一皿ごとの説明が{a}点が、少し気になりました。",
+"料理の説明について、少し気になる点がありました。",
+"料理の説明が、もう少し分かりやすいと嬉しいです。"],
+en:[
+"The explanations of the dishes felt a little {a}.",
+"The explanation for each dish was {a}, which bothered me a little.",
+"A few things about the explanations of the dishes bothered me.",
+"I would like the explanations of the dishes to be a little easier to follow."]}}
+}
+};
+window.ETHICA_SURVEY_CONF = Object.assign(window.ETHICA_SURVEY_CONF || {}, {TERMS:TERMS, GOOD_ORDER:GOOD_ORDER, BAD_ORDER:BAD_ORDER, DETAIL:DETAIL});
+})();
+</script>
+<script>
+(function(){
+"use strict";
+var OPEN = {ja:{
+5:["期待をはるかに超える、忘れられないイノベーティブのディナーでした。", "ここまで心を動かされるイノベーティブのコースは初めてです。", "最初の一皿から最後まで、驚きの連続のイノベーティブなディナーでした。", "ペルー料理をベースにしたイノベーティブのコースに、すっかり魅了されました。", "料理と物語がひとつになった、唯一無二のイノベーティブ体験でした。", "一皿ごとに時代をめぐるイノベーティブのディナーコースに、終始わくわくしました。", "想像していた以上に、完成度の高いイノベーティブでした。", "東京で食べてきたイノベーティブの中でも、間違いなく特別な一夜でした。", "五感すべてで楽しめるイノベーティブのディナーで、心から満たされました。", "期待して銀座に伺いましたが、そのはるか上をいくイノベーティブなディナーでした。"],
+4:["とても満足度の高いイノベーティブのディナーコースでした。", "全体を通して楽しい時間を過ごせる、素敵なイノベーティブでした。", "一皿ごとに発見のあるイノベーティブのコースで、満足しています。", "ペルー料理の要素を取り入れたイノベーティブのコースを、存分に楽しめました。", "物語のあるイノベーティブのディナーで、心地よい時間を過ごせました。", "期待どおり、印象に残るイノベーティブなディナーでした。", "料理も空間も楽しめる、満足のいくイノベーティブのレストランでした。", "時代をたどるイノベーティブのコースは、とても新鮮でした。", "細部までこだわりを感じるイノベーティブで、良いディナーになりました。", "東京でも珍しい、落ち着いて楽しめるイノベーティブでした。"],
+3:["イノベーティブのコースとして、楽しめたところと気になったところの両方がありました。","全体としては楽しめましたが、イノベーティブとして惜しいと感じる点もありました。","コンセプトのあるイノベーティブで面白かった一方、気になる点もありました。","期待していたイノベーティブ体験に、あと一歩届かない印象でした。","良いところも多いイノベーティブでしたが、課題も感じました。","イノベーティブらしい驚きはありましたが、全体の満足度はほどほどでした。","楽しめる場面も多かった一方、イノベーティブとしてもう少しを期待していました。","印象に残る皿もあれば、物足りない皿もあるイノベーティブのコースでした。","世界観は魅力的なイノベーティブでしたが、気になる点も残りました。","ほどよく楽しめたものの、イノベーティブとしての驚きはもう少し欲しかったです。"],
+2:["正直に言うと、期待していたイノベーティブ体験とは違いました。","楽しみにしていたイノベーティブでしたが、残念ながら満足しきれませんでした。","イノベーティブのコースとして、期待とは大きく違う印象でした。","率直に言って、今回のイノベーティブ体験には満足できませんでした。","期待して伺ったイノベーティブでしたが、残念に感じる点が多くありました。","イノベーティブとしての魅力を、今回は十分に感じられませんでした。","残念ながら、心に残るイノベーティブ体験にはなりませんでした。","楽しみにしていた分、今回のイノベーティブのコースには落胆しました。","コンセプトには惹かれましたが、イノベーティブ体験としては物足りませんでした。","今回は、期待していたイノベーティブの水準に届いていないと感じました。"]},
+en:{
+5:["An unforgettable innovative dinner that far exceeded my expectations.", "I have never been so moved by an innovative tasting course.", "From the first plate to the last, this innovative dinner was full of surprises.", "I was completely captivated by this innovative course rooted in Peruvian cuisine.", "A one-of-a-kind innovative fine dining experience where food and story become one.", "An innovative course that travels through the eras plate by plate — I was excited throughout.", "The innovative cuisine was far more accomplished than I had imagined.", "Of all the innovative restaurants I have tried in Tokyo, this was truly a special night.", "An innovative dinner that engages all five senses — I left completely satisfied.", "I came with high hopes, and this innovative fine dining experience went far beyond them."],
+4:["A very satisfying innovative dinner course.", "A lovely innovative restaurant where I enjoyed every part of the evening.", "An innovative course with a new discovery in every dish — I was very pleased.", "I really enjoyed this innovative course with Peruvian influences.", "An innovative dinner with a story, and a very pleasant time.", "A memorable innovative fine dining experience, just as I had hoped.", "A satisfying innovative meal where both the food and the space were enjoyable.", "The innovative course tracing different eras felt wonderfully fresh.", "Innovative cuisine with attention to every detail — a lovely dinner.", "One of the calmest and most satisfying innovative dinners I have had in Tokyo."],
+3:["As an innovative course, there were things I enjoyed and things that bothered me.","Overall I enjoyed it, but some points felt like missed opportunities for an innovative restaurant.","The concept-driven innovative cuisine was interesting, though a few things bothered me.","The innovative experience fell just short of what I had hoped for.","Plenty to like in this innovative course, but also room for improvement.","There were innovative surprises, but my overall satisfaction was moderate.","Many moments were enjoyable, though I expected a little more from an innovative restaurant.","An innovative course with some memorable plates and some that fell flat.","The world of this innovative restaurant is appealing, but some concerns remained.","I enjoyed it to a degree, but wanted a bit more innovative surprise."],
+2:["To be honest, this was not the innovative experience I had hoped for.","I was looking forward to this innovative restaurant, but unfortunately left unsatisfied.","As an innovative course, it felt very different from what I expected.","Frankly, I was not satisfied with this innovative experience.","I came with high expectations for the innovative cuisine, but much of it disappointed me.","This time, I could not fully feel the appeal of the innovative cuisine.","Unfortunately, it did not become a memorable innovative experience.","Because I had looked forward to it, this innovative course was a letdown.","The concept drew me in, but the innovative experience itself fell short.","This time, it did not reach the level I expect from an innovative restaurant."]}};
+var CLOSE = {ja:{
+5:["銀座で特別な日のディナーなら、またこのレストランを選びたいです。", "次の季節の章を楽しみに、また銀座までディナーに伺います。", "銀座でイノベーティブなディナーを探している方に、心からおすすめしたいレストランです。", "大切な人を連れて、また銀座のこのレストランにディナーで来たいです。", "東京で過ごしたディナーの中でも、いちばん記憶に残る銀座の夜になりました。", "有楽町駅や東京駅からも歩ける銀座のレストランなので、また気軽にディナーで伺いたいです。", "季節が変わったら、また銀座のディナーで次の物語に会いに行きます。", "銀座でのディナーの楽しみがひとつ増えた、素敵なレストランでした。", "銀座でディナーをするたびに、このレストランを思い出しそうです。", "東京でおすすめのディナーを聞かれたら、まず銀座のこのお店を挙げます。"],
+4:["銀座でまたディナーをするときは、候補に入れたいレストランです。", "次の季節のメニューも楽しみに、また銀座でディナーに伺いたいです。", "銀座で落ち着いてディナーを楽しみたいときに、また利用したいです。", "銀座でイノベーティブなディナーを楽しみたい方にもおすすめできるレストランです。", "有楽町駅や東京駅からも歩ける銀座のお店なので、仕事帰りのディナーにも伺いやすいです。", "銀座での特別なディナーに、また選びたいと思います。", "次は別のコースも試しに、また銀座までディナーに来たいです。", "銀座で過ごすディナーの選択肢として、覚えておきたいレストランです。", "機会があれば、また銀座でディナーに伺いたいと思います。", "東京で友人にすすめたいレストランが、銀座にひとつ増えました。"],
+3:["銀座でまた機会があれば、改善された姿を見に伺いたいです。","次回はさらに良くなっていることを期待して、また銀座で伺うかもしれません。","銀座のお店として、今後に期待しています。","改善されたら、また銀座で試してみたいと思います。","銀座での選択肢のひとつとして、今後の変化に期待しています。","次の季節のメニューで印象が変わるか、また銀座で確かめたいです。","ポテンシャルを感じるので、銀座でのこれからに期待しています。","銀座で再訪するかは、次の変化しだいだと思います。","良さもあったので、銀座でまた機会があれば伺いたいです。","今後のブラッシュアップに、銀座の一客として期待しています。"],
+2:["銀座のお店として、今後の改善に期待しています。","この感想が、銀座でのより良いお店づくりのお役に立てば幸いです。","銀座で多くの方に愛されるお店になるよう、改善に期待しています。","銀座で再び伺うかは、今後の改善しだいです。","銀座の一等地にあるお店だからこそ、期待を込めてお伝えしました。","銀座で改めて伺いたいと思えるよう、変化に期待しています。","銀座での食事として、次は満足できることを願っています。","銀座のお店として、ポテンシャルは感じるので今後に期待します。","率直な感想ですが、銀座でのお店づくりの参考になれば嬉しいです。","銀座でまた選びたいと思えるお店になることを期待しています。"]},
+en:{
+5:["For a special dinner in Ginza, I would choose this restaurant again.", "I will be back in Ginza for dinner and the next season's chapter.", "I wholeheartedly recommend it to anyone looking for an innovative dinner in Ginza.", "I would love to return to this Ginza restaurant for dinner with someone special.", "One of the best restaurants in Ginza — the most memorable dinner of my time in Tokyo.", "Within walking distance of Yurakucho and Tokyo Station, this Ginza restaurant is easy to come back to for dinner.", "When the season changes, I will return to Ginza for another dinner here.", "It gives me one more reason to have dinner in Ginza.", "I think I will remember this restaurant every time I dine in Ginza.", "If anyone asks me for a dinner recommendation in Tokyo, this Ginza restaurant comes first."],
+4:["It is on my list for my next dinner in Ginza.", "I look forward to the next season's menu and having dinner in Ginza again.", "I would come back whenever I want a relaxed dinner in Ginza.", "I can recommend this restaurant to anyone wanting an innovative dinner in Ginza.", "Within walking distance of Yurakucho and Tokyo Station, this Ginza restaurant is easy to return to for dinner after work.", "I would choose it again for a special dinner in Ginza.", "Next time I would like to try another dinner course here in Ginza.", "A restaurant in Ginza worth remembering for a special dinner.", "Given the chance, I would have dinner here in Ginza again.", "One more restaurant in Ginza that I can recommend to friends visiting Tokyo."],
+3:["If I have another chance in Ginza, I would like to see how it has improved.","I may return in Ginza, hoping it will be even better next time.","As a Ginza restaurant, I look forward to its future.","Once these points are improved, I would like to try it again in Ginza.","As one of the options in Ginza, I look forward to how it evolves.","I would like to see whether the next season's menu changes my impression of this Ginza restaurant.","I sense real potential and look forward to what comes next in Ginza.","Whether I return to this Ginza restaurant will depend on the next changes.","There were good points too, so I may visit again in Ginza.","As a guest in Ginza, I look forward to further refinement."],
+2:["As a Ginza restaurant, I hope to see improvements.","I hope this feedback helps make it an even better restaurant in Ginza.","I hope it improves and becomes a place many people in Ginza love.","Whether I return to this Ginza restaurant depends on future improvements.","Precisely because it is in such a prime spot in Ginza, I wanted to share this honestly.","I hope it changes enough that I want to come back to it in Ginza.","I hope my next meal here in Ginza will be satisfying.","As a Ginza restaurant, it has potential, and I hope for better.","This is honest feedback; I hope it helps the restaurant in Ginza.","I hope it becomes a restaurant I would choose again in Ginza."]}};
+var BRIDGE = {ja:"一方で、", en:"That said, a few things could be better."};
+var SEATS = [
+{id:"counter", ja:"キッチンカウンター", en:"Kitchen counter",
+tja:["«キッチンカウンター»の席で、シェフの手元を間近に見ながら食事を楽しめました。","«カウンター»席からはキッチンの様子がよく見えて、臨場感がありました。","目の前で料理が仕上がる«カウンター»席は、まさに特等席でした。"],
+ten:["Sitting at the «kitchen counter», I could watch the chefs at work up close.","The «counter» seats offered a front-row view of the kitchen.","Watching each dish being finished right in front of me at the «counter» was a real treat."]},
+{id:"private", ja:"キッチン内の個室", en:"Private room",
+tja:["キッチンの中にある«個室»で、ゆったりと過ごせました。","«個室»だったので、周りを気にせず会話も楽しめました。","落ち着いた«個室»で、特別な時間を過ごせました。"],
+ten:["The «private room» inside the kitchen was completely relaxing.","Being in a «private room» meant no distractions, and every moment felt relaxed.","The calm «private room» made the evening feel truly special."]},
+{id:"table", ja:"テーブル席", en:"Table",
+tja:["今回は«テーブル席»でしたが、次はキッチン内の個室やカウンター席でも楽しんでみたいです。","«テーブル席»でゆっくり楽しめました。次はシェフの手元が見えるカウンターや個室も利用してみたいです。"],
+ten:["This time I had a «table»; next time I would love to try the counter or the private room.","The «table» was comfortable and relaxed, and next time I would like to try the counter or the private room."]}
+];
+var SCENES = [
+{id:"birthday", ja:"誕生日のお祝い", en:"Birthday",
+tja:["«誕生日»のお祝いのディナーで利用しました。","«誕生日»のディナーに伺いました。","«誕生日»を祝うディナーのために選んだお店です。"],
+ten:["We came for a «birthday» dinner.","It was a «birthday» dinner.","I chose this restaurant for a «birthday» dinner."]},
+{id:"anniversary", ja:"記念日", en:"Anniversary",
+tja:["«記念日»のディナーで利用しました。","«記念日»のお祝いのディナーに伺いました。","大切な«記念日»のディナーに選んだお店です。"],
+ten:["We came for our «anniversary» dinner.","We celebrated our «anniversary» with dinner here.","We chose it for a special «anniversary» dinner."]},
+{id:"business", ja:"接待・会食", en:"Business dinner",
+tja:["«接待»のディナーで利用しました。","«接待・会食»の場として、ディナーで利用しました。","大切な方の«接待»に利用しました。"],
+ten:["I used it for a «business dinner».","We came here to «entertain clients».","It was a «business dinner» with important guests."]},
+{id:"date", ja:"デート", en:"Date",
+tja:["«デート»のディナーで利用しました。","«デート»で銀座のディナーに伺いました。","«デート»のディナーに選んだお店です。"],
+ten:["It was a «date» night dinner.","We came here for a «date».","I chose it for a «date» dinner."]},
+{id:"family", ja:"ご家族と", en:"With family",
+tja:["«家族»とのディナーで利用しました。","«家族»と一緒に伺いました。","«家族»で特別な食事を楽しみました。"],
+ten:["I came with my «family».","We enjoyed a special meal as a «family».","It was a «family» meal."]},
+{id:"friends", ja:"ご友人と", en:"With friends",
+tja:["«友人»とのディナーで利用しました。","«友人»と一緒に伺いました。","«友人»と特別なひとときを過ごしました。"],
+ten:["I came with «friends».","We spent a special time with «friends».","It was a meal with «friends»."]},
+{id:"solo", ja:"おひとりで", en:"On my own",
+tja:["«ひとり»でディナーに伺いました。","«ひとり»でゆっくりと楽しみました。","«ひとり»の時間を楽しみに伺いました。"],
+ten:["I came «on my own».","I enjoyed a quiet meal «on my own».","I visited «alone» to treat myself."]},
+{id:"travel", ja:"観光・旅行", en:"Travel",
+tja:["«旅行»で東京を訪れた際に、ディナーで伺いました。","«観光»の合間に伺いました。","«旅行»中の特別な食事に選びました。"],
+ten:["I visited while «travelling» in Tokyo.","We came during our «trip» to Tokyo.","It was a special meal during our «trip»."]}
+];
+var FRENCH = {
+food:{ja:["ペルー料理をフレンチの技法で仕立てた、繊細な味わいでした。","フレンチの技法が随所に感じられ、完成度の高さに驚きました。","素材の個性をフレンチの技法で美しくまとめているのが印象的でした。","ソースや火入れにフレンチの技法が生きていて、奥行きのある味でした。","フレンチの技法をベースにした、洗練された仕上がりでした。","ペルー料理の香りとフレンチの技法が見事に調和していました。","フレンチの技法による丁寧な仕事が、一皿ごとに伝わってきました。","見た目の華やかさの裏に、確かなフレンチの技法を感じました。","フレンチの技法で整えられた味わいに、品の良さを感じました。","ペルー料理とフレンチの技法の組み合わせが新鮮でした。"],
+en:["Peruvian cuisine refined with French techniques — delicate and precise.","French techniques were evident throughout, and the level of finish amazed me.","I loved how French techniques brought out each ingredient's character.","French techniques in the sauces and cooking gave the flavours real depth.","A refined finish built on French techniques.","Peruvian aromas and French techniques were in perfect harmony.","The careful work rooted in French techniques came through in every plate.","Behind the beautiful presentation, I could sense solid French techniques.","The flavours, shaped by French techniques, felt elegant.","The combination of Peruvian cuisine and French techniques felt fresh."]},
+dessert:{ja:["デザートにもフレンチの技法が光っていました。","フレンチの技法で仕上げたデザートは、甘さのバランスが絶妙でした。","パティシエのフレンチの技法が、デザートの美しさに表れていました。","フレンチの技法を生かしたデザートで、最後まで洗練されていました。","ペルーの果実をフレンチの技法で仕立てたデザートが印象的でした。"],
+en:["French techniques shone in the desserts too.","The desserts, finished with French techniques, had a perfect balance of sweetness.","The pastry chef's French techniques showed in the beauty of the desserts.","Desserts making full use of French techniques kept things refined to the end.","The dessert of Peruvian fruit crafted with French techniques was memorable."]}
+};
+var UI = {
+ja:{title:"ご来店ありがとうございました", sub:"今日の体験をお聞かせください。（約1分）", stars:"全体の満足度",
+starLabels:["不満","やや不満","ふつう","満足","大変満足"], good:"良かったところ（2つまで）", bad:"改善してほしいところ（3つまで）",
+detail:"もう少し詳しく教えてください（任意）", other:"その他", otherPh:"自由に入力", text:"お客様の感想",
+textNote:"お客様に選んでいただいた青字のキーワードから文章を作りました。自由に書き換えられます。",
+regen:"別の言い回しをする", regenConfirm:"書き換えた内容が消えます。作り直しますか？", name:"お名前・ニックネーム（任意）",
+consent:"この感想を、公式サイトなどで匿名で紹介することに同意します（任意）", submit:"送信する", sending:"送信中…",
+doneTitle:"ご意見ありがとうございました。", thanks:"ありがとうございました", thanksP:"いただいた声はスタッフ全員で共有し、次の一皿に生かします。",
+err:"送信できませんでした。通信環境をご確認のうえ、もう一度お試しください。", goodPick:"良かった点", badPick:"改善点",
+scene:"今回のご利用シーン", seat:"お席",
+snsLead:"よろしければ、この感想を口コミでシェアしていただけませんか。下のボタンを押すと文章がコピーされ、口コミの投稿画面が開きます。お客様の一言が、まだETHICAを知らない方との出会いにつながります。",
+copy:"文章をコピーする", copied:"コピーしました", ikyu:"一休", tabelog:"食べログ", google:"Google", trip:"Tripadvisor", gyg:"GetYourGuide",
+reviewNote:"開いた画面の口コミ欄に貼り付けてください（一休は一休でご予約の方）。", book:"1月の旅のご予約（12/1〜）", giftAsk:"お願い：次の旅をより良くする為に"},
+en:{title:"Thank you for dining with us", sub:"Tell us about today (about 1 min).", stars:"Overall satisfaction",
+starLabels:["Poor","Fair","Good","Very good","Excellent"], good:"What did you enjoy? (up to 2)", bad:"What could be better? (up to 3)",
+detail:"Tell us a little more (optional)", other:"Other", otherPh:"Type here", text:"Your review",
+textNote:"We drafted this from the keywords you chose, shown in blue. Feel free to edit it.",
+regen:"Try different wording", regenConfirm:"Your edits will be lost. Regenerate?", name:"Name or nickname (optional)",
+consent:"I agree that this review may be shared anonymously on the official website (optional)", submit:"Send", sending:"Sending…",
+doneTitle:"Thank you for your feedback.", thanks:"Thank you", thanksP:"We will share your words with the whole team and carry them into the next plate.",
+err:"Could not send. Please check your connection and try again.", goodPick:"Enjoyed", badPick:"Could be better",
+scene:"What was the occasion?", seat:"Where did you sit?",
+snsLead:"Would you share this review? Tap a button below to copy it and open the review page. Your words help others discover ETHICA.",
+copy:"Copy the text", copied:"Copied", ikyu:"Ikyu", tabelog:"Tabelog", google:"Google", trip:"Tripadvisor", gyg:"GetYourGuide",
+reviewNote:"Paste the text into the review form on the page that opens.", book:"Book your January journey (from Dec 1)", giftAsk:"To improve the next journey with us."}
+};
+window.ETHICA_SURVEY_CONF = Object.assign(window.ETHICA_SURVEY_CONF || {}, {OPEN:OPEN, CLOSE:CLOSE, BRIDGE:BRIDGE, SCENES:SCENES, SEATS:SEATS, FRENCH:FRENCH, UI:UI});
+})();
+</script>
+<style>html,body{background:#0b0b0b!important}body>div.box:empty{display:none!important}</style>
+<style>
+#ethica-survey{--bg:#0b0b0b;--panel:#151515;--line:#2e2e2e;--text:#f1efea;--muted:#a19d95;--gold:#c9a96b;--red:#ff5d5d;--blue:#6cb2ff;
+background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;
+font-size:15px;line-height:1.7;letter-spacing:.02em;max-width:560px;margin:0 auto;padding:20px 16px 48px;box-sizing:border-box;-webkit-text-size-adjust:100%}
+#ethica-survey *{box-sizing:border-box}
+#ethica-survey button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#ethica-survey .es-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+#ethica-survey .es-logo{line-height:0}
+#ethica-survey .es-logo img{height:56px;width:auto;display:block}
+#ethica-survey .es-lang{display:flex;gap:6px}
+#ethica-survey .es-lang button{background:none;border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:12px;color:var(--muted)}
+#ethica-survey .es-lang button.on{border-color:var(--gold);color:var(--gold)}
+#ethica-survey h1{color:var(--text);font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-weight:400;font-size:22px;line-height:1.5;margin:0 0 8px;letter-spacing:.06em}
+#ethica-survey .es-sub{color:var(--muted);font-size:13px;margin:0 0 28px}
+#ethica-survey.es-embed{padding-top:2px}
+#ethica-survey.es-embed .es-giftask{margin-bottom:2px}
+#ethica-survey.es-embed[lang="en"] .es-giftask{white-space:nowrap;font-size:clamp(12px,4.1vw,19px)}
+#ethica-survey.es-embed .es-sub{margin-bottom:4px}
+#ethica-survey.es-embed .es-sub + .es-sec{border-top:0;padding-top:4px}
+#ethica-survey.es-embed .es-sub + .es-sec .es-h{margin-bottom:6px}
+#ethica-survey .es-giftask{color:var(--text);font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-weight:400;font-size:clamp(15px,4.7vw,19px);line-height:1.5;margin:0 0 8px;letter-spacing:.06em}
+#ethica-survey .es-sec{border-top:1px solid var(--line);padding:24px 0 4px}
+#ethica-survey .es-h{font-size:14px;font-weight:600;margin:0 0 12px;letter-spacing:.05em}
+#ethica-survey .es-h2{margin-top:18px}
+#ethica-survey .es-note{color:var(--muted);font-size:12px;margin:-6px 0 12px}
+#ethica-survey .es-stars{display:flex;gap:6px;justify-content:center;margin:4px 0 6px}
+#ethica-survey .es-star{background:none;border:0;padding:4px;line-height:0}
+#ethica-survey .es-star svg{width:44px;height:44px;display:block}
+#ethica-survey .es-star path{fill:none;stroke:#5c584f;stroke-width:1.4;transition:fill .15s,stroke .15s}
+#ethica-survey .es-star.on path{fill:var(--gold);stroke:var(--gold)}
+#ethica-survey .es-starlabel{text-align:center;color:var(--gold);font-size:13px;min-height:22px;margin-bottom:8px}
+#ethica-survey .es-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+#ethica-survey .es-chip{background:transparent;border:1px solid #4a4741;border-radius:999px;padding:7px 14px;font-size:13.5px;line-height:1.3;color:var(--text);transition:background .15s,border-color .15s,opacity .15s}
+#ethica-survey .es-chip.on{background:var(--gold);border-color:var(--gold);color:#111}
+#ethica-survey .es-chip.bad.on{background:#e9e4da;border-color:#e9e4da;color:#111}
+#ethica-survey .es-chip:disabled{opacity:.35;cursor:default}
+#ethica-survey .es-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 14px 6px;margin-bottom:12px}
+#ethica-survey .es-card-t{font-size:13px;color:var(--gold);margin-bottom:10px;letter-spacing:.05em}
+#ethica-survey .es-card-t.bad{color:#e9e4da}
+#ethica-survey .es-q{color:var(--text);font-size:13.5px;margin:0 0 8px}
+#ethica-survey .es-other{width:100%;background:#0f0f0f;border:1px solid var(--line);border-radius:8px;color:var(--text);font:inherit;font-size:16px;padding:8px 10px;margin:-4px 0 14px}
+#ethica-survey .es-text{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;min-height:140px;line-height:1.95;font-size:15px;outline:none;white-space:pre-wrap;word-break:break-word}
+#ethica-survey .es-text:focus{border-color:var(--gold)}
+#ethica-survey .es-hl{color:var(--blue)}
+#ethica-survey .es-row{display:flex;justify-content:flex-end;margin:8px 0 4px}
+#ethica-survey .es-link{background:none;border:0;color:var(--gold);font-size:13px;padding:6px 0;text-decoration:underline;text-underline-offset:3px}
+#ethica-survey label.es-lbl{display:block;font-size:13px;color:var(--muted);margin:6px 0 6px}
+#ethica-survey input.es-in{width:100%;background:#0f0f0f;border:1px solid var(--line);border-radius:8px;color:var(--text);font:inherit;font-size:16px;padding:10px 12px}
+#ethica-survey .es-check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:16px 0 4px;cursor:pointer}
+#ethica-survey .es-check input{margin-top:4px;accent-color:var(--gold);width:16px;height:16px;flex:none}
+#ethica-survey .es-submit{display:block;width:100%;margin-top:24px;background:var(--gold);color:#111;border:0;border-radius:999px;padding:14px;font-size:15px;font-weight:600;letter-spacing:.1em}
+#ethica-survey .es-submit:disabled{opacity:.35;cursor:default}
+#ethica-survey .es-err{color:var(--red);font-size:13px;margin-top:10px;text-align:center}
+#ethica-survey .es-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#ethica-survey .es-thanks{text-align:center;padding:72px 8px}
+#ethica-survey .es-thanks p{color:var(--muted);font-size:14px}
+#ethica-survey .es-done{padding:28px 0 8px}
+#ethica-survey .es-done .es-h{margin-top:24px}
+#ethica-survey .es-done h1{font-size:clamp(17px,5.3vw,20px)}
+#ethica-survey .es-ask{color:var(--text);font-size:14.5px;line-height:1.85;margin:32px 0 0}
+#ethica-survey .es-copy{margin-top:16px}
+#ethica-survey .es-sns-row{display:flex;justify-content:center;gap:24px;margin-top:24px}
+#ethica-survey .es-ico{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:12px;letter-spacing:.05em;text-decoration:none}
+#ethica-survey .es-ico-c{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff}
+#ethica-survey .es-ico svg{width:28px;height:28px;display:block}
+#ethica-survey .es-ikyu .es-ico-c{background:#1a1a1a;border:1px solid var(--gold);color:var(--gold);font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:17px;letter-spacing:.05em}
+#ethica-survey .es-trip .es-ico-c{background:#34e0a1;color:#000}
+#ethica-survey .es-trip svg{width:34px;height:34px}
+#ethica-survey .es-tabelog .es-ico-c{background:#f2711c;color:#fff;font-size:11.5px;font-weight:700;letter-spacing:0}
+#ethica-survey .es-google .es-ico-c{background:#fff}
+#ethica-survey .es-google svg{width:30px;height:30px}
+#ethica-survey .es-gyg .es-ico-c{background:#ff5533;color:#fff;flex-direction:column;font-size:8.5px;font-weight:800;line-height:1.05;letter-spacing:.04em}
+#ethica-survey .es-book{display:block;margin:22px auto 0;width:max-content;max-width:100%;color:var(--gold);font-size:14px;letter-spacing:.06em;text-decoration:underline;text-underline-offset:4px}
+#ethica-survey .es-sns-note{margin:12px 0 0}
+#ethica-survey .es-foot{color:#5c584f;font-size:11px;text-align:center;margin-top:40px;letter-spacing:.2em}
+</style>
+<script>
+(function(){
+"use strict";
+var ENDPOINT = "https://script.google.com/macros/s/AKfycbx4MdiL6Wk4rRuNpVLE1-cvklV8VQPtyUT4UrZEo-b2tOfLoaM_oFbd8_-k95t0np86/exec";
+var C = window.ETHICA_SURVEY_CONF; if (!C) return;
+var TERMS = C.TERMS, GOOD_ORDER = C.GOOD_ORDER, BAD_ORDER = C.BAD_ORDER, DETAIL = C.DETAIL, OPEN = C.OPEN, CLOSE = C.CLOSE, BRIDGE = C.BRIDGE, SCENES = C.SCENES, SEATS = C.SEATS || [], FRENCH = C.FRENCH, UI = C.UI;
+var SNS_MODE = "on";
+var SNS_ON = SNS_MODE === "on" || (SNS_MODE === "param" && /[?&]sns=1(&|$)/.test(location.search));
+var SNS_BY_LANG = {ja:["ikyu","google","tabelog"], en:["trip","google","gyg"]};
+var DEST = {
+ikyu:{url:"https://restaurant.ikyu.com/me/reservations", icon:"一休"},
+tabelog:{url:"https://tabelog.com/tokyo/A1301/A130101/13275021/#edit-review/13275021", icon:"食べログ"},
+google:{url:"https://g.page/r/CYVIe-Er2z8dEBM/review", icon:'<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>'},
+trip:{url:"https://www.tripadvisor.jp/UserReviewEdit-g14129573-d25069484-Ethica-Ginza_Chuo_Tokyo_Tokyo_Prefecture_Kanto.html", icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="13" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="13" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="7" cy="13" r="1.6" fill="currentColor"/><circle cx="17" cy="13" r="1.6" fill="currentColor"/><path d="M3 8.5c2.6-2 5.8-3 9-3s6.4 1 9 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'},
+gyg:{url:"https://www.getyourguide.com/scan-review-qr?activity_id=1440978&utm_medium=offline&utm_source=supplier_review_link&utm_campaign=supplier_review_qrcode&utm_content=1440978", icon:"<span>GET</span><span>YOUR</span><span>GUIDE</span>"}
+};
+var BOOK = {ja:"https://res-reserve.com/ja/restaurants/ethicatokyo", en:"https://res-reserve.com/en/restaurants/ethicatokyo"};
+var GIFT = window.ETHICA_GIFT || null;
+var QR = (location.search.match(/[?&]qr=(ja|en)/) || [])[1] || (GIFT && GIFT.qr) || "";
+var root = document.getElementById("ethica-survey");
+if (!root) { root = document.createElement("div"); root.id = "ethica-survey"; document.body.appendChild(root); }
+var qs = (location.search.match(/[?&]lang=(ja|en)/) || [])[1];
+var S = {lang: qs || ((navigator.language || "ja").toLowerCase().indexOf("ja") === 0 ? "ja" : "en"),
+stars:0, scenes:[], seat:"", good:[], bad:[], det:{}, picks:{}, edited:false, postHTML:"", payload:null, lastSent:"", sent:false};
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function el(tag, attrs, html){ var e = document.createElement(tag); for (var k in (attrs||{})) e.setAttribute(k, attrs[k]); if (html != null) e.innerHTML = html; return e; }
+function L(){ return UI[S.lang]; }
+function pick(key, n){ if (S.picks[key] == null) S.picks[key] = Math.random(); return Math.floor(S.picks[key] * n); }
+function detKey(side, term){ return side + ":" + term; }
+function getDet(side, term){ var k = detKey(side, term); if (!S.det[k]) S.det[k] = {a:[], b:[], aOther:"", bOther:"", aOtherOn:false, bOtherOn:false}; return S.det[k]; }
+function values(side, term, slotK){
+var conf = DETAIL[side][term]; if (!conf) return [];
+var slot = conf.slots.filter(function(s){ return s.k === slotK; })[0]; if (!slot) return [];
+var d = getDet(side, term), out = [];
+d[slotK].forEach(function(id){ if (id === "veg") return; var o = slot.opts.filter(function(x){ return x.id === id; })[0]; if (o) out.push(S.lang === "ja" ? (o.sja || o.ja) : (o.sen || o.en)); });
+return out;
+}
+function otherText(side, term, slotK){ var d = getDet(side, term); return d[slotK + "OtherOn"] ? (d[slotK + "Other"] || "").trim() : ""; }
+var JA_NOUN_END = /(わい|合い|あい|違い|扱い|想い|思い|願い|匂い|におい|具合|ぐあい)$/;
+var END_MARK = /([。．.！!？?♪…〜～]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[☀-➿])$/;
+function freeSentence(side, term, x, n){
+var s = x.replace(/\s+/g, " ").trim();
+if (S.lang !== "ja"){
+if (/^[A-Z][a-z]/.test(s) && !/^I\b/.test(s)) s = s.charAt(0).toLowerCase() + s.slice(1);
+var hlE = '<span class="es-hl">' + esc(s) + "</span>", t = TERMS[term].en.toLowerCase();
+if (END_MARK.test(s) || /\b(is|was|were|are|am|felt|feel|loved|love|liked|enjoyed|could|would|should|had|have|made|makes)\b/i.test(s)) return (n ? "Also, " : "As for the " + t + ", ") + hlE + (END_MARK.test(s) ? "" : ".");
+return (side === "good" ? (n ? "Another highlight: " : "What stood out about the " + t + ": ") : (n ? "Another point: " : "One thing to improve about the " + t + ": ")) + hlE + ".";
+}
+var lead = n ? (n === 1 ? "また、" : "さらに、") : esc(TERMS[term].ja) + "については、";
+var hl = '<span class="es-hl">' + esc(s) + "</span>";
+if (END_MARK.test(s)) return lead + hl;
+if (/(です|ます|でした|ました|ません|ください|よ|ね)$/.test(s)) return lead + hl + "。";
+if (/[たいる]$/.test(s) && !JA_NOUN_END.test(s) || /だ$/.test(s)) return lead + hl + "と感じました。";
+if (/[くに]$/.test(s)) return lead + hl + (side === "good" ? "感じられました。" : "なると嬉しいです。");
+if (/[っん][ぁ-ん]り$/.test(s)) return lead + hl + (side === "good" ? "としていて心地よかったです。" : "だと嬉しいです。");
+if (/[一-鿿゠-ヿーさみ][がはもを]./.test(s)) return lead + hl + "だと感じました。";
+return lead + (side === "good" ? "特に" + hl + "が印象に残りました。" : hl + "が少し気になりました。");
+}
+function joinVals(arr){
+var h = arr.map(function(v){ return '<span class="es-hl">' + esc(v) + "</span>"; });
+if (h.length <= 1) return h.join("");
+if (S.lang === "ja") return h.slice(0, -1).join("、") + "と" + h[h.length - 1];
+return h.slice(0, -1).join(", ") + " and " + h[h.length - 1];
+}
+var VEG = {ja:["«ベジタリアン»のコースでも満足度が高く、«ヴィーガン»にも対応してもらえるのが嬉しかったです。","«ベジタリアン»や«ヴィーガン»にも対応してくれるので、食事制限があっても安心して楽しめました。"],
+en:["Even the «vegetarian» course was deeply satisfying, and they can accommodate «vegan» diets too.","With «vegetarian» and «vegan» options, everyone at the table could enjoy the meal without worry."]};
+function sentenceFor(side, term){
+var conf = DETAIL[side][term], tpls = conf.tpl[S.lang], sep = S.lang === "ja" ? "" : " ";
+var filled = {}, frees = [];
+conf.slots.forEach(function(s){ var v = values(side, term, s.k); if (v.length) filled[s.k] = v; var o = otherText(side, term, s.k); if (o) frees.push(o); });
+if (frees.length && !Object.keys(filled).length) return frees.map(function(x, i){ return freeSentence(side, term, x, i); }).join(sep);
+var need = function(t){ return (t.match(/\{([ab])\}/g) || []).map(function(m){ return m[1]; }); };
+var ok = tpls.filter(function(t){ return need(t).every(function(k){ return filled[k]; }); });
+var best = Math.max.apply(null, ok.map(function(t){ return need(t).length; }));
+var cands = ok.filter(function(t){ return need(t).length === best; });
+var t = cands[pick(detKey(side, term), cands.length)];
+var out = [t.replace(/\{([ab])\}/g, function(_, k){ return joinVals(filled[k]); })];
+frees.forEach(function(x, i){ out.push(freeSentence(side, term, x, i + 1)); });
+if (side === "good" && term === "food" && getDet(side, term).b.indexOf("veg") >= 0) {
+var vg = VEG[S.lang]; out.push(vg[pick("veg", vg.length)].replace(/«(.+?)»/g, '<span class="es-hl">$1</span>'));
+}
+return out.join(sep);
+}
+function generate(){
+if (!S.stars) return "";
+var sep = S.lang === "ja" ? "" : " ", parts = [];
+var band = S.stars >= 3 ? S.stars : 2;
+var op = OPEN[S.lang][band]; parts.push(esc(op[pick("open", op.length)]));
+S.scenes.forEach(function(id){
+var sc = SCENES.filter(function(x){ return x.id === id; })[0]; if (!sc) return;
+var t = S.lang === "ja" ? sc.tja : sc.ten;
+parts.push(esc(t[pick("scene:" + id, t.length)]).replace(/«(.+?)»/g, '<span class="es-hl">$1</span>'));
+});
+if (S.seat) {
+var st = SEATS.filter(function(x){ return x.id === S.seat; })[0];
+if (st) { var tt = S.lang === "ja" ? st.tja : st.ten; parts.push(esc(tt[pick("seat:" + st.id, tt.length)]).replace(/«(.+?)»/g, '<span class="es-hl">$1</span>')); }
+}
+var frenchDone = false;
+S.good.forEach(function(t){
+parts.push(sentenceFor("good", t));
+if (!frenchDone && (t === "food" || t === "dessert")) {
+var pool = (S.good.indexOf("food") >= 0 ? FRENCH.food : FRENCH.dessert)[S.lang];
+parts.push(esc(pool[pick("french", pool.length)])); frenchDone = true;
+}
+});
+if (!frenchDone && S.stars >= 4) { var fp = FRENCH.food[S.lang]; parts.push(esc(fp[pick("french", fp.length)])); frenchDone = true; }
+S.bad.forEach(function(t, i){
+var s = sentenceFor("bad", t);
+if (i === 0 && S.good.length) { if (S.lang === "ja") s = BRIDGE.ja + s; else parts.push(BRIDGE.en); }
+parts.push(s);
+});
+var cl = CLOSE[S.lang][band]; parts.push(esc(cl[pick("close", cl.length)]));
+return parts.join(sep);
+}
+var STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.75 5.9 6.45.75-4.78 4.4 1.28 6.37L12 17.06 6.3 20.22l1.28-6.37L2.8 9.45l6.45-.75z"/></svg>';
+var refs = {};
+function build(){
+root.innerHTML = "";
+root.setAttribute("lang", S.lang);
+if (GIFT) root.classList.add("es-embed");
+else {
+var top = el("div", {"class":"es-top"}, '<div class="es-logo"><img src="' + LOGO + '" alt="ETHICA" width="61" height="56"></div>');
+var lang = el("div", {"class":"es-lang"});
+["ja","en"].forEach(function(l){
+var b = el("button", {type:"button", "class": S.lang === l ? "on" : ""}, l === "ja" ? "日本語" : "English");
+b.onclick = function(){ setLang(l); };
+lang.appendChild(b);
+});
+top.appendChild(lang); root.appendChild(top);
+}
+if (S.sent){ buildDone(); root.appendChild(el("div", {"class":"es-foot"}, "ETHICA GINZA")); return; }
+if (GIFT) root.appendChild(el("h2", {"class":"es-giftask"}, esc(L().giftAsk)));
+else root.appendChild(el("h1", null, esc(L().title)));
+root.appendChild(el("p", {"class":"es-sub"}, esc(L().sub)));
+var sec = el("div", {"class":"es-sec"}); sec.appendChild(el("div", {"class":"es-h"}, esc(L().stars)));
+var stars = el("div", {"class":"es-stars", role:"radiogroup"});
+for (var i = 1; i <= 5; i++) (function(n){
+var b = el("button", {type:"button", "class":"es-star", "aria-label": n + " / 5", role:"radio"}, STAR);
+b.onclick = function(){ setStars(n); };
+stars.appendChild(b);
+})(i);
+sec.appendChild(stars);
+refs.starLabel = el("div", {"class":"es-starlabel"}); sec.appendChild(refs.starLabel);
+root.appendChild(sec); refs.stars = stars;
+refs.scene = el("div"); root.appendChild(refs.scene);
+refs.terms = el("div"); root.appendChild(refs.terms);
+refs.details = el("div"); root.appendChild(refs.details);
+refs.sendSec = el("div", {"class":"es-sec"});
+refs.sendSec.appendChild(el("label", {"class":"es-lbl", "for":"es-name"}, esc(L().name)));
+refs.name = el("input", {"class":"es-in", id:"es-name", type:"text", maxlength:"40", autocomplete:"nickname"});
+refs.sendSec.appendChild(refs.name);
+var chk = el("label", {"class":"es-check"});
+refs.consent = el("input", {type:"checkbox"});
+chk.appendChild(refs.consent); chk.appendChild(el("span", null, esc(L().consent)));
+refs.sendSec.appendChild(chk);
+refs.hp = el("input", {"class":"es-hp", type:"text", tabindex:"-1", autocomplete:"off", "aria-hidden":"true"});
+refs.sendSec.appendChild(refs.hp);
+refs.submit = el("button", {type:"button", "class":"es-submit"}, esc(L().submit));
+refs.submit.onclick = submit;
+refs.sendSec.appendChild(refs.submit);
+root.appendChild(refs.sendSec);
+root.appendChild(el("div", {"class":"es-foot"}, "ETHICA GINZA"));
+paintStars(); renderScenes(); renderTerms(); renderDetails(); updateSubmit();
+}
+function setLang(l){
+if (S.lang === l) return true;
+if (S.sent && S.edited && !window.confirm(L().regenConfirm)) return false;
+S.lang = l; S.edited = false;
+if (S.sent) { S.postHTML = generate(); queueUpdate(); }
+build();
+return true;
+}
+window.ETHICA_SURVEY_SETLANG = setLang;
+function setStars(n){
+if (GIFT && !S.started) { S.started = true; try { window.dispatchEvent(new CustomEvent("ethica:survey-start")); } catch (e) {} }
+S.stars = n;
+if (n === 5) S.bad = [];
+paintStars(); renderScenes(); renderTerms(); renderDetails(); updateSubmit();
+}
+function paintStars(){
+[].forEach.call(refs.stars.children, function(b, i){ b.classList.toggle("on", i < S.stars); b.setAttribute("aria-checked", i + 1 === S.stars ? "true" : "false"); });
+refs.starLabel.textContent = S.stars ? L().starLabels[S.stars - 1] : "";
+}
+function chipGroup(list, selected, max, onToggle, cls){
+var wrap = el("div", {"class":"es-chips"});
+list.forEach(function(item){
+var on = selected.indexOf(item.id) >= 0;
+var b = el("button", {type:"button", "class":"es-chip" + (cls ? " " + cls : "") + (on ? " on" : ""), "aria-pressed": on ? "true" : "false"}, esc(item.label));
+if (!on && selected.length >= max) b.disabled = true;
+b.onclick = function(){ onToggle(item.id); };
+wrap.appendChild(b);
+});
+return wrap;
+}
+function renderScenes(){
+refs.scene.innerHTML = "";
+if (!S.stars) return;
+var sec = el("div", {"class":"es-sec"}); sec.appendChild(el("div", {"class":"es-h"}, esc(L().scene)));
+sec.appendChild(chipGroup(SCENES.map(function(x){ return {id:x.id, label:x[S.lang]}; }), S.scenes, 99, function(id){
+S.scenes = S.scenes.indexOf(id) >= 0 ? [] : [id];
+renderScenes();
+}, ""));
+if (SEATS.length) {
+sec.appendChild(el("div", {"class":"es-h es-h2"}, esc(L().seat)));
+sec.appendChild(chipGroup(SEATS.map(function(x){ return {id:x.id, label:x[S.lang]}; }), S.seat ? [S.seat] : [], 99, function(id){
+S.seat = S.seat === id ? "" : id;
+renderScenes();
+}, ""));
+}
+refs.scene.appendChild(sec);
+}
+function renderTerms(){
+refs.terms.innerHTML = "";
+if (!S.stars) return;
+var mk = function(side, order, heading){
+var sec = el("div", {"class":"es-sec"}); sec.appendChild(el("div", {"class":"es-h"}, esc(heading)));
+var arr = S[side];
+var max = side === "good" ? 2 : 3;
+sec.appendChild(chipGroup(order.map(function(t){ return {id:t, label:TERMS[t][S.lang]}; }), arr, max, function(id){
+var i = arr.indexOf(id); if (i >= 0) arr.splice(i, 1); else if (arr.length < max) arr.push(id);
+renderTerms(); renderDetails();
+}, side === "bad" ? "bad" : ""));
+refs.terms.appendChild(sec);
+};
+mk("good", GOOD_ORDER, L().good);
+if (S.stars <= 4) mk("bad", BAD_ORDER, L().bad);
+}
+function renderDetails(){
+refs.details.innerHTML = "";
+var items = S.good.map(function(t){ return ["good", t]; }).concat(S.bad.map(function(t){ return ["bad", t]; }));
+if (!items.length) return;
+var sec = el("div", {"class":"es-sec"}); sec.appendChild(el("div", {"class":"es-h"}, esc(L().detail)));
+items.forEach(function(it){
+var side = it[0], term = it[1], conf = DETAIL[side][term], d = getDet(side, term);
+var card = el("div", {"class":"es-card"});
+card.appendChild(el("div", {"class":"es-card-t" + (side === "bad" ? " bad" : "")}, esc((side === "good" ? L().goodPick : L().badPick) + "｜" + TERMS[term][S.lang])));
+conf.slots.forEach(function(slot){
+card.appendChild(el("p", {"class":"es-q"}, esc(slot.q[S.lang])));
+var list = slot.opts.map(function(o){ return {id:o.id, label:o[S.lang]}; });
+list.push({id:"__other", label:L().other});
+var selected = d[slot.k].slice(); if (d[slot.k + "OtherOn"]) selected.push("__other");
+card.appendChild(chipGroup(list, selected, slot.max, function(id){
+if (id === "__other"){ d[slot.k + "OtherOn"] = !d[slot.k + "OtherOn"]; }
+else { var i = d[slot.k].indexOf(id); if (i >= 0) d[slot.k].splice(i, 1); else if (selected.length < slot.max) d[slot.k].push(id); }
+renderDetails();
+}, side === "bad" ? "bad" : ""));
+if (d[slot.k + "OtherOn"]){
+var inp = el("input", {"class":"es-other", type:"text", maxlength:"40", placeholder:L().otherPh});
+inp.value = d[slot.k + "Other"];
+inp.addEventListener("input", function(){ d[slot.k + "Other"] = inp.value; });
+card.appendChild(inp);
+}
+});
+sec.appendChild(card);
+});
+refs.details.appendChild(sec);
+}
+function updateSubmit(){ refs.submit.disabled = !S.stars; refs.sendSec.style.display = S.stars ? "" : "none"; }
+function detailText(side){
+return S[side].map(function(term){
+var conf = DETAIL[side][term], d = getDet(side, term);
+var bits = conf.slots.map(function(slot){
+var v = d[slot.k].map(function(id){ var o = slot.opts.filter(function(x){ return x.id === id; })[0]; return o ? o.ja : id; });
+if (d[slot.k + "OtherOn"] && d[slot.k + "Other"].trim()) v.push("その他:" + d[slot.k + "Other"].trim());
+return v.length ? slot.q.ja.replace(/[？?]$/, "") + "=" + v.join("・") : "";
+}).filter(Boolean);
+return TERMS[term].ja + (bits.length ? "（" + bits.join(" / ") + "）" : "");
+}).join("\n");
+}
+function copyFallback(t){
+var ta = document.createElement("textarea"); ta.value = t; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.top = "0"; ta.style.opacity = "0";
+document.body.appendChild(ta); ta.focus(); ta.select(); ta.setSelectionRange(0, t.length);
+var ok = false; try { ok = document.execCommand("copy"); } catch (e) {} document.body.removeChild(ta);
+return ok;
+}
+function copyText(t){
+if (copyFallback(t)) return Promise.resolve();
+if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
+return Promise.reject();
+}
+function plain(html){ var t = document.createElement("div"); t.innerHTML = html; return t.textContent; }
+function currentText(){ return refs.post ? refs.post.innerText.trim() : plain(S.postHTML).trim(); }
+var LOGO = "../assets/img/guest_logo.webp";
+function buildDone(){
+var box = el("div", {"class":"es-done"});
+box.appendChild(el("h1", null, esc(L().doneTitle)));
+if (S.stars < 5){ root.appendChild(box); return; }
+box.appendChild(el("p", {"class":"es-sub"}, esc(L().thanksP)));
+box.appendChild(el("div", {"class":"es-h"}, esc(L().text)));
+box.appendChild(el("p", {"class":"es-note"}, esc(L().textNote)));
+refs.post = el("div", {"class":"es-text", contenteditable:"true", role:"textbox", "aria-multiline":"true", spellcheck:"false"});
+refs.post.innerHTML = S.postHTML;
+refs.post.addEventListener("input", function(){ S.edited = true; S.postHTML = refs.post.innerHTML; queueUpdate(); });
+box.appendChild(refs.post);
+var row = el("div", {"class":"es-row"});
+var regen = el("button", {type:"button", "class":"es-link"}, esc(L().regen));
+regen.onclick = function(){
+if (S.edited && !window.confirm(L().regenConfirm)) return;
+S.picks = {}; S.edited = false; S.postHTML = generate(); refs.post.innerHTML = S.postHTML; queueUpdate();
+};
+row.appendChild(regen); box.appendChild(row);
+if (SNS_ON){
+box.appendChild(el("p", {"class":"es-ask"}, esc(L().snsLead)));
+var copyBtn = el("button", {type:"button", "class":"es-submit es-copy"}, esc(L().copy));
+var markCopied = function(){ copyBtn.textContent = L().copied; };
+copyBtn.onclick = function(){ flushUpdate(); copyText(currentText()).then(markCopied, function(){}); track("copy"); };
+box.appendChild(copyBtn);
+var sns = el("div", {"class":"es-sns-row"});
+SNS_BY_LANG[S.lang].forEach(function(dk){
+var dest = DEST[dk];
+var go = el("a", {"class":"es-ico es-" + dk, href:dest.url, target:"_blank", rel:"noopener", "aria-label":L()[dk]}, '<span class="es-ico-c">' + dest.icon + "</span>" + esc(L()[dk]));
+go.onclick = function(){ flushUpdate(); copyText(currentText()).then(markCopied, function(){}); track(dk); };
+sns.appendChild(go);
+});
+box.appendChild(sns);
+box.appendChild(el("p", {"class":"es-note es-sns-note"}, esc(L().reviewNote)));
+var book = el("a", {"class":"es-book", href:BOOK[S.lang], target:"_blank", rel:"noopener"}, esc(L().book));
+book.onclick = function(){ track("reserve"); };
+box.appendChild(book);
+}
+root.appendChild(box);
+}
+function post(body, beacon){
+if (!ENDPOINT){ console.log("[ethica-survey]", body.type || "insert", body); return; }
+var data = JSON.stringify(body);
+if (beacon && navigator.sendBeacon){ try { if (navigator.sendBeacon(ENDPOINT, data)) return; } catch (e) {} }
+var tries = 0;
+(function go(){
+fetch(ENDPOINT, {method:"POST", mode:"no-cors", keepalive:true, headers:{"Content-Type":"text/plain;charset=utf-8"}, body:data})
+.catch(function(){ if (++tries < 3) setTimeout(go, 1500 * tries); });
+})();
+}
+function track(btn){ if (!S.payload) return; post(Object.assign({}, S.payload, {type:"click", button:btn, final:currentText(), edited:S.edited}), true); }
+var updTimer = null;
+function queueUpdate(){ clearTimeout(updTimer); updTimer = setTimeout(flushUpdate, 2500); }
+function flushUpdate(beacon){
+clearTimeout(updTimer); updTimer = null;
+if (!S.payload) return;
+var t = currentText();
+if (t === S.lastSent) return;
+S.lastSent = t;
+post(Object.assign({}, S.payload, {type:"update", final:t, edited:S.edited}), beacon);
+}
+document.addEventListener("visibilitychange", function(){ if (document.visibilityState === "hidden") flushUpdate(true); });
+window.addEventListener("pagehide", function(){ flushUpdate(true); });
+function submit(){
+if (refs.submit.disabled || refs.hp.value) return;
+S.postHTML = generate();
+var text = plain(S.postHTML).trim();
+S.payload = {
+id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+lang:S.lang, stars:S.stars,
+good:S.good.map(function(t){ return TERMS[t].ja; }).join("・"), goodDetail:detailText("good"),
+bad:S.bad.map(function(t){ return TERMS[t].ja; }).join("・"), badDetail:detailText("bad"),
+generated:text, final:text, edited:false,
+name:refs.name.value.trim().slice(0, 40), consent:refs.consent.checked, page:location.href.split("?")[0], qr:QR,
+scene:S.scenes.map(function(id){ var x = SCENES.filter(function(y){ return y.id === id; })[0]; return x ? x.ja : id; }).concat(S.seat ? ["席:" + ((SEATS.filter(function(y){ return y.id === S.seat; })[0] || {}).ja || S.seat)] : []).join("、")
+};
+S.lastSent = text;
+S.sent = true; build();
+try { window.scrollTo(0, root.getBoundingClientRect().top + window.pageYOffset - 8); } catch (e) {}
+post(S.payload);
+}
+build();
+})();
+</script>
+</body>
+</html>
