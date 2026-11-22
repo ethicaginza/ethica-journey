@@ -100,8 +100,6 @@ html[lang="en"] .dv-nm,html[lang="es"] .dv-nm,html[lang="en"] .dv-end,html[lang=
   html[lang="en"] .leg .ago .u.big,html[lang="es"] .leg .ago .u.big{font-size:30px}
   /* 全言語：スマホで12px未満だった注記を12pxに */
   .leg .no small{font-size:12px}
-  .dive-key li{font-size:12px}
-  .dive-key b{font-size:11px}
   .pg-list dt small{font-size:12px}
 }
 
