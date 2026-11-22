@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://ethicatokyo.jp/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<url><loc>https://ethicatokyo.jp/</loc><xhtml:link rel="alternate" hreflang="ja" href="https://ethicatokyo.jp/"/><xhtml:link rel="alternate" hreflang="en" href="https://ethicatokyo.jp/en.html"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ethicatokyo.jp/zh-cn.html"/><xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ethicatokyo.jp/zh-tw.html"/><xhtml:link rel="alternate" hreflang="ko" href="https://ethicatokyo.jp/ko.html"/><xhtml:link rel="alternate" hreflang="es" href="https://ethicatokyo.jp/es.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ethicatokyo.jp/"/></url>
 <url><loc>https://ethicatokyo.jp/drinks/</loc></url>
 <url><loc>https://ethicatokyo.jp/drinks/champagne.html</loc></url>
 <url><loc>https://ethicatokyo.jp/drinks/en/</loc></url>
@@ -137,10 +137,10 @@
 <url><loc>https://ethicatokyo.jp/drinks/wine/tralala.html</loc></url>
 <url><loc>https://ethicatokyo.jp/drinks/wine/vieilles-vignes-grand-cru.html</loc></url>
 <url><loc>https://ethicatokyo.jp/drinks/wine/zweigelt-vom-opok.html</loc></url>
-<url><loc>https://ethicatokyo.jp/en.html</loc></url>
-<url><loc>https://ethicatokyo.jp/es.html</loc></url>
-<url><loc>https://ethicatokyo.jp/ko.html</loc></url>
+<url><loc>https://ethicatokyo.jp/en.html</loc><xhtml:link rel="alternate" hreflang="ja" href="https://ethicatokyo.jp/"/><xhtml:link rel="alternate" hreflang="en" href="https://ethicatokyo.jp/en.html"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ethicatokyo.jp/zh-cn.html"/><xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ethicatokyo.jp/zh-tw.html"/><xhtml:link rel="alternate" hreflang="ko" href="https://ethicatokyo.jp/ko.html"/><xhtml:link rel="alternate" hreflang="es" href="https://ethicatokyo.jp/es.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ethicatokyo.jp/"/></url>
+<url><loc>https://ethicatokyo.jp/es.html</loc><xhtml:link rel="alternate" hreflang="ja" href="https://ethicatokyo.jp/"/><xhtml:link rel="alternate" hreflang="en" href="https://ethicatokyo.jp/en.html"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ethicatokyo.jp/zh-cn.html"/><xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ethicatokyo.jp/zh-tw.html"/><xhtml:link rel="alternate" hreflang="ko" href="https://ethicatokyo.jp/ko.html"/><xhtml:link rel="alternate" hreflang="es" href="https://ethicatokyo.jp/es.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ethicatokyo.jp/"/></url>
+<url><loc>https://ethicatokyo.jp/ko.html</loc><xhtml:link rel="alternate" hreflang="ja" href="https://ethicatokyo.jp/"/><xhtml:link rel="alternate" hreflang="en" href="https://ethicatokyo.jp/en.html"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ethicatokyo.jp/zh-cn.html"/><xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ethicatokyo.jp/zh-tw.html"/><xhtml:link rel="alternate" hreflang="ko" href="https://ethicatokyo.jp/ko.html"/><xhtml:link rel="alternate" hreflang="es" href="https://ethicatokyo.jp/es.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ethicatokyo.jp/"/></url>
 <url><loc>https://ethicatokyo.jp/recruit/</loc></url>
-<url><loc>https://ethicatokyo.jp/zh-cn.html</loc></url>
-<url><loc>https://ethicatokyo.jp/zh-tw.html</loc></url>
+<url><loc>https://ethicatokyo.jp/zh-cn.html</loc><xhtml:link rel="alternate" hreflang="ja" href="https://ethicatokyo.jp/"/><xhtml:link rel="alternate" hreflang="en" href="https://ethicatokyo.jp/en.html"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ethicatokyo.jp/zh-cn.html"/><xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ethicatokyo.jp/zh-tw.html"/><xhtml:link rel="alternate" hreflang="ko" href="https://ethicatokyo.jp/ko.html"/><xhtml:link rel="alternate" hreflang="es" href="https://ethicatokyo.jp/es.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ethicatokyo.jp/"/></url>
+<url><loc>https://ethicatokyo.jp/zh-tw.html</loc><xhtml:link rel="alternate" hreflang="ja" href="https://ethicatokyo.jp/"/><xhtml:link rel="alternate" hreflang="en" href="https://ethicatokyo.jp/en.html"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ethicatokyo.jp/zh-cn.html"/><xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ethicatokyo.jp/zh-tw.html"/><xhtml:link rel="alternate" hreflang="ko" href="https://ethicatokyo.jp/ko.html"/><xhtml:link rel="alternate" hreflang="es" href="https://ethicatokyo.jp/es.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ethicatokyo.jp/"/></url>
 </urlset>
