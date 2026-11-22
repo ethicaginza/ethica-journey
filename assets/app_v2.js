@@ -328,6 +328,7 @@
     var rpo = new IntersectionObserver(function (es) { if (es[es.length - 1].isIntersecting) { route.classList.remove('pre'); rpo.disconnect(); } }, { rootMargin: '0px 0px -15% 0px' });
     rpo.observe(route);
   }
+  var miniSync = null;
   if (legs.length && IO) {
     var co = new IntersectionObserver(function (es) {
       es.forEach(function (x) {
@@ -337,10 +338,11 @@
         rps.forEach(function (rp) { rp.classList.toggle('cur', rp.getAttribute('data-n') === n); });
         if (route) { route.classList.toggle('has-cur', +n >= 2 && +n <= 8); [].forEach.call(route.querySelectorAll('.seg'), function (sg) { sg.classList.toggle('on', sg.getAttribute('data-to') === n); }); }
       });
+      if (miniSync) miniSync();
     }, { rootMargin: '-45% 0px -45% 0px' });
     legs.forEach(function (li) { co.observe(li); });
   }
-  /* スマホ：皿の一覧を読んでいる間だけ、上に細い年代図を出す。帯のすぐ下の「読む位置」にある皿を光らせ、水面からその皿までの道のりを光らせる。
+  /* 皿の一覧を読んでいる間だけ、上に細い年代図を出す（PCは 2026-11-23 から。PCでは一覧と帯が同時に見えるので、一覧で光っている皿と同じ番号を光らせる）。帯のすぐ下の「読む位置」にある皿を光らせ、水面からその皿までの道のりを光らせる。
      帯のどこを押しても、いちばん近い番号の皿へ移る（移った皿は読む位置に来るので、帯は消えず、押した番号が光る） */
   var mini = d.querySelector('.tl-mini'), voyage = d.getElementById('voyage');
   if (mini && voyage) {
@@ -357,15 +359,18 @@
       if (doneEl) doneEl.setAttribute('points', ptsAll.slice(0, k === 9 ? ptsAll.length : k + 1).join(' '));
     };
     var hdrEl = d.getElementById('top');
-    var readLine = function () { var top0 = (hdrEl ? hdrEl.getBoundingClientRect().bottom : 68) + mini.offsetHeight; return top0 + (w.innerHeight - top0) * 0.3; };
-    var mqMini = w.matchMedia ? w.matchMedia('(max-width: 900px) and (min-height: 501px)') : { matches: true };
+    var mqWide = w.matchMedia ? w.matchMedia('(min-width: 901px)') : { matches: false };
+    var readLine = function () { if (mqWide.matches) return w.innerHeight * 0.5; var top0 = (hdrEl ? hdrEl.getBoundingClientRect().bottom : 68) + mini.offsetHeight; return top0 + (w.innerHeight - top0) * 0.3; };
+    var mqMini = w.matchMedia ? w.matchMedia('(min-height: 501px)') : { matches: true };
     var onScrollMini = function () {
       if (!mqMini.matches) { mini.classList.remove('on'); return; }
       var r = voyage.getBoundingClientRect(), L = readLine(), on = r.top < L && r.bottom > L + 40;
       mini.classList.toggle('on', on);
-      if (on) { for (var i = legsArr.length - 1; i >= 0; i--) { if (legsArr[i].getBoundingClientRect().top <= L) { setMini(legsArr[i].getAttribute('data-n')); break; } } }
+      var lit = mqWide.matches && on ? voyage.querySelector('.leg.cur') : null;
+      if (lit) setMini(lit.getAttribute('data-n'));
+      else if (on) { for (var i = legsArr.length - 1; i >= 0; i--) { if (legsArr[i].getBoundingClientRect().top <= L) { setMini(legsArr[i].getAttribute('data-n')); break; } } }
     };
-    setMini('1');
+    setMini('1'); miniSync = onScrollMini;
     var tick = 0; w.addEventListener('scroll', function () { if (tick) return; tick = requestAnimationFrame(function () { tick = 0; onScrollMini(); }); }, { passive: true });
     w.addEventListener('resize', onScrollMini); onScrollMini();
     axis.addEventListener('click', function (ev) {
