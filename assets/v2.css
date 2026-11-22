@@ -108,3 +108,15 @@ footer a.ig[href]{display:inline-flex;align-items:center;gap:8px;letter-spacing:
 footer a.ig svg{flex:none}
 /* 日本語以外は「：」の後ろに間が無いので、媒体名の前を少し空ける */
 html:not([lang="ja"]) footer .ftl{margin-left:.45em}
+/* 日本語以外：アクセス欄の駅からの案内は、行の途中で折り返してよい（英語が901px幅でページの外へ出ていた・2026-11-23） */
+html:not([lang="ja"]) .access dd .nw{white-space:normal}
+/* 901〜1100px：ヘッダーのメニューがロゴの文字に重なっていた（日本語・英語・スペイン語・2026-11-23）。間隔と字間を詰める */
+@media (min-width:901px) and (max-width:1100px){
+  .top .wrap>nav{gap:16px;letter-spacing:.08em}
+  html:not([lang="ja"]) .top .wrap>nav{gap:13px;letter-spacing:.01em}
+  .top .btn{padding:0 14px}
+}
+@media (min-width:901px) and (max-width:1040px){
+  html[lang="es"] .top .wrap>nav{gap:11px;letter-spacing:0;font-size:12px}
+  html[lang="es"] .top .btn{padding:0 11px;font-size:12px;letter-spacing:.02em}
+}
