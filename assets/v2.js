@@ -14,9 +14,8 @@
   var dockMain = dockA && dockA.querySelector('.d-main');
   var recLabel = box.getAttribute('data-rec') || '';
 
-  function link(base, content, term) {
-    return base + '?utm_source=ethica_lp&utm_medium=referral&utm_campaign=lp_2026autumn&utm_content=' + content + '&utm_term=' + term;
-  }
+  // 2026-11-22: UTM を付けない（自社サイト→予約サイトで GA4 の流入元を上書きするため）。どの場面かは data-cta（dock_scene_*）で GTM が取る
+  function link(base) { return base; }
   function panelOf(key) {
     for (var i = 0; i < panels.length; i++) if (panels[i].getAttribute('data-scene') === key) return panels[i];
     return null;
@@ -41,12 +40,13 @@
       dockMain.textContent = p.getAttribute('data-dock') || '';
       if (arrow) dockMain.appendChild(arrow);
       // 行き先のコースだけを差し替える。リンクに後から付いた印（広告のクリックの引き継ぎなど）は残す
-      var href = link(p.getAttribute('data-href'), 'dock', 'scene_' + key);
+      var href = link(p.getAttribute('data-href'));
       try {
         var u = new URL(dockA.href), t = new URL(p.getAttribute('data-href'));
-        u.pathname = t.pathname; u.searchParams.set('utm_term', 'scene_' + key); href = u.toString();
+        u.pathname = t.pathname; href = u.toString();
       } catch (e) {}
       dockA.setAttribute('href', href);
+      dockA.setAttribute('data-cta', 'dock_scene_' + key);
       dockA.setAttribute('data-scene', key);
       dockA.classList.add('sc-on');
     }
