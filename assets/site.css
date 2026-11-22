@@ -580,3 +580,6 @@ html[lang="en"],html[lang="es"]{--f-jp:"Cormorant Garamond","Shippori Mincho",Ge
 }
 /* 言語の箱：「Español」「简体中文」の最後の字が切れていたので、361px以上の画面では少し広げる */
 @media (min-width:361px) and (max-width:600px){.lsel{max-width:108px}}
+/* 日本語以外：ボタンの文が長く、1行固定＋広い字間だと端が切れていた（2026-11-22 英語のコースカード）。折り返しを許し、字間を詰める */
+html:not([lang="ja"]) .btn{white-space:normal;text-align:center;letter-spacing:.06em;line-height:1.35}
+html:not([lang="ja"]) .btn.hdr{white-space:nowrap;flex-shrink:0}
