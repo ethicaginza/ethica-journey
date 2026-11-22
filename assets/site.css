@@ -580,6 +580,14 @@ html[lang="en"],html[lang="es"]{--f-jp:"Cormorant Garamond","Shippori Mincho",Ge
 }
 /* 言語の箱：「Español」「简体中文」の最後の字が切れていたので、361px以上の画面では少し広げる */
 @media (min-width:361px) and (max-width:600px){.lsel{max-width:108px}}
-/* 日本語以外：ボタンの文が長く、1行固定＋広い字間だと端が切れていた（2026-11-22 英語のコースカード）。折り返しを許し、字間を詰める */
+/* ボタンの文が長く、1行固定＋広い字間だと端が切れていた（2026-11-22 英語のコースカード、日本語もPCのキッチン席カードで「カウンターの空席を見る」が切れていた）。
+   日本語以外：折り返しを許し、字間を詰める。日本語：キッチン席カードだけ字間と余白を詰め、収まらない幅では文節で折り返す */
 html:not([lang="ja"]) .btn{white-space:normal;text-align:center;letter-spacing:.06em;line-height:1.35}
 html:not([lang="ja"]) .btn.hdr{white-space:nowrap;flex-shrink:0}
+html[lang="ja"] .seat .btn{white-space:normal;text-align:center;line-height:1.35;letter-spacing:.08em;padding:0 18px;gap:8px;word-break:auto-phrase}
+/* 日本語以外：PCのヘッダーのメニューが、960〜1024px 幅でスペイン語「Capítulos del tiempo」「Cómo llegar」が2行に折れていた（2026-11-22）。1行に保ち、狭い幅では間隔を詰める */
+html:not([lang="ja"]) .top .wrap>nav a.nl{white-space:nowrap}
+@media (min-width:901px) and (max-width:1180px){html:not([lang="ja"]) .top .wrap>nav{gap:18px;letter-spacing:.06em}}
+/* 日本語以外：「ご利用シーン」の項目名の列が狭く、「Recommended」「Recomendado」が単語の途中で折れていた（2026-11-22）。列を広げ、字間を詰め、単語の途中では折らない */
+html:not([lang="ja"]) .sc-spec>div{grid-template-columns:7.5em minmax(0,1fr)}
+html:not([lang="ja"]) .sc-spec dt{letter-spacing:.06em;overflow-wrap:normal;word-break:normal;hyphens:none}

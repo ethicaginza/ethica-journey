@@ -182,3 +182,10 @@
 }
 /* いちばん狭い画面（340px以下）で、年数と目盛りの札が1行に収まらないときは札を次の行へ */
 @media (max-width:340px){.leg .ago{flex-wrap:wrap;row-gap:6px}}
+/* 日本語以外：スマホの年表の見出しバーで、時代名が長く「…」で切れていた（2026-11-22）。年数は下の本文にも出るので隠し、時代名を2行まで出す */
+@media (max-width:900px){
+  html:not([lang="ja"]) .tm-now{white-space:normal;align-items:center}
+  html:not([lang="ja"]) .tm-now .tm-ago{display:none}
+  html:not([lang="ja"]) .tm-now .tm-n{white-space:nowrap;flex-shrink:0}
+  html:not([lang="ja"]) .tm-now .tm-t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;white-space:normal;letter-spacing:.02em}
+}
