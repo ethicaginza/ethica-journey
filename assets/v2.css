@@ -81,3 +81,32 @@
 @media (max-width:900px){.pairing{grid-template-columns:minmax(0,1fr);margin-top:48px;align-items:start}}
 /* ご利用シーンとコースの節は同じ地色が続くので、細い線で区切る */
 .scenes-sec+.courses-sec{border-top:1px solid var(--line)}
+
+/* 2026-11-22 読みやすさ：英語・スペイン語は見出し用の欧文書体が同じ大きさでも小さく細く見えるので、小さめの見出し・ラベルを大きく・太くする */
+html[lang="en"] .leg h3,html[lang="es"] .leg h3{font-size:24px;font-weight:500;line-height:1.3;letter-spacing:.01em;color:var(--gold-hi)}
+html[lang="en"] .leg .line,html[lang="es"] .leg .line{margin-top:8px}
+html[lang="en"] .leg .ago .u,html[lang="es"] .leg .ago .u{font-size:19px;font-weight:500;letter-spacing:.03em}
+html[lang="en"] .leg .ago .u.big,html[lang="es"] .leg .ago .u.big{font-size:32px}
+html[lang="en"] .k-lead,html[lang="es"] .k-lead{font-size:20px;font-weight:500;letter-spacing:.02em;line-height:1.6}
+html[lang="en"] .points b,html[lang="es"] .points b,html[lang="en"] .space ul b,html[lang="es"] .space ul b{font-size:19px;font-weight:500;letter-spacing:.04em}
+html[lang="en"] .sc-fact,html[lang="es"] .sc-fact{font-size:18px;font-weight:500;line-height:1.6}
+html[lang="en"] .pg-list dt,html[lang="es"] .pg-list dt{font-size:18.5px;font-weight:500;letter-spacing:.02em}
+html[lang="en"] .pairing .pg-head h3,html[lang="es"] .pairing .pg-head h3{font-size:23px}
+html[lang="en"] .sc-tab,html[lang="es"] .sc-tab{font-size:clamp(17px,1.5vw,19px);font-weight:500;letter-spacing:.03em}
+html[lang="en"] .dv-nm,html[lang="es"] .dv-nm,html[lang="en"] .dv-end,html[lang="es"] .dv-end,html[lang="en"] .dv-sfl,html[lang="es"] .dv-sfl{font-weight:500}
+@media (max-width:760px){
+  html[lang="en"] .leg h3,html[lang="es"] .leg h3{font-size:22px}
+  html[lang="en"] .leg .ago .u,html[lang="es"] .leg .ago .u{font-size:17.5px;letter-spacing:.02em}
+  html[lang="en"] .leg .ago .u.big,html[lang="es"] .leg .ago .u.big{font-size:30px}
+  /* 全言語：スマホで12px未満だった注記を12pxに */
+  .leg .no small{font-size:12px}
+  .dive-key li{font-size:12px}
+  .dive-key b{font-size:11px}
+  .pg-list dt small{font-size:12px}
+}
+
+/* 2026-11-22 フッターに Instagram へのリンク */
+footer a.ig[href]{display:inline-flex;align-items:center;gap:8px;letter-spacing:.06em}
+footer a.ig svg{flex:none}
+/* 日本語以外は「：」の後ろに間が無いので、媒体名の前を少し空ける */
+html:not([lang="ja"]) footer .ftl{margin-left:.45em}
