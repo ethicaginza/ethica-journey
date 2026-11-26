@@ -96,6 +96,7 @@ h2+.lede,.eyebrow+h2+.lede{margin-top:18px}
 .hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(var(--hs-rx,42%) var(--hs-ry,22%) at var(--hs-x,32%) var(--hs-y,55%),rgba(6,8,7,var(--hs-a,.6)) 0%,rgba(6,8,7,var(--hs-b,.45)) 60%,rgba(6,8,7,0) 100%),linear-gradient(90deg,rgba(6,8,7,.5) 0%,rgba(6,8,7,.2) 45%,rgba(6,8,7,0) 65%),linear-gradient(180deg,rgba(6,8,7,.45) 0%,rgba(6,8,7,0) 16%,rgba(6,8,7,0) 55%,rgba(6,8,7,.55) 78%,rgba(6,8,7,.9) 92%,var(--cave) 100%)} /* v18: セノーテ（公式サイトの concept の背景）に合わせて軽く。見出しの裏（楕円・位置は app.js）と左・下端だけ暗く */
 .hero .inner{position:relative;z-index:2;padding-block:calc(var(--hdr) + env(safe-area-inset-top,0px) + 64px) 40px;pointer-events:none}
 .hero .inner a,.hero .inner button{pointer-events:auto}
+.hero .inner :is(h1,h2,p,ul){pointer-events:auto} /* 2026-11-26 文字は選択・コピーできるように（波紋は window で受けるので止まらない） */
 .mich{font-family:var(--f-body);font-size:13px;letter-spacing:.2em;text-transform:none;color:var(--gold-text);display:inline-flex;align-items:center;gap:12px;margin-bottom:20px}
 .mich::before,.mich::after{content:"";width:22px;height:1px;background:var(--gold);opacity:.7}
 .hero h1{font-size:clamp(36px,5.8vw,74px);line-height:1.42;letter-spacing:.1em;text-shadow:0 2px 30px rgba(0,0,0,.45)}

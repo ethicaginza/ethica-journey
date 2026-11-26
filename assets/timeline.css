@@ -98,7 +98,7 @@
 .final.water canvas{opacity:1}
 .final.water .still{visibility:hidden;transition:visibility 0s linear 1.3s}
 .final::after{z-index:1;pointer-events:none}
-.final .inner{pointer-events:none}.final .inner a{pointer-events:auto}
+.final .inner{pointer-events:none}.final .inner a{pointer-events:auto}.final .inner :is(h2,p,ul){pointer-events:auto}
 .final h2{font-size:clamp(30px,4.6vw,54px);line-height:1.5}
 .final-sub{max-width:34em;color:#DED8CB;font-size:15px}
 
