@@ -603,3 +603,7 @@ html:not([lang="ja"]) .sc-spec dt{letter-spacing:.06em;overflow-wrap:normal;word
 .g-points li{display:flex;align-items:baseline;gap:12px}
 .g-points li::before{content:"";width:5px;height:5px;transform:translateY(-.25em) rotate(45deg);background:var(--gold);flex:0 0 auto}
 .lede.g-end{margin-top:8px}
+
+/* 2026-11-26 コースのカードの「どんな方に」の札（ご利用シーンの節の代わり） */
+.card .tags{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.card .tags li{font-size:12px;line-height:1.4;letter-spacing:.06em;padding:4px 11px;border:1px solid var(--line-gold);border-radius:999px;color:var(--gold-text);white-space:nowrap}
