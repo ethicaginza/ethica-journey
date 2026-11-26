@@ -629,3 +629,19 @@ html:not([lang="ja"]) .sc-spec dt{letter-spacing:.06em;overflow-wrap:normal;word
 .voyage .gap:last-child{padding-bottom:44px}
 .voyage .gap i{display:block;width:7px;height:7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F3E2B8 0%,var(--gold) 55%,var(--gold-lo) 100%);box-shadow:0 0 0 3px var(--cave),0 0 0 4px rgba(201,164,106,.32),0 0 10px rgba(201,164,106,.35)}
 @media (max-width:820px){.voyage .gap{width:48px;gap:12px;margin-top:-10px;padding-bottom:22px}.voyage .gap i{width:6px;height:6px}}
+/* 2026-11-26 コンセプト欄のインタビュー動画と音声ボタン */
+.k-grid .k-vid{position:relative;aspect-ratio:4/5;background:#050605}
+.k-vid video{display:block;width:100%;height:100%;object-fit:cover}
+.k-vid .snd{position:absolute;right:16px;bottom:16px;z-index:2;display:inline-flex;align-items:center;gap:9px;height:42px;padding:0 16px 0 12px;border-radius:999px;border:1px solid rgba(226,200,144,.55);background:rgba(6,8,7,.42);-webkit-backdrop-filter:blur(8px) saturate(1.2);backdrop-filter:blur(8px) saturate(1.2);color:var(--gold-hi);font-family:var(--f-body);font-size:12.5px;letter-spacing:.14em;cursor:pointer;opacity:.82;box-shadow:0 0 0 0 rgba(226,200,144,.38);transition:opacity .6s ease,background .3s ease,border-color .3s ease;animation:snd-call 3.2s ease-out 1.2s infinite}
+.k-vid .snd:hover,.k-vid .snd:focus-visible{opacity:1;background:rgba(6,8,7,.6);border-color:var(--gold-hi);outline:none}
+.k-vid .snd svg{width:18px;height:18px;flex:0 0 auto;fill:currentColor}
+.k-vid .snd svg .ln{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.k-vid .snd .ic-on,.k-vid .snd .t-on{display:none}
+.k-vid.sound-on .snd .ic-on,.k-vid.sound-on .snd .t-on{display:inline}
+.k-vid.sound-on .snd .ic-off,.k-vid.sound-on .snd .t-off{display:none}
+.k-vid.sound-on .snd{opacity:0;animation:none;pointer-events:none}
+.k-vid.sound-on.peek .snd{opacity:.55;pointer-events:auto}
+@keyframes snd-call{0%{box-shadow:0 0 0 0 rgba(226,200,144,.38)}70%{box-shadow:0 0 0 12px rgba(226,200,144,0)}100%{box-shadow:0 0 0 0 rgba(226,200,144,0)}}
+@media (max-width:900px){.k-grid .k-vid{aspect-ratio:4/5}}
+@media (max-width:600px){.k-grid .k-vid{aspect-ratio:4/5}.k-vid .snd{right:12px;top:12px;bottom:auto;height:40px;font-size:12px}} /* スマホは字幕（下の方）に重ならないよう右上 */
+@media (prefers-reduced-motion:reduce){.k-vid .snd{animation:none}}
