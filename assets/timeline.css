@@ -195,10 +195,10 @@ html[lang="en"] .dive-key .nm,html[lang="es"] .dive-key .nm{font-size:13.5px;lin
 /* 2026-11-18 時代の章の頭＝セノーテの説明（段落を分けて読む） */
 .tl-lede{display:flex;flex-direction:column;gap:14px}
 .tl-lede .lede{margin:0}
-/* 2026-11-26 オーナー指示: セノーテの説明は見出しの右でなく、潜水図の真下に */
+/* 2026-11-26 オーナー指示: セノーテの説明は見出しの右でなく、見出しと潜水図の間に */
 .tl-head.solo{grid-template-columns:minmax(0,1fr)}
-.tl-lede.below{max-width:760px;margin:-20px 0 56px}
-@media (max-width:900px){.tl-lede.below{margin:-12px 0 44px}}
+.tl-lede.mid{max-width:760px;margin:0 0 48px}
+@media (max-width:900px){.tl-lede.mid{margin:0 0 36px}}
 
 /* 900px以下：時代名は点の真下に並べず、番号つきの2列の一覧に（英語・スペイン語は名前が長いので1列） */
 @media (max-width:900px){
