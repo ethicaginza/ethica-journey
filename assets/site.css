@@ -611,3 +611,12 @@ html:not([lang="ja"]) .sc-spec dt{letter-spacing:.06em;overflow-wrap:normal;word
 /* 2026-11-26 料理の写真欄とシェフ欄の直後の予約ボタン */
 .sec-cta{margin-top:32px}
 @media (max-width:600px){.sec-cta .btn{width:100%}.chef .sec-cta{order:6;margin-top:28px}}
+
+/* 2026-11-26 皿の一覧の時代名は金色（本文と見分ける） */
+.voyage .leg h3{color:var(--gold-hi)}
+/* 2026-11-26 Culinary Philosophy（シェフの後） */
+.philo-in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,72px);align-items:start}
+.philo-head{position:sticky;top:calc(var(--hdr) + 40px)}
+.philo-body .lede{margin:0;max-width:36em}
+.philo-body .lede+.lede{margin-top:1.3em}
+@media (max-width:900px){.philo-in{grid-template-columns:minmax(0,1fr);gap:22px}.philo-head{position:static}}
