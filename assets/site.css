@@ -596,3 +596,10 @@ html:not([lang="ja"]) .top .wrap>nav a.nl{white-space:nowrap}
 /* 日本語以外：「ご利用シーン」の項目名の列が狭く、「Recommended」「Recomendado」が単語の途中で折れていた（2026-11-22）。列を広げ、字間を詰め、単語の途中では折らない */
 html:not([lang="ja"]) .sc-spec>div{grid-template-columns:7.5em minmax(0,1fr)}
 html:not([lang="ja"]) .sc-spec dt{letter-spacing:.06em;overflow-wrap:normal;word-break:normal;hyphens:none}
+
+/* 2026-11-26 料理の写真欄：説明文＋3つの箇条書き */
+.lede.g-lead{margin-top:14px}
+.g-points{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;font-family:var(--f-body);font-weight:400;letter-spacing:.05em;font-size:clamp(15px,1.6vw,17.5px);line-height:1.8;color:#DED8CB;max-width:38em}
+.g-points li{display:flex;align-items:baseline;gap:12px}
+.g-points li::before{content:"";width:5px;height:5px;transform:translateY(-.25em) rotate(45deg);background:var(--gold);flex:0 0 auto}
+.lede.g-end{margin-top:8px}
