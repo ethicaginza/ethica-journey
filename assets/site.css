@@ -607,3 +607,7 @@ html:not([lang="ja"]) .sc-spec dt{letter-spacing:.06em;overflow-wrap:normal;word
 /* 2026-11-26 コースのカードの「どんな方に」の札（ご利用シーンの節の代わり） */
 .card .tags{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .card .tags li{font-size:12px;line-height:1.4;letter-spacing:.06em;padding:4px 11px;border:1px solid var(--line-gold);border-radius:999px;color:var(--gold-text);white-space:nowrap}
+
+/* 2026-11-26 料理の写真欄とシェフ欄の直後の予約ボタン */
+.sec-cta{margin-top:32px}
+@media (max-width:600px){.sec-cta .btn{width:100%}.chef .sec-cta{order:6;margin-top:28px}}
