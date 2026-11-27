@@ -2,8 +2,7 @@
 
 /* ---- 続きを読む ---- */
 .js [data-fold]:not(.p-open) .p-fold,.js [data-fold]:not(.p-open) .p-full{display:none}
-.js [data-fold].p-open .p-short{display:none}
-html:not(.js) .p-short,html:not(.js) .p-more{display:none}
+html:not(.js) .p-more{display:none}
 .p-more{display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:9px 0;background:none;border:0;border-bottom:1px solid var(--line-gold);color:var(--gold-text);font:inherit;font-size:13px;letter-spacing:.14em;cursor:pointer;min-height:44px}
 .p-more span{font-family:var(--f-lat);font-size:16px;line-height:1;color:var(--gold)}
 .p-more[hidden]{display:none}
@@ -180,3 +179,7 @@ html:not(.js) .p-short,html:not(.js) .p-more{display:none}
 @media (max-width:900px){.p-band canvas{filter:none}}
 @media (max-width:900px) and (orientation:landscape){.p-band canvas{filter:brightness(.6)}}
 @media (prefers-reduced-motion:reduce){.p-slide.on canvas,.p-slide.prev canvas{animation:none}}
+
+/* 11/27: 「続きを読む」は追加の文だけを開く（見えている文は繰り返さない） */
+.p-stars i{font-style:normal;font-size:12.5px;letter-spacing:.1em;color:var(--gold-text)}
+.p-trip p.d.p-full{margin-top:-4px}
