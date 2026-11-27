@@ -186,3 +186,5 @@ html:not(.js) .p-more{display:none}
 /* トップの説明文：PCは書かれたとおり3行。スマホは幅に任せる */
 @media (max-width:900px){.hero .sub br.p-br-pc{display:none}}
 @media (max-width:900px) and (max-height:720px) and (orientation:portrait){.hero .inner{padding-top:calc(var(--p-zone) + 66.67vw - 104px)}}
+/* 時代の章の抜粋：3枚とも中身を上にそろえる（高さをそろえた余りが、空の行に配られて下がっていた） */
+@media (max-width:600px){.p-vrail .leg{grid-template-areas:"no body";grid-template-rows:auto;align-content:start}}
