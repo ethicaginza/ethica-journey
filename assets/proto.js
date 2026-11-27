@@ -97,4 +97,11 @@
     rail.addEventListener('scroll', function () { w.requestAnimationFrame(mark); }, { passive: true });
     start(); w.addEventListener('load', start);
   });
+
+  /* 動画のキャスト・ピクチャー イン ピクチャーのボタンを出さない（後から作られる動画にも付ける） */
+  var noCast = function (v) { try { v.disableRemotePlayback = true; v.disablePictureInPicture = true; v.setAttribute('disableremoteplayback', ''); v.setAttribute('x-webkit-airplay', 'deny'); } catch (e) {} };
+  [].forEach.call(d.querySelectorAll('video'), noCast);
+  if ('MutationObserver' in w) new MutationObserver(function (ms) {
+    ms.forEach(function (m) { [].forEach.call(m.addedNodes, function (n) { if (n.nodeType !== 1) return; if (n.tagName === 'VIDEO') noCast(n); else if (n.querySelectorAll) [].forEach.call(n.querySelectorAll('video'), noCast); }); });
+  }).observe(d.documentElement, { childList: true, subtree: true });
 })(window, document);
