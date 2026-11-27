@@ -210,3 +210,6 @@ main .sec.pg-top{padding-top:150px!important}
 .pg-more{margin-top:26px}
 .pg-todo{border:1px dashed var(--gold);padding:14px 16px;margin-top:26px;font-size:14px;color:var(--gold-text);max-width:46em}
 @media (max-width:600px){main .sec.pg-top{padding-top:104px!important}.pg-ph{gap:6px}}
+.pg-ph.n1{grid-template-columns:1fr;max-width:46em}.pg-ph.n1 img{aspect-ratio:16/10}
+.pg-cards{display:grid;grid-template-columns:minmax(0,420px);gap:18px}
+.pg-ph.n1 img{object-position:50% 88%}
