@@ -142,7 +142,14 @@ html:not(.js) .p-more{display:none}
 @media (max-width:900px) and (orientation:portrait){html:not([lang="ja"]) .hero .inner{padding-top:calc(var(--p-zone) + 66.67vw - 110px)}}
 /* PC：一匙の設計。短くした本文は、左の見出し＋写真の高さの中央に置く（開いたら上ぞろえに戻す） */
 @media (min-width:901px){
-  .philo-body[data-fold]:not(.p-open){align-self:center}
+  /* PC: 本文は、写真の上端と同じ高さから始める（2026-11-27 オーナー指示） */
+  .proto .philo-head,.philo-head{display:contents}
+  .philo-in{grid-template-rows:auto auto 1fr;row-gap:0}
+  .philo-head>.eyebrow{grid-column:1;grid-row:1}
+  .philo-head>h2{grid-column:1;grid-row:2}
+  .philo-head>.philo-img{grid-column:1;grid-row:3;align-self:start}
+  .philo-body{grid-column:2;grid-row:3;align-self:start;margin-top:10px}
+  .philo-body:not(.p-open) .p-full+.lede:not(.p-full){margin-top:0}
   .proto .philo-head{position:static}
 }
 /* コースのパネル：予約ボタンが右端で切れていた（幅100%に左右の余白が足されていた）。余白の内側に収める */
