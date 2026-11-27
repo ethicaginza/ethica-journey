@@ -18,6 +18,24 @@
   if (hero && slides.length) {
     var cur = -1, on = true, timer = 0, pt = 0;
     var load = function (el) { var im = el.querySelector('img'); if (im && !im.src) im.src = im.getAttribute('data-src'); };
+    /* 青いテーブルの写真だけ、青い所に波紋（本番の波紋の部品と、同じ写真用の型をそのまま使う） */
+    var coarse = w.matchMedia && w.matchMedia('(pointer: coarse)').matches, wr = null, WM = 'assets/img/hero_mask.png?v=5';
+    var water = function (el) {
+      if (wr || reduce || !w.EthicaRipple) return;
+      var im = el.querySelector('img'), cv = el.querySelector('canvas'); if (!im || !cv) return;
+      var go = function () {
+        if (wr) return;
+        try {
+          wr = new w.EthicaRipple(cv, im.currentSrc || im.src, { ambient: coarse ? 0 : 2600, pert: coarse ? 0.06 : 0.03, zoomFrom: 1, zoomTo: 1, pan: 0, panY: 0, period: 14, dpr: 2, lite: coarse,
+            thr: coarse ? 0.015 : 0.03, touch: { r: 42, s: 0.2, move: 0.06, echo: true }, mask: { landscape: WM, portrait: WM },
+            onLost: function () { el.classList.remove('water'); }, onBack: function () { el.classList.add('water'); } });
+          if (!wr.ok) { wr = null; return; }
+          wr.start(function () { el.classList.add('water'); }); wr.bind(hero);
+          wr.inView = el.classList.contains('on'); w.__photoRipple = wr;
+        } catch (e) { wr = null; }
+      };
+      if (im.complete && im.naturalWidth) go(); else im.addEventListener('load', go, { once: true });
+    };
     var show = function (n) {
       var prev = cur;
       /* 前の写真は、次の写真が出きるまで下に残す（両方を同時に薄くすると、奥のセノーテが一瞬透ける） */
@@ -25,6 +43,9 @@
       clearTimeout(pt); pt = setTimeout(function () { slides.forEach(function (el) { el.classList.remove('prev'); }); }, 1700);
       hero.classList.toggle('p-photo', n >= 0); cur = n;
       if (n + 1 < slides.length) load(slides[n + 1]);
+      var ws = n >= 0 && slides[n].hasAttribute('data-water-photo');
+      if (ws) water(slides[n]);
+      if (wr) { wr.inView = ws; if (ws) wr.kick(); }
     };
     var fix = (location.search.match(/[?&]slide=(-?\d+)/) || [])[1];
     if (fix !== undefined) { if (+fix >= 0) { load(slides[+fix]); } show(+fix); }
