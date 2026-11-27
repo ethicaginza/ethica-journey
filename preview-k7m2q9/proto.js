@@ -16,10 +16,13 @@
   /* 最初の画面：セノーテ（波紋つき）→ 写真4枚。写真は上の層でフェードし、波紋の層には触らない */
   var hero = d.getElementById('hero'), slides = [].slice.call(d.querySelectorAll('.p-slide'));
   if (hero && slides.length) {
-    var cur = -1, on = true, timer = 0;
+    var cur = -1, on = true, timer = 0, pt = 0;
     var load = function (el) { var im = el.querySelector('img'); if (im && !im.src) im.src = im.getAttribute('data-src'); };
     var show = function (n) {
-      slides.forEach(function (el, i) { el.classList.toggle('on', i === n); });
+      var prev = cur;
+      /* 前の写真は、次の写真が出きるまで下に残す（両方を同時に薄くすると、奥のセノーテが一瞬透ける） */
+      slides.forEach(function (el, i) { el.classList.toggle('on', i === n); el.classList.toggle('prev', n >= 0 && prev >= 0 && i === prev); });
+      clearTimeout(pt); pt = setTimeout(function () { slides.forEach(function (el) { el.classList.remove('prev'); }); }, 1700);
       hero.classList.toggle('p-photo', n >= 0); cur = n;
       if (n + 1 < slides.length) load(slides[n + 1]);
     };
@@ -39,6 +42,18 @@
     /* スマホでは、最初の画面のあいだだけヘッダーの小さなロゴを隠す（中央に大きなロゴがあるため） */
     var over = function () { top.classList.toggle('over-ss', small.matches && (w.scrollY || 0) <= 40); };
     w.addEventListener('scroll', over, { passive: true }); w.addEventListener('resize', over); over();
+  }
+
+  /* 時代の章の抜粋（スマホは横にめくる）：中央にあるパネルの数字だけを光らせる */
+  var vr = d.querySelector('.p-vrail');
+  if (vr) {
+    var legs = [].slice.call(vr.querySelectorAll('.leg'));
+    var vmark = function () {
+      var mid = vr.scrollLeft + vr.clientWidth / 2, best = null, bd = 1e9;
+      legs.forEach(function (c) { var x = Math.abs(c.offsetLeft - vr.offsetLeft + c.offsetWidth / 2 - mid); if (x < bd) { bd = x; best = c; } });
+      legs.forEach(function (c) { c.classList.toggle('p-cur', c === best); });
+    };
+    vr.addEventListener('scroll', function () { w.requestAnimationFrame(vmark); }, { passive: true }); vmark();
   }
 
   /* コースのパネル：横にめくる。最初に見せる1枚を中央に置き、下の点で位置を示す */

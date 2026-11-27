@@ -148,3 +148,28 @@ html:not(.js) .p-short,html:not(.js) .p-more{display:none}
 }
 /* コースのパネル：予約ボタンが右端で切れていた（幅100%に左右の余白が足されていた）。余白の内側に収める */
 .p-trip>.btn,.p-trip>.btn.btn-wide{width:auto;align-self:stretch;box-sizing:border-box}
+
+/* ---- 11/27 オーナーの指摘 ---- */
+/* スライドショー：前の写真を下に残して重ねる。写真はゆっくり寄る */
+.p-band{position:absolute;inset:0;overflow:hidden}
+/* 重なりの順は並び順に任せる（次の写真は必ず後ろの要素。z-index を付けると暗くする膜より上に出てしまう） */
+.p-slide.prev{opacity:1;transition:none}
+@keyframes p-zoom{from{transform:scale(1)}to{transform:scale(1.12)}}
+.p-slide.on img,.p-slide.prev img{animation:p-zoom 9s ease-out forwards}
+@media (prefers-reduced-motion:reduce){.p-slide.on img,.p-slide.prev img{animation:none}}
+@media (max-width:900px){
+  .p-band{inset:var(--p-zone) 0 auto 0;height:66.67vw;max-height:52svh;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 52%,rgba(0,0,0,.5) 76%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 52%,rgba(0,0,0,.5) 76%,transparent 100%)}
+  .p-slide img{inset:0;height:100%;max-height:none;-webkit-mask-image:none;mask-image:none}
+}
+@media (max-width:900px) and (orientation:landscape){.p-band{inset:0;height:auto;max-height:none;-webkit-mask-image:none;mask-image:none}}
+/* 時代の章の抜粋：数字の丸を年代の行にそろえ、光るのは中央のパネルだけ */
+@media (max-width:600px){
+  .p-vrail .leg{grid-template-columns:44px minmax(0,1fr);gap:0 14px;align-items:start}
+  .p-vrail .leg .no{padding-top:0;gap:6px}
+  .p-vrail .leg .no .n{width:40px;height:40px}
+  .p-vrail .leg .ago{min-height:40px;align-items:center}
+  .p-vrail .leg .ago .u{align-self:center;padding-top:8px}
+  .p-vrail .leg.cur .no .n{border-color:var(--line-gold);color:var(--bone);box-shadow:none}
+  .p-vrail .leg.p-cur .no .n{border-color:var(--gold);color:var(--gold-hi);box-shadow:0 0 0 6px rgba(201,164,106,.1)}
+}
+.tiers.p-rail{margin-top:26px}
