@@ -98,6 +98,52 @@
     start(); w.addEventListener('load', start);
   });
 
+  /* 時代の章：大きい潜水図が画面の上に消えたら、メニューの下に小さい潜水図を出す。
+     スマホは横にめくって中央に来たパネル、PCは読んでいる位置のパネルの番号を金色にし、水面からそこまでの線を光らせる。
+     元の帯は縦に並んだ一覧を前提にしているので、写しを作ってこちらで動かす（元の帯は外す） */
+  var mini0 = d.querySelector('.tl-mini'), voy = d.getElementById('voyage'), dvBig = d.querySelector('#chapters .dv');
+  if (mini0 && voy && dvBig && mini0.getAttribute('data-info')) {
+    var mini = mini0.cloneNode(true); mini.classList.remove('on'); mini0.parentNode.replaceChild(mini, mini0);
+    var info = {}; mini.getAttribute('data-info').split(';').forEach(function (r) { var a = r.split('|'); info[a[0]] = { ago: a[1], t: a[2] }; });
+    var pins = [].slice.call(mini.querySelectorAll('.tm-p')), axis = mini.querySelector('.tm-axis'), plot = mini.querySelector('.tm-plot') || axis, doneEl = mini.querySelector('.tm-done');
+    var nEl = mini.querySelector('.tm-n'), agoEl = mini.querySelector('.tm-ago'), tEl = mini.querySelector('.tm-t');
+    var mlegs = [].slice.call(voy.querySelectorAll('.leg')), curN = 0;
+    var xOf = function (n) { var p = mini.querySelector('.tm-p[data-n="' + n + '"]'); return p ? parseFloat(p.style.getPropertyValue('--x')) : 0; };
+    var setMini = function (n) {
+      var k = +n; if (!info[n] || k === curN) return; curN = k;
+      pins.forEach(function (p) { var m = +p.getAttribute('data-n'); p.classList.toggle('cur', m === k); p.classList.toggle('seen', m < k); });
+      if (nEl) nEl.textContent = (mini.getAttribute('data-dish') || '{n}').replace('{n}', k);
+      if (agoEl) agoEl.textContent = info[n].ago; if (tEl) tEl.textContent = info[n].t;
+      if (doneEl) { var cp = 'inset(-20px ' + (100 - xOf(n)).toFixed(1) + '% -20px -20px)'; doneEl.style.webkitClipPath = cp; doneEl.style.clipPath = cp; }
+    };
+    var railMode = function () { return voy.scrollWidth > voy.clientWidth + 4; };
+    var legNow = function () {
+      var best = mlegs[0], i;
+      if (railMode()) { var mid = voy.scrollLeft + voy.clientWidth / 2, bd = 1e9; mlegs.forEach(function (c) { var x = Math.abs(c.offsetLeft - voy.offsetLeft + c.offsetWidth / 2 - mid); if (x < bd) { bd = x; best = c; } }); }
+      else { var L = w.innerHeight * 0.5; for (i = mlegs.length - 1; i >= 0; i--) { if (mlegs[i].getBoundingClientRect().top <= L) { best = mlegs[i]; break; } } }
+      return best;
+    };
+    var tall = w.matchMedia ? w.matchMedia('(min-height: 501px)') : { matches: true };
+    var msync = function () {
+      var hb = top ? top.getBoundingClientRect().bottom : 68, mh = mini.offsetHeight || 80;
+      var on = tall.matches && dvBig.getBoundingClientRect().bottom < hb + mh * 0.6 && voy.getBoundingClientRect().bottom > hb + mh + 70;
+      mini.classList.toggle('on', on);
+      var l = legNow(); if (l) setMini(l.getAttribute('data-n'));
+    };
+    var mt = 0, mreq = function () { if (mt) return; mt = w.requestAnimationFrame(function () { mt = 0; msync(); }); };
+    w.addEventListener('scroll', mreq, { passive: true }); voy.addEventListener('scroll', mreq, { passive: true }); w.addEventListener('resize', mreq);
+    setMini(mlegs[0] ? mlegs[0].getAttribute('data-n') : '1'); msync();
+    /* 小さい潜水図を押すと、いちばん近い番号のパネルへ移る */
+    axis.addEventListener('click', function (ev) {
+      var b = plot.getBoundingClientRect(), x = (ev.clientX - b.left) / b.width * 100, bestN = 1, bd = 1e9, li = null, ld = 1e9;
+      pins.forEach(function (p) { var n = +p.getAttribute('data-n'), dd = Math.abs(xOf(n) - x); if (dd < bd) { bd = dd; bestN = n; } });
+      mlegs.forEach(function (c) { var dd = Math.abs(+c.getAttribute('data-n') - bestN); if (dd < ld) { ld = dd; li = c; } });
+      if (!li) return;
+      if (railMode()) voy.scrollTo({ left: li.offsetLeft - voy.offsetLeft + li.offsetWidth / 2 - voy.clientWidth / 2, behavior: reduce ? 'auto' : 'smooth' });
+      else w.scrollTo({ top: li.getBoundingClientRect().top + w.scrollY - w.innerHeight * 0.42, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }
+
   /* 動画のキャスト・ピクチャー イン ピクチャーのボタンを出さない（後から作られる動画にも付ける） */
   var noCast = function (v) { try { v.disableRemotePlayback = true; v.disablePictureInPicture = true; v.setAttribute('disableremoteplayback', ''); v.setAttribute('x-webkit-airplay', 'deny'); } catch (e) {} };
   [].forEach.call(d.querySelectorAll('video'), noCast);
